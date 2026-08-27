@@ -160,6 +160,10 @@ browser's local storage on the device. The Android build removes the `INTERNET`
 permission Capacitor declares by default, so the offline claim is enforced by
 the platform rather than merely promised.
 
+## Contact
+
+google@steppicrew.de
+
 ## Licence
 
 MIT

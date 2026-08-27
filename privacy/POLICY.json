@@ -1,7 +1,7 @@
 {
   "$comment": "Privacy policy text per language. `yarn privacy` renders these into public/privacy/. Keep the factual claims in sync with what the app actually does.",
   "effectiveDate": "2026-08-27",
-  "contactEmail": "steppicrew@gmail.com",
+  "contactEmail": "google@steppicrew.de",
   "policies": {
     "en": {
       "title": "Privacy Policy",
