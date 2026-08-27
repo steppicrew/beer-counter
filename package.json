@@ -25,6 +25,7 @@
     "store-qr": "yarn node scripts/gen-store-qr.mjs"
   },
   "dependencies": {
+    "@capacitor/share": "^7.0.4",
     "clsx": "^2.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
