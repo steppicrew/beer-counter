@@ -42,7 +42,7 @@ export function App() {
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
 
   // Never reload out from under someone mid-round — offer it instead.
-  const updateReady = useAppUpdate();
+  const update = useAppUpdate();
 
   // German hosting law requires an Impressum and a privacy link reachable from
   // the site. The Play listing carries its own, so the packaged app omits them.
@@ -142,13 +142,13 @@ export function App() {
           </ul>
         </main>
 
-        {updateReady && (
+        {update.ready && (
           <div className="app__update" role="status">
             <span>{t('update.ready')}</span>
             <button
               type="button"
               className="app__update-btn"
-              onClick={() => window.location.reload()}
+              onClick={update.apply}
             >
               {t('update.reload')}
             </button>
