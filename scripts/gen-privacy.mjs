@@ -72,8 +72,15 @@ h2{font-size:1.08rem;margin:30px 0 6px}
 p{margin:0 0 12px}
 .meta{color:var(--muted);font-size:.88rem;border-top:1px solid var(--border);margin-top:36px;padding-top:16px}
 a{color:var(--accent)}
-nav{margin-top:28px;font-size:.88rem;color:var(--muted);line-height:2.1}
-nav a{margin-right:12px;white-space:nowrap}
+/* Wrap the language list like any other line. Flex-wrap rather than inline
+   text, so the row-gap applies between wrapped rows and the trailing
+   margin-right cannot push the last item past the edge. nowrap stays on the
+   links themselves: a label may contain a space ("中文" no, "Português" no,
+   but e.g. a future "Brasileiro (BR)" would), and only the whole name should
+   move to the next line. */
+nav{margin-top:28px;font-size:.88rem;color:var(--muted);
+display:flex;flex-wrap:wrap;column-gap:12px;row-gap:4px}
+nav a{white-space:nowrap}
 `.trim();
 
 function render(code) {
