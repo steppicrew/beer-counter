@@ -8,6 +8,10 @@
  *   yarn play:publish --track internal   # upload + roll out to a track
  *   yarn play:publish --listings-only    # metadata/images, no binary
  *   yarn play:publish --track production --rollout 0.1   # staged rollout
+ *   yarn play:publish --force            # re-upload even if Play matches
+ *
+ * Listings and images that Play already holds unchanged are skipped, compared
+ * by sha256 for images and by value for text.
  *
  * Auth: a Google Cloud service account with the "Release manager" role in
  * Play Console. Point PLAY_SERVICE_ACCOUNT_JSON at its key file (see .env).
@@ -17,6 +21,7 @@
  * updated.
  */
 import { readFileSync, existsSync, createReadStream, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { google } from 'googleapis';
@@ -33,6 +38,8 @@ const value = (name, fallback) => {
 };
 
 const dryRun = flag('dry-run');
+// Re-upload everything even when Play already has an identical copy.
+const force = flag('force');
 const listingsOnly = flag('listings-only');
 const track = value('track', 'internal');
 const rollout = Number(value('rollout', '0'));
@@ -93,6 +100,39 @@ async function withRetry(label, fn, attempts = 5) {
       console.log(`    ${label}: ${status}, retrying in ${Math.round(backoff)}ms (${attempt}/${attempts - 1})`);
       await sleep(backoff);
     }
+  }
+}
+
+/**
+ * Play stores a sha256 for every image, so an unchanged asset can be skipped
+ * instead of re-uploaded. A full run is ~160 uploads and several minutes, and
+ * every one of those minutes is a window for a concurrent Play Console change
+ * to invalidate the edit — so skipping is about reliability, not just speed.
+ */
+function sha256(file) {
+  return createHash('sha256').update(readFileSync(file)).digest('hex');
+}
+
+async function remoteImageHashes(editId, language, imageType) {
+  try {
+    const { data } = await withRetry(`${language} ${imageType} list`, () =>
+      play.edits.images.list({ packageName, editId, language, imageType }),
+    );
+    return (data.images ?? []).map((image) => image.sha256).filter(Boolean);
+  } catch {
+    // A slot that has never been populated 404s; treat as empty.
+    return [];
+  }
+}
+
+async function remoteListing(editId, language) {
+  try {
+    const { data } = await withRetry(`${language} listing read`, () =>
+      play.edits.listings.get({ packageName, editId, language }),
+    );
+    return data;
+  } catch {
+    return null;
   }
 }
 
@@ -166,6 +206,7 @@ console.log(`\nEdit ${editId} opened.`);
 
 try {
   let versionCode = pkg.androidVersionCode;
+  let changedLanguages = 0;
 
   if (!listingsOnly) {
     console.log('Uploading bundle…');
@@ -183,21 +224,49 @@ try {
   for (const { locale, entry, images } of plan) {
     const tag = locale.playStore;
 
-    await withRetry(`${tag} listing`, () =>
-      play.edits.listings.update({
-        packageName,
-        editId,
-        language: tag,
-        requestBody: {
+    let listingChanged = false;
+    const current = force ? null : await remoteListing(editId, tag);
+
+    if (
+      !current ||
+      current.title !== entry.title ||
+      current.shortDescription !== entry.short ||
+      current.fullDescription !== entry.full
+    ) {
+      await withRetry(`${tag} listing`, () =>
+        play.edits.listings.update({
+          packageName,
+          editId,
           language: tag,
-          title: entry.title,
-          shortDescription: entry.short,
-          fullDescription: entry.full,
-        },
-      }),
-    );
+          requestBody: {
+            language: tag,
+            title: entry.title,
+            shortDescription: entry.short,
+            fullDescription: entry.full,
+          },
+        }),
+      );
+      listingChanged = true;
+    }
+
+    let uploaded = 0;
+    let skipped = 0;
 
     for (const [imageType, files] of Object.entries(images)) {
+      const localHashes = files.map(sha256);
+      const remoteHashes = force ? [] : await remoteImageHashes(editId, tag, imageType);
+
+      // Order matters for screenshots, so the slot only matches when the whole
+      // sequence does — otherwise replace it wholesale.
+      const identical =
+        remoteHashes.length === localHashes.length &&
+        localHashes.every((hash, i) => hash === remoteHashes[i]);
+
+      if (identical) {
+        skipped += files.length;
+        continue;
+      }
+
       // Replace the slot wholesale so removed screenshots actually disappear.
       await withRetry(`${tag} ${imageType} clear`, () =>
         play.edits.images.deleteall({ packageName, editId, language: tag, imageType }),
@@ -214,11 +283,20 @@ try {
             media: { mimeType: 'image/png', body: createReadStream(file) },
           }),
         );
+        uploaded += 1;
         await sleep(UPLOAD_PACING_MS);
       }
     }
 
-    console.log(`  ${tag} listing + ${Object.values(images).flat().length} image(s)`);
+    if (listingChanged || uploaded > 0) {
+      console.log(
+        `  ${tag} ${listingChanged ? 'listing' : 'listing unchanged'}` +
+          `, ${uploaded} image(s) uploaded${skipped > 0 ? `, ${skipped} unchanged` : ''}`,
+      );
+      changedLanguages += 1;
+    } else {
+      console.log(`  ${tag} unchanged (${skipped} image(s))`);
+    }
   }
 
   if (!listingsOnly) {
@@ -243,6 +321,14 @@ try {
       }),
     );
     console.log(`  track "${track}" set${rollout > 0 && rollout < 1 ? ` (${rollout * 100}% rollout)` : ''}.`);
+  }
+
+  if (listingsOnly && changedLanguages === 0) {
+    // Committing an edit that changes nothing still bumps the listing's
+    // modification date in Play Console; abandoning is the honest no-op.
+    await play.edits.delete({ packageName, editId }).catch(() => {});
+    console.log('\nNothing to update — every listing already matches.');
+    return true;
   }
 
   const { data: committed } = await withRetry('commit', () =>
