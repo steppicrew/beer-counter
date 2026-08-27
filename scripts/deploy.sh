@@ -70,6 +70,10 @@ echo
 echo "==> Rendering privacy policy and Impressum"
 yarn node scripts/gen-privacy.mjs
 
+# The Play Store QR is derived from the application id, so regenerate it in
+# case that changed rather than shipping a code pointing at the old listing.
+yarn node scripts/gen-store-qr.mjs
+
 echo
 echo "==> Building $VERSION"
 yarn build

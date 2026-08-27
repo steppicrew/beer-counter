@@ -21,7 +21,8 @@
     "check-locales": "yarn node scripts/check-locales.mjs",
     "play:publish": "yarn node scripts/play-publish.mjs",
     "feature-graphic": "yarn node scripts/gen-feature-graphic.mjs",
-    "privacy": "yarn node scripts/gen-privacy.mjs"
+    "privacy": "yarn node scripts/gen-privacy.mjs",
+    "store-qr": "yarn node scripts/gen-store-qr.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

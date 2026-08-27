@@ -73,10 +73,14 @@ echo "==> Gradle :app:${GRADLE_TASK}"
 (cd android && ./gradlew --no-daemon "app:${GRADLE_TASK}")
 
 # --- collect ---------------------------------------------------------------
-# Stale artefacts from an earlier (possibly unsigned) build must not be picked
-# up: bundleRelease does not rebuild APKs, so an old one can linger here.
-rm -f android/app/build/outputs/apk/release/*.apk.stale
+# Only collect what THIS target just built. bundleRelease does not rebuild
+# APKs, so an APK from an earlier version would otherwise be copied out and
+# reported as if it were part of this build.
 mkdir -p "$ROOT/build-output"
+case "$TARGET" in
+  bundle) find "$ROOT/build-output" -maxdepth 1 -name '*.apk' -delete ;;
+  apk|debug) find "$ROOT/build-output" -maxdepth 1 -name '*.aab' -delete ;;
+esac
 shopt -s nullglob
 for artefact in \
   android/app/build/outputs/bundle/release/*.aab \
