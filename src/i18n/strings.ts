@@ -52,7 +52,8 @@ export const en = {
   'add.scopeHint': 'Session drinks disappear when you reset.',
 
   'edit.title': 'Edit drink',
-  'edit.deleteConfirm': 'Delete this drink and its count?',
+  'delete.title': 'Delete this drink?',
+  'edit.deleteConfirm': 'Its count for this round goes with it. This cannot be undone.',
 
   'settings.title': 'Settings',
   'settings.language': 'Language',
@@ -155,7 +156,8 @@ export const de: Messages = {
   'add.scopeHint': 'Runden-Getränke verschwinden beim Zurücksetzen.',
 
   'edit.title': 'Getränk bearbeiten',
-  'edit.deleteConfirm': 'Dieses Getränk und seinen Zähler löschen?',
+  'delete.title': 'Getränk löschen?',
+  'edit.deleteConfirm': 'Der Zählerstand dieser Runde geht mit verloren. Das lässt sich nicht rückgängig machen.',
 
   'settings.title': 'Einstellungen',
   'settings.language': 'Sprache',
@@ -255,7 +257,8 @@ export const fr: Messages = {
   'add.scopeHint': 'Les boissons de la tournée disparaissent à la réinitialisation.',
 
   'edit.title': 'Modifier la boisson',
-  'edit.deleteConfirm': 'Supprimer cette boisson et son compteur ?',
+  'delete.title': 'Supprimer cette boisson ?',
+  'edit.deleteConfirm': 'Son compte pour cette tournée disparaît aussi. Cette action est irréversible.',
 
   'settings.title': 'Paramètres',
   'settings.language': 'Langue',
@@ -355,7 +358,8 @@ export const es: Messages = {
   'add.scopeHint': 'Las bebidas de la ronda desaparecen al reiniciar.',
 
   'edit.title': 'Editar bebida',
-  'edit.deleteConfirm': '¿Eliminar esta bebida y su contador?',
+  'delete.title': '¿Eliminar esta bebida?',
+  'edit.deleteConfirm': 'Su cuenta de esta ronda se borra también. Esto no se puede deshacer.',
 
   'settings.title': 'Ajustes',
   'settings.language': 'Idioma',
@@ -455,7 +459,8 @@ export const it: Messages = {
   'add.scopeHint': 'Le bevande del giro spariscono con l’azzeramento.',
 
   'edit.title': 'Modifica bevanda',
-  'edit.deleteConfirm': 'Eliminare questa bevanda e il suo contatore?',
+  'delete.title': 'Eliminare questa bevanda?',
+  'edit.deleteConfirm': 'Anche il suo conteggio di questo giro sparisce. L’azione non è reversibile.',
 
   'settings.title': 'Impostazioni',
   'settings.language': 'Lingua',
@@ -555,7 +560,8 @@ export const nl: Messages = {
   'add.scopeHint': 'Rondedrankjes verdwijnen bij het resetten.',
 
   'edit.title': 'Drankje bewerken',
-  'edit.deleteConfirm': 'Dit drankje en de teller verwijderen?',
+  'delete.title': 'Dit drankje verwijderen?',
+  'edit.deleteConfirm': 'De telling van deze ronde verdwijnt mee. Dit kan niet ongedaan worden gemaakt.',
 
   'settings.title': 'Instellingen',
   'settings.language': 'Taal',
@@ -655,7 +661,8 @@ export const pl: Messages = {
   'add.scopeHint': 'Napoje kolejki znikają po zresetowaniu.',
 
   'edit.title': 'Edytuj napój',
-  'edit.deleteConfirm': 'Usunąć ten napój i jego licznik?',
+  'delete.title': 'Usunąć ten napój?',
+  'edit.deleteConfirm': 'Licznik z tej kolejki zniknie razem z nim. Tego nie można cofnąć.',
 
   'settings.title': 'Ustawienia',
   'settings.language': 'Język',
@@ -755,7 +762,8 @@ export const pt: Messages = {
   'add.scopeHint': 'As bebidas da rodada desaparecem ao reiniciar.',
 
   'edit.title': 'Editar bebida',
-  'edit.deleteConfirm': 'Eliminar esta bebida e o seu contador?',
+  'delete.title': 'Eliminar esta bebida?',
+  'edit.deleteConfirm': 'A contagem desta rodada desaparece com ela. Isto não pode ser anulado.',
 
   'settings.title': 'Definições',
   'settings.language': 'Idioma',
@@ -855,7 +863,8 @@ export const cs: Messages = {
   'add.scopeHint': 'Nápoje kola zmizí při vynulování.',
 
   'edit.title': 'Upravit nápoj',
-  'edit.deleteConfirm': 'Smazat tento nápoj i jeho počítadlo?',
+  'delete.title': 'Smazat tento nápoj?',
+  'edit.deleteConfirm': 'Zmizí i jeho počet v tomto kole. Tuto akci nelze vrátit zpět.',
 
   'settings.title': 'Nastavení',
   'settings.language': 'Jazyk',
@@ -955,7 +964,8 @@ export const da: Messages = {
   'add.scopeHint': 'Omgangens drinks forsvinder ved nulstilling.',
 
   'edit.title': 'Rediger drink',
-  'edit.deleteConfirm': 'Slet denne drink og dens tæller?',
+  'delete.title': 'Slet denne drink?',
+  'edit.deleteConfirm': 'Tællingen for denne omgang ryger med. Det kan ikke fortrydes.',
 
   'settings.title': 'Indstillinger',
   'settings.language': 'Sprog',
@@ -1055,7 +1065,8 @@ export const sv: Messages = {
   'add.scopeHint': 'Rundans drycker försvinner vid nollställning.',
 
   'edit.title': 'Redigera dryck',
-  'edit.deleteConfirm': 'Radera den här drycken och dess räknare?',
+  'delete.title': 'Ta bort den här drycken?',
+  'edit.deleteConfirm': 'Räkningen för den här rundan följer med. Det går inte att ångra.',
 
   'settings.title': 'Inställningar',
   'settings.language': 'Språk',
@@ -1155,7 +1166,8 @@ export const tr: Messages = {
   'add.scopeHint': 'Tur içecekleri sıfırlayınca kaybolur.',
 
   'edit.title': 'İçeceği düzenle',
-  'edit.deleteConfirm': 'Bu içecek ve sayacı silinsin mi?',
+  'delete.title': 'Bu içecek silinsin mi?',
+  'edit.deleteConfirm': 'Bu turdaki sayısı da silinir. Bu geri alınamaz.',
 
   'settings.title': 'Ayarlar',
   'settings.language': 'Dil',
@@ -1255,7 +1267,8 @@ export const ru: Messages = {
   'add.scopeHint': 'Напитки круга исчезнут после сброса.',
 
   'edit.title': 'Изменить напиток',
-  'edit.deleteConfirm': 'Удалить этот напиток и его счётчик?',
+  'delete.title': 'Удалить этот напиток?',
+  'edit.deleteConfirm': 'Счёт за этот круг тоже пропадёт. Отменить это нельзя.',
 
   'settings.title': 'Настройки',
   'settings.language': 'Язык',
@@ -1355,7 +1368,8 @@ export const ja: Messages = {
   'add.scopeHint': 'ラウンド限定の飲み物はリセットで消えます。',
 
   'edit.title': '飲み物を編集',
-  'edit.deleteConfirm': 'この飲み物とカウントを削除しますか？',
+  'delete.title': 'この飲み物を削除しますか？',
+  'edit.deleteConfirm': 'この回の杯数も一緒に消えます。元に戻せません。',
 
   'settings.title': '設定',
   'settings.language': '言語',
@@ -1454,7 +1468,8 @@ export const zh: Messages = {
   'add.scopeHint': '本轮饮品会在重置后消失。',
 
   'edit.title': '编辑饮品',
-  'edit.deleteConfirm': '删除此饮品及其计数？',
+  'delete.title': '删除这个饮品？',
+  'edit.deleteConfirm': '这一轮的计数也会一并删除，且无法撤销。',
 
   'settings.title': '设置',
   'settings.language': '语言',

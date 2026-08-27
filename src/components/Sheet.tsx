@@ -17,8 +17,17 @@ export function Sheet({ title, onClose, children }: Props) {
     if (dialog && !dialog.open) dialog.showModal();
   }, []);
 
+  // <dialog>'s cancel/close events bubble, so a nested sheet's Esc would also
+  // reach the sheet underneath and tear both down — losing unsaved edits.
+  // Each sheet handles only its own.
+  const handle = (event: React.SyntheticEvent<HTMLDialogElement>) => {
+    if (event.target !== ref.current) return;
+    event.stopPropagation();
+    onClose();
+  };
+
   return (
-    <dialog ref={ref} className="sheet" onCancel={onClose} onClose={onClose}>
+    <dialog ref={ref} className="sheet" onCancel={handle} onClose={handle}>
       <div className="sheet__panel">
         <h2 className="sheet__title">{title}</h2>
         {children}
