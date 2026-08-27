@@ -1,0 +1,155 @@
+@use '../styles/vars' as vars;
+
+.sheet {
+  width: 100%;
+  max-width: 460px;
+  margin: auto auto 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text);
+
+  &::backdrop {
+    background: var(--overlay);
+  }
+
+  &__panel {
+    background: var(--bg-elevated);
+    border-top-left-radius: vars.$radius-lg;
+    border-top-right-radius: vars.$radius-lg;
+    padding: vars.$space-lg;
+    padding-bottom: calc(#{vars.$space-lg} + env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    gap: vars.$space-md;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  @media (width >= 560px) {
+    margin: auto;
+
+    .sheet__panel {
+      border-radius: vars.$radius-lg;
+    }
+  }
+}
+
+// Shared form furniture for the sheets.
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-xs;
+
+  &__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  &__input,
+  &__select {
+    padding: vars.$space-sm vars.$space-md;
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+    border-radius: vars.$radius-sm;
+    min-height: vars.$tap-min;
+  }
+
+  &__hint {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+}
+
+.icon-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: vars.$space-sm;
+
+  &__option {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    font-size: 28px;
+    color: var(--text-muted);
+    background: var(--bg-sunken);
+    border: 2px solid var(--border);
+    border-radius: vars.$radius-md;
+
+    --icon-fill: transparent;
+
+    &--selected {
+      border-color: var(--accent);
+      color: var(--accent);
+
+      --icon-fill: #{rgba(vars.$color-amber, 0.3)};
+    }
+  }
+}
+
+.segmented {
+  display: flex;
+  gap: vars.$space-xs;
+  padding: vars.$space-xs;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: vars.$radius-md;
+
+  &__option {
+    flex: 1;
+    min-height: 40px;
+    border-radius: vars.$radius-sm;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+
+    &--selected {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+  }
+}
+
+.sheet-actions {
+  display: flex;
+  gap: vars.$space-sm;
+  margin-top: vars.$space-xs;
+
+  &__spacer {
+    flex: 1;
+  }
+}
+
+.btn {
+  min-height: vars.$tap-min;
+  padding: 0 vars.$space-lg;
+  border-radius: vars.$radius-pill;
+  font-weight: 600;
+
+  &--primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  &--ghost {
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+  }
+
+  &--danger {
+    background: var(--danger);
+    color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}

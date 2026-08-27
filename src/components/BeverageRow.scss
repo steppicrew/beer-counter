@@ -1,0 +1,117 @@
+@use '../styles/vars' as vars;
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: vars.$space-sm;
+  padding: vars.$space-sm vars.$space-md;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: vars.$radius-md;
+  box-shadow: var(--shadow);
+  transition: border-color 160ms vars.$ease;
+
+  &--active {
+    border-color: var(--accent);
+  }
+
+  &__identity {
+    display: flex;
+    align-items: center;
+    gap: vars.$space-md;
+    flex: 1;
+    min-width: 0;
+    padding: vars.$space-xs 0;
+    text-align: left;
+  }
+
+  &__icon {
+    flex: none;
+    font-size: 30px;
+    color: var(--text-muted);
+
+    --icon-fill: #{rgba(vars.$color-amber, 0.28)};
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 17px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__time {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+
+    // The "you just tapped this" warning state.
+    &--fresh {
+      color: var(--accent);
+      font-weight: 600;
+    }
+  }
+
+  &__count {
+    flex: none;
+    min-width: 2ch;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: vars.$space-xs;
+    flex: none;
+  }
+
+  &__minus,
+  &__plus {
+    display: grid;
+    place-items: center;
+    border-radius: vars.$radius-pill;
+    line-height: 1;
+    transition:
+      transform 120ms vars.$ease,
+      background 160ms vars.$ease;
+
+    &:active {
+      transform: scale(0.92);
+    }
+  }
+
+  // Deliberately smaller than the add button: correcting a miscount is rarer
+  // than counting, and a fat minus invites mis-taps.
+  &__minus {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    background: var(--bg-sunken);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+  }
+
+  &__plus {
+    width: vars.$tap-min;
+    height: vars.$tap-min;
+    font-size: 30px;
+    font-weight: 400;
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+}

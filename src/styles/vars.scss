@@ -1,0 +1,43 @@
+@use 'sass:color';
+
+// ---------------------------------------------------------------------------
+// Brand
+// ---------------------------------------------------------------------------
+$color-amber: #f0a500;
+$color-amber-deep: #d98c00;
+$color-foam: #fff6e0;
+$color-malt: #7a4b12;
+
+// Semantic (status) colours — never reused for decoration.
+$color-danger: #d7443e;
+$color-success: #3f9d5a;
+
+// ---------------------------------------------------------------------------
+// Metrics
+// ---------------------------------------------------------------------------
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-lg: 22px;
+$radius-pill: 999px;
+
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 14px;
+$space-lg: 22px;
+$space-xl: 32px;
+
+// Comfortable thumb target even after a few rounds.
+$tap-min: 48px;
+
+$font-stack:
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  sans-serif;
+
+$shadow-card: 0 2px 10px rgb(0 0 0 / 12%);
+$shadow-lifted: 0 8px 28px rgb(0 0 0 / 26%);
+
+$ease: cubic-bezier(0.2, 0.7, 0.3, 1);
