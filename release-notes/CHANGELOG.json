@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.4.1",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "The header no longer runs off the edge on smaller phones: when the total and the price do not fit on one line, the price moves underneath instead of pushing the page sideways.",
+        "de": "Die Kopfzeile läuft auf kleineren Handys nicht mehr über den Rand: Wenn Gesamtzahl und Preis nicht in eine Zeile passen, rutscht der Preis darunter, statt die Seite seitlich zu verschieben.",
+        "fr": "L’en-tête ne déborde plus sur les petits téléphones : si le total et le prix ne tiennent pas sur une ligne, le prix passe en dessous au lieu de décaler la page.",
+        "es": "La cabecera ya no se sale en móviles pequeños: si el total y el precio no caben en una línea, el precio pasa debajo en vez de desplazar la página.",
+        "it": "L’intestazione non esce più dallo schermo sui telefoni piccoli: se totale e prezzo non stanno su una riga, il prezzo va sotto invece di spostare la pagina.",
+        "nl": "De koptekst loopt niet meer buiten beeld op kleinere telefoons: past het totaal met de prijs niet op één regel, dan gaat de prijs eronder staan.",
+        "pl": "Nagłówek nie wychodzi już poza ekran na mniejszych telefonach: gdy suma i cena nie mieszczą się w jednym wierszu, cena przechodzi niżej.",
+        "pt": "O cabeçalho já não sai do ecrã em telemóveis mais pequenos: se o total e o preço não couberem numa linha, o preço passa para baixo.",
+        "cs": "Záhlaví už na menších telefonech nepřetéká: pokud se součet a cena nevejdou na jeden řádek, cena se přesune pod něj.",
+        "da": "Overskriften løber ikke længere ud over kanten på mindre telefoner: hvis total og pris ikke er på én linje, rykker prisen nedenunder.",
+        "sv": "Rubriken går inte längre utanför kanten på mindre telefoner: får totalen och priset inte plats på en rad hamnar priset under.",
+        "tr": "Başlık artık küçük telefonlarda taşmıyor: toplam ile fiyat tek satıra sığmazsa fiyat alt satıra geçiyor.",
+        "ru": "Заголовок больше не выходит за край на небольших телефонах: если сумма и цена не помещаются в одну строку, цена переносится вниз.",
+        "ja": "画面の小さい端末でヘッダーがはみ出さなくなりました。合計と金額が 1 行に収まらないときは、金額が下の行に移ります。",
+        "zh": "在较小的手机上标题栏不再溢出：合计和金额放不下一行时，金额会移到下一行。"
+      }
+    },
+    {
       "version": "1.4.0",
       "date": "2026-08-27",
       "notes": {
