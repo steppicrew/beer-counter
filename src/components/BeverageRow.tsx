@@ -17,9 +17,7 @@ interface Props {
 export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit }: Props) {
   const { t } = useI18n();
   const elapsed = useElapsed(tally.lastAt);
-  const label = beverage.nameKey
-    ? t(beverage.nameKey as MessageKey)
-    : (beverage.name ?? '');
+  const label = beverage.nameKey ? t(beverage.nameKey as MessageKey) : (beverage.name ?? '');
 
   // Under a minute since the last tap is the window where an accidental
   // double-count is likely — flag it so the row draws attention to itself.
@@ -27,11 +25,13 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
 
   return (
     <li className={clsx('row', tally.count > 0 && 'row--active')}>
+      {/* The whole tile is the add button: counting is the one thing you do
+          over and over, often one-handed and not entirely sober. */}
       <button
         type="button"
-        className="row__identity"
-        onClick={onEdit}
-        aria-label={`${label} — ${t('action.edit')}`}
+        className="row__add"
+        onClick={onIncrement}
+        aria-label={`${t('action.add')} — ${label}`}
       >
         <BeverageIcon icon={beverage.icon} className="row__icon" />
         <span className="row__text">
@@ -40,11 +40,10 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
             {formatElapsed(elapsed, t)}
           </span>
         </span>
+        <span className="row__count" aria-live="polite">
+          {tally.count}
+        </span>
       </button>
-
-      <span className="row__count" aria-live="polite">
-        {tally.count}
-      </span>
 
       <span className="row__controls">
         <button
@@ -58,11 +57,11 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
         </button>
         <button
           type="button"
-          className="row__plus"
-          onClick={onIncrement}
-          aria-label={`${t('action.add')} — ${label}`}
+          className="row__edit"
+          onClick={onEdit}
+          aria-label={`${t('action.edit')} — ${label}`}
         >
-          +
+          ✎
         </button>
       </span>
     </li>
