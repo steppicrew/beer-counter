@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { BeverageRow } from './components/BeverageRow';
+import { UiIcon } from './components/UiIcon';
 import { BeverageSheet } from './components/BeverageSheet';
 import { SettingsSheet } from './components/SettingsSheet';
 import { ResetSheet } from './components/ResetSheet';
@@ -77,7 +78,7 @@ export function App() {
               onClick={() => setDialog({ kind: 'settings' })}
               aria-label={t('action.settings')}
             >
-              ⚙
+              <UiIcon name="settings" />
             </button>
             <button
               type="button"
@@ -86,7 +87,7 @@ export function App() {
               aria-label={t('action.reset')}
               disabled={total === 0 && beverages.every((b) => b.scope === 'default')}
             >
-              ⟲
+              <UiIcon name="reset" />
             </button>
           </div>
         </header>
