@@ -9,6 +9,15 @@
   background: none;
   color: var(--text);
 
+  // Sit above the on-screen keyboard rather than behind it. The IME shrinks
+  // the visual viewport but not the layout viewport, so without this the
+  // panel keeps its bottom at the window edge and the buttons end up
+  // underneath the keyboard (see useViewportInset).
+  margin-bottom: var(--keyboard-inset, 0px);
+  // Whatever is left of the screen is the budget; a tall form scrolls inside
+  // the panel instead of pushing its actions out of reach.
+  max-height: calc(100dvh - var(--keyboard-inset, 0px));
+
   &::backdrop {
     background: var(--overlay);
   }
@@ -18,10 +27,17 @@
     border-top-left-radius: vars.$radius-lg;
     border-top-right-radius: vars.$radius-lg;
     padding: vars.$space-lg;
-    padding-bottom: calc(#{vars.$space-lg} + env(safe-area-inset-bottom));
+    // No bottom padding: the sticky action bar carries it (including the
+    // gesture-bar inset), so content scrolls flush behind it.
+    padding-bottom: 0;
     display: flex;
     flex-direction: column;
     gap: vars.$space-md;
+    // Only the panel scrolls, so the rounded top edge stays put.
+    max-height: inherit;
+    overflow-y: auto;
+    // Momentum scrolling in the WebView without dragging the page behind it.
+    overscroll-behavior: contain;
   }
 
   &__title {
@@ -115,6 +131,19 @@
 }
 
 .sheet-actions {
+  // Stay reachable when the panel scrolls — with the keyboard up the form is
+  // taller than the space left, and actions that scroll away are the whole
+  // complaint. Sticking to the bottom of the scroll box keeps Save one tap
+  // away no matter how far down the fields go.
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  // The panel's own padding would show content sliding through the gap.
+  margin: 0 calc(-1 * #{vars.$space-lg});
+  padding: vars.$space-sm vars.$space-lg
+    calc(#{vars.$space-sm} + max(0px, env(safe-area-inset-bottom) - var(--keyboard-inset, 0px)));
+  background: var(--bg-elevated);
+
   display: flex;
   // Two buttons per row, each exactly half. German is the worst case —
   // "Löschen"+"Abbrechen"+"Speichern" needs ~365px on one line and was clipped
