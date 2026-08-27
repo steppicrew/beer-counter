@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.4.0",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "Tapped “+” by mistake? Pressing “−” now brings back the previous drink’s time instead of leaving the wrong one. Times older than a day also read properly — yesterday, 2d ago, then a date, instead of “96h ago”.",
+        "de": "Aus Versehen auf „+“ getippt? Ein Druck auf „−“ stellt jetzt die Zeit des vorherigen Getränks wieder her, statt die falsche stehen zu lassen. Zeiten über einen Tag lesen sich außerdem richtig: gestern, vor 2 Tagen, dann ein Datum statt „vor 96h“.",
+        "fr": "Appui sur « + » par erreur ? « − » restaure désormais l’heure de la boisson précédente au lieu de garder la mauvaise. Au-delà d’un jour, l’affichage devient hier, il y a 2 j, puis une date, au lieu de « il y a 96h ».",
+        "es": "¿Tocaste «+» sin querer? Ahora «−» recupera la hora de la bebida anterior en vez de dejar la incorrecta. Los tiempos de más de un día se leen mejor: ayer, hace 2 d y luego una fecha, en lugar de «hace 96h».",
+        "it": "Hai toccato «+» per sbaglio? Ora «−» ripristina l’orario della bevanda precedente invece di lasciare quello sbagliato. Oltre un giorno si legge ieri, 2 g fa e poi una data, invece di «96h fa».",
+        "nl": "Per ongeluk op “+” getikt? “−” zet nu de tijd van het vorige drankje terug in plaats van de verkeerde te laten staan. Tijden ouder dan een dag lezen ook beter: gisteren, 2 d geleden, daarna een datum.",
+        "pl": "Przypadkowe „+”? Teraz „−” przywraca godzinę poprzedniego napoju zamiast zostawiać błędną. Czasy starsze niż doba czytają się lepiej: wczoraj, 2 dni temu, potem data zamiast „96h temu”.",
+        "pt": "Tocou em «+» sem querer? Agora «−» repõe a hora da bebida anterior em vez de deixar a errada. Tempos com mais de um dia passam a ler-se ontem, há 2 d e depois uma data.",
+        "cs": "Omylem „+“? Stisk „−“ nyní obnoví čas předchozího nápoje místo ponechání špatného. Časy starší než den se čtou lépe: včera, před 2 dny, poté datum místo „před 96h“.",
+        "da": "Trykkede du “+” ved et uheld? “−” gendanner nu tidspunktet for den forrige drink i stedet for at lade det forkerte stå. Tider over et døgn vises som i går, for 2 d siden og derefter en dato.",
+        "sv": "Tryckte du “+” av misstag? “−” återställer nu tiden för föregående dryck i stället för att lämna kvar fel tid. Tider äldre än ett dygn visas som i går, för 2 d sedan och sedan ett datum.",
+        "tr": "Yanlışlıkla „+“ mı dokundun? Artık „−“ önceki içeceğin saatini geri getiriyor. Bir günden eski süreler de düzgün okunuyor: dün, 2 gün önce, ardından bir tarih.",
+        "ru": "Случайно нажали «+»? Теперь «−» возвращает время предыдущего напитка вместо неверного. Время старше суток читается нормально: вчера, 2 дн. назад, затем дата вместо «96h назад».",
+        "ja": "「+」を誤ってタップしても、「−」で前の一杯の時刻が戻るようになりました。1日以上前の表示も、昨日・2日前・日付と読みやすくなっています。",
+        "zh": "不小心点了“+”？现在按“−”会恢复上一杯的时间，而不是留下错误的时间。超过一天的时间也更好读：昨天、2 天前，再往前显示日期。"
+      }
+    },
+    {
       "version": "1.3.0",
       "date": "2026-08-27",
       "notes": {
