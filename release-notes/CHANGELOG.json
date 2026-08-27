@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.2.2",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "Editing a drink is easier on a phone: the sheet now stays above the on-screen keyboard, so Save is always in reach. Buttons are evenly sized and wrap instead of being cut off, and deleting a drink asks in the app’s own dialog rather than a browser popup.",
+        "de": "Getränke bearbeiten geht am Handy leichter: Das Fenster bleibt jetzt über der Bildschirmtastatur, „Speichern“ ist immer erreichbar. Die Knöpfe sind gleich groß und brechen um, statt abgeschnitten zu werden, und das Löschen fragt in einem eigenen Dialog statt in einem Browser-Popup.",
+        "fr": "Modifier une boisson est plus simple sur téléphone : la feuille reste au-dessus du clavier, « Enregistrer » est toujours accessible. Les boutons sont de taille égale et passent à la ligne au lieu d’être coupés, et la suppression demande confirmation dans une fenêtre de l’app.",
+        "es": "Editar una bebida es más fácil en el móvil: el panel se mantiene sobre el teclado, así «Guardar» siempre queda a mano. Los botones tienen el mismo tamaño y se ajustan en lugar de cortarse, y borrar una bebida pregunta en un diálogo propio de la app.",
+        "it": "Modificare una bevanda è più comodo da telefono: il pannello resta sopra la tastiera, quindi «Salva» è sempre raggiungibile. I pulsanti hanno la stessa dimensione e vanno a capo invece di essere tagliati, e l’eliminazione chiede conferma in una finestra dell’app.",
+        "nl": "Een drankje bewerken gaat makkelijker op de telefoon: het venster blijft boven het toetsenbord, dus “Opslaan” is altijd bereikbaar. Knoppen zijn even groot en lopen door in plaats van afgekapt te worden, en verwijderen vraagt in een eigen venster van de app.",
+        "pl": "Edycja napoju jest wygodniejsza na telefonie: panel zostaje nad klawiaturą, więc „Zapisz” jest zawsze w zasięgu. Przyciski mają jednakowy rozmiar i zawijają się zamiast być ucinane, a usuwanie pyta w oknie samej aplikacji.",
+        "pt": "Editar uma bebida é mais fácil no telemóvel: o painel fica acima do teclado, por isso «Guardar» está sempre ao alcance. Os botões têm o mesmo tamanho e passam à linha em vez de serem cortados, e apagar pergunta numa janela da própria app.",
+        "cs": "Úprava nápoje je na telefonu snazší: panel zůstává nad klávesnicí, takže „Uložit“ je vždy po ruce. Tlačítka mají stejnou velikost a zalamují se místo oříznutí a mazání se ptá ve vlastním okně aplikace.",
+        "da": "Det er nemmere at redigere en drink på telefonen: panelet bliver over tastaturet, så “Gem” altid kan nås. Knapperne er lige store og ombrydes i stedet for at blive skåret af, og sletning spørger i appens eget vindue.",
+        "sv": "Att redigera en dryck är enklare på telefonen: panelen stannar ovanför tangentbordet, så “Spara” går alltid att nå. Knapparna är lika stora och radbryts i stället för att kapas, och radering frågar i appens eget fönster.",
+        "tr": "Telefonda içecek düzenlemek artık daha kolay: pencere ekran klavyesinin üstünde kalıyor, böylece “Kaydet” hep elinizin altında. Düğmeler eşit boyutta ve kesilmek yerine alt satıra kayıyor, silme işlemi ise uygulamanın kendi penceresinde soruluyor.",
+        "ru": "Редактировать напиток на телефоне стало удобнее: панель остаётся над экранной клавиатурой, поэтому «Сохранить» всегда под рукой. Кнопки одного размера и переносятся, а не обрезаются, а удаление спрашивает в окне самого приложения.",
+        "ja": "スマートフォンでの編集が快適になりました。入力パネルが画面キーボードの上に残るので「保存」にいつでも届きます。ボタンは同じ大きさで、切れずに折り返します。削除の確認もアプリ自身のダイアログで行います。",
+        "zh": "在手机上编辑饮品更方便了：面板会停在软键盘上方，“保存”随时可点。按钮大小一致，会自动换行而不再被截断；删除确认也改用应用自己的对话框。"
+      }
+    },
+    {
       "version": "1.2.1",
       "date": "2026-08-27",
       "notes": {
