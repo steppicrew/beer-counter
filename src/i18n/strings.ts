@@ -35,6 +35,8 @@ export const en = {
   'time.secondsAgo': '{count}s ago',
   'time.minutesAgo': '{count}m ago',
   'time.hoursAgo': '{count}h ago',
+  'time.daysAgo': '{count}d ago',
+  'time.daysAgoOne': 'yesterday',
   'time.never': '—',
 
   'reset.title': 'Start a new round?',
@@ -139,6 +141,8 @@ export const de: Messages = {
   'time.secondsAgo': 'vor {count}s',
   'time.minutesAgo': 'vor {count}min',
   'time.hoursAgo': 'vor {count}h',
+  'time.daysAgo': 'vor {count} Tagen',
+  'time.daysAgoOne': 'gestern',
   'time.never': '—',
 
   'reset.title': 'Neue Runde starten?',
@@ -240,6 +244,8 @@ export const fr: Messages = {
   'time.secondsAgo': 'il y a {count}s',
   'time.minutesAgo': 'il y a {count}min',
   'time.hoursAgo': 'il y a {count}h',
+  'time.daysAgo': 'il y a {count} j',
+  'time.daysAgoOne': 'hier',
   'time.never': '—',
 
   'reset.title': 'Commencer une nouvelle tournée ?',
@@ -341,6 +347,8 @@ export const es: Messages = {
   'time.secondsAgo': 'hace {count}s',
   'time.minutesAgo': 'hace {count}min',
   'time.hoursAgo': 'hace {count}h',
+  'time.daysAgo': 'hace {count} d',
+  'time.daysAgoOne': 'ayer',
   'time.never': '—',
 
   'reset.title': '¿Empezar una ronda nueva?',
@@ -442,6 +450,8 @@ export const it: Messages = {
   'time.secondsAgo': '{count}s fa',
   'time.minutesAgo': '{count}min fa',
   'time.hoursAgo': '{count}h fa',
+  'time.daysAgo': '{count} g fa',
+  'time.daysAgoOne': 'ieri',
   'time.never': '—',
 
   'reset.title': 'Iniziare un nuovo giro?',
@@ -543,6 +553,8 @@ export const nl: Messages = {
   'time.secondsAgo': '{count}s geleden',
   'time.minutesAgo': '{count}min geleden',
   'time.hoursAgo': '{count}u geleden',
+  'time.daysAgo': '{count} d geleden',
+  'time.daysAgoOne': 'gisteren',
   'time.never': '—',
 
   'reset.title': 'Nieuwe ronde beginnen?',
@@ -644,6 +656,8 @@ export const pl: Messages = {
   'time.secondsAgo': '{count}s temu',
   'time.minutesAgo': '{count}min temu',
   'time.hoursAgo': '{count}godz. temu',
+  'time.daysAgo': '{count} dni temu',
+  'time.daysAgoOne': 'wczoraj',
   'time.never': '—',
 
   'reset.title': 'Zacząć nową kolejkę?',
@@ -745,6 +759,8 @@ export const pt: Messages = {
   'time.secondsAgo': 'há {count}s',
   'time.minutesAgo': 'há {count}min',
   'time.hoursAgo': 'há {count}h',
+  'time.daysAgo': 'há {count} d',
+  'time.daysAgoOne': 'ontem',
   'time.never': '—',
 
   'reset.title': 'Começar uma nova rodada?',
@@ -846,6 +862,8 @@ export const cs: Messages = {
   'time.secondsAgo': 'před {count}s',
   'time.minutesAgo': 'před {count}min',
   'time.hoursAgo': 'před {count}h',
+  'time.daysAgo': 'před {count} dny',
+  'time.daysAgoOne': 'včera',
   'time.never': '—',
 
   'reset.title': 'Začít nové kolo?',
@@ -947,6 +965,8 @@ export const da: Messages = {
   'time.secondsAgo': 'for {count}s siden',
   'time.minutesAgo': 'for {count}min siden',
   'time.hoursAgo': 'for {count}t siden',
+  'time.daysAgo': 'for {count} d siden',
+  'time.daysAgoOne': 'i går',
   'time.never': '—',
 
   'reset.title': 'Start en ny omgang?',
@@ -1048,6 +1068,8 @@ export const sv: Messages = {
   'time.secondsAgo': 'för {count}s sedan',
   'time.minutesAgo': 'för {count}min sedan',
   'time.hoursAgo': 'för {count}h sedan',
+  'time.daysAgo': 'för {count} d sedan',
+  'time.daysAgoOne': 'i går',
   'time.never': '—',
 
   'reset.title': 'Starta en ny runda?',
@@ -1149,6 +1171,8 @@ export const tr: Messages = {
   'time.secondsAgo': '{count}sn önce',
   'time.minutesAgo': '{count}dk önce',
   'time.hoursAgo': '{count}sa önce',
+  'time.daysAgo': '{count} gün önce',
+  'time.daysAgoOne': 'dün',
   'time.never': '—',
 
   'reset.title': 'Yeni tur başlasın mı?',
@@ -1250,6 +1274,8 @@ export const ru: Messages = {
   'time.secondsAgo': '{count}с назад',
   'time.minutesAgo': '{count}мин назад',
   'time.hoursAgo': '{count}ч назад',
+  'time.daysAgo': '{count} дн. назад',
+  'time.daysAgoOne': 'вчера',
   'time.never': '—',
 
   'reset.title': 'Начать новый круг?',
@@ -1351,6 +1377,8 @@ export const ja: Messages = {
   'time.secondsAgo': '{count}秒前',
   'time.minutesAgo': '{count}分前',
   'time.hoursAgo': '{count}時間前',
+  'time.daysAgo': '{count}日前',
+  'time.daysAgoOne': '昨日',
   'time.never': '—',
 
   'reset.title': '新しいラウンドを始めますか？',
@@ -1452,6 +1480,8 @@ export const zh: Messages = {
   'time.secondsAgo': '{count}秒前',
   'time.minutesAgo': '{count}分钟前',
   'time.hoursAgo': '{count}小时前',
+  'time.daysAgo': '{count} 天前',
+  'time.daysAgoOne': '昨天',
   'time.never': '—',
 
   'reset.title': '开始新的一轮？',

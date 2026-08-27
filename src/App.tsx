@@ -7,7 +7,7 @@ import { ResetSheet } from './components/ResetSheet';
 import { ShareSheet } from './components/ShareSheet';
 import { useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
-import type { Beverage } from './lib/types';
+import type { Beverage, Tally } from './lib/types';
 import { computeTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
@@ -16,7 +16,7 @@ import { useViewportInset } from './lib/useViewportInset';
 import { formatMoney, defaultCurrencyFor } from './lib/money';
 import './App.scss';
 
-const EMPTY_TALLY = { count: 0, lastAt: null } as const;
+const EMPTY_TALLY: Tally = { times: [] };
 
 /** None of the shipped locales are RTL yet; kept so adding ar/he is a one-liner. */
 const RTL_LOCALES = new Set<string>();

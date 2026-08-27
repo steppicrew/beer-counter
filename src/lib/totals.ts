@@ -11,7 +11,7 @@ export interface Totals {
   anyPriced: boolean;
 }
 
-const EMPTY: Tally = { count: 0, lastAt: null };
+const EMPTY: Tally = { times: [] };
 
 /**
  * A running total is only trustworthy if everything counted is priced —
@@ -28,7 +28,7 @@ export function computeTotals(
   let anyPriced = false;
 
   for (const beverage of beverages) {
-    const { count } = tallies[beverage.id] ?? EMPTY;
+    const count = (tallies[beverage.id] ?? EMPTY).times.length;
     if (count === 0) continue;
 
     drinks += count;
@@ -47,5 +47,5 @@ export function computeTotals(
 /** Line total for a single drink, or null when it has no price. */
 export function lineTotal(beverage: Beverage, tally: Tally): number | null {
   if (beverage.priceCents === undefined) return null;
-  return beverage.priceCents * tally.count;
+  return beverage.priceCents * tally.times.length;
 }

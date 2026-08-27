@@ -28,10 +28,25 @@ export interface Beverage {
   priceCents?: number;
 }
 
+/**
+ * One entry per drink counted, oldest first (epoch ms).
+ *
+ * A stack rather than a count plus a single timestamp: undoing a mistaken tap
+ * has to restore the *previous* drink's time, which a lone `lastAt` cannot do
+ * — it would either keep the wrong time or blank it entirely.
+ */
 export interface Tally {
-  count: number;
-  /** Epoch ms of the most recent increment; null when count is 0. */
-  lastAt: number | null;
+  times: number[];
+}
+
+/** Number of drinks counted. */
+export function tallyCount(tally: Tally): number {
+  return tally.times.length;
+}
+
+/** Epoch ms of the most recent drink; null when none are counted. */
+export function tallyLastAt(tally: Tally): number | null {
+  return tally.times.at(-1) ?? null;
 }
 
 export type ThemeMode = 'system' | 'light' | 'dark';

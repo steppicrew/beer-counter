@@ -40,7 +40,7 @@ interface AppState {
   totalDrinks: () => number;
 }
 
-const emptyTally: Tally = { count: 0, lastAt: null };
+const emptyTally: Tally = { times: [] };
 
 export const useAppStore = create<AppState>()(
   subscribeWithSelector(
@@ -59,7 +59,7 @@ export const useAppStore = create<AppState>()(
             return {
               tallies: {
                 ...state.tallies,
-                [id]: { count: current.count + 1, lastAt: Date.now() },
+                [id]: { times: [...current.times, Date.now()] },
               },
             };
           }),
@@ -67,14 +67,14 @@ export const useAppStore = create<AppState>()(
         decrement: (id) =>
           set((state) => {
             const current = state.tallies[id] ?? emptyTally;
-            if (current.count <= 0) return state;
-            const count = current.count - 1;
+            if (current.times.length === 0) return state;
             return {
               tallies: {
                 ...state.tallies,
-                // Dropping to zero clears the timer; otherwise the previous
-                // timestamp stands (we don't track per-drink history).
-                [id]: { count, lastAt: count === 0 ? null : current.lastAt },
+                // Popping the newest entry uncovers the one before it, so an
+                // accidental tap-then-undo restores the previous drink's time
+                // rather than losing it.
+                [id]: { times: current.times.slice(0, -1) },
               },
             };
           }),
@@ -134,12 +134,34 @@ export const useAppStore = create<AppState>()(
         setCurrency: (currency) => set({ currency }),
 
         totalDrinks: () =>
-          Object.values(get().tallies).reduce((sum, t) => sum + t.count, 0),
+          Object.values(get().tallies).reduce((sum, t) => sum + t.times.length, 0),
       }),
       {
         name: 'beer-counter-state',
         storage: createJSONStorage(() => localStorage),
-        version: 1,
+        version: 2,
+        /**
+         * v1 stored `{ count, lastAt }`. Only the newest drink had a time, so
+         * the older entries are unknowable — they are seeded to that same
+         * timestamp, which keeps counts and the displayed "last drink" exact
+         * and only affects undo history the user never had anyway.
+         */
+        migrate: (persisted, version) => {
+          if (version >= 2) return persisted as AppState;
+          const state = persisted as { tallies?: Record<string, unknown> };
+          const tallies: Record<string, Tally> = {};
+          for (const [id, value] of Object.entries(state.tallies ?? {})) {
+            const old = value as { count?: number; lastAt?: number | null; times?: number[] };
+            if (Array.isArray(old.times)) {
+              tallies[id] = { times: old.times };
+              continue;
+            }
+            const count = Math.max(0, old.count ?? 0);
+            const at = old.lastAt ?? Date.now();
+            tallies[id] = { times: Array.from({ length: count }, () => at) };
+          }
+          return { ...(persisted as object), tallies } as AppState;
+        },
         // Actions are recreated on load; only data is persisted.
         partialize: (state) => ({
           beverages: state.beverages,
