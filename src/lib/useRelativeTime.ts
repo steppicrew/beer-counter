@@ -12,7 +12,8 @@ export function useElapsed(since: number | null): number | null {
   useEffect(() => {
     if (since === null) return;
     const age = now - since;
-    const interval = age < 60_000 ? 1_000 : 30_000;
+    // Past an hour the label only changes hourly, so stop waking every 30s.
+    const interval = age < 60_000 ? 1_000 : age < 3_600_000 ? 30_000 : 300_000;
     const timer = setInterval(() => setNow(Date.now()), interval);
     return () => clearInterval(timer);
   }, [since, now]);
@@ -21,7 +22,15 @@ export function useElapsed(since: number | null): number | null {
   return Math.max(0, now - since);
 }
 
-export function formatElapsed(ms: number | null, t: Translate): string {
+/**
+ * Relative for as long as that reads naturally, then an absolute date.
+ *
+ * Counts persist until the next reset, so a tab left open on Monday and
+ * reopened on Friday used to render "96h ago" — technically right, useless at
+ * a glance. Past a week even "12d ago" stops meaning anything, so it becomes
+ * a short date instead.
+ */
+export function formatElapsed(ms: number | null, t: Translate, locale?: string): string {
   if (ms === null) return t('time.never');
 
   const seconds = Math.floor(ms / 1000);
@@ -31,5 +40,14 @@ export function formatElapsed(ms: number | null, t: Translate): string {
   const minutes = Math.floor(seconds / 60);
   if (minutes < 60) return t('time.minutesAgo', { count: minutes });
 
-  return t('time.hoursAgo', { count: Math.floor(minutes / 60) });
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return t('time.hoursAgo', { count: hours });
+
+  const days = Math.floor(hours / 24);
+  if (days === 1) return t('time.daysAgoOne');
+  if (days < 7) return t('time.daysAgo', { count: days });
+
+  // Older than a week: the day and month say more than a running total.
+  return new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short' })
+    .format(new Date(Date.now() - ms));
 }

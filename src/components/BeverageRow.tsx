@@ -7,6 +7,7 @@ import { useI18n } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
 import { formatMoney, defaultCurrencyFor } from '../lib/money';
 import { lineTotal } from '../lib/totals';
+import { tallyCount, tallyLastAt } from '../lib/types';
 import type { Beverage, Tally } from '../lib/types';
 import type { MessageKey } from '../i18n';
 import './BeverageRow.scss';
@@ -21,7 +22,8 @@ interface Props {
 
 export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit }: Props) {
   const { t, locale } = useI18n();
-  const elapsed = useElapsed(tally.lastAt);
+  const count = tallyCount(tally);
+  const elapsed = useElapsed(tallyLastAt(tally));
   const label = beverage.nameKey ? t(beverage.nameKey as MessageKey) : (beverage.name ?? '');
 
   // Under a minute since the last tap is the window where an accidental
@@ -37,7 +39,7 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
   const pressHandlers = useLongPress({ onLongPress: onEdit, onClick: onIncrement });
 
   return (
-    <li className={clsx('row', tally.count > 0 && 'row--active')}>
+    <li className={clsx('row', count > 0 && 'row--active')}>
       {/* The whole tile is the add button: counting is the one thing you do
           over and over, often one-handed and not entirely sober. */}
       <button
@@ -50,12 +52,12 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
         <span className="row__text">
           <span className="row__name">{label}</span>
           <span className={clsx('row__time', isFresh && 'row__time--fresh')}>
-            {formatElapsed(elapsed, t)}
+            {formatElapsed(elapsed, t, locale)}
           </span>
         </span>
         <span className="row__figures">
           <span className="row__count" aria-live="polite">
-            {tally.count}
+            {count}
           </span>
           {money !== null && money > 0 && (
             <span className="row__money">{formatMoney(money, currency, locale)}</span>
@@ -68,7 +70,7 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
           type="button"
           className="row__minus"
           onClick={onDecrement}
-          disabled={tally.count === 0}
+          disabled={count === 0}
           aria-label={`${t('action.remove')} — ${label}`}
         >
           −
