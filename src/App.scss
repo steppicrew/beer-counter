@@ -26,6 +26,15 @@
     // have very different baselines, which left the label sitting low.
     align-items: center;
     gap: vars.$space-sm;
+    // "GESAMT 2 mindestens 5,50 €" plus three 48px buttons needs ~383px and
+    // overflowed every common phone, scrolling the whole page sideways. Let
+    // the price drop to a second line only when it does not fit; on a wider
+    // screen the row is unchanged.
+    flex-wrap: wrap;
+    // Without this the block refuses to shrink below its content and wraps
+    // nothing, no matter how narrow the screen.
+    min-width: 0;
+    row-gap: 2px;
   }
 
   &__total-label {
@@ -55,6 +64,8 @@
   &__header-actions {
     display: flex;
     gap: vars.$space-sm;
+    // Tap targets are not negotiable: the totals block wraps instead.
+    flex: none;
   }
 
   &__icon-btn {
@@ -204,7 +215,11 @@
   &__legal {
     display: flex;
     justify-content: center;
+    // Longer translations ("Приложение для Android · Конфиденциальность · …")
+    // pushed the row past the screen and scrolled the whole page sideways.
+    flex-wrap: wrap;
     gap: vars.$space-sm;
+    row-gap: vars.$space-xs;
     margin-top: vars.$space-sm;
     font-size: 12px;
     color: var(--text-muted);
