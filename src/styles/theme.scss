@@ -1,0 +1,46 @@
+@use 'vars' as vars;
+@use 'sass:color';
+
+// Theme tokens. `[data-theme]` is set explicitly by the app; the media query
+// covers the "system" setting where no attribute is written.
+:root {
+  --bg: #{vars.$color-foam};
+  --bg-elevated: #ffffff;
+  --bg-sunken: #{color.adjust(vars.$color-foam, $lightness: -4%)};
+  --border: #{color.adjust(vars.$color-foam, $lightness: -12%)};
+  --text: #23180a;
+  --text-muted: #7d6a4f;
+  --accent: #{vars.$color-amber-deep};
+  --accent-contrast: #ffffff;
+  --danger: #{vars.$color-danger};
+  --overlay: rgb(35 24 10 / 45%);
+  --shadow: #{vars.$shadow-card};
+
+  color-scheme: light;
+}
+
+@mixin dark-tokens {
+  --bg: #12100e;
+  --bg-elevated: #1e1b17;
+  --bg-sunken: #0b0a09;
+  --border: #332e27;
+  --text: #f4ece0;
+  --text-muted: #a2957f;
+  --accent: #{vars.$color-amber};
+  --accent-contrast: #1a1206;
+  --danger: #{color.adjust(vars.$color-danger, $lightness: 8%)};
+  --overlay: rgb(0 0 0 / 62%);
+  --shadow: #{vars.$shadow-lifted};
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include dark-tokens;
+  }
+}
+
+:root[data-theme='dark'] {
+  @include dark-tokens;
+}

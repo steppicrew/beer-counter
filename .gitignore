@@ -1,0 +1,31 @@
+node_modules/
+dist/
+dist-ssv/
+.env
+*.local
+*.log
+
+# Yarn 4 PnP: keep releases/plugins, ignore the caches and unplugged state.
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.pnp.*
+
+# Android build output
+android/.gradle/
+android/build/
+android/app/build/
+android/app/release/
+android/local.properties
+android/.idea/
+*.keystore
+!debug.keystore
+keystore.properties
+
+# Generated assets (rebuilt by `yarn assets` / `yarn screenshots`)
+public/icons/
+public/favicon.svg
+assets/play/
+assets/screenshots/*/
