@@ -24,9 +24,14 @@ export interface AppUpdate {
  * on us: a PWA launched from the home screen may not navigate for days, so we
  * check at startup, whenever the app returns to the foreground, and hourly.
  *
- * Inert in the packaged Android app: its assets come from the APK and are
- * updated through Play, so there is no origin to poll — and with no INTERNET
- * permission the check could not run anyway.
+ * In the packaged Android app this does more than nothing: it actively tears
+ * any service worker down. The APK ships `sw.js` alongside the assets, and a
+ * worker registered once for the origin keeps controlling the page across
+ * app updates. Play then installs a new APK carrying a byte-different
+ * `sw.js` at the same URL, the surviving worker treats that as a new version
+ * and prompts for a reload — an update check that needs no network at all,
+ * which is why the missing INTERNET permission never prevented it. Reloading
+ * could not help either: the old worker just serves its cache back.
  */
 export function useAppUpdate(): AppUpdate {
   const [ready, setReady] = useState(false);
@@ -35,7 +40,19 @@ export function useAppUpdate(): AppUpdate {
   const applying = useRef(false);
 
   useEffect(() => {
-    if (isNativeApp()) return;
+    if (isNativeApp()) {
+      // Not just "don't register": a worker from an earlier build — or from
+      // the PWA on the same origin — outlives the install and would keep
+      // prompting. Tear it down and drop its caches so the WebView serves
+      // the APK's own assets.
+      void navigator.serviceWorker?.getRegistrations().then((registrations) => {
+        for (const registration of registrations) void registration.unregister();
+      });
+      void caches?.keys().then((keys) => {
+        for (const key of keys) void caches.delete(key);
+      });
+      return;
+    }
 
     const cleanups: (() => void)[] = [];
 
@@ -100,5 +117,8 @@ export function useAppUpdate(): AppUpdate {
     });
   };
 
-  return { ready, apply };
+  // Belt and braces: even if a worker that outlived an install fires
+  // onNeedRefresh before the teardown above completes, the packaged app must
+  // never offer a reload it cannot perform — updates there come from Play.
+  return { ready: ready && !isNativeApp(), apply };
 }
