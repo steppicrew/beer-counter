@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.2.1",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "Fixes an “update available” prompt that could appear in the Android app and did nothing when tapped — the app updates through Google Play. The privacy page’s language list now wraps instead of running off the screen.",
+        "de": "Behebt einen Hinweis „Neue Version verfügbar“, der in der Android-App erscheinen konnte und beim Antippen nichts tat — die App wird über Google Play aktualisiert. Die Sprachliste der Datenschutzseite bricht jetzt um, statt aus dem Bild zu laufen.",
+        "fr": "Corrige un message « mise à jour disponible » qui pouvait apparaître dans l’app Android sans rien faire — l’app se met à jour via Google Play. La liste des langues de la page de confidentialité passe désormais à la ligne.",
+        "es": "Corrige un aviso de «actualización disponible» que podía aparecer en la app de Android y no hacía nada — la app se actualiza por Google Play. La lista de idiomas de la página de privacidad ahora se ajusta en varias líneas.",
+        "it": "Corregge un avviso «aggiornamento disponibile» che poteva comparire nell’app Android senza fare nulla — l’app si aggiorna tramite Google Play. L’elenco delle lingue nella pagina privacy ora va a capo.",
+        "nl": "Lost een melding “update beschikbaar” op die in de Android-app kon verschijnen en niets deed — de app werkt bij via Google Play. De talenlijst op de privacypagina loopt nu door op meerdere regels.",
+        "pl": "Naprawia komunikat „dostępna aktualizacja”, który mógł pojawiać się w aplikacji na Androida i nic nie robił — aplikacja aktualizuje się przez Google Play. Lista języków na stronie prywatności zawija się teraz do kolejnych wierszy.",
+        "pt": "Corrige um aviso de “atualização disponível” que podia aparecer na app Android sem fazer nada — a app atualiza através do Google Play. A lista de idiomas da página de privacidade passa agora à linha seguinte.",
+        "cs": "Opravuje hlášení „je dostupná aktualizace“, které se mohlo objevit v aplikaci pro Android a po klepnutí nic neudělalo — aplikace se aktualizuje přes Google Play. Seznam jazyků na stránce o soukromí se nyní zalamuje.",
+        "da": "Retter en “opdatering tilgængelig”-besked, der kunne vises i Android-appen og ikke gjorde noget — appen opdateres via Google Play. Sproglisten på privatlivssiden ombrydes nu i stedet for at løbe ud af skærmen.",
+        "sv": "Rättar ett meddelande om “uppdatering tillgänglig” som kunde visas i Android-appen utan att göra något — appen uppdateras via Google Play. Språklistan på integritetssidan radbryts nu i stället för att löpa utanför skärmen.",
+        "tr": "Android uygulamasında görünebilen ve dokunulduğunda hiçbir şey yapmayan “güncelleme mevcut” uyarısı düzeltildi — uygulama Google Play üzerinden güncellenir. Gizlilik sayfasındaki dil listesi artık alt satıra kayıyor.",
+        "ru": "Исправлено уведомление «доступно обновление», которое могло появляться в приложении для Android и ничего не делало — приложение обновляется через Google Play. Список языков на странице конфиденциальности теперь переносится по строкам.",
+        "ja": "Android アプリで表示されることがあり、タップしても何も起きなかった「アップデートあり」の通知を修正しました（アプリの更新は Google Play 経由です）。プライバシーページの言語一覧が画面外に伸びず折り返すようになりました。",
+        "zh": "修复了 Android 应用中可能出现、点击却无反应的“有新版本”提示 —— 应用通过 Google Play 更新。隐私页面的语言列表现在会自动换行，不再超出屏幕。"
+      }
+    },
+    {
       "version": "1.2.0",
       "date": "2026-08-27",
       "notes": {
