@@ -5,6 +5,9 @@ no network permission at all.
 
 Available as a PWA and as a native Android app (Capacitor), from one codebase.
 
+**➔ [beercounter.steppicrew.de](https://beercounter.steppicrew.de/)** — live version,
+installable straight from the browser.
+
 ## Features
 
 - **Tap to count.** The whole drink tile is the button; a smaller minus fixes a
