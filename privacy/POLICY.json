@@ -1,0 +1,637 @@
+{
+  "$comment": "Privacy policy text per language. `yarn privacy` renders these into public/privacy/. Keep the factual claims in sync with what the app actually does.",
+  "effectiveDate": "2026-08-27",
+  "contactEmail": "steppicrew@gmail.com",
+  "policies": {
+    "en": {
+      "title": "Privacy Policy",
+      "intro": "Steppi's Beer Counter is designed to collect nothing. This policy explains what that means in practice.",
+      "sections": [
+        [
+          "No data is collected",
+          "The app does not collect, transmit or store any personal data on any server. There is no analytics, no crash reporting, no advertising SDK and no tracking of any kind."
+        ],
+        [
+          "No account",
+          "The app requires no account, no sign-up, no email address and no login. It never asks who you are."
+        ],
+        [
+          "Where your data lives",
+          "The drinks you add, your counts, prices and settings are stored only in your own device's local storage. They never leave the device. Uninstalling the app, or clearing the app's storage, deletes them permanently — there is no backup and no way for anyone, including the developer, to recover them."
+        ],
+        [
+          "No network access",
+          "The Android app is built without the INTERNET permission, so it is technically incapable of sending anything anywhere. The web version loads once and then runs entirely offline from its cache."
+        ],
+        [
+          "No third parties",
+          "No data is shared with third parties, because no data is collected. The app contains no third-party SDKs."
+        ],
+        [
+          "Children",
+          "The app collects no data from anyone, including children under 13."
+        ],
+        [
+          "Permissions",
+          "The Android app requests no permissions."
+        ],
+        [
+          "Changes",
+          "If this policy ever changes, the updated version will be published at this address with a new effective date."
+        ],
+        [
+          "Contact",
+          "Questions about this policy can be sent to the address below."
+        ]
+      ]
+    },
+    "de": {
+      "title": "Datenschutzerklärung",
+      "intro": "Steppis Bierzähler ist so gebaut, dass er nichts erhebt. Diese Erklärung beschreibt, was das konkret bedeutet.",
+      "sections": [
+        [
+          "Es werden keine Daten erhoben",
+          "Die App erhebt, überträgt und speichert keinerlei personenbezogene Daten auf irgendeinem Server. Es gibt keine Analyse, keine Absturzberichte, kein Werbe-SDK und kein Tracking jeglicher Art."
+        ],
+        [
+          "Kein Konto",
+          "Die App benötigt kein Konto, keine Registrierung, keine E-Mail-Adresse und keine Anmeldung. Sie fragt nie, wer Sie sind."
+        ],
+        [
+          "Wo Ihre Daten liegen",
+          "Die von Ihnen angelegten Getränke, Ihre Zählerstände, Preise und Einstellungen werden ausschließlich im lokalen Speicher Ihres Geräts abgelegt. Sie verlassen das Gerät nie. Deinstallieren der App oder Löschen des App-Speichers löscht sie endgültig — es gibt keine Sicherung und keine Möglichkeit, sie wiederherzustellen, auch nicht für den Entwickler."
+        ],
+        [
+          "Kein Netzwerkzugriff",
+          "Die Android-App wird ohne die Berechtigung INTERNET gebaut und ist damit technisch außerstande, irgendetwas zu versenden. Die Web-Version lädt einmal und läuft danach vollständig offline aus ihrem Cache."
+        ],
+        [
+          "Keine Dritten",
+          "Es werden keine Daten an Dritte weitergegeben, weil keine Daten erhoben werden. Die App enthält keine Fremd-SDKs."
+        ],
+        [
+          "Kinder",
+          "Die App erhebt von niemandem Daten, auch nicht von Kindern unter 13 Jahren."
+        ],
+        [
+          "Berechtigungen",
+          "Die Android-App fordert keine Berechtigungen an."
+        ],
+        [
+          "Änderungen",
+          "Sollte sich diese Erklärung ändern, wird die aktualisierte Fassung unter dieser Adresse mit neuem Stand veröffentlicht."
+        ],
+        [
+          "Kontakt",
+          "Fragen zu dieser Erklärung können an die unten stehende Adresse gerichtet werden."
+        ]
+      ]
+    },
+    "fr": {
+      "title": "Politique de confidentialité",
+      "intro": "Compteur de Bières Steppi est conçu pour ne rien collecter. Cette politique explique ce que cela signifie concrètement.",
+      "sections": [
+        [
+          "Aucune donnée collectée",
+          "L'application ne collecte, ne transmet et ne stocke aucune donnée personnelle sur aucun serveur. Il n'y a ni analyse, ni rapport de plantage, ni SDK publicitaire, ni suivi d'aucune sorte."
+        ],
+        [
+          "Aucun compte",
+          "L'application ne nécessite aucun compte, aucune inscription, aucune adresse e-mail et aucune connexion. Elle ne demande jamais qui vous êtes."
+        ],
+        [
+          "Où vivent vos données",
+          "Les boissons que vous ajoutez, vos compteurs, vos prix et vos réglages sont stockés uniquement dans le stockage local de votre appareil. Ils ne le quittent jamais. Désinstaller l'application ou effacer son stockage les supprime définitivement — il n'existe aucune sauvegarde et aucun moyen de les récupérer, pas même pour le développeur."
+        ],
+        [
+          "Aucun accès réseau",
+          "L'application Android est compilée sans la permission INTERNET : elle est donc techniquement incapable d'envoyer quoi que ce soit. La version web se charge une fois puis fonctionne entièrement hors ligne depuis son cache."
+        ],
+        [
+          "Aucun tiers",
+          "Aucune donnée n'est partagée avec des tiers, puisqu'aucune donnée n'est collectée. L'application ne contient aucun SDK tiers."
+        ],
+        [
+          "Enfants",
+          "L'application ne collecte de données auprès de personne, y compris les enfants de moins de 13 ans."
+        ],
+        [
+          "Autorisations",
+          "L'application Android ne demande aucune autorisation."
+        ],
+        [
+          "Modifications",
+          "Si cette politique venait à changer, la version mise à jour serait publiée à cette adresse avec une nouvelle date d'effet."
+        ],
+        [
+          "Contact",
+          "Toute question sur cette politique peut être adressée à l'adresse ci-dessous."
+        ]
+      ]
+    },
+    "es": {
+      "title": "Política de privacidad",
+      "intro": "Contador de Cervezas Steppi está diseñado para no recopilar nada. Esta política explica qué significa eso en la práctica.",
+      "sections": [
+        [
+          "No se recopilan datos",
+          "La aplicación no recopila, transmite ni almacena ningún dato personal en ningún servidor. No hay analíticas, ni informes de fallos, ni SDK publicitario, ni rastreo de ningún tipo."
+        ],
+        [
+          "Sin cuenta",
+          "La aplicación no requiere cuenta, ni registro, ni dirección de correo, ni inicio de sesión. Nunca pregunta quién eres."
+        ],
+        [
+          "Dónde están tus datos",
+          "Las bebidas que añades, tus contadores, precios y ajustes se guardan únicamente en el almacenamiento local de tu dispositivo. Nunca salen de él. Desinstalar la aplicación o borrar su almacenamiento los elimina de forma permanente: no hay copia de seguridad ni forma de recuperarlos, tampoco para el desarrollador."
+        ],
+        [
+          "Sin acceso a la red",
+          "La aplicación de Android se compila sin el permiso INTERNET, por lo que es técnicamente incapaz de enviar nada a ninguna parte. La versión web se carga una vez y luego funciona totalmente sin conexión desde su caché."
+        ],
+        [
+          "Sin terceros",
+          "No se comparten datos con terceros, porque no se recopilan datos. La aplicación no contiene SDK de terceros."
+        ],
+        [
+          "Menores",
+          "La aplicación no recopila datos de nadie, incluidos los menores de 13 años."
+        ],
+        [
+          "Permisos",
+          "La aplicación de Android no solicita ningún permiso."
+        ],
+        [
+          "Cambios",
+          "Si esta política cambia, la versión actualizada se publicará en esta dirección con una nueva fecha de entrada en vigor."
+        ],
+        [
+          "Contacto",
+          "Las preguntas sobre esta política pueden enviarse a la dirección indicada abajo."
+        ]
+      ]
+    },
+    "it": {
+      "title": "Informativa sulla privacy",
+      "intro": "Il Contabirre di Steppi è progettato per non raccogliere nulla. Questa informativa spiega cosa significa in pratica.",
+      "sections": [
+        [
+          "Nessun dato raccolto",
+          "L'app non raccoglie, non trasmette e non archivia alcun dato personale su alcun server. Non ci sono analisi, né segnalazioni di arresto anomalo, né SDK pubblicitari, né tracciamento di alcun tipo."
+        ],
+        [
+          "Nessun account",
+          "L'app non richiede account, registrazione, indirizzo email o accesso. Non chiede mai chi sei."
+        ],
+        [
+          "Dove stanno i tuoi dati",
+          "Le bevande che aggiungi, i tuoi conteggi, i prezzi e le impostazioni sono archiviati solo nella memoria locale del tuo dispositivo. Non lo lasciano mai. Disinstallare l'app o cancellarne la memoria li elimina definitivamente: non esiste backup né modo di recuperarli, nemmeno per lo sviluppatore."
+        ],
+        [
+          "Nessun accesso alla rete",
+          "L'app Android è compilata senza il permesso INTERNET, quindi è tecnicamente incapace di inviare alcunché. La versione web si carica una volta e poi funziona interamente offline dalla sua cache."
+        ],
+        [
+          "Nessuna terza parte",
+          "Nessun dato è condiviso con terze parti, perché nessun dato viene raccolto. L'app non contiene SDK di terze parti."
+        ],
+        [
+          "Minori",
+          "L'app non raccoglie dati da nessuno, inclusi i minori di 13 anni."
+        ],
+        [
+          "Autorizzazioni",
+          "L'app Android non richiede alcuna autorizzazione."
+        ],
+        [
+          "Modifiche",
+          "Se questa informativa dovesse cambiare, la versione aggiornata sarà pubblicata a questo indirizzo con una nuova data di validità."
+        ],
+        [
+          "Contatti",
+          "Le domande su questa informativa possono essere inviate all'indirizzo indicato sotto."
+        ]
+      ]
+    },
+    "nl": {
+      "title": "Privacyverklaring",
+      "intro": "Steppi's Bierteller is zo gebouwd dat er niets wordt verzameld. Deze verklaring legt uit wat dat in de praktijk betekent.",
+      "sections": [
+        [
+          "Er worden geen gegevens verzameld",
+          "De app verzamelt, verzendt en bewaart geen enkel persoonsgegeven op welke server dan ook. Er is geen analyse, geen crashrapportage, geen advertentie-SDK en geen tracking van welke aard dan ook."
+        ],
+        [
+          "Geen account",
+          "De app vereist geen account, geen registratie, geen e-mailadres en geen login. Er wordt nooit gevraagd wie je bent."
+        ],
+        [
+          "Waar je gegevens staan",
+          "De drankjes die je toevoegt, je tellers, prijzen en instellingen worden uitsluitend in de lokale opslag van je eigen apparaat bewaard. Ze verlaten het apparaat nooit. De app verwijderen of de opslag wissen verwijdert ze definitief — er is geen back-up en geen manier om ze terug te halen, ook niet voor de ontwikkelaar."
+        ],
+        [
+          "Geen netwerktoegang",
+          "De Android-app wordt gebouwd zonder de INTERNET-toestemming en is daardoor technisch niet in staat iets te versturen. De webversie laadt één keer en draait daarna volledig offline vanuit de cache."
+        ],
+        [
+          "Geen derden",
+          "Er worden geen gegevens gedeeld met derden, omdat er geen gegevens worden verzameld. De app bevat geen SDK's van derden."
+        ],
+        [
+          "Kinderen",
+          "De app verzamelt van niemand gegevens, ook niet van kinderen onder de 13."
+        ],
+        [
+          "Toestemmingen",
+          "De Android-app vraagt geen enkele toestemming."
+        ],
+        [
+          "Wijzigingen",
+          "Mocht deze verklaring wijzigen, dan wordt de bijgewerkte versie op dit adres gepubliceerd met een nieuwe ingangsdatum."
+        ],
+        [
+          "Contact",
+          "Vragen over deze verklaring kunnen naar het onderstaande adres."
+        ]
+      ]
+    },
+    "pl": {
+      "title": "Polityka prywatności",
+      "intro": "Licznik Piw Steppiego został zbudowany tak, aby niczego nie zbierać. Ta polityka wyjaśnia, co to oznacza w praktyce.",
+      "sections": [
+        [
+          "Nie zbieramy żadnych danych",
+          "Aplikacja nie zbiera, nie przesyła ani nie przechowuje żadnych danych osobowych na jakimkolwiek serwerze. Nie ma analityki, raportów awarii, SDK reklamowego ani śledzenia jakiegokolwiek rodzaju."
+        ],
+        [
+          "Brak konta",
+          "Aplikacja nie wymaga konta, rejestracji, adresu e-mail ani logowania. Nigdy nie pyta, kim jesteś."
+        ],
+        [
+          "Gdzie są Twoje dane",
+          "Dodane napoje, liczniki, ceny i ustawienia są przechowywane wyłącznie w lokalnej pamięci Twojego urządzenia. Nigdy go nie opuszczają. Odinstalowanie aplikacji lub wyczyszczenie jej pamięci usuwa je trwale — nie ma kopii zapasowej ani możliwości ich odzyskania, również przez autora."
+        ],
+        [
+          "Brak dostępu do sieci",
+          "Aplikacja na Androida jest budowana bez uprawnienia INTERNET, więc technicznie nie jest w stanie niczego wysłać. Wersja webowa ładuje się raz, a potem działa całkowicie offline z pamięci podręcznej."
+        ],
+        [
+          "Brak stron trzecich",
+          "Żadne dane nie są udostępniane stronom trzecim, ponieważ żadne dane nie są zbierane. Aplikacja nie zawiera zewnętrznych SDK."
+        ],
+        [
+          "Dzieci",
+          "Aplikacja nie zbiera danych od nikogo, w tym od dzieci poniżej 13 roku życia."
+        ],
+        [
+          "Uprawnienia",
+          "Aplikacja na Androida nie żąda żadnych uprawnień."
+        ],
+        [
+          "Zmiany",
+          "Jeśli ta polityka ulegnie zmianie, zaktualizowana wersja zostanie opublikowana pod tym adresem z nową datą obowiązywania."
+        ],
+        [
+          "Kontakt",
+          "Pytania dotyczące tej polityki można kierować na poniższy adres."
+        ]
+      ]
+    },
+    "pt": {
+      "title": "Política de Privacidade",
+      "intro": "O Contador de Cervejas Steppi foi feito para não recolher nada. Esta política explica o que isso significa na prática.",
+      "sections": [
+        [
+          "Não são recolhidos dados",
+          "A aplicação não recolhe, não transmite nem armazena quaisquer dados pessoais em qualquer servidor. Não há análises, relatórios de falhas, SDK de publicidade nem rastreio de qualquer tipo."
+        ],
+        [
+          "Sem conta",
+          "A aplicação não requer conta, registo, endereço de e-mail nem início de sessão. Nunca pergunta quem é."
+        ],
+        [
+          "Onde ficam os seus dados",
+          "As bebidas que adiciona, os seus contadores, preços e definições são guardados apenas no armazenamento local do seu dispositivo. Nunca saem dele. Desinstalar a aplicação ou limpar o seu armazenamento apaga-os permanentemente — não há cópia de segurança nem forma de os recuperar, nem sequer pelo programador."
+        ],
+        [
+          "Sem acesso à rede",
+          "A aplicação Android é compilada sem a permissão INTERNET, pelo que é tecnicamente incapaz de enviar o que quer que seja. A versão web carrega uma vez e depois funciona totalmente offline a partir da sua cache."
+        ],
+        [
+          "Sem terceiros",
+          "Não são partilhados dados com terceiros, porque não são recolhidos dados. A aplicação não contém SDK de terceiros."
+        ],
+        [
+          "Crianças",
+          "A aplicação não recolhe dados de ninguém, incluindo crianças com menos de 13 anos."
+        ],
+        [
+          "Permissões",
+          "A aplicação Android não pede quaisquer permissões."
+        ],
+        [
+          "Alterações",
+          "Se esta política for alterada, a versão atualizada será publicada neste endereço com uma nova data de entrada em vigor."
+        ],
+        [
+          "Contacto",
+          "Questões sobre esta política podem ser enviadas para o endereço abaixo."
+        ]
+      ]
+    },
+    "cs": {
+      "title": "Zásady ochrany osobních údajů",
+      "intro": "Steppiho Počítadlo Piv je navrženo tak, aby nic neshromažďovalo. Tyto zásady vysvětlují, co to v praxi znamená.",
+      "sections": [
+        [
+          "Neshromažďují se žádné údaje",
+          "Aplikace neshromažďuje, nepřenáší ani neukládá žádné osobní údaje na žádný server. Neobsahuje analytiku, hlášení pádů, reklamní SDK ani sledování jakéhokoli druhu."
+        ],
+        [
+          "Žádný účet",
+          "Aplikace nevyžaduje účet, registraci, e-mailovou adresu ani přihlášení. Nikdy se neptá, kdo jste."
+        ],
+        [
+          "Kde jsou vaše data",
+          "Nápoje, které přidáte, vaše počty, ceny a nastavení se ukládají výhradně do místního úložiště vašeho zařízení. Nikdy je neopustí. Odinstalování aplikace nebo vymazání jejího úložiště je trvale smaže — neexistuje záloha ani způsob, jak je obnovit, a to ani pro vývojáře."
+        ],
+        [
+          "Žádný přístup k síti",
+          "Aplikace pro Android se sestavuje bez oprávnění INTERNET, takže technicky není schopna cokoli odeslat. Webová verze se načte jednou a poté běží zcela offline z mezipaměti."
+        ],
+        [
+          "Žádné třetí strany",
+          "Žádná data nejsou sdílena s třetími stranami, protože se žádná data neshromažďují. Aplikace neobsahuje SDK třetích stran."
+        ],
+        [
+          "Děti",
+          "Aplikace neshromažďuje údaje od nikoho, včetně dětí mladších 13 let."
+        ],
+        [
+          "Oprávnění",
+          "Aplikace pro Android nevyžaduje žádná oprávnění."
+        ],
+        [
+          "Změny",
+          "Pokud se tyto zásady změní, aktualizovaná verze bude zveřejněna na této adrese s novým datem účinnosti."
+        ],
+        [
+          "Kontakt",
+          "Dotazy k těmto zásadám lze zaslat na níže uvedenou adresu."
+        ]
+      ]
+    },
+    "da": {
+      "title": "Privatlivspolitik",
+      "intro": "Steppis Øltæller er bygget til ikke at indsamle noget. Denne politik forklarer, hvad det betyder i praksis.",
+      "sections": [
+        [
+          "Der indsamles ingen data",
+          "Appen indsamler, sender og gemmer ingen personoplysninger på nogen server. Der er ingen analyse, ingen fejlrapportering, intet reklame-SDK og ingen sporing af nogen art."
+        ],
+        [
+          "Ingen konto",
+          "Appen kræver ingen konto, ingen tilmelding, ingen e-mailadresse og intet login. Den spørger aldrig, hvem du er."
+        ],
+        [
+          "Hvor dine data ligger",
+          "De drinks du tilføjer, dine tællere, priser og indstillinger gemmes udelukkende i din egen enheds lokale lager. De forlader aldrig enheden. Afinstallation af appen eller rydning af dens lager sletter dem permanent — der findes ingen sikkerhedskopi og ingen måde at gendanne dem på, heller ikke for udvikleren."
+        ],
+        [
+          "Ingen netværksadgang",
+          "Android-appen bygges uden INTERNET-tilladelsen og er derfor teknisk ude af stand til at sende noget som helst. Webversionen indlæses én gang og kører derefter helt offline fra sin cache."
+        ],
+        [
+          "Ingen tredjeparter",
+          "Ingen data deles med tredjeparter, fordi ingen data indsamles. Appen indeholder ingen tredjeparts-SDK'er."
+        ],
+        [
+          "Børn",
+          "Appen indsamler ikke data fra nogen, heller ikke børn under 13 år."
+        ],
+        [
+          "Tilladelser",
+          "Android-appen anmoder ikke om nogen tilladelser."
+        ],
+        [
+          "Ændringer",
+          "Hvis denne politik ændres, offentliggøres den opdaterede version på denne adresse med en ny ikrafttrædelsesdato."
+        ],
+        [
+          "Kontakt",
+          "Spørgsmål til denne politik kan sendes til adressen nedenfor."
+        ]
+      ]
+    },
+    "sv": {
+      "title": "Integritetspolicy",
+      "intro": "Steppis Ölräknare är byggd för att inte samla in någonting. Den här policyn förklarar vad det innebär i praktiken.",
+      "sections": [
+        [
+          "Inga uppgifter samlas in",
+          "Appen samlar inte in, överför eller lagrar några personuppgifter på någon server. Det finns ingen analys, ingen kraschrapportering, inget annons-SDK och ingen spårning av något slag."
+        ],
+        [
+          "Inget konto",
+          "Appen kräver inget konto, ingen registrering, ingen e-postadress och ingen inloggning. Den frågar aldrig vem du är."
+        ],
+        [
+          "Var dina uppgifter finns",
+          "Dryckerna du lägger till, dina räknare, priser och inställningar lagras enbart i din egen enhets lokala lagring. De lämnar aldrig enheten. Att avinstallera appen eller rensa dess lagring raderar dem permanent — det finns ingen säkerhetskopia och inget sätt att återställa dem, inte heller för utvecklaren."
+        ],
+        [
+          "Ingen nätverksåtkomst",
+          "Android-appen byggs utan behörigheten INTERNET och är därför tekniskt oförmögen att skicka något. Webbversionen laddas en gång och körs sedan helt offline från sin cache."
+        ],
+        [
+          "Inga tredje parter",
+          "Inga uppgifter delas med tredje part, eftersom inga uppgifter samlas in. Appen innehåller inga SDK:er från tredje part."
+        ],
+        [
+          "Barn",
+          "Appen samlar inte in uppgifter från någon, inklusive barn under 13 år."
+        ],
+        [
+          "Behörigheter",
+          "Android-appen begär inga behörigheter."
+        ],
+        [
+          "Ändringar",
+          "Om denna policy ändras publiceras den uppdaterade versionen på denna adress med ett nytt ikraftträdandedatum."
+        ],
+        [
+          "Kontakt",
+          "Frågor om denna policy kan skickas till adressen nedan."
+        ]
+      ]
+    },
+    "tr": {
+      "title": "Gizlilik Politikası",
+      "intro": "Steppi'nin Bira Sayacı hiçbir şey toplamayacak şekilde tasarlandı. Bu politika bunun pratikte ne anlama geldiğini açıklar.",
+      "sections": [
+        [
+          "Hiçbir veri toplanmaz",
+          "Uygulama hiçbir sunucuda hiçbir kişisel veri toplamaz, iletmez veya saklamaz. Analiz, çökme raporlaması, reklam SDK'sı veya herhangi bir türde takip yoktur."
+        ],
+        [
+          "Hesap yok",
+          "Uygulama hesap, kayıt, e-posta adresi veya giriş gerektirmez. Kim olduğunuzu asla sormaz."
+        ],
+        [
+          "Verileriniz nerede",
+          "Eklediğiniz içecekler, sayaçlarınız, fiyatlar ve ayarlar yalnızca kendi cihazınızın yerel depolamasında tutulur. Cihazdan asla çıkmazlar. Uygulamayı kaldırmak veya depolamasını temizlemek bunları kalıcı olarak siler — yedek yoktur ve geliştirici dahil hiç kimsenin bunları kurtarma imkânı yoktur."
+        ],
+        [
+          "Ağ erişimi yok",
+          "Android uygulaması INTERNET izni olmadan derlenir, bu yüzden teknik olarak hiçbir şey gönderemez. Web sürümü bir kez yüklenir ve sonrasında tamamen çevrimdışı olarak önbelleğinden çalışır."
+        ],
+        [
+          "Üçüncü taraf yok",
+          "Hiçbir veri üçüncü taraflarla paylaşılmaz, çünkü hiçbir veri toplanmaz. Uygulama üçüncü taraf SDK içermez."
+        ],
+        [
+          "Çocuklar",
+          "Uygulama 13 yaşın altındaki çocuklar dahil hiç kimseden veri toplamaz."
+        ],
+        [
+          "İzinler",
+          "Android uygulaması hiçbir izin talep etmez."
+        ],
+        [
+          "Değişiklikler",
+          "Bu politika değişirse, güncellenmiş sürüm yeni yürürlük tarihiyle bu adreste yayımlanacaktır."
+        ],
+        [
+          "İletişim",
+          "Bu politikayla ilgili sorular aşağıdaki adrese gönderilebilir."
+        ]
+      ]
+    },
+    "ru": {
+      "title": "Политика конфиденциальности",
+      "intro": "«Пивной счётчик Steppi» создан так, чтобы ничего не собирать. Эта политика объясняет, что это означает на практике.",
+      "sections": [
+        [
+          "Никакие данные не собираются",
+          "Приложение не собирает, не передаёт и не хранит никаких персональных данных ни на одном сервере. В нём нет аналитики, отчётов о сбоях, рекламных SDK и отслеживания любого рода."
+        ],
+        [
+          "Без аккаунта",
+          "Приложение не требует аккаунта, регистрации, адреса электронной почты или входа. Оно никогда не спрашивает, кто вы."
+        ],
+        [
+          "Где хранятся ваши данные",
+          "Добавленные вами напитки, счётчики, цены и настройки хранятся только в локальном хранилище вашего устройства. Они никогда его не покидают. Удаление приложения или очистка его хранилища удаляет их безвозвратно — резервной копии нет, и восстановить их невозможно, в том числе разработчику."
+        ],
+        [
+          "Нет доступа к сети",
+          "Android-приложение собирается без разрешения INTERNET, поэтому технически не способно что-либо отправить. Веб-версия загружается один раз и далее работает полностью офлайн из своего кэша."
+        ],
+        [
+          "Никаких третьих лиц",
+          "Данные не передаются третьим лицам, поскольку данные не собираются. Приложение не содержит сторонних SDK."
+        ],
+        [
+          "Дети",
+          "Приложение не собирает данные ни от кого, включая детей младше 13 лет."
+        ],
+        [
+          "Разрешения",
+          "Android-приложение не запрашивает никаких разрешений."
+        ],
+        [
+          "Изменения",
+          "Если эта политика изменится, обновлённая версия будет опубликована по этому адресу с новой датой вступления в силу."
+        ],
+        [
+          "Контакты",
+          "Вопросы по этой политике можно направить на указанный ниже адрес."
+        ]
+      ]
+    },
+    "ja": {
+      "title": "プライバシーポリシー",
+      "intro": "「Steppi のビールカウンター」は、何も収集しないように設計されています。このポリシーでは、それが実際に何を意味するかを説明します。",
+      "sections": [
+        [
+          "データを一切収集しません",
+          "本アプリは、いかなるサーバーにも個人データを収集・送信・保存しません。解析、クラッシュレポート、広告SDK、いかなる種類のトラッキングもありません。"
+        ],
+        [
+          "アカウント不要",
+          "本アプリはアカウント、登録、メールアドレス、ログインを一切必要としません。あなたが誰であるかを尋ねることはありません。"
+        ],
+        [
+          "データの保存場所",
+          "追加した飲み物、杯数、価格、設定は、お使いの端末のローカルストレージにのみ保存されます。端末外に出ることはありません。アプリのアンインストールまたはストレージの消去により完全に削除され、バックアップは存在せず、開発者を含め誰も復元できません。"
+        ],
+        [
+          "ネットワークアクセスなし",
+          "Android版はINTERNET権限なしでビルドされているため、技術的に何も送信できません。ウェブ版は一度読み込まれた後、キャッシュから完全にオフラインで動作します。"
+        ],
+        [
+          "第三者提供なし",
+          "データを収集しないため、第三者と共有するデータもありません。本アプリはサードパーティ製SDKを含みません。"
+        ],
+        [
+          "お子様について",
+          "本アプリは13歳未満のお子様を含め、誰からもデータを収集しません。"
+        ],
+        [
+          "権限",
+          "Android版はいかなる権限も要求しません。"
+        ],
+        [
+          "変更",
+          "本ポリシーを変更する場合は、新しい発効日とともに本アドレスで更新版を公開します。"
+        ],
+        [
+          "お問い合わせ",
+          "本ポリシーに関するご質問は下記アドレスまでお寄せください。"
+        ]
+      ]
+    },
+    "zh": {
+      "title": "隐私政策",
+      "intro": "“Steppi 的啤酒计数器”的设计原则是不收集任何信息。本政策说明这在实践中意味着什么。",
+      "sections": [
+        [
+          "不收集任何数据",
+          "本应用不会在任何服务器上收集、传输或存储任何个人数据。没有分析统计、没有崩溃报告、没有广告 SDK，也没有任何形式的追踪。"
+        ],
+        [
+          "无需账号",
+          "本应用不需要账号、不需要注册、不需要电子邮箱、不需要登录。它从不询问你是谁。"
+        ],
+        [
+          "你的数据存放在哪里",
+          "你添加的饮品、计数、价格和设置仅保存在你自己设备的本地存储中，绝不会离开设备。卸载应用或清除应用存储会将其永久删除——没有备份，任何人（包括开发者）都无法恢复。"
+        ],
+        [
+          "无网络访问权限",
+          "Android 版本在构建时未包含 INTERNET 权限，因此在技术上无法发送任何内容。网页版加载一次后，即完全离线地从缓存运行。"
+        ],
+        [
+          "无第三方",
+          "不会与第三方共享任何数据，因为根本不收集数据。本应用不包含任何第三方 SDK。"
+        ],
+        [
+          "儿童",
+          "本应用不收集任何人的数据，包括 13 岁以下的儿童。"
+        ],
+        [
+          "权限",
+          "Android 应用不请求任何权限。"
+        ],
+        [
+          "变更",
+          "如本政策发生变更，更新后的版本将在本网址发布，并注明新的生效日期。"
+        ],
+        [
+          "联系方式",
+          "有关本政策的问题可发送至下方地址。"
+        ]
+      ]
+    }
+  }
+}

@@ -20,7 +20,8 @@
     "store-listing": "yarn node scripts/store-listing.mjs",
     "check-locales": "yarn node scripts/check-locales.mjs",
     "play:publish": "yarn node scripts/play-publish.mjs",
-    "feature-graphic": "yarn node scripts/gen-feature-graphic.mjs"
+    "feature-graphic": "yarn node scripts/gen-feature-graphic.mjs",
+    "privacy": "yarn node scripts/gen-privacy.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
