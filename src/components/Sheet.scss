@@ -15,8 +15,16 @@
   // underneath the keyboard (see useViewportInset).
   margin-bottom: var(--keyboard-inset, 0px);
   // Whatever is left of the screen is the budget; a tall form scrolls inside
-  // the panel instead of pushing its actions out of reach.
-  max-height: calc(100dvh - var(--keyboard-inset, 0px));
+  // the panel instead of pushing its actions out of reach. 100% here is the
+  // layout viewport — the same box --keyboard-inset is measured against.
+  // 100dvh would already exclude the browser's URL bar, so subtracting the
+  // inset from it would take that chrome off twice.
+  max-height: calc(100% - var(--keyboard-inset, 0px));
+  // Flex so the panel is bounded by this box: a percentage max-height on the
+  // panel would need a *definite* height here, which a max-height alone does
+  // not provide, and the panel would grow past the dialog unchecked.
+  display: flex;
+  flex-direction: column;
 
   &::backdrop {
     background: var(--overlay);
@@ -33,8 +41,10 @@
     display: flex;
     flex-direction: column;
     gap: vars.$space-md;
-    // Only the panel scrolls, so the rounded top edge stays put.
-    max-height: inherit;
+    // Only the panel scrolls, so the rounded top edge stays put. As a flex
+    // child it is capped by the dialog; min-height:0 is what actually lets it
+    // shrink below its content and start scrolling.
+    min-height: 0;
     overflow-y: auto;
     // Momentum scrolling in the WebView without dragging the page behind it.
     overscroll-behavior: contain;
