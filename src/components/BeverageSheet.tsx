@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import { Sheet } from './Sheet';
+import { ConfirmSheet } from './ConfirmSheet';
 import { BeverageIcon } from './BeverageIcon';
 import { useI18n } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
@@ -36,6 +37,7 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
   const [name, setName] = useState(initialName);
   const [icon, setIcon] = useState<IconKey>(existing?.icon ?? 'beer-large');
   const [scope, setScope] = useState<Beverage['scope']>(existing?.scope ?? 'session');
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   // Seed the field with the plain number so it is editable, not the formatted
   // string with a currency symbol in it.
   const [price, setPrice] = useState(() =>
@@ -141,17 +143,25 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
           <button
             type="button"
             className="btn btn--danger"
-            onClick={() => {
-              if (confirm(t('edit.deleteConfirm'))) {
-                onDelete();
-                onClose();
-              }
-            }}
+            onClick={() => setConfirmingDelete(true)}
           >
             {t('action.delete')}
           </button>
         )}
       </div>
+
+      {confirmingDelete && onDelete && (
+        <ConfirmSheet
+          title={t('delete.title')}
+          body={t('edit.deleteConfirm')}
+          confirmLabel={t('action.delete')}
+          onConfirm={() => {
+            onDelete();
+            onClose();
+          }}
+          onClose={() => setConfirmingDelete(false)}
+        />
+      )}
     </Sheet>
   );
 }
