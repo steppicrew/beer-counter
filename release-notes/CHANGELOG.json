@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.2.0",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "Share the app with the people you’re drinking with: tap Share to show a QR code they can scan across the table, send the link through your usual messenger, or just copy it.",
+        "de": "Teile die App mit den Leuten, mit denen du trinkst: Auf „Teilen“ tippen und den QR-Code über den Tisch scannen lassen, den Link per Messenger schicken oder einfach kopieren.",
+        "fr": "Partagez l’app avec ceux qui trinquent avec vous : appuyez sur Partager pour afficher un QR code à scanner à table, envoyez le lien par messagerie, ou copiez-le simplement.",
+        "es": "Comparte la app con quienes están bebiendo contigo: toca Compartir para mostrar un código QR que escaneen en la mesa, manda el enlace por tu mensajería o simplemente cópialo.",
+        "it": "Condividi l’app con chi beve con te: tocca Condividi per mostrare un codice QR da inquadrare al tavolo, manda il link con la tua app di messaggi o copialo e basta.",
+        "nl": "Deel de app met wie er met je meedrinkt: tik op Delen om een QR-code te tonen die ze aan tafel scannen, stuur de link via je messenger of kopieer hem gewoon.",
+        "pl": "Udostępnij aplikację tym, z którymi pijesz: dotknij Udostępnij, aby pokazać kod QR do zeskanowania przy stole, wyślij link komunikatorem albo po prostu go skopiuj.",
+        "pt": "Partilha a app com quem está a beber contigo: toca em Partilhar para mostrar um código QR que digitalizam à mesa, envia o link pelo teu mensageiro ou copia-o.",
+        "cs": "Sdílej aplikaci s těmi, s kým piješ: klepni na Sdílet a ukaž QR kód k naskenování u stolu, pošli odkaz přes messenger nebo ho prostě zkopíruj.",
+        "da": "Del appen med dem, du drikker med: tryk på Del for at vise en QR-kode, de kan scanne hen over bordet, send linket i din sædvanlige messenger, eller kopiér det.",
+        "sv": "Dela appen med dem du dricker med: tryck på Dela för att visa en QR-kod de kan skanna över bordet, skicka länken i din vanliga app, eller kopiera den.",
+        "tr": "Uygulamayı birlikte içtiğin kişilerle paylaş: Paylaş’a dokunup masanın üstünden okutabilecekleri bir QR kod göster, bağlantıyı mesajlaşma uygulamandan yolla ya da kopyala.",
+        "ru": "Поделитесь приложением с теми, с кем пьёте: нажмите «Поделиться», покажите QR-код через стол, отправьте ссылку в мессенджере или просто скопируйте её.",
+        "ja": "一緒に飲んでいる人にアプリを共有できます。「共有」をタップすればテーブル越しに読み取れる QR コードを表示でき、メッセンジャーでリンクを送ることも、コピーすることもできます。",
+        "zh": "把应用分享给一起喝酒的朋友：点「分享」显示二维码让他们隔着桌子扫，或用常用的聊天工具发送链接，也可以直接复制。"
+      }
+    },
+    {
       "version": "1.1.0",
       "date": "2026-08-27",
       "notes": {
