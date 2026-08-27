@@ -137,7 +137,6 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
         <button type="button" className="btn btn--ghost" onClick={onClose}>
           {t('action.cancel')}
         </button>
-        <span className="sheet-actions__spacer" />
         {isEdit && onDelete && (
           <button
             type="button"
