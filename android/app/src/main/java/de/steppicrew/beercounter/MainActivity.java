@@ -1,4 +1,4 @@
-package de.runlevel3.beercounter;
+package de.steppicrew.beercounter;
 
 import com.getcapacitor.BridgeActivity;
 

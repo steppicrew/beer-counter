@@ -8,6 +8,7 @@ import { useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage } from './lib/types';
 import { computeTotals } from './lib/totals';
+import { useAppUpdate } from './lib/useAppUpdate';
 import { formatMoney, defaultCurrencyFor } from './lib/money';
 import './App.scss';
 
@@ -38,6 +39,9 @@ export function App() {
   const resetSession = useAppStore((s) => s.resetSession);
 
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
+
+  // Never reload out from under someone mid-round — offer it instead.
+  const updateReady = useAppUpdate();
 
   const locale = storedLocale ?? resolveLocale(navigator.languages ?? [navigator.language]);
   const t = useMemo(() => createTranslator(locale), [locale]);
@@ -132,6 +136,19 @@ export function App() {
             ))}
           </ul>
         </main>
+
+        {updateReady && (
+          <div className="app__update" role="status">
+            <span>{t('update.ready')}</span>
+            <button
+              type="button"
+              className="app__update-btn"
+              onClick={() => window.location.reload()}
+            >
+              {t('update.reload')}
+            </button>
+          </div>
+        )}
 
         <footer className="app__footer">
           <button

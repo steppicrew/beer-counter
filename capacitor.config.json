@@ -1,5 +1,5 @@
 {
-  "appId": "de.runlevel3.beercounter",
+  "appId": "de.steppicrew.beercounter",
   "appName": "Steppi's Beer Counter",
   "webDir": "dist",
   "android": {
