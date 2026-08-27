@@ -1,5 +1,5 @@
 interface Props {
-  name: 'settings' | 'reset' | 'edit' | 'android';
+  name: 'settings' | 'reset' | 'edit' | 'android' | 'share';
   className?: string;
 }
 
@@ -23,6 +23,25 @@ const PATHS: Record<Props['name'], React.ReactNode> = {
         strokeLinejoin="round"
       />
       <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+    </>
+  ),
+  share: (
+    <>
+      {/*
+        Three nodes joined by two links — the platform-neutral share mark.
+        Deliberately not the iOS box-and-arrow, which reads as "upload"
+        outside Apple's platforms.
+      */}
+      <circle cx="17.5" cy="5.8" r="2.9" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      <circle cx="6.5" cy="12" r="2.9" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      <circle cx="17.5" cy="18.2" r="2.9" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      <path
+        d="M9.02 10.59 14.98 7.21M9.02 13.41 14.98 16.79"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
     </>
   ),
   android: (

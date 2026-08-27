@@ -4,7 +4,7 @@ import { UiIcon } from './components/UiIcon';
 import { BeverageSheet } from './components/BeverageSheet';
 import { SettingsSheet } from './components/SettingsSheet';
 import { ResetSheet } from './components/ResetSheet';
-import { StoreQrSheet } from './components/StoreQrSheet';
+import { ShareSheet } from './components/ShareSheet';
 import { useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage } from './lib/types';
@@ -26,7 +26,7 @@ type Dialog =
   | { kind: 'edit'; beverage: Beverage }
   | { kind: 'settings' }
   | { kind: 'reset' }
-  | { kind: 'storeQr' };
+  | { kind: 'share' };
 
 export function App() {
   const beverages = useAppStore((s) => s.beverages);
@@ -104,6 +104,14 @@ export function App() {
             )}
           </div>
           <div className="app__header-actions">
+            <button
+              type="button"
+              className="app__icon-btn"
+              onClick={() => setDialog({ kind: 'share' })}
+              aria-label={t('share.action')}
+            >
+              <UiIcon name="share" />
+            </button>
             <button
               type="button"
               className="app__icon-btn"
@@ -199,7 +207,7 @@ export function App() {
               <button
                 type="button"
                 className="app__legal-store"
-                onClick={() => setDialog({ kind: 'storeQr' })}
+                onClick={() => setDialog({ kind: 'share' })}
               >
                 <UiIcon name="android" />
                 {t('store.link')}
@@ -232,7 +240,7 @@ export function App() {
 
         {dialog.kind === 'settings' && <SettingsSheet onClose={() => setDialog({ kind: 'none' })} />}
 
-        {dialog.kind === 'storeQr' && <StoreQrSheet onClose={() => setDialog({ kind: 'none' })} />}
+        {dialog.kind === 'share' && <ShareSheet onClose={() => setDialog({ kind: 'none' })} />}
 
         {dialog.kind === 'reset' && (
           <ResetSheet onConfirm={resetSession} onClose={() => setDialog({ kind: 'none' })} />
