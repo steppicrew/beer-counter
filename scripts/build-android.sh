@@ -73,6 +73,9 @@ echo "==> Gradle :app:${GRADLE_TASK}"
 (cd android && ./gradlew --no-daemon "app:${GRADLE_TASK}")
 
 # --- collect ---------------------------------------------------------------
+# Stale artefacts from an earlier (possibly unsigned) build must not be picked
+# up: bundleRelease does not rebuild APKs, so an old one can linger here.
+rm -f android/app/build/outputs/apk/release/*.apk.stale
 mkdir -p "$ROOT/build-output"
 shopt -s nullglob
 for artefact in \
@@ -88,6 +91,37 @@ do
   cp "$artefact" "$dest"
   echo "  → ${dest#"$ROOT"/}  ($(du -h "$dest" | cut -f1))"
 done
+
+# --- verify signing --------------------------------------------------------
+# Play rejects an unsigned upload, and an unsigned build otherwise fails only
+# at the end of a long manual upload.
+if [ "$TARGET" != "debug" ]; then
+  if [ -f "$ROOT/android/keystore.properties" ]; then
+    for artefact in "$ROOT/build-output/beer-counter-${VERSION}.aab"; do
+      [ -f "$artefact" ] || continue
+      if unzip -l "$artefact" | grep -qiE 'META-INF/.*\.(RSA|DSA|EC)'; then
+        echo "  signed: $(basename "$artefact")"
+      else
+        echo "  ERROR: $(basename "$artefact") is NOT signed." >&2
+        exit 1
+      fi
+    done
+
+    APK="$ROOT/build-output/beer-counter-release-${VERSION}.apk"
+    if [ -f "$APK" ] && command -v apksigner >/dev/null 2>&1; then
+      if apksigner verify "$APK" >/dev/null 2>&1; then
+        echo "  signed: $(basename "$APK")"
+      else
+        echo "  ERROR: $(basename "$APK") is NOT signed." >&2
+        exit 1
+      fi
+    fi
+  else
+    echo
+    echo "  NOTE: android/keystore.properties is absent — artefacts are UNSIGNED"
+    echo "        and Play Console will reject them. See the .example file."
+  fi
+fi
 
 echo
 echo "Done. Release notes for Play Console:"

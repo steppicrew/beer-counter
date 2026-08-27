@@ -68,6 +68,34 @@ function shots(tag, filter) {
 /** Release notes for one language, reusing the rolling-window renderer. */
 const { renderNotes } = await import(resolve(root, 'scripts/release-notes-lib.mjs'));
 
+
+/**
+ * Play's API throttles a burst of uploads and reports it as a generic
+ * "Internal error encountered" (HTTP 500) rather than a 429, so a plain
+ * sequential run of ~160 image uploads fails part-way. Retry those with
+ * exponential backoff, and pace requests slightly between calls.
+ */
+const RETRYABLE = new Set([429, 500, 502, 503, 504]);
+
+/** Small gap between uploads; cheaper than retrying after a throttle. */
+const UPLOAD_PACING_MS = 250;
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function withRetry(label, fn, attempts = 5) {
+  for (let attempt = 1; ; attempt += 1) {
+    try {
+      return await fn();
+    } catch (error) {
+      const status = error?.code ?? error?.response?.status;
+      if (!RETRYABLE.has(status) || attempt >= attempts) throw error;
+      const backoff = 2 ** attempt * 500 + Math.random() * 500;
+      console.log(`    ${label}: ${status}, retrying in ${Math.round(backoff)}ms (${attempt}/${attempts - 1})`);
+      await sleep(backoff);
+    }
+  }
+}
+
 // --- preflight -------------------------------------------------------------
 const keyFile = process.env.PLAY_SERVICE_ACCOUNT_JSON;
 if (!keyFile || !existsSync(keyFile)) {
@@ -132,11 +160,13 @@ try {
 
   if (!listingsOnly) {
     console.log('Uploading bundle…');
-    const { data: bundle } = await play.edits.bundles.upload({
-      packageName,
-      editId,
-      media: { mimeType: 'application/octet-stream', body: createReadStream(aabPath) },
-    });
+    const { data: bundle } = await withRetry('bundle upload', () =>
+      play.edits.bundles.upload({
+        packageName,
+        editId,
+        media: { mimeType: 'application/octet-stream', body: createReadStream(aabPath) },
+      }),
+    );
     versionCode = bundle.versionCode;
     console.log(`  versionCode ${versionCode} uploaded.`);
   }
@@ -144,29 +174,38 @@ try {
   for (const { locale, entry, images } of plan) {
     const tag = locale.playStore;
 
-    await play.edits.listings.update({
-      packageName,
-      editId,
-      language: tag,
-      requestBody: {
+    await withRetry(`${tag} listing`, () =>
+      play.edits.listings.update({
+        packageName,
+        editId,
         language: tag,
-        title: entry.title,
-        shortDescription: entry.short,
-        fullDescription: entry.full,
-      },
-    });
+        requestBody: {
+          language: tag,
+          title: entry.title,
+          shortDescription: entry.short,
+          fullDescription: entry.full,
+        },
+      }),
+    );
 
     for (const [imageType, files] of Object.entries(images)) {
       // Replace the slot wholesale so removed screenshots actually disappear.
-      await play.edits.images.deleteall({ packageName, editId, language: tag, imageType });
+      await withRetry(`${tag} ${imageType} clear`, () =>
+        play.edits.images.deleteall({ packageName, editId, language: tag, imageType }),
+      );
+
       for (const file of files) {
-        await play.edits.images.upload({
-          packageName,
-          editId,
-          language: tag,
-          imageType,
-          media: { mimeType: 'image/png', body: createReadStream(file) },
-        });
+        // A fresh stream per attempt: a consumed one cannot be replayed.
+        await withRetry(`${tag} ${basename(file)}`, () =>
+          play.edits.images.upload({
+            packageName,
+            editId,
+            language: tag,
+            imageType,
+            media: { mimeType: 'image/png', body: createReadStream(file) },
+          }),
+        );
+        await sleep(UPLOAD_PACING_MS);
       }
     }
 
@@ -186,16 +225,20 @@ try {
       ...(rollout > 0 && rollout < 1 ? { userFraction: rollout } : {}),
     };
 
-    await play.edits.tracks.update({
-      packageName,
-      editId,
-      track,
-      requestBody: { track, releases: [release] },
-    });
+    await withRetry(`track ${track}`, () =>
+      play.edits.tracks.update({
+        packageName,
+        editId,
+        track,
+        requestBody: { track, releases: [release] },
+      }),
+    );
     console.log(`  track "${track}" set${rollout > 0 && rollout < 1 ? ` (${rollout * 100}% rollout)` : ''}.`);
   }
 
-  const { data: committed } = await play.edits.commit({ packageName, editId });
+  const { data: committed } = await withRetry('commit', () =>
+    play.edits.commit({ packageName, editId }),
+  );
   console.log(`\nCommitted edit ${committed.id}.`);
 } catch (error) {
   // Abandon so a failed run does not leave a dangling edit blocking the next.

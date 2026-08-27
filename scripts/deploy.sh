@@ -52,12 +52,17 @@ fi
 
 VERSION="$(node -p "require('./package.json').version")"
 
+# The privacy policy is a Play Console requirement and ships with the site.
+echo
+echo "==> Rendering privacy policy"
+yarn node scripts/gen-privacy.mjs
+
 echo
 echo "==> Building $VERSION"
 yarn build
 
 # A PWA that 404s its own service worker is worse than one that never had it.
-for required in dist/index.html dist/sw.js dist/manifest.webmanifest; do
+for required in dist/index.html dist/sw.js dist/manifest.webmanifest dist/privacy/index.html; do
   [ -f "$required" ] || { echo "Build incomplete: $required is missing." >&2; exit 1; }
 done
 
