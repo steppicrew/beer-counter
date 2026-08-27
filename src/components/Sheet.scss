@@ -130,6 +130,13 @@
     padding: 0 vars.$space-md;
   }
 
+  // Destructive actions never grow: wrapped onto its own row, a stretched
+  // delete button becomes the widest, most inviting target in the sheet —
+  // exactly the wrong emphasis for the one irreversible action here.
+  .btn--danger {
+    flex: 0 1 auto;
+  }
+
   &__spacer {
     flex: 1 1 0;
     // Collapses to nothing once the row wraps — a rigid spacer would push the
