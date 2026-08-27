@@ -151,6 +151,15 @@ const auth = new google.auth.GoogleAuth({
 });
 const play = google.androidpublisher({ version: 'v3', auth });
 
+/**
+ * Play edits are optimistic-locked: any change made in Play Console (or by
+ * another tool) while ours is open invalidates it at commit time. That is
+ * cheap to lose on a small edit and expensive here, where ~160 uploads
+ * precede the commit — so run the whole lifecycle again on a fresh edit.
+ */
+const CONFLICT = /A change was made to the application outside of this Edit/i;
+
+async function publishOnce() {
 const { data: edit } = await play.edits.insert({ packageName });
 const editId = edit.id;
 console.log(`\nEdit ${editId} opened.`);
@@ -240,10 +249,36 @@ try {
     play.edits.commit({ packageName, editId }),
   );
   console.log(`\nCommitted edit ${committed.id}.`);
+  return true;
 } catch (error) {
   // Abandon so a failed run does not leave a dangling edit blocking the next.
   await play.edits.delete({ packageName, editId }).catch(() => {});
+
+  const detail = error?.errors?.[0]?.message ?? error?.message ?? '';
+  if (CONFLICT.test(detail)) {
+    console.error(`\nEdit ${editId} was invalidated by a change in Play Console.`);
+    return false;
+  }
+
   console.error(`\nFailed — edit ${editId} abandoned, nothing was published.`);
   console.error(error?.errors ?? error?.message ?? error);
   process.exit(1);
+}
+}
+
+const MAX_EDIT_ATTEMPTS = 3;
+for (let attempt = 1; attempt <= MAX_EDIT_ATTEMPTS; attempt += 1) {
+  if (await publishOnce()) break;
+
+  if (attempt === MAX_EDIT_ATTEMPTS) {
+    console.error(
+      `\nGave up after ${MAX_EDIT_ATTEMPTS} attempts — nothing was published.\n` +
+        'Something keeps changing the app while the upload runs. Close the Play\n' +
+        'Console tab (or finish what you are editing there) and run this again.',
+    );
+    process.exit(1);
+  }
+
+  console.error(`Retrying on a fresh edit (${attempt + 1}/${MAX_EDIT_ATTEMPTS})…\n`);
+  await sleep(3000);
 }
