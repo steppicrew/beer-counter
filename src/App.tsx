@@ -4,6 +4,7 @@ import { UiIcon } from './components/UiIcon';
 import { BeverageSheet } from './components/BeverageSheet';
 import { SettingsSheet } from './components/SettingsSheet';
 import { ResetSheet } from './components/ResetSheet';
+import { StoreQrSheet } from './components/StoreQrSheet';
 import { useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage } from './lib/types';
@@ -24,7 +25,8 @@ type Dialog =
   | { kind: 'add' }
   | { kind: 'edit'; beverage: Beverage }
   | { kind: 'settings' }
-  | { kind: 'reset' };
+  | { kind: 'reset' }
+  | { kind: 'storeQr' };
 
 export function App() {
   const beverages = useAppStore((s) => s.beverages);
@@ -194,6 +196,15 @@ export function App() {
 
           {showLegal && (
             <nav className="app__legal">
+              <button
+                type="button"
+                className="app__legal-store"
+                onClick={() => setDialog({ kind: 'storeQr' })}
+              >
+                <UiIcon name="android" />
+                {t('store.link')}
+              </button>
+              <span aria-hidden="true">·</span>
               <a href="./privacy/">{t('legal.privacy')}</a>
               <span aria-hidden="true">·</span>
               <a href="./impressum/">{t('legal.imprint')}</a>
@@ -220,6 +231,8 @@ export function App() {
         )}
 
         {dialog.kind === 'settings' && <SettingsSheet onClose={() => setDialog({ kind: 'none' })} />}
+
+        {dialog.kind === 'storeQr' && <StoreQrSheet onClose={() => setDialog({ kind: 'none' })} />}
 
         {dialog.kind === 'reset' && (
           <ResetSheet onConfirm={resetSession} onClose={() => setDialog({ kind: 'none' })} />

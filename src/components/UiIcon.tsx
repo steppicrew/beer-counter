@@ -1,5 +1,5 @@
 interface Props {
-  name: 'settings' | 'reset' | 'edit';
+  name: 'settings' | 'reset' | 'edit' | 'android';
   className?: string;
 }
 
@@ -23,6 +23,34 @@ const PATHS: Record<Props['name'], React.ReactNode> = {
         strokeLinejoin="round"
       />
       <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+    </>
+  ),
+  android: (
+    <>
+      <path
+        d="M6 10.4h12v7.3a1.3 1.3 0 0 1-1.3 1.3H7.3A1.3 1.3 0 0 1 6 17.7v-7.3Z"
+        fill="currentColor"
+      />
+      <path
+        d="M6 10.4a6 6 0 0 1 12 0"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M8.1 5.2 7 3.4M15.9 5.2 17 3.4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <circle cx="9.6" cy="7.9" r="0.85" fill="currentColor" />
+      <circle cx="14.4" cy="7.9" r="0.85" fill="currentColor" />
+      <rect x="2.6" y="10.6" width="2.4" height="6.6" rx="1.2" fill="currentColor" />
+      <rect x="19" y="10.6" width="2.4" height="6.6" rx="1.2" fill="currentColor" />
+      <rect x="8.6" y="18.6" width="2.3" height="3.6" rx="1.15" fill="currentColor" />
+      <rect x="13.1" y="18.6" width="2.3" height="3.6" rx="1.15" fill="currentColor" />
     </>
   ),
   edit: (
