@@ -7,6 +7,8 @@ import { ResetSheet } from './components/ResetSheet';
 import { useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage } from './lib/types';
+import { computeTotals } from './lib/totals';
+import { formatMoney, defaultCurrencyFor } from './lib/money';
 import './App.scss';
 
 const EMPTY_TALLY = { count: 0, lastAt: null } as const;
@@ -26,6 +28,7 @@ export function App() {
   const tallies = useAppStore((s) => s.tallies);
   const theme = useAppStore((s) => s.theme);
   const storedLocale = useAppStore((s) => s.locale);
+  const storedCurrency = useAppStore((s) => s.currency);
 
   const increment = useAppStore((s) => s.increment);
   const decrement = useAppStore((s) => s.decrement);
@@ -61,7 +64,9 @@ export function App() {
       ?.setAttribute('content', t('app.tagline'));
   }, [locale, t]);
 
-  const total = Object.values(tallies).reduce((sum, entry) => sum + entry.count, 0);
+  const totals = computeTotals(beverages, tallies);
+  const total = totals.drinks;
+  const currency = storedCurrency ?? defaultCurrencyFor(locale);
 
   return (
     <I18nContext.Provider value={{ locale, t }}>
@@ -70,6 +75,20 @@ export function App() {
           <div className="app__totals">
             <span className="app__total-label">{t('total.label')}</span>
             <span className="app__total-value">{total}</span>
+            {totals.anyPriced && (
+              <span
+                className="app__total-money"
+                // An incomplete sum is a floor, not the bill — say so rather
+                // than showing a confident number that is quietly too low.
+                title={totals.complete ? undefined : t('total.partialHint')}
+              >
+                {totals.complete
+                  ? formatMoney(totals.cents, currency, locale)
+                  : t('total.partial', {
+                      price: formatMoney(totals.cents, currency, locale),
+                    })}
+              </span>
+            )}
           </div>
           <div className="app__header-actions">
             <button
@@ -134,7 +153,9 @@ export function App() {
         {dialog.kind === 'edit' && (
           <BeverageSheet
             existing={dialog.beverage}
-            onSave={({ name, icon }) => updateBeverage(dialog.beverage.id, { name, icon })}
+            onSave={({ name, icon, priceCents }) =>
+              updateBeverage(dialog.beverage.id, { name, icon, priceCents })
+            }
             onDelete={() => removeBeverage(dialog.beverage.id)}
             onClose={() => setDialog({ kind: 'none' })}
           />
