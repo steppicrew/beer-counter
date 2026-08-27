@@ -18,7 +18,9 @@
     "android:build": "./scripts/build-android.sh",
     "dev:host": "./scripts/dev.sh",
     "store-listing": "yarn node scripts/store-listing.mjs",
-    "check-locales": "yarn node scripts/check-locales.mjs"
+    "check-locales": "yarn node scripts/check-locales.mjs",
+    "play:publish": "yarn node scripts/play-publish.mjs",
+    "feature-graphic": "yarn node scripts/gen-feature-graphic.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -39,6 +41,7 @@
     "eslint": "^9.39.0",
     "eslint-plugin-react-hooks": "^7.0.0",
     "globals": "^16.5.0",
+    "googleapis": "^176.0.0",
     "playwright": "^1.62.1",
     "sass": "^1.94.0",
     "typescript": "^5.9.3",
