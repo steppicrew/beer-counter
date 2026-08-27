@@ -12,6 +12,7 @@ import { computeTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
 import { useInstallPrompt } from './lib/useInstallPrompt';
+import { useViewportInset } from './lib/useViewportInset';
 import { formatMoney, defaultCurrencyFor } from './lib/money';
 import './App.scss';
 
@@ -43,6 +44,9 @@ export function App() {
   const resetSession = useAppStore((s) => s.resetSession);
 
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
+
+  // Keeps sheets clear of the on-screen keyboard.
+  useViewportInset();
 
   // Never reload out from under someone mid-round — offer it instead.
   const update = useAppUpdate();
