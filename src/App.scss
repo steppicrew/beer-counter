@@ -36,6 +36,14 @@
     color: var(--text-muted);
   }
 
+  &__total-money {
+    font-size: 13px;
+    line-height: 1;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
   &__total-value {
     font-size: 34px;
     line-height: 1;

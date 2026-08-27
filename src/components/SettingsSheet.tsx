@@ -3,6 +3,7 @@ import { Sheet } from './Sheet';
 import { useI18n, LOCALES } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
 import type { ThemeMode } from '../lib/types';
+import { CURRENCIES, defaultCurrencyFor } from '../lib/money';
 
 const THEMES: { mode: ThemeMode; labelKey: 'settings.themeSystem' | 'settings.themeLight' | 'settings.themeDark' }[] = [
   { mode: 'system', labelKey: 'settings.themeSystem' },
@@ -11,11 +12,13 @@ const THEMES: { mode: ThemeMode; labelKey: 'settings.themeSystem' | 'settings.th
 ];
 
 export function SettingsSheet({ onClose }: { onClose: () => void }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const theme = useAppStore((s) => s.theme);
   const setTheme = useAppStore((s) => s.setTheme);
-  const locale = useAppStore((s) => s.locale);
+  const storedLocale = useAppStore((s) => s.locale);
   const setLocale = useAppStore((s) => s.setLocale);
+  const storedCurrency = useAppStore((s) => s.currency);
+  const setCurrency = useAppStore((s) => s.setCurrency);
 
   return (
     <Sheet title={t('settings.title')} onClose={onClose}>
@@ -23,13 +26,35 @@ export function SettingsSheet({ onClose }: { onClose: () => void }) {
         <span className="field__label">{t('settings.language')}</span>
         <select
           className="field__select"
-          value={locale ?? ''}
+          value={storedLocale ?? ''}
           onChange={(e) => setLocale(e.target.value === '' ? null : e.target.value)}
         >
           <option value="">{t('settings.languageSystem')}</option>
           {LOCALES.map((l) => (
             <option key={l.code} value={l.code}>
               {l.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="field">
+        <span className="field__label">{t('settings.currency')}</span>
+        <select
+          className="field__select"
+          value={storedCurrency ?? defaultCurrencyFor(locale)}
+          onChange={(e) => setCurrency(e.target.value)}
+        >
+          {CURRENCIES.map((code) => (
+            <option key={code} value={code}>
+              {code} · {new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: code,
+                maximumFractionDigits: 0,
+              })
+                .format(0)
+                .replace(/\d/g, '')
+                .trim()}
             </option>
           ))}
         </select>

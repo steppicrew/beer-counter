@@ -2,7 +2,11 @@ import clsx from 'clsx';
 import { BeverageIcon } from './BeverageIcon';
 import { UiIcon } from './UiIcon';
 import { useElapsed, formatElapsed } from '../lib/useRelativeTime';
+import { useLongPress } from '../lib/useLongPress';
 import { useI18n } from '../i18n';
+import { useAppStore } from '../store/useAppStore';
+import { formatMoney, defaultCurrencyFor } from '../lib/money';
+import { lineTotal } from '../lib/totals';
 import type { Beverage, Tally } from '../lib/types';
 import type { MessageKey } from '../i18n';
 import './BeverageRow.scss';
@@ -16,13 +20,21 @@ interface Props {
 }
 
 export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit }: Props) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const elapsed = useElapsed(tally.lastAt);
   const label = beverage.nameKey ? t(beverage.nameKey as MessageKey) : (beverage.name ?? '');
 
   // Under a minute since the last tap is the window where an accidental
   // double-count is likely — flag it so the row draws attention to itself.
   const isFresh = elapsed !== null && elapsed < 60_000;
+
+  const storedCurrency = useAppStore((s) => s.currency);
+  const currency = storedCurrency ?? defaultCurrencyFor(locale);
+  const money = lineTotal(beverage, tally);
+
+  // Long-pressing the tile opens the same editor as the pencil — the quickest
+  // route to a price once you know what the round actually cost.
+  const pressHandlers = useLongPress({ onLongPress: onEdit, onClick: onIncrement });
 
   return (
     <li className={clsx('row', tally.count > 0 && 'row--active')}>
@@ -31,7 +43,7 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
       <button
         type="button"
         className="row__add"
-        onClick={onIncrement}
+        {...pressHandlers}
         aria-label={`${t('action.add')} — ${label}`}
       >
         <BeverageIcon icon={beverage.icon} className="row__icon" />
@@ -41,8 +53,13 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
             {formatElapsed(elapsed, t)}
           </span>
         </span>
-        <span className="row__count" aria-live="polite">
-          {tally.count}
+        <span className="row__figures">
+          <span className="row__count" aria-live="polite">
+            {tally.count}
+          </span>
+          {money !== null && money > 0 && (
+            <span className="row__money">{formatMoney(money, currency, locale)}</span>
+          )}
         </span>
       </button>
 

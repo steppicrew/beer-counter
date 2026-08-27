@@ -20,6 +20,12 @@ export interface Beverage {
   icon: IconKey;
   /** Built-ins persist across sessions; session drinks vanish on reset. */
   scope: 'default' | 'session';
+  /**
+   * Unit price in minor units (cents) — integers only, so summing a round
+   * never accumulates the rounding error a float would. Undefined means the
+   * user has not priced this drink; the total then reports as incomplete.
+   */
+  priceCents?: number;
 }
 
 export interface Tally {
@@ -29,3 +35,6 @@ export interface Tally {
 }
 
 export type ThemeMode = 'system' | 'light' | 'dark';
+
+/** ISO 4217 code used to format every price; chosen once in settings. */
+export type CurrencyCode = string;

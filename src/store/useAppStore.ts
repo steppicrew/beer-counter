@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { subscribeWithSelector } from 'zustand/middleware';
-import type { Beverage, IconKey, Tally, ThemeMode } from '../lib/types';
+import type { Beverage, CurrencyCode, IconKey, Tally, ThemeMode } from '../lib/types';
 import { DEFAULT_BEVERAGES } from '../lib/defaults';
 
 interface AppState {
@@ -12,12 +12,22 @@ interface AppState {
   theme: ThemeMode;
   /** null = follow browser/system language. */
   locale: string | null;
+  /** null = derive from the active locale on first use. */
+  currency: CurrencyCode | null;
 
   increment: (id: string) => void;
   decrement: (id: string) => void;
 
-  addBeverage: (input: { name: string; icon: IconKey; scope: Beverage['scope'] }) => void;
-  updateBeverage: (id: string, patch: Partial<Pick<Beverage, 'name' | 'icon'>>) => void;
+  addBeverage: (input: {
+    name: string;
+    icon: IconKey;
+    scope: Beverage['scope'];
+    priceCents?: number | undefined;
+  }) => void;
+  updateBeverage: (
+    id: string,
+    patch: Partial<Pick<Beverage, 'name' | 'icon'>> & { priceCents?: number | undefined },
+  ) => void;
   removeBeverage: (id: string) => void;
 
   /** Zeroes every count and drops session-only drinks. Defaults survive. */
@@ -25,6 +35,7 @@ interface AppState {
 
   setTheme: (theme: ThemeMode) => void;
   setLocale: (locale: string | null) => void;
+  setCurrency: (currency: CurrencyCode) => void;
 
   totalDrinks: () => number;
 }
@@ -40,6 +51,7 @@ export const useAppStore = create<AppState>()(
         sessionStartedAt: Date.now(),
         theme: 'system',
         locale: null,
+        currency: null,
 
         increment: (id) =>
           set((state) => {
@@ -67,11 +79,17 @@ export const useAppStore = create<AppState>()(
             };
           }),
 
-        addBeverage: ({ name, icon, scope }) =>
+        addBeverage: ({ name, icon, scope, priceCents }) =>
           set((state) => ({
             beverages: [
               ...state.beverages,
-              { id: `${scope}-${crypto.randomUUID()}`, name, icon, scope },
+              {
+                id: `${scope}-${crypto.randomUUID()}`,
+                name,
+                icon,
+                scope,
+                ...(priceCents === undefined ? {} : { priceCents }),
+              },
             ],
           })),
 
@@ -83,7 +101,15 @@ export const useAppStore = create<AppState>()(
               // the next language switch would silently undo the rename.
               const renamed = patch.name !== undefined && patch.name !== '';
               const { nameKey: _dropped, ...rest } = b;
-              return renamed ? { ...rest, ...patch } : { ...b, ...patch };
+              const base = renamed ? rest : b;
+
+              // An explicit `undefined` price means "clear it", which spreading
+              // alone would not do — the key has to go.
+              const { priceCents, ...withoutPrice } = patch;
+              const next = { ...base, ...withoutPrice };
+              if (priceCents === undefined) delete next.priceCents;
+              else next.priceCents = priceCents;
+              return next;
             }),
           })),
 
@@ -105,6 +131,7 @@ export const useAppStore = create<AppState>()(
 
         setTheme: (theme) => set({ theme }),
         setLocale: (locale) => set({ locale }),
+        setCurrency: (currency) => set({ currency }),
 
         totalDrinks: () =>
           Object.values(get().tallies).reduce((sum, t) => sum + t.count, 0),
@@ -120,6 +147,7 @@ export const useAppStore = create<AppState>()(
           sessionStartedAt: state.sessionStartedAt,
           theme: state.theme,
           locale: state.locale,
+          currency: state.currency,
         }),
       },
     ),

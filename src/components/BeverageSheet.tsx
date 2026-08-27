@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import { Sheet } from './Sheet';
 import { BeverageIcon } from './BeverageIcon';
 import { useI18n } from '../i18n';
+import { useAppStore } from '../store/useAppStore';
+import { formatMoney, parseMoney, defaultCurrencyFor } from '../lib/money';
 import { ICON_KEYS } from '../lib/types';
 import type { Beverage, IconKey } from '../lib/types';
 import type { MessageKey } from '../i18n';
@@ -10,28 +12,45 @@ import type { MessageKey } from '../i18n';
 interface Props {
   /** Absent = create mode. */
   existing?: Beverage;
-  onSave: (data: { name: string; icon: IconKey; scope: Beverage['scope'] }) => void;
+  onSave: (data: {
+    name: string;
+    icon: IconKey;
+    scope: Beverage['scope'];
+    priceCents?: number | undefined;
+  }) => void;
   onDelete?: () => void;
   onClose: () => void;
 }
 
 export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const isEdit = existing !== undefined;
 
   const initialName = existing
     ? (existing.nameKey ? t(existing.nameKey as MessageKey) : (existing.name ?? ''))
     : '';
 
+  const storedCurrency = useAppStore((s) => s.currency);
+  const currency = storedCurrency ?? defaultCurrencyFor(locale);
+
   const [name, setName] = useState(initialName);
   const [icon, setIcon] = useState<IconKey>(existing?.icon ?? 'beer-large');
   const [scope, setScope] = useState<Beverage['scope']>(existing?.scope ?? 'session');
+  // Seed the field with the plain number so it is editable, not the formatted
+  // string with a currency symbol in it.
+  const [price, setPrice] = useState(() =>
+    existing?.priceCents === undefined
+      ? ''
+      : formatMoney(existing.priceCents, currency, locale).replace(/[^\d.,]/g, '').trim(),
+  );
 
   const trimmed = name.trim();
+  const priceCents = price.trim() === '' ? undefined : parseMoney(price, currency, locale);
+  const priceInvalid = price.trim() !== '' && priceCents === null;
 
   const submit = () => {
-    if (!trimmed) return;
-    onSave({ name: trimmed, icon, scope });
+    if (!trimmed || priceInvalid) return;
+    onSave({ name: trimmed, icon, scope, priceCents: priceCents ?? undefined });
     onClose();
   };
 
@@ -47,6 +66,19 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
           autoFocus={!isEdit}
           maxLength={40}
         />
+      </label>
+
+      <label className="field">
+        <span className="field__label">{t('price.optional')}</span>
+        <input
+          className={clsx('field__input', priceInvalid && 'field__input--invalid')}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          inputMode="decimal"
+          placeholder={formatMoney(0, currency, locale)}
+          maxLength={12}
+        />
+        <span className="field__hint">{t('price.hint')}</span>
       </label>
 
       <div className="field">
@@ -109,7 +141,12 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
         <button type="button" className="btn btn--ghost" onClick={onClose}>
           {t('action.cancel')}
         </button>
-        <button type="button" className="btn btn--primary" onClick={submit} disabled={!trimmed}>
+        <button
+          type="button"
+          className="btn btn--primary"
+          onClick={submit}
+          disabled={!trimmed || priceInvalid}
+        >
           {t('action.save')}
         </button>
       </div>
