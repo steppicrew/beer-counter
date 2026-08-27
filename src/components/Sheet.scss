@@ -116,11 +116,25 @@
 
 .sheet-actions {
   display: flex;
+  // German is the worst case: "Löschen"+"Abbrechen"+"Speichern" needs ~365px
+  // and was clipped on any phone narrower than ~400px. Wrap instead, and let
+  // the buttons share the row so they stay thumb-sized once they do.
+  flex-wrap: wrap;
   gap: vars.$space-sm;
   margin-top: vars.$space-xs;
 
+  .btn {
+    // Grow into the free space, but never force a wrap below a readable width.
+    flex: 1 1 auto;
+    min-width: max-content;
+    padding: 0 vars.$space-md;
+  }
+
   &__spacer {
-    flex: 1;
+    flex: 1 1 0;
+    // Collapses to nothing once the row wraps — a rigid spacer would push the
+    // confirm buttons onto a line of their own even when they would have fit.
+    min-width: 0;
   }
 }
 
