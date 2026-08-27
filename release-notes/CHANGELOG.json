@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.2.3",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "Closes a gap that left the edit sheet floating above the on-screen keyboard in mobile browsers.",
+        "de": "Schließt eine Lücke, durch die das Bearbeiten-Fenster im mobilen Browser über der Bildschirmtastatur schwebte.",
+        "fr": "Corrige un espace qui laissait la feuille d’édition flotter au-dessus du clavier dans les navigateurs mobiles.",
+        "es": "Corrige un hueco que dejaba el panel de edición flotando sobre el teclado en navegadores móviles.",
+        "it": "Corregge uno spazio che lasciava il pannello di modifica sospeso sopra la tastiera nei browser mobili.",
+        "nl": "Verhelpt een gat waardoor het bewerkvenster in mobiele browsers boven het toetsenbord zweefde.",
+        "pl": "Usuwa odstęp, przez który panel edycji unosił się nad klawiaturą w przeglądarkach mobilnych.",
+        "pt": "Corrige um espaço que deixava o painel de edição a flutuar sobre o teclado em navegadores móveis.",
+        "cs": "Odstraňuje mezeru, kvůli které panel úprav v mobilních prohlížečích plaval nad klávesnicí.",
+        "da": "Lukker et mellemrum, der fik redigeringspanelet til at svæve over tastaturet i mobilbrowsere.",
+        "sv": "Tar bort ett mellanrum som fick redigeringspanelen att sväva ovanför tangentbordet i mobilwebbläsare.",
+        "tr": "Mobil tarayıcılarda düzenleme penceresinin klavyenin üstünde havada kalmasına yol açan boşluk giderildi.",
+        "ru": "Убран зазор, из-за которого панель редактирования висела над клавиатурой в мобильных браузерах.",
+        "ja": "モバイルブラウザで編集パネルが画面キーボードの上に浮いてしまう隙間を解消しました。",
+        "zh": "修复了移动浏览器中编辑面板悬浮在软键盘上方留出空隙的问题。"
+      }
+    },
+    {
       "version": "1.2.2",
       "date": "2026-08-27",
       "notes": {
