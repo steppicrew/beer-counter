@@ -10,7 +10,7 @@
  *
  *   yarn node scripts/gen-privacy.mjs
  */
-import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -18,6 +18,31 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const { LOCALES } = await import(resolve(root, 'scripts/locales.mjs'));
 
 const policy = JSON.parse(readFileSync(resolve(root, 'privacy/POLICY.json'), 'utf8'));
+
+/**
+ * Imprint details come from .env, never from a committed file: §5 DDG wants a
+ * real postal address, which is personal data, and this repository is public.
+ */
+function readEnv() {
+  const file = resolve(root, '.env');
+  if (!existsSync(file)) return {};
+  const out = {};
+  for (const line of readFileSync(file, 'utf8').split('\n')) {
+    const match = /^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*)$/.exec(line);
+    if (match) out[match[1]] = match[2].trim().replace(/^["']|["']$/g, '');
+  }
+  return out;
+}
+
+const env = { ...readEnv(), ...process.env };
+const imprint = {
+  name: env.IMPRINT_NAME || '',
+  street: env.IMPRINT_STREET || '',
+  city: env.IMPRINT_CITY || '',
+  country: env.IMPRINT_COUNTRY || 'Deutschland',
+  email: env.IMPRINT_EMAIL || 'google@steppicrew.de',
+  responsible: env.IMPRINT_RESPONSIBLE || '',
+};
 const { listings } = JSON.parse(
   readFileSync(resolve(root, 'store-listing/LISTINGS.json'), 'utf8'),
 );
@@ -102,6 +127,95 @@ ${escape(meta?.playStore ?? code)} · ${escape(policy.effectiveDate)}<br>
 
 for (const locale of LOCALES) {
   writeFileSync(resolve(outDir, `${locale.code}.html`), render(locale.code));
+}
+
+// --- Impressum (§5 DDG) ----------------------------------------------------
+// Required for a German-hosted site and must be reachable from every page.
+const imprintDir = resolve(root, 'public/impressum');
+rmSync(imprintDir, { recursive: true, force: true });
+mkdirSync(imprintDir, { recursive: true });
+
+function renderImprint(code) {
+  const text = policy.imprintText[code] ?? policy.imprintText.de;
+  const i = imprint;
+  const appName = listings[code]?.title ?? listings.en.title;
+
+  // Unfilled placeholders are rendered as a visible warning rather than
+  // shipping an imprint that silently fails to identify the operator.
+  const todo = (v) =>
+    String(v).trim() === ''
+      ? '<span class="todo">— nicht gesetzt —</span>'
+      : escape(String(v));
+
+  const other = code === 'de' ? 'en' : 'de';
+  const otherLabel = code === 'de' ? 'English' : 'Deutsch';
+
+  return `<!doctype html>
+<html lang="${code}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${escape(text.title)} — ${escape(appName)}</title>
+<style>${STYLE}
+.todo{color:#c0392b;font-weight:600}
+address{font-style:normal;line-height:1.8}
+</style>
+</head>
+<body>
+<main>
+<header>
+<img src="../icons/icon-192.png" alt="" width="56" height="56">
+<div>
+<h1>${escape(text.title)}</h1>
+<p class="app-name">${escape(appName)}</p>
+</div>
+</header>
+
+<h2>${escape(text.providerHeading)}</h2>
+<address>
+${todo(i.name)}<br>
+${todo(i.street)}<br>
+${todo(i.city)}<br>
+${escape(i.country)}
+</address>
+
+<h2>${escape(text.contactHeading)}</h2>
+<p><a href="mailto:${escape(i.email)}">${escape(i.email)}</a></p>
+
+${i.responsible ? `<h2>${escape(text.responsibleHeading)}</h2>\n<p>${escape(i.responsible)}</p>` : ''}
+
+<h2>${escape(text.disclaimerHeading)}</h2>
+<p>${escape(text.disclaimer)}</p>
+
+<h2>${escape(text.disputeHeading)}</h2>
+<p>${escape(text.dispute)}</p>
+
+<p class="meta">
+<a href="../privacy/">${escape(policy.policies[code]?.title ?? policy.policies.en.title)}</a><br>
+<a href="../">${escape(appName)}</a>
+</p>
+
+<nav><a href="./${other}.html" hreflang="${other}">${otherLabel}</a></nav>
+</main>
+</body>
+</html>
+`;
+}
+
+for (const code of ['de', 'en']) {
+  writeFileSync(resolve(imprintDir, `${code}.html`), renderImprint(code));
+}
+// German default: the legal requirement is German law.
+writeFileSync(resolve(imprintDir, 'index.html'), renderImprint('de'));
+
+console.log('Impressum (de/en) in public/impressum/');
+
+const unfilled = ['name', 'street', 'city'].filter((k) => imprint[k].trim() === '');
+if (unfilled.length > 0) {
+  console.log(
+    `\n  WARNING: imprint ${unfilled.map((k) => `IMPRINT_${k.toUpperCase()}`).join(', ')} not set in .env.\n` +
+      '  §5 DDG requires a real name and postal address before this goes live.',
+  );
 }
 
 // The index picks the visitor's language client-side, so a single URL works

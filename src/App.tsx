@@ -9,6 +9,7 @@ import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage } from './lib/types';
 import { computeTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
+import { isNativeApp } from './lib/platform';
 import { formatMoney, defaultCurrencyFor } from './lib/money';
 import './App.scss';
 
@@ -42,6 +43,10 @@ export function App() {
 
   // Never reload out from under someone mid-round — offer it instead.
   const updateReady = useAppUpdate();
+
+  // German hosting law requires an Impressum and a privacy link reachable from
+  // the site. The Play listing carries its own, so the packaged app omits them.
+  const showLegal = !isNativeApp();
 
   const locale = storedLocale ?? resolveLocale(navigator.languages ?? [navigator.language]);
   const t = useMemo(() => createTranslator(locale), [locale]);
@@ -158,6 +163,14 @@ export function App() {
           >
             ＋ {t('action.addDrink')}
           </button>
+
+          {showLegal && (
+            <nav className="app__legal">
+              <a href="./privacy/">{t('legal.privacy')}</a>
+              <span aria-hidden="true">·</span>
+              <a href="./impressum/">{t('legal.imprint')}</a>
+            </nav>
+          )}
         </footer>
 
         {dialog.kind === 'add' && (
