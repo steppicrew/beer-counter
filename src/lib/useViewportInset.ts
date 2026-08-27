@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 
+/** Below this, an inset is rounding noise rather than a keyboard. */
+const MIN_INSET = 24;
+
 /**
  * Publishes the on-screen keyboard's height as `--keyboard-inset` on <html>.
  *
@@ -8,11 +11,11 @@ import { useEffect } from 'react';
  * window and its buttons end up underneath the keyboard. `dvh` units do not
  * help: they track the browser's own UI, not the IME.
  *
- * Measured against the *document*, not `window.innerHeight`. In a phone
- * browser `innerHeight - visualViewport.height` counts the collapsible URL bar
- * as well as the keyboard, which lifted the sheet a URL bar's height too far
- * and left a visible gap above the keyboard. Comparing the visual viewport's
- * bottom edge with the layout viewport's own bottom isolates the keyboard.
+ * Known limitation: a browser that keeps its own toolbar between the page and
+ * the keyboard (Brave on Android) reports a `visualViewport.height` that stops
+ * above that toolbar, and no viewport API exposes its size. The sheet is then
+ * positioned correctly against everything the page can observe, but still sits
+ * a toolbar's height above the keyboard itself.
  */
 export function useViewportInset(): void {
   useEffect(() => {
@@ -26,12 +29,14 @@ export function useViewportInset(): void {
       // excludes browser chrome, so what remains really is just the keyboard.
       const layoutHeight = root.clientHeight;
       const visibleBottom = vv.offsetTop + vv.height;
-      const inset = Math.max(0, layoutHeight - visibleBottom);
+      const raw = Math.max(0, layoutHeight - visibleBottom);
+
       // Ignore slivers: rounding and a collapsing URL bar produce a few
       // pixels that would otherwise shift the sheet for no reason.
-      const settled = inset < 24 ? 0 : Math.round(inset);
+      const inset = raw < MIN_INSET ? 0 : Math.round(raw);
+
       // Sub-pixel jitter while the keyboard animates would thrash layout.
-      root.style.setProperty('--keyboard-inset', `${settled}px`);
+      root.style.setProperty('--keyboard-inset', `${inset}px`);
     };
 
     apply();
