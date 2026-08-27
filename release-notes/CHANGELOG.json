@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.1.0",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "Give your drinks a price and the app adds up the round. Tap a drink to count it, or hold it to edit. Now in 15 languages.",
+        "de": "Gib deinen Getränken einen Preis und die App rechnet die Runde zusammen. Getränk antippen zum Zählen, gedrückt halten zum Bearbeiten. Jetzt in 15 Sprachen.",
+        "fr": "Donnez un prix à vos boissons et l'app calcule la tournée. Touchez une boisson pour la compter, maintenez pour la modifier. Désormais en 15 langues.",
+        "es": "Pon precio a tus bebidas y la app suma la ronda. Toca una bebida para contarla o mantén pulsado para editarla. Ahora en 15 idiomas.",
+        "it": "Dai un prezzo alle tue bevande e l'app calcola il giro. Tocca una bevanda per contarla, tieni premuto per modificarla. Ora in 15 lingue.",
+        "nl": "Geef je drankjes een prijs en de app telt de ronde op. Tik op een drankje om te tellen, houd vast om te bewerken. Nu in 15 talen.",
+        "pl": "Nadaj napojom cenę, a aplikacja podliczy kolejkę. Dotknij napoju, aby go policzyć, przytrzymaj, aby edytować. Teraz w 15 językach.",
+        "pt": "Dê um preço às suas bebidas e a app soma a rodada. Toque numa bebida para a contar, mantenha premido para editar. Agora em 15 idiomas.",
+        "cs": "Dejte nápojům cenu a aplikace spočítá kolo. Klepnutím nápoj započítáte, podržením jej upravíte. Nyní v 15 jazycích.",
+        "da": "Giv dine drinks en pris, så lægger appen omgangen sammen. Tryk på en drink for at tælle, hold nede for at redigere. Nu på 15 sprog.",
+        "sv": "Ge dina drycker ett pris så räknar appen ihop rundan. Tryck på en dryck för att räkna, håll in för att redigera. Nu på 15 språk.",
+        "tr": "İçeceklerine fiyat ver, uygulama turu toplasın. Saymak için içeceğe dokun, düzenlemek için basılı tut. Artık 15 dilde.",
+        "ru": "Задайте напиткам цену — приложение посчитает круг. Нажмите на напиток, чтобы посчитать, удерживайте, чтобы изменить. Теперь на 15 языках.",
+        "ja": "飲み物に価格を設定すると、ラウンドの合計を計算します。タップで1杯、長押しで編集。15言語に対応しました。",
+        "zh": "为饮品设置价格，应用会自动累计本轮花费。点击计数，长按编辑。现已支持 15 种语言。"
+      }
+    },
+    {
       "version": "1.0.0",
       "date": "2026-08-27",
       "notes": {
