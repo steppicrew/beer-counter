@@ -2,7 +2,7 @@
 
 .row {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: vars.$space-sm;
   padding: vars.$space-sm vars.$space-md;
   background: var(--bg-elevated);
@@ -15,19 +15,27 @@
     border-color: var(--accent);
   }
 
-  &__identity {
+  // The primary target: the entire tile counts one drink.
+  &__add {
     display: flex;
     align-items: center;
     gap: vars.$space-md;
     flex: 1;
     min-width: 0;
+    min-height: 62px;
     padding: vars.$space-xs 0;
     text-align: left;
+    border-radius: vars.$radius-sm;
+    transition: transform 120ms vars.$ease;
+
+    &:active {
+      transform: scale(0.98);
+    }
   }
 
   &__icon {
     flex: none;
-    font-size: 30px;
+    font-size: 36px;
     color: var(--text-muted);
 
     --icon-fill: #{rgba(vars.$color-amber, 0.28)};
@@ -36,6 +44,7 @@
   &__text {
     display: flex;
     flex-direction: column;
+    flex: 1;
     min-width: 0;
   }
 
@@ -61,57 +70,54 @@
 
   &__count {
     flex: none;
-    min-width: 2ch;
-    font-size: 26px;
-    font-weight: 700;
+    min-width: 2.2ch;
+    padding-left: vars.$space-sm;
+    font-size: 30px;
+    font-weight: 800;
     text-align: right;
     font-variant-numeric: tabular-nums;
+    color: var(--accent);
   }
 
+  // Secondary actions, stacked and deliberately small so they don't compete
+  // with the tile for a thumb that is aiming to count.
   &__controls {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     gap: vars.$space-xs;
     flex: none;
+    padding-left: vars.$space-sm;
+    border-left: 1px solid var(--border);
   }
 
   &__minus,
-  &__plus {
+  &__edit {
+    width: 34px;
+    height: 30px;
     display: grid;
     place-items: center;
-    border-radius: vars.$radius-pill;
+    border-radius: vars.$radius-sm;
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
     line-height: 1;
-    transition:
-      transform 120ms vars.$ease,
-      background 160ms vars.$ease;
 
     &:active {
       transform: scale(0.92);
     }
-  }
-
-  // Deliberately smaller than the add button: correcting a miscount is rarer
-  // than counting, and a fat minus invites mis-taps.
-  &__minus {
-    width: 36px;
-    height: 36px;
-    font-size: 22px;
-    background: var(--bg-sunken);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
 
     &:disabled {
-      opacity: 0.35;
+      opacity: 0.3;
       cursor: default;
     }
   }
 
-  &__plus {
-    width: vars.$tap-min;
-    height: vars.$tap-min;
-    font-size: 30px;
-    font-weight: 400;
-    background: var(--accent);
-    color: var(--accent-contrast);
+  &__minus {
+    font-size: 20px;
+  }
+
+  &__edit {
+    font-size: 14px;
   }
 }
