@@ -116,31 +116,30 @@
 
 .sheet-actions {
   display: flex;
-  // German is the worst case: "Löschen"+"Abbrechen"+"Speichern" needs ~365px
-  // and was clipped on any phone narrower than ~400px. Wrap instead, and let
-  // the buttons share the row so they stay thumb-sized once they do.
+  // Two buttons per row, each exactly half. German is the worst case —
+  // "Löschen"+"Abbrechen"+"Speichern" needs ~365px on one line and was clipped
+  // on any phone under ~400px — so three actions wrap to 2 + 1 rather than
+  // being squeezed. Every button is the same size whatever its label, so the
+  // row reads as equal choices instead of a ranking by word length.
   flex-wrap: wrap;
   gap: vars.$space-sm;
   margin-top: vars.$space-xs;
 
   .btn {
-    // Grow into the free space, but never force a wrap below a readable width.
-    flex: 1 1 auto;
-    min-width: max-content;
+    // Half the row minus half the gap. A fixed basis (not flex-grow) is what
+    // keeps the odd third button at the same width as the pair above it
+    // instead of stretching to fill its own line.
+    flex: 0 0 calc(50% - #{vars.$space-sm} / 2);
     padding: 0 vars.$space-md;
-  }
-
-  // Destructive actions never grow: wrapped onto its own row, a stretched
-  // delete button becomes the widest, most inviting target in the sheet —
-  // exactly the wrong emphasis for the one irreversible action here.
-  .btn--danger {
-    flex: 0 1 auto;
+    // A long label must shrink its text, not the button: equal width is the
+    // point, and every sheet here fits at half width on a 320px screen.
+    min-width: 0;
   }
 
   &__spacer {
+    // Only pushes a lone button to the right edge; it must not claim a share
+    // of the row, or the buttons would stop being equal halves.
     flex: 1 1 0;
-    // Collapses to nothing once the row wraps — a rigid spacer would push the
-    // confirm buttons onto a line of their own even when they would have fit.
     min-width: 0;
   }
 }
