@@ -12,8 +12,9 @@ export function ResetSheet({ onConfirm, onClose }: Props) {
   return (
     <Sheet title={t('reset.title')} onClose={onClose}>
       <p className="field__hint">{t('reset.body')}</p>
+      {/* No spacer: with two buttons it would claim a half-row of its own and
+          force them onto separate lines. Cancel leads, as in ConfirmSheet. */}
       <div className="sheet-actions">
-        <span className="sheet-actions__spacer" />
         <button type="button" className="btn btn--ghost" onClick={onClose}>
           {t('action.cancel')}
         </button>
