@@ -1,0 +1,26 @@
+{
+  "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
+  "releases": [
+    {
+      "version": "1.0.0",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "First release: count your drinks completely offline. Add your own beverages, see how long ago you ordered each one, switch between light and dark, and reset for the next round.",
+        "de": "Erste Version: Zähle deine Getränke komplett offline. Eigene Getränke anlegen, sehen wie lange die letzte Bestellung her ist, hell/dunkel umschalten und für die nächste Runde zurücksetzen.",
+        "fr": "Première version : comptez vos boissons entièrement hors ligne. Ajoutez vos propres boissons, voyez depuis quand vous avez commandé, basculez clair/sombre et réinitialisez pour la tournée suivante.",
+        "es": "Primera versión: cuenta tus bebidas totalmente sin conexión. Añade tus propias bebidas, mira cuánto hace que pediste, cambia entre claro y oscuro y reinicia para la siguiente ronda.",
+        "it": "Prima versione: conta le tue bevute completamente offline. Aggiungi le tue bevande, vedi da quanto hai ordinato, passa da chiaro a scuro e azzera per il giro successivo.",
+        "nl": "Eerste versie: tel je drankjes volledig offline. Voeg eigen drankjes toe, zie hoelang geleden je bestelde, wissel tussen licht en donker en reset voor de volgende ronde.",
+        "pl": "Pierwsza wersja: licz swoje napoje całkowicie offline. Dodawaj własne napoje, sprawdzaj, kiedy ostatnio zamawiałeś, przełączaj jasny/ciemny i resetuj przed kolejną kolejką.",
+        "pt": "Primeira versão: conte as suas bebidas totalmente offline. Adicione as suas bebidas, veja há quanto tempo pediu, alterne entre claro e escuro e reinicie para a rodada seguinte.",
+        "cs": "První verze: počítejte své nápoje zcela offline. Přidejte vlastní nápoje, sledujte, jak dávno jste objednali, přepínejte světlý/tmavý režim a vynulujte před dalším kolem.",
+        "da": "Første version: tæl dine drinks helt offline. Tilføj dine egne drinks, se hvor længe siden du bestilte, skift mellem lyst og mørkt, og nulstil til næste omgang.",
+        "sv": "Första versionen: räkna dina drinkar helt offline. Lägg till egna drycker, se hur länge sedan du beställde, växla mellan ljust och mörkt och nollställ inför nästa runda.",
+        "tr": "İlk sürüm: içeceklerini tamamen çevrimdışı say. Kendi içeceklerini ekle, en son ne zaman sipariş verdiğini gör, açık/koyu tema arasında geçiş yap ve sonraki tur için sıfırla.",
+        "ru": "Первая версия: считайте напитки полностью офлайн. Добавляйте свои напитки, смотрите, когда заказывали в последний раз, переключайте светлую и тёмную тему и сбрасывайте перед новым кругом.",
+        "ja": "初回リリース: 完全オフラインで杯数を記録。自分の飲み物を追加でき、前回の注文からの経過時間を表示、ライト/ダーク切り替え、次のラウンド用にリセットできます。",
+        "zh": "首个版本：完全离线记录你喝了多少。可添加自己的饮品，查看距上次点单多久，切换浅色/深色主题，并为下一轮重置。"
+      }
+    }
+  ]
+}

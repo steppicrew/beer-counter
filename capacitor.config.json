@@ -1,0 +1,11 @@
+{
+  "appId": "de.runlevel3.beercounter",
+  "appName": "Steppi's Beer Counter",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": false
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
