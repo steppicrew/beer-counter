@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.2.4",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "Really closes the gap between the edit sheet and the on-screen keyboard in mobile browsers.",
+        "de": "Schließt die Lücke zwischen Bearbeiten-Fenster und Bildschirmtastatur im mobilen Browser nun wirklich.",
+        "fr": "Comble réellement l’espace entre la feuille d’édition et le clavier dans les navigateurs mobiles.",
+        "es": "Cierra de verdad el hueco entre el panel de edición y el teclado en navegadores móviles.",
+        "it": "Chiude davvero lo spazio tra il pannello di modifica e la tastiera nei browser mobili.",
+        "nl": "Sluit het gat tussen het bewerkvenster en het toetsenbord in mobiele browsers nu echt.",
+        "pl": "Naprawdę usuwa odstęp między panelem edycji a klawiaturą w przeglądarkach mobilnych.",
+        "pt": "Fecha mesmo o espaço entre o painel de edição e o teclado em navegadores móveis.",
+        "cs": "Nyní skutečně odstraňuje mezeru mezi panelem úprav a klávesnicí v mobilních prohlížečích.",
+        "da": "Lukker nu for alvor mellemrummet mellem redigeringspanelet og tastaturet i mobilbrowsere.",
+        "sv": "Stänger nu verkligen mellanrummet mellan redigeringspanelen och tangentbordet i mobilwebbläsare.",
+        "tr": "Mobil tarayıcılarda düzenleme penceresi ile klavye arasındaki boşluk artık gerçekten kapandı.",
+        "ru": "Теперь действительно убран зазор между панелью редактирования и клавиатурой в мобильных браузерах.",
+        "ja": "モバイルブラウザで編集パネルと画面キーボードの間に残っていた隙間を完全に解消しました。",
+        "zh": "彻底消除了移动浏览器中编辑面板与软键盘之间的空隙。"
+      }
+    },
+    {
       "version": "1.2.3",
       "date": "2026-08-27",
       "notes": {
