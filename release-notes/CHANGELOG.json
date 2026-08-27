@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.3.0",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "The Share button now works in the app itself: tap it to send the link through WhatsApp, Signal, email or any other app. Previously only \"Copy link\" was available here.",
+        "de": "Der Teilen-Knopf funktioniert jetzt auch in der App: Damit schickst du den Link über WhatsApp, Signal, E-Mail oder eine beliebige andere App. Bisher gab es hier nur „Link kopieren“.",
+        "fr": "Le bouton Partager fonctionne maintenant dans l’app : envoyez le lien via WhatsApp, Signal, e-mail ou toute autre application. Auparavant, seul « Copier le lien » était disponible ici.",
+        "es": "El botón Compartir ya funciona dentro de la app: envía el enlace por WhatsApp, Signal, correo o cualquier otra aplicación. Antes aquí solo estaba «Copiar enlace».",
+        "it": "Il pulsante Condividi ora funziona anche nell’app: manda il link con WhatsApp, Signal, email o qualsiasi altra app. Prima qui c’era solo «Copia link».",
+        "nl": "De knop Delen werkt nu ook in de app zelf: stuur de link via WhatsApp, Signal, e-mail of een andere app. Voorheen was hier alleen “Link kopiëren”.",
+        "pl": "Przycisk Udostępnij działa teraz w samej aplikacji: wyślij link przez WhatsApp, Signal, e-mail lub dowolną inną aplikację. Wcześniej było tu tylko „Kopiuj link”.",
+        "pt": "O botão Partilhar já funciona na própria app: envie o link por WhatsApp, Signal, e-mail ou qualquer outra aplicação. Antes só existia aqui «Copiar link».",
+        "cs": "Tlačítko Sdílet nyní funguje i v aplikaci: pošlete odkaz přes WhatsApp, Signal, e-mail nebo jinou aplikaci. Dříve zde bylo jen „Kopírovat odkaz“.",
+        "da": "Del-knappen virker nu i selve appen: send linket via WhatsApp, Signal, e-mail eller en anden app. Tidligere var kun “Kopiér link” tilgængeligt her.",
+        "sv": "Dela-knappen fungerar nu i själva appen: skicka länken via WhatsApp, Signal, e-post eller någon annan app. Tidigare fanns bara “Kopiera länk” här.",
+        "tr": "Paylaş düğmesi artık uygulamanın içinde de çalışıyor: bağlantıyı WhatsApp, Signal, e-posta ya da başka bir uygulamayla gönderin. Önceden burada yalnızca „Bağlantıyı kopyala“ vardı.",
+        "ru": "Кнопка «Поделиться» теперь работает и в самом приложении: отправьте ссылку через WhatsApp, Signal, почту или любое другое приложение. Раньше здесь было только «Копировать ссылку».",
+        "ja": "アプリ内でも共有ボタンが使えるようになりました。WhatsApp、Signal、メールなど好きなアプリでリンクを送れます。これまでは「リンクをコピー」だけでした。",
+        "zh": "应用内的分享按钮现在可以使用了：通过 WhatsApp、Signal、邮件或任意其他应用发送链接。此前这里只有“复制链接”。"
+      }
+    },
+    {
       "version": "1.2.5",
       "date": "2026-08-27",
       "notes": {
