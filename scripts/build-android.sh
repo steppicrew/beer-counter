@@ -52,7 +52,7 @@ yarn cap sync android
 
 # Launcher icons are derived from the SVG master, and `cap sync` does not
 # touch them — regenerate so an icon change always reaches the APK.
-node scripts/gen-assets.mjs >/dev/null
+yarn node scripts/gen-assets.mjs >/dev/null
 
 # --- native build ----------------------------------------------------------
 echo

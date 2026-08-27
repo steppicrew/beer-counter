@@ -74,7 +74,7 @@ export type MessageKey = keyof typeof en;
 export type Messages = Record<MessageKey, string>;
 
 export const de: Messages = {
-  'app.title': "Steppi's Bierzähler",
+  'app.title': 'Steppis Bierzähler',
   'app.tagline': 'Zähl deine Getränke — komplett offline.',
 
   'drink.beer': 'Bier',
@@ -142,7 +142,7 @@ export const de: Messages = {
 };
 
 export const fr: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Compteur de Bières Steppi',
   'app.tagline': 'Comptez vos boissons — entièrement hors ligne.',
 
   'drink.beer': 'Bière',
@@ -210,7 +210,7 @@ export const fr: Messages = {
 };
 
 export const es: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Contador de Cervezas Steppi',
   'app.tagline': 'Cuenta tus bebidas — totalmente sin conexión.',
 
   'drink.beer': 'Cerveza',
@@ -278,7 +278,7 @@ export const es: Messages = {
 };
 
 export const it: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Il Contabirre di Steppi',
   'app.tagline': 'Conta le tue bevute — completamente offline.',
 
   'drink.beer': 'Birra',
@@ -346,7 +346,7 @@ export const it: Messages = {
 };
 
 export const nl: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': "Steppi's Bierteller",
   'app.tagline': 'Tel je drankjes — volledig offline.',
 
   'drink.beer': 'Bier',
@@ -414,7 +414,7 @@ export const nl: Messages = {
 };
 
 export const pl: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Licznik Piw Steppiego',
   'app.tagline': 'Licz swoje drinki — całkowicie offline.',
 
   'drink.beer': 'Piwo',
@@ -482,7 +482,7 @@ export const pl: Messages = {
 };
 
 export const pt: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Contador de Cervejas Steppi',
   'app.tagline': 'Conte as suas bebidas — totalmente offline.',
 
   'drink.beer': 'Cerveja',
@@ -550,7 +550,7 @@ export const pt: Messages = {
 };
 
 export const cs: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Steppiho Počítadlo Piv',
   'app.tagline': 'Počítejte své nápoje — zcela offline.',
 
   'drink.beer': 'Pivo',
@@ -618,7 +618,7 @@ export const cs: Messages = {
 };
 
 export const da: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Steppis Øltæller',
   'app.tagline': 'Tæl dine drinks — helt offline.',
 
   'drink.beer': 'Øl',
@@ -686,7 +686,7 @@ export const da: Messages = {
 };
 
 export const sv: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Steppis Ölräknare',
   'app.tagline': 'Räkna dina drinkar — helt offline.',
 
   'drink.beer': 'Öl',
@@ -754,7 +754,7 @@ export const sv: Messages = {
 };
 
 export const tr: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': "Steppi'nin Bira Sayacı",
   'app.tagline': 'İçeceklerini say — tamamen çevrimdışı.',
 
   'drink.beer': 'Bira',
@@ -822,7 +822,7 @@ export const tr: Messages = {
 };
 
 export const ru: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Пивной счётчик Steppi',
   'app.tagline': 'Считайте свои напитки — полностью офлайн.',
 
   'drink.beer': 'Пиво',
@@ -890,7 +890,7 @@ export const ru: Messages = {
 };
 
 export const ja: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Steppi のビールカウンター',
   'app.tagline': '飲んだ杯数を記録 — 完全オフライン。',
 
   'drink.beer': 'ビール',
@@ -958,7 +958,7 @@ export const ja: Messages = {
 };
 
 export const zh: Messages = {
-  'app.title': "Steppi's Beer Counter",
+  'app.title': 'Steppi 的啤酒计数器',
   'app.tagline': '记录你喝了多少 — 完全离线。',
 
   'drink.beer': '啤酒',

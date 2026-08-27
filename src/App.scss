@@ -22,12 +22,15 @@
 
   &__totals {
     display: flex;
-    align-items: baseline;
+    // Centre rather than baseline-align: the 34px number and the 14px label
+    // have very different baselines, which left the label sitting low.
+    align-items: center;
     gap: vars.$space-sm;
   }
 
   &__total-label {
     font-size: 14px;
+    line-height: 1;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
@@ -35,6 +38,7 @@
 
   &__total-value {
     font-size: 34px;
+    line-height: 1;
     font-weight: 800;
     font-variant-numeric: tabular-nums;
     color: var(--accent);

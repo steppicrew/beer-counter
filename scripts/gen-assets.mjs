@@ -6,7 +6,7 @@
  * Requires ImageMagick (`magick`) on PATH.
  */
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync, copyFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, copyFileSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -79,6 +79,50 @@ writeFileSync(
 </resources>
 `,
 );
+
+// Localised launcher label. Android picks values-<lang>/ by the device
+// language, so the home-screen name matches the app's own UI language.
+const { LOCALES } = await import(resolve(root, 'scripts/locales.mjs'));
+const { listings } = JSON.parse(
+  readFileSync(resolve(root, 'store-listing/LISTINGS.json'), 'utf8'),
+);
+
+const xmlEscape = (s) =>
+  s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/'/g, "\\'");
+
+console.log('Localised app names');
+for (const locale of LOCALES) {
+  const title = listings[locale.code]?.title;
+  if (!title) continue;
+
+  // `en` is the default resource directory, not a qualified one.
+  const dir =
+    locale.code === 'en'
+      ? resolve(androidRes, 'values')
+      : resolve(androidRes, `values-${locale.code}`);
+  mkdirSync(dir, { recursive: true });
+
+  if (locale.code === 'en') {
+    // Leave the generated values/strings.xml alone — it also carries the
+    // package name and URL scheme that Capacitor writes.
+    continue;
+  }
+
+  writeFileSync(
+    resolve(dir, 'strings.xml'),
+    `<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">${xmlEscape(title)}</string>
+    <string name="title_activity_main">${xmlEscape(title)}</string>
+</resources>
+`,
+  );
+  console.log(`  values-${locale.code}/strings.xml  ${title}`);
+}
 
 console.log('favicon');
 copyFileSync(master, resolve(root, 'public/favicon.svg'));
