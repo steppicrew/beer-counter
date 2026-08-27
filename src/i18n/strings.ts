@@ -74,6 +74,8 @@ export const en = {
   'settings.currency': 'Currency',
   'update.ready': 'A new version is ready',
   'update.reload': 'Reload',
+  'legal.privacy': 'Privacy',
+  'legal.imprint': 'Legal notice',
 
   'session.startedAt': 'Round started {time}',
   'empty.title': 'Nothing on the tab yet',
@@ -155,6 +157,8 @@ export const de: Messages = {
   'settings.currency': 'Währung',
   'update.ready': 'Neue Version verfügbar',
   'update.reload': 'Neu laden',
+  'legal.privacy': 'Datenschutz',
+  'legal.imprint': 'Impressum',
 
   'session.startedAt': 'Runde gestartet {time}',
   'empty.title': 'Noch nichts auf dem Deckel',
@@ -233,6 +237,8 @@ export const fr: Messages = {
   'settings.currency': 'Devise',
   'update.ready': 'Une nouvelle version est prête',
   'update.reload': 'Recharger',
+  'legal.privacy': 'Confidentialité',
+  'legal.imprint': 'Mentions légales',
 
   'session.startedAt': 'Tournée commencée {time}',
   'empty.title': "Rien sur l'ardoise",
@@ -311,6 +317,8 @@ export const es: Messages = {
   'settings.currency': 'Moneda',
   'update.ready': 'Hay una versión nueva',
   'update.reload': 'Recargar',
+  'legal.privacy': 'Privacidad',
+  'legal.imprint': 'Aviso legal',
 
   'session.startedAt': 'Ronda iniciada {time}',
   'empty.title': 'Nada en la cuenta todavía',
@@ -389,6 +397,8 @@ export const it: Messages = {
   'settings.currency': 'Valuta',
   'update.ready': 'È pronta una nuova versione',
   'update.reload': 'Ricarica',
+  'legal.privacy': 'Privacy',
+  'legal.imprint': 'Note legali',
 
   'session.startedAt': 'Giro iniziato {time}',
   'empty.title': 'Ancora niente sul conto',
@@ -467,6 +477,8 @@ export const nl: Messages = {
   'settings.currency': 'Valuta',
   'update.ready': 'Er is een nieuwe versie',
   'update.reload': 'Herladen',
+  'legal.privacy': 'Privacy',
+  'legal.imprint': 'Colofon',
 
   'session.startedAt': 'Ronde gestart {time}',
   'empty.title': 'Nog niets op de rekening',
@@ -545,6 +557,8 @@ export const pl: Messages = {
   'settings.currency': 'Waluta',
   'update.ready': 'Dostępna jest nowa wersja',
   'update.reload': 'Odśwież',
+  'legal.privacy': 'Prywatność',
+  'legal.imprint': 'Nota prawna',
 
   'session.startedAt': 'Kolejka rozpoczęta {time}',
   'empty.title': 'Nic jeszcze na rachunku',
@@ -623,6 +637,8 @@ export const pt: Messages = {
   'settings.currency': 'Moeda',
   'update.ready': 'Há uma nova versão',
   'update.reload': 'Recarregar',
+  'legal.privacy': 'Privacidade',
+  'legal.imprint': 'Aviso legal',
 
   'session.startedAt': 'Rodada iniciada {time}',
   'empty.title': 'Nada na conta ainda',
@@ -701,6 +717,8 @@ export const cs: Messages = {
   'settings.currency': 'Měna',
   'update.ready': 'Je připravena nová verze',
   'update.reload': 'Načíst znovu',
+  'legal.privacy': 'Soukromí',
+  'legal.imprint': 'Právní informace',
 
   'session.startedAt': 'Kolo začalo {time}',
   'empty.title': 'Zatím nic na účtu',
@@ -779,6 +797,8 @@ export const da: Messages = {
   'settings.currency': 'Valuta',
   'update.ready': 'En ny version er klar',
   'update.reload': 'Genindlæs',
+  'legal.privacy': 'Privatliv',
+  'legal.imprint': 'Juridisk info',
 
   'session.startedAt': 'Omgang startet {time}',
   'empty.title': 'Intet på regningen endnu',
@@ -857,6 +877,8 @@ export const sv: Messages = {
   'settings.currency': 'Valuta',
   'update.ready': 'En ny version är klar',
   'update.reload': 'Ladda om',
+  'legal.privacy': 'Integritet',
+  'legal.imprint': 'Juridisk info',
 
   'session.startedAt': 'Runda startad {time}',
   'empty.title': 'Inget på notan än',
@@ -935,6 +957,8 @@ export const tr: Messages = {
   'settings.currency': 'Para birimi',
   'update.ready': 'Yeni sürüm hazır',
   'update.reload': 'Yeniden yükle',
+  'legal.privacy': 'Gizlilik',
+  'legal.imprint': 'Künye',
 
   'session.startedAt': 'Tur başladı {time}',
   'empty.title': 'Hesapta henüz bir şey yok',
@@ -1013,6 +1037,8 @@ export const ru: Messages = {
   'settings.currency': 'Валюта',
   'update.ready': 'Доступна новая версия',
   'update.reload': 'Обновить',
+  'legal.privacy': 'Конфиденциальность',
+  'legal.imprint': 'Правовая информация',
 
   'session.startedAt': 'Круг начат {time}',
   'empty.title': 'В счёте пока пусто',
@@ -1091,6 +1117,8 @@ export const ja: Messages = {
   'settings.currency': '通貨',
   'update.ready': '新しいバージョンがあります',
   'update.reload': '再読み込み',
+  'legal.privacy': 'プライバシー',
+  'legal.imprint': '運営者情報',
 
   'session.startedAt': 'ラウンド開始 {time}',
   'empty.title': 'まだ何も飲んでいません',
@@ -1168,6 +1196,8 @@ export const zh: Messages = {
   'settings.currency': '货币',
   'update.ready': '有新版本可用',
   'update.reload': '重新加载',
+  'legal.privacy': '隐私',
+  'legal.imprint': '法律声明',
 
   'session.startedAt': '本轮开始于 {time}',
   'empty.title': '账单上还是空的',

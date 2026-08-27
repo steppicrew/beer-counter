@@ -52,9 +52,22 @@ fi
 
 VERSION="$(node -p "require('./package.json').version")"
 
-# The privacy policy is a Play Console requirement and ships with the site.
+# Publishing a German-hosted site without a complete Impressum is a legal
+# risk (§5 DDG), so refuse rather than quietly shipping placeholders.
+MISSING_IMPRINT=""
+for field in IMPRINT_NAME IMPRINT_STREET IMPRINT_CITY; do
+  [ -z "${!field:-}" ] && MISSING_IMPRINT="$MISSING_IMPRINT $field"
+done
+if [ -n "$MISSING_IMPRINT" ] && [ "$DRY_RUN" -eq 0 ]; then
+  echo "Refusing to deploy: incomplete Impressum." >&2
+  echo "  Not set in .env:$MISSING_IMPRINT" >&2
+  echo "  §5 DDG requires a real name and postal address on a German-hosted site." >&2
+  exit 1
+fi
+
+# The privacy policy and Impressum ship with the site.
 echo
-echo "==> Rendering privacy policy"
+echo "==> Rendering privacy policy and Impressum"
 yarn node scripts/gen-privacy.mjs
 
 echo
@@ -62,7 +75,8 @@ echo "==> Building $VERSION"
 yarn build
 
 # A PWA that 404s its own service worker is worse than one that never had it.
-for required in dist/index.html dist/sw.js dist/manifest.webmanifest dist/privacy/index.html; do
+for required in dist/index.html dist/sw.js dist/manifest.webmanifest \
+                dist/privacy/index.html dist/impressum/index.html; do
   [ -f "$required" ] || { echo "Build incomplete: $required is missing." >&2; exit 1; }
 done
 
