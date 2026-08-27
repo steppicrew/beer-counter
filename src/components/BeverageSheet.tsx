@@ -122,7 +122,22 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
         <span className="field__hint">{t('add.scopeHint')}</span>
       </div>
 
+      {/* Ordered by how often each is pressed: save first, delete last. The
+          destructive action sits furthest from the resting thumb rather than
+          where a confirm button is expected. */}
       <div className="sheet-actions">
+        <button
+          type="button"
+          className="btn btn--primary"
+          onClick={submit}
+          disabled={!trimmed || priceInvalid}
+        >
+          {t('action.save')}
+        </button>
+        <button type="button" className="btn btn--ghost" onClick={onClose}>
+          {t('action.cancel')}
+        </button>
+        <span className="sheet-actions__spacer" />
         {isEdit && onDelete && (
           <button
             type="button"
@@ -137,18 +152,6 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
             {t('action.delete')}
           </button>
         )}
-        <span className="sheet-actions__spacer" />
-        <button type="button" className="btn btn--ghost" onClick={onClose}>
-          {t('action.cancel')}
-        </button>
-        <button
-          type="button"
-          className="btn btn--primary"
-          onClick={submit}
-          disabled={!trimmed || priceInvalid}
-        >
-          {t('action.save')}
-        </button>
       </div>
     </Sheet>
   );
