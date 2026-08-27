@@ -4,6 +4,7 @@ import { useI18n, LOCALES } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
 import type { ThemeMode } from '../lib/types';
 import { CURRENCIES, defaultCurrencyFor } from '../lib/money';
+import { useInstallPrompt } from '../lib/useInstallPrompt';
 
 const THEMES: { mode: ThemeMode; labelKey: 'settings.themeSystem' | 'settings.themeLight' | 'settings.themeDark' }[] = [
   { mode: 'system', labelKey: 'settings.themeSystem' },
@@ -17,6 +18,7 @@ export function SettingsSheet({ onClose }: { onClose: () => void }) {
   const setTheme = useAppStore((s) => s.setTheme);
   const storedLocale = useAppStore((s) => s.locale);
   const setLocale = useAppStore((s) => s.setLocale);
+  const install = useInstallPrompt();
   const storedCurrency = useAppStore((s) => s.currency);
   const setCurrency = useAppStore((s) => s.setCurrency);
 
@@ -76,6 +78,24 @@ export function SettingsSheet({ onClose }: { onClose: () => void }) {
           ))}
         </div>
       </div>
+
+      {/* Stays reachable after the banner has been dismissed. */}
+      {install.available && (
+        <div className="field">
+          <span className="field__label">{t('install.settings')}</span>
+          {install.manualOnly ? (
+            <span className="field__hint">{t('install.ios')}</span>
+          ) : (
+            <button
+              type="button"
+              className="btn btn--ghost"
+              onClick={() => void install.install()}
+            >
+              {t('install.action')}
+            </button>
+          )}
+        </div>
+      )}
 
       <p className="field__hint">
         {t('settings.version', { version: __APP_VERSION__ })} · {t('settings.offline')}

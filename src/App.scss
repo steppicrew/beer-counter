@@ -115,6 +115,52 @@
     gap: vars.$space-sm;
   }
 
+  // Web only: hidden in the packaged app and once already installed.
+  &__install {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: vars.$space-md;
+    margin: 0 vars.$space-md vars.$space-sm;
+    padding: vars.$space-sm vars.$space-sm vars.$space-sm vars.$space-md;
+    font-size: 14px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: vars.$radius-md;
+    box-shadow: var(--shadow);
+  }
+
+  &__install-text {
+    min-width: 0;
+  }
+
+  &__install-actions {
+    display: flex;
+    align-items: center;
+    gap: vars.$space-xs;
+    flex: none;
+  }
+
+  &__install-dismiss {
+    min-height: 36px;
+    padding: 0 vars.$space-sm;
+    font-size: 13px;
+    color: var(--text-muted);
+    border-radius: vars.$radius-pill;
+  }
+
+  &__install-btn {
+    min-height: 36px;
+    padding: 0 vars.$space-md;
+    font-weight: 600;
+    border-radius: vars.$radius-pill;
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
   &__update {
     position: sticky;
     bottom: 0;

@@ -10,6 +10,7 @@ import type { Beverage } from './lib/types';
 import { computeTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
+import { useInstallPrompt } from './lib/useInstallPrompt';
 import { formatMoney, defaultCurrencyFor } from './lib/money';
 import './App.scss';
 
@@ -43,6 +44,7 @@ export function App() {
 
   // Never reload out from under someone mid-round — offer it instead.
   const update = useAppUpdate();
+  const install = useInstallPrompt();
 
   // German hosting law requires an Impressum and a privacy link reachable from
   // the site. The Play listing carries its own, so the packaged app omits them.
@@ -141,6 +143,32 @@ export function App() {
             ))}
           </ul>
         </main>
+
+        {install.bannerVisible && (
+          <div className="app__install">
+            <span className="app__install-text">
+              {install.manualOnly ? t('install.ios') : t('install.banner')}
+            </span>
+            <span className="app__install-actions">
+              <button
+                type="button"
+                className="app__install-dismiss"
+                onClick={install.dismissBanner}
+              >
+                {t('install.dismiss')}
+              </button>
+              {!install.manualOnly && (
+                <button
+                  type="button"
+                  className="app__install-btn"
+                  onClick={() => void install.install()}
+                >
+                  {t('install.action')}
+                </button>
+              )}
+            </span>
+          </div>
+        )}
 
         {update.ready && (
           <div className="app__update" role="status">
