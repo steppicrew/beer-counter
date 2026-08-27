@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.4.2",
+      "date": "2026-08-27",
+      "notes": {
+        "en": "The “start a new round?” dialog had its two buttons on separate lines; they sit side by side again.",
+        "de": "Im Dialog „Neue Runde starten?“ standen die beiden Knöpfe untereinander — sie stehen wieder nebeneinander.",
+        "fr": "Dans la boîte « Nouvelle tournée ? », les deux boutons étaient sur deux lignes ; ils sont de nouveau côte à côte.",
+        "es": "En el diálogo «¿Empezar una ronda nueva?» los dos botones quedaban en líneas separadas; vuelven a estar uno al lado del otro.",
+        "it": "Nella finestra «Iniziare un nuovo giro?» i due pulsanti finivano su righe separate; ora sono di nuovo affiancati.",
+        "nl": "In het venster “Nieuwe ronde starten?” stonden de twee knoppen onder elkaar; ze staan weer naast elkaar.",
+        "pl": "W oknie „Zacząć nową kolejkę?” dwa przyciski trafiały do osobnych wierszy; znów są obok siebie.",
+        "pt": "Na janela «Começar uma nova rodada?» os dois botões ficavam em linhas separadas; voltam a estar lado a lado.",
+        "cs": "V dialogu „Začít nové kolo?“ byla tlačítka pod sebou; jsou zase vedle sebe.",
+        "da": "I dialogen “Start en ny omgang?” stod de to knapper under hinanden; de står ved siden af hinanden igen.",
+        "sv": "I rutan “Starta en ny runda?” hamnade de två knapparna på var sin rad; de står bredvid varandra igen.",
+        "tr": "„Yeni tur başlasın mı?“ penceresinde iki düğme alt alta kalıyordu; yeniden yan yana duruyorlar.",
+        "ru": "В окне «Начать новый круг?» две кнопки оказывались на разных строках — теперь снова рядом.",
+        "ja": "「新しいラウンドを始めますか？」のボタンが上下に分かれていた問題を修正し、再び横並びになりました。",
+        "zh": "“开始新一轮？”对话框中的两个按钮曾分成上下两行，现在恢复并排显示。"
+      }
+    },
+    {
       "version": "1.4.1",
       "date": "2026-08-27",
       "notes": {
