@@ -3,13 +3,14 @@
 .sheet {
   width: 100%;
   max-width: 460px;
-  // Anchored to the bottom edge explicitly rather than by auto margins. With
-  // `margin: auto auto 0` the dialog is centred, so the browser splits the
-  // free space between the two auto block margins — which halved the keyboard
-  // inset and left the sheet hovering a visible gap above the keyboard.
+  // A dialog in the top layer is laid out against the UA's `inset: 0` box, so
+  // top and bottom are BOTH resolved and `margin: auto` splits the leftover
+  // space evenly — half the keyboard inset ended up above the sheet as a
+  // visible gap. Give the top margin all the slack and keep the bottom margin
+  // exact, so the sheet sits flush on the keyboard.
   position: fixed;
-  inset: auto 0 var(--keyboard-inset, 0px) 0;
-  margin: 0 auto;
+  margin: auto auto 0;
+  margin-bottom: var(--keyboard-inset, 0px);
   padding: 0;
   border: none;
   background: none;
@@ -62,7 +63,6 @@
 
   @media (width >= 560px) {
     // Centred on a large screen, where no keyboard crowds the sheet.
-    inset: 0;
     margin: auto;
 
     .sheet__panel {
