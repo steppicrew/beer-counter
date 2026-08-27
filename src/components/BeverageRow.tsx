@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { BeverageIcon } from './BeverageIcon';
+import { UiIcon } from './UiIcon';
 import { useElapsed, formatElapsed } from '../lib/useRelativeTime';
 import { useI18n } from '../i18n';
 import type { Beverage, Tally } from '../lib/types';
@@ -61,7 +62,7 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
           onClick={onEdit}
           aria-label={`${t('action.edit')} — ${label}`}
         >
-          ✎
+          <UiIcon name="edit" />
         </button>
       </span>
     </li>

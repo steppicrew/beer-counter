@@ -114,10 +114,13 @@
   }
 
   &__minus {
-    font-size: 20px;
+    font-size: 21px;
   }
 
+  // SVG sized from font-size; the glyph fills more of the small button than
+  // the old ✎ character did.
   &__edit {
-    font-size: 14px;
+    font-size: 17px;
+    line-height: 0;
   }
 }

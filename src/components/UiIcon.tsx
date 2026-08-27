@@ -1,5 +1,5 @@
 interface Props {
-  name: 'settings' | 'reset';
+  name: 'settings' | 'reset' | 'edit';
   className?: string;
 }
 
@@ -11,13 +11,35 @@ interface Props {
 const PATHS: Record<Props['name'], React.ReactNode> = {
   settings: (
     <>
-      <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      {/*
+        Teeth generated as 8 rotationally-symmetric segments about (12,12) —
+        a hand-drawn gear left the hub visibly off-centre inside the teeth.
+      */}
       <path
-        d="M12 2.6a1 1 0 0 1 1 .8l.25 1.6a7.4 7.4 0 0 1 1.72.72l1.32-.94a1 1 0 0 1 1.29.1l1.54 1.54a1 1 0 0 1 .1 1.29l-.94 1.32c.3.54.54 1.12.72 1.72l1.6.25a1 1 0 0 1 .8 1v2.18a1 1 0 0 1-.8 1l-1.6.25a7.4 7.4 0 0 1-.72 1.72l.94 1.32a1 1 0 0 1-.1 1.29l-1.54 1.54a1 1 0 0 1-1.29.1l-1.32-.94a7.4 7.4 0 0 1-1.72.72l-.25 1.6a1 1 0 0 1-1 .8h-2.18a1 1 0 0 1-1-.8l-.25-1.6a7.4 7.4 0 0 1-1.72-.72l-1.32.94a1 1 0 0 1-1.29-.1L4.2 19.05a1 1 0 0 1-.1-1.29l.94-1.32a7.4 7.4 0 0 1-.72-1.72l-1.6-.25a1 1 0 0 1-.8-1v-2.18a1 1 0 0 1 .8-1l1.6-.25c.18-.6.42-1.18.72-1.72l-.94-1.32a1 1 0 0 1 .1-1.29L5.74 4.9a1 1 0 0 1 1.29-.1l1.32.94a7.4 7.4 0 0 1 1.72-.72l.25-1.6a1 1 0 0 1 1-.8Z"
+        d="M9.94 2.73 L14.06 2.73 L14.40 5.21 L15.10 5.50 L17.10 3.99 L20.01 6.90 L18.50 8.90 L18.79 9.60 L21.27 9.94 L21.27 14.06 L18.79 14.40 L18.50 15.10 L20.01 17.10 L17.10 20.01 L15.10 18.50 L14.40 18.79 L14.06 21.27 L9.94 21.27 L9.60 18.79 L8.90 18.50 L6.90 20.01 L3.99 17.10 L5.50 15.10 L5.21 14.40 L2.73 14.06 L2.73 9.94 L5.21 9.60 L5.50 8.90 L3.99 6.90 L6.90 3.99 L8.90 5.50 L9.60 5.21 Z"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinejoin="round"
+      />
+      <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.7" />
+    </>
+  ),
+  edit: (
+    <>
+      <path
+        d="M4 20.1l.9-4 11-11a2.1 2.1 0 0 1 3 0l.9.9a2.1 2.1 0 0 1 0 3l-11 11-4 .9Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14.4 6.6l3.4 3.4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
       />
     </>
   ),
