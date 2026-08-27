@@ -1,0 +1,58 @@
+@use '../styles/vars' as vars;
+
+.share-qr {
+  display: flex;
+  justify-content: center;
+  padding: vars.$space-sm 0;
+
+  &__code {
+    // A QR must stay high-contrast to scan; force the light scheme's pairing
+    // rather than inheriting a muted foreground. Sized to still resolve when
+    // held up across a bar table.
+    width: min(260px, 66vw);
+    height: auto;
+    padding: vars.$space-md;
+    background: #fff;
+    color: #000;
+    border-radius: vars.$radius-sm;
+    // Crisp module edges at any size.
+    shape-rendering: crispEdges;
+  }
+
+  &__link {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: var(--accent);
+    word-break: break-all;
+  }
+}
+
+.share-actions {
+  display: flex;
+  gap: vars.$space-sm;
+
+  &__share,
+  &__copy {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: vars.$space-xs;
+    padding: 0 vars.$space-md;
+  }
+
+  svg {
+    font-size: 17px;
+  }
+}
+
+.share-status {
+  // Reserve the line so a confirmation appearing does not shift the buttons
+  // out from under a thumb already moving toward them.
+  min-height: 1.2em;
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
