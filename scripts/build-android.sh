@@ -46,6 +46,9 @@ echo
 echo "==> Building web assets"
 yarn build
 
+# .env may override the application id (see ANDROID_APP_ID).
+yarn node scripts/sync-app-id.mjs
+
 echo
 echo "==> Syncing into the native project"
 yarn cap sync android

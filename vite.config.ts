@@ -17,7 +17,11 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      // 'prompt', not 'autoUpdate': autoUpdate calls skipWaiting() as soon as a
+      // new worker installs, which swaps the assets under a page that is still
+      // running the old JS. The app offers a reload instead — a counter must
+      // not blink away mid-round.
+      registerType: 'prompt',
       includeAssets: ['favicon.svg', 'icons/*.png'],
       manifest: {
         name: "Steppi's Beer Counter",

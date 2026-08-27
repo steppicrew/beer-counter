@@ -72,6 +72,8 @@ export const en = {
   'total.partial': 'at least {price}',
   'total.partialHint': 'Some drinks have no price yet.',
   'settings.currency': 'Currency',
+  'update.ready': 'A new version is ready',
+  'update.reload': 'Reload',
 
   'session.startedAt': 'Round started {time}',
   'empty.title': 'Nothing on the tab yet',
@@ -151,6 +153,8 @@ export const de: Messages = {
   'total.partial': 'mindestens {price}',
   'total.partialHint': 'Einige Getränke haben noch keinen Preis.',
   'settings.currency': 'Währung',
+  'update.ready': 'Neue Version verfügbar',
+  'update.reload': 'Neu laden',
 
   'session.startedAt': 'Runde gestartet {time}',
   'empty.title': 'Noch nichts auf dem Deckel',
@@ -227,6 +231,8 @@ export const fr: Messages = {
   'total.partial': 'au moins {price}',
   'total.partialHint': 'Certaines boissons n’ont pas encore de prix.',
   'settings.currency': 'Devise',
+  'update.ready': 'Une nouvelle version est prête',
+  'update.reload': 'Recharger',
 
   'session.startedAt': 'Tournée commencée {time}',
   'empty.title': "Rien sur l'ardoise",
@@ -303,6 +309,8 @@ export const es: Messages = {
   'total.partial': 'al menos {price}',
   'total.partialHint': 'Algunas bebidas aún no tienen precio.',
   'settings.currency': 'Moneda',
+  'update.ready': 'Hay una versión nueva',
+  'update.reload': 'Recargar',
 
   'session.startedAt': 'Ronda iniciada {time}',
   'empty.title': 'Nada en la cuenta todavía',
@@ -379,6 +387,8 @@ export const it: Messages = {
   'total.partial': 'almeno {price}',
   'total.partialHint': 'Alcune bevande non hanno ancora un prezzo.',
   'settings.currency': 'Valuta',
+  'update.ready': 'È pronta una nuova versione',
+  'update.reload': 'Ricarica',
 
   'session.startedAt': 'Giro iniziato {time}',
   'empty.title': 'Ancora niente sul conto',
@@ -455,6 +465,8 @@ export const nl: Messages = {
   'total.partial': 'minstens {price}',
   'total.partialHint': 'Sommige drankjes hebben nog geen prijs.',
   'settings.currency': 'Valuta',
+  'update.ready': 'Er is een nieuwe versie',
+  'update.reload': 'Herladen',
 
   'session.startedAt': 'Ronde gestart {time}',
   'empty.title': 'Nog niets op de rekening',
@@ -531,6 +543,8 @@ export const pl: Messages = {
   'total.partial': 'co najmniej {price}',
   'total.partialHint': 'Niektóre napoje nie mają jeszcze ceny.',
   'settings.currency': 'Waluta',
+  'update.ready': 'Dostępna jest nowa wersja',
+  'update.reload': 'Odśwież',
 
   'session.startedAt': 'Kolejka rozpoczęta {time}',
   'empty.title': 'Nic jeszcze na rachunku',
@@ -607,6 +621,8 @@ export const pt: Messages = {
   'total.partial': 'pelo menos {price}',
   'total.partialHint': 'Algumas bebidas ainda não têm preço.',
   'settings.currency': 'Moeda',
+  'update.ready': 'Há uma nova versão',
+  'update.reload': 'Recarregar',
 
   'session.startedAt': 'Rodada iniciada {time}',
   'empty.title': 'Nada na conta ainda',
@@ -683,6 +699,8 @@ export const cs: Messages = {
   'total.partial': 'nejméně {price}',
   'total.partialHint': 'Některé nápoje zatím nemají cenu.',
   'settings.currency': 'Měna',
+  'update.ready': 'Je připravena nová verze',
+  'update.reload': 'Načíst znovu',
 
   'session.startedAt': 'Kolo začalo {time}',
   'empty.title': 'Zatím nic na účtu',
@@ -759,6 +777,8 @@ export const da: Messages = {
   'total.partial': 'mindst {price}',
   'total.partialHint': 'Nogle drinks har endnu ingen pris.',
   'settings.currency': 'Valuta',
+  'update.ready': 'En ny version er klar',
+  'update.reload': 'Genindlæs',
 
   'session.startedAt': 'Omgang startet {time}',
   'empty.title': 'Intet på regningen endnu',
@@ -835,6 +855,8 @@ export const sv: Messages = {
   'total.partial': 'minst {price}',
   'total.partialHint': 'Vissa drycker saknar fortfarande pris.',
   'settings.currency': 'Valuta',
+  'update.ready': 'En ny version är klar',
+  'update.reload': 'Ladda om',
 
   'session.startedAt': 'Runda startad {time}',
   'empty.title': 'Inget på notan än',
@@ -911,6 +933,8 @@ export const tr: Messages = {
   'total.partial': 'en az {price}',
   'total.partialHint': 'Bazı içeceklerin henüz fiyatı yok.',
   'settings.currency': 'Para birimi',
+  'update.ready': 'Yeni sürüm hazır',
+  'update.reload': 'Yeniden yükle',
 
   'session.startedAt': 'Tur başladı {time}',
   'empty.title': 'Hesapta henüz bir şey yok',
@@ -987,6 +1011,8 @@ export const ru: Messages = {
   'total.partial': 'не менее {price}',
   'total.partialHint': 'У некоторых напитков ещё нет цены.',
   'settings.currency': 'Валюта',
+  'update.ready': 'Доступна новая версия',
+  'update.reload': 'Обновить',
 
   'session.startedAt': 'Круг начат {time}',
   'empty.title': 'В счёте пока пусто',
@@ -1063,6 +1089,8 @@ export const ja: Messages = {
   'total.partial': '{price} 以上',
   'total.partialHint': '価格未設定の飲み物があります。',
   'settings.currency': '通貨',
+  'update.ready': '新しいバージョンがあります',
+  'update.reload': '再読み込み',
 
   'session.startedAt': 'ラウンド開始 {time}',
   'empty.title': 'まだ何も飲んでいません',
@@ -1138,6 +1166,8 @@ export const zh: Messages = {
   'total.partial': '至少 {price}',
   'total.partialHint': '部分饮品尚未设置价格。',
   'settings.currency': '货币',
+  'update.ready': '有新版本可用',
+  'update.reload': '重新加载',
 
   'session.startedAt': '本轮开始于 {time}',
   'empty.title': '账单上还是空的',
