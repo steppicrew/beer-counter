@@ -54,7 +54,10 @@
     height: vars.$tap-min;
     display: grid;
     place-items: center;
-    font-size: 22px;
+    // SVG icons scale from font-size and centre on their own viewBox, so no
+    // optical nudge is needed here (text glyphs did need one).
+    font-size: 21px;
+    line-height: 0;
     border-radius: vars.$radius-pill;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
