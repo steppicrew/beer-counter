@@ -115,12 +115,23 @@ yarn play:publish --dry-run                  # show exactly what would change
 yarn play:publish --track internal           # upload + roll out
 yarn play:publish --listings-only            # metadata and images only
 yarn play:publish --track production --rollout 0.1
+yarn play:publish --force                    # re-upload even if Play matches
 ```
 
 One command uploads the bundle, all 15 listings, icons, feature graphics,
 screenshots and release notes. Everything happens inside a single Play "edit"
 that is committed only at the end — a failure part-way abandons the edit and
 leaves the live listing untouched.
+
+Anything Play already holds unchanged is skipped: images are compared by the
+sha256 Play reports, listing text by value. A run with nothing to do takes
+seconds and commits nothing.
+
+**While a publish runs, don't save anything in Play Console.** An edit is
+optimistic-locked, so a concurrent change — including a draft the store-listing
+or release editor autosaves as you type — rejects the commit. Having the tab
+open is fine; editing screens are not. The script retries on a fresh edit, but
+a full re-upload costs several minutes.
 
 ### Release notes
 
