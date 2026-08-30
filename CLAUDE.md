@@ -15,7 +15,7 @@ dependencies: use `yarn node …`. Scripts under `/tmp` can't resolve either —
 PnP only applies inside the project, so put throwaway scripts in the repo root
 and delete them after.
 
-Gradle 8.11 / AGP 8.7 **reject JDK 25**, which is the system default.
+Gradle 8.13 / AGP 8.13 **reject JDK 25**, which is the system default.
 `build-android.sh` selects JDK 21 itself.
 
 `magick`, `qrencode` and `zbarimg` are used by the asset scripts. Noto Sans CJK
@@ -41,6 +41,14 @@ privacy/          POLICY.json → public/privacy/ + public/impressum/
 committed, so a clone builds without qrencode.
 
 ## Conventions that bite
+
+**Target SDK.** The app targets API 37, which needs **AGP 8.13 + Gradle 8.13**.
+The SDK installs that platform as `platforms/android-37.0` (the `sdk_full`
+extension naming): older AGP resolves neither `android-37` nor the literal
+`"android-37.0"` and fails configuration outright, which reads as a missing SDK
+but is a plugin limit. This is unrelated to Capacitor, which stays on 7 — a
+Capacitor 8 bump is *not* a prerequisite and drags in a Kotlin stdlib
+duplicate-class clash via Cordova 14.
 
 **Versioning.** `package.json` owns both `version` and `androidVersionCode`;
 Gradle reads them, so web and native cannot drift. `versionCode` only ever
