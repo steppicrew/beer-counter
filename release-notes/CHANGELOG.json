@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.4.4",
+      "date": "2026-08-30",
+      "notes": {
+        "en": "Ready for the next Android version, so the app keeps running smoothly on the newest phones. Counting is unchanged and everything still works offline.",
+        "de": "Für die nächste Android-Version vorbereitet, damit die App auf den neuesten Handys rundläuft. Am Zählen ändert sich nichts, alles funktioniert weiterhin offline.",
+        "fr": "Prête pour la prochaine version d'Android, pour rester fluide sur les téléphones les plus récents. Le comptage ne change pas et tout fonctionne toujours hors ligne.",
+        "es": "Preparada para la próxima versión de Android, para seguir funcionando bien en los móviles más nuevos. El conteo no cambia y todo sigue funcionando sin conexión.",
+        "it": "Pronta per la prossima versione di Android, così resta fluida sui telefoni più recenti. Il conteggio non cambia e tutto funziona ancora offline.",
+        "nl": "Klaar voor de volgende Android-versie, zodat de app soepel blijft werken op de nieuwste telefoons. Tellen verandert niet en alles werkt nog steeds offline.",
+        "pl": "Przygotowana na kolejną wersję Androida, aby działać płynnie na najnowszych telefonach. Liczenie bez zmian, wszystko nadal działa offline.",
+        "pt": "Pronta para a próxima versão do Android, para continuar fluida nos telemóveis mais recentes. A contagem não muda e tudo continua a funcionar offline.",
+        "cs": "Připraveno na další verzi Androidu, aby aplikace běžela hladce i na nejnovějších telefonech. Počítání se nemění a vše stále funguje offline.",
+        "da": "Klar til den næste Android-version, så appen kører glat på de nyeste telefoner. Optællingen er uændret, og alt fungerer stadig offline.",
+        "sv": "Redo för nästa Android-version så att appen fungerar smidigt på de nyaste telefonerna. Räknandet är oförändrat och allt fungerar fortfarande offline.",
+        "tr": "Bir sonraki Android sürümüne hazır, böylece en yeni telefonlarda sorunsuz çalışır. Sayma aynı kalıyor ve her şey hâlâ çevrimdışı çalışıyor.",
+        "ru": "Готово к следующей версии Android, чтобы приложение работало без сбоев на новейших телефонах. Подсчёт не изменился, всё по-прежнему работает офлайн.",
+        "ja": "次期 Android に対応し、最新の端末でも快適に動作します。数え方は変わらず、すべてオフラインのまま使えます。",
+        "zh": "已为下一个 Android 版本做好准备，在最新手机上运行更顺畅。计数方式不变，一切仍可离线使用。"
+      }
+    },
+    {
       "version": "1.4.3",
       "date": "2026-08-30",
       "notes": {
