@@ -20,7 +20,7 @@ if command -v fnm >/dev/null 2>&1; then
   fnm use 22 >/dev/null 2>&1 || true
 fi
 
-# Gradle 8.11 / AGP 8.7 do not support JDK 25+; prefer an installed JDK 21.
+# Gradle 8.13 / AGP 8.13 do not support JDK 25+; prefer an installed JDK 21.
 if [ -z "${JAVA_HOME:-}" ] || ! "$JAVA_HOME/bin/java" -version 2>&1 | grep -qE '"(17|21)'; then
   for candidate in /usr/lib/jvm/java-21-openjdk /usr/lib/jvm/java-17-openjdk; do
     if [ -x "$candidate/bin/java" ]; then
