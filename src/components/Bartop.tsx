@@ -150,19 +150,42 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
     return () => clearTimeout(timer);
   }, [dropping]);
 
+  // Named days only appear once the round has run past midnight, so an
+  // ordinary evening keeps bare hours on the counter.
+  const dayLabel = new Intl.DateTimeFormat(locale, { weekday: 'short' });
+
+  // The hour as the locale writes it: "22" in de, "10 PM" in en-US, "22時" in
+  // ja. Reading getHours() and printing the number was correct only for
+  // 24-hour locales, and the app ships in fifteen.
+  //
+  // `formatToParts` rather than `format`: several locales append a literal
+  // unit ("22 Uhr", "22 h") that is fine in prose but is noise on a tick a few
+  // pixels wide. The day period of a 12-hour locale is kept — "10" alone would
+  // be ambiguous — and so is a suffix that is part of the number's own script,
+  // like Japanese 時, which reads as the unit rather than a word.
+  const hourParts = new Intl.DateTimeFormat(locale, { hour: 'numeric' });
+  const hourLabel = {
+    format: (date: Date) =>
+      hourParts
+        .formatToParts(date)
+        .filter((part) => part.type !== 'literal' || !/\p{L}{2,}/u.test(part.value))
+        .map((part) => part.value)
+        .join('')
+        .trim(),
+  };
+
   // Half a label's width as a share of the counter, so a mark whose digits
-  // would hang off either end can be dropped. A weekday label ("Mon 22") is
-  // much wider than a bare hour, so the widest form in play sets the margin.
+  // would hang off either end can be dropped. The widest form in play sets the
+  // margin: a 12-hour label ("11 PM") is roughly twice a bare "23", and a
+  // weekday prefix ("Mon 11 PM") wider still.
   const counterWidth = Math.max(1, width - BAR_INSET_PX);
-  const labelRoom = (marksAnotherDay(window.start, now) ? 26 : 9) / counterWidth;
+  const twelveHour = hourLabel.format(new Date(now)).length > 2;
+  const halfLabelPx = (twelveHour ? 18 : 9) + (marksAnotherDay(window.start, now) ? 17 : 0);
+  const labelRoom = halfLabelPx / counterWidth;
 
   const nowAt = positionIn(window, now);
   const isEmpty = glasses.length === 0;
   const isWiping = wiping !== null;
-
-  // Named days only appear once the round has run past midnight, so an
-  // ordinary evening keeps bare hours on the counter.
-  const dayLabel = new Intl.DateTimeFormat(locale, { weekday: 'short' });
 
   return (
     <div
@@ -205,8 +228,8 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
                 <span className="bartop__hour-tick" />
                 <span className="bartop__hour-label">
                   {marksAnotherDay(at, now)
-                    ? `${dayLabel.format(new Date(at))} ${new Date(at).getHours()}`
-                    : new Date(at).getHours()}
+                    ? `${dayLabel.format(new Date(at))} ${hourLabel.format(new Date(at))}`
+                    : hourLabel.format(new Date(at))}
                 </span>
               </span>
             ))}

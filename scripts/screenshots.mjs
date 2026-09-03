@@ -50,6 +50,28 @@ const at = (t, ...minutesAgo) => ({
   times: minutesAgo.map((m) => t - m * 60_000).sort((a, b) => a - b),
 });
 
+/**
+ * The clock the scenes are staged at.
+ *
+ * Not `Date.now()`: that stamped every shot with whatever time the release
+ * happened to be built at, so the bartop's hour marks read "12, 14" — a lunch
+ * that nobody is counting rounds at. Pinned to a Friday night instead, which
+ * is when the app is actually used and what the counter should be showing.
+ *
+ * Late enough that a four-hour evening is entirely after dark, and the marks
+ * land on friendly whole hours.
+ *
+ * The page's clock is moved to match (see the init script below): the rows
+ * show "12m ago" against `Date.now()`, so shifting only the stored timestamps
+ * would stage a handsome bartop above a list claiming every drink was eight
+ * hours ago.
+ */
+function stagedNow() {
+  const d = new Date();
+  d.setHours(23, 20, 0, 0);
+  return d.getTime();
+}
+
 const SCENES = [
   {
     file: '01-counting',
@@ -200,6 +222,21 @@ for (const locale of targets) {
         window.androidBridge = { postMessage: () => {} };
       });
 
+      // Move the page's clock to the staged evening, so the relative times in
+      // the rows ("12m ago") agree with the timestamps on the counter. Only
+      // `now` is shifted — real timers still fire normally, so the app runs.
+      await page.addInitScript((fakeNow) => {
+        const Real = Date;
+        const delta = fakeNow - Real.now();
+        const Faked = new Proxy(Real, {
+          construct: (target, args) =>
+            args.length === 0 ? new target(Real.now() + delta) : new target(...args),
+          get: (target, prop) =>
+            prop === 'now' ? () => Real.now() + delta : Reflect.get(target, prop),
+        });
+        window.Date = Faked;
+      }, stagedNow());
+
       // Seed state before the app's first paint so nothing flashes empty.
       await page.addInitScript(
         ({ state, theme, code }) => {
@@ -211,7 +248,7 @@ for (const locale of targets) {
             }),
           );
         },
-        { state: scene.state(Date.now()), theme: scene.theme, code: locale.code },
+        { state: scene.state(stagedNow()), theme: scene.theme, code: locale.code },
       );
 
       await page.goto(BASE, { waitUntil: 'networkidle' });
