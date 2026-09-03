@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.6.0",
+      "date": "2026-09-03",
+      "notes": {
+        "en": "The bar now stays on screen: drinks stand on a counter that time moves through, and glasses that fall off it break. Drag the bar back to revisit the evening.",
+        "de": "Der Tresen bleibt jetzt sichtbar: Getränke stehen auf einem Tresen, durch den die Zeit läuft, und heruntergefallene Gläser zerbrechen. Zieh den Tresen zurück, um den Abend nachzusehen.",
+        "fr": "Le comptoir reste désormais visible : les verres posés dessus avancent avec le temps et se brisent en tombant. Faites glisser le comptoir pour revoir la soirée.",
+        "es": "La barra ahora permanece visible: las copas están sobre una barra por la que pasa el tiempo y se rompen al caer. Arrastra la barra para repasar la noche.",
+        "it": "Il bancone ora resta visibile: i bicchieri poggiano su un bancone attraversato dal tempo e si rompono cadendo. Trascina il bancone per rivedere la serata.",
+        "nl": "De bar blijft nu in beeld: glazen staan op een bar waar de tijd doorheen loopt en breken als ze eraf vallen. Sleep de bar terug om de avond terug te zien.",
+        "pl": "Bar pozostaje teraz widoczny: szklanki stoją na barze, przez który płynie czas, i tłuką się, gdy z niego spadną. Przeciągnij bar, aby wrócić do wieczoru.",
+        "pt": "O balcão fica agora sempre visível: os copos estão num balcão por onde passa o tempo e partem-se ao cair. Arraste o balcão para rever a noite.",
+        "cs": "Pult teď zůstává na obrazovce: sklenice stojí na pultu, kterým plyne čas, a při pádu se rozbijí. Přetažením pultu si připomenete večer.",
+        "da": "Baren bliver nu på skærmen: glassene står på en bar, som tiden bevæger sig igennem, og går i stykker, når de falder ned. Træk baren tilbage for at gense aftenen.",
+        "sv": "Baren stannar nu kvar på skärmen: glasen står på en bar som tiden rör sig genom och går sönder när de faller av. Dra baren bakåt för att se kvällen igen.",
+        "tr": "Bar artık ekranda kalıyor: bardaklar zamanın aktığı bir barın üzerinde durur ve düşünce kırılır. Akşamı yeniden görmek için barı geriye sürükleyin.",
+        "ru": "Барная стойка теперь всегда на экране: бокалы стоят на стойке, сквозь которую течёт время, и разбиваются, падая с неё. Потяните стойку назад, чтобы вспомнить вечер.",
+        "ja": "カウンターが常に表示されるようになりました。グラスは時間が流れるカウンターに並び、落ちると割れます。カウンターを引き戻すと夜を振り返れます。",
+        "zh": "吧台现在始终可见：酒杯立在时间流过的吧台上，掉下去就会摔碎。向后拖动吧台即可回顾整晚。"
+      }
+    },
+    {
       "version": "1.5.1",
       "date": "2026-09-03",
       "notes": {
