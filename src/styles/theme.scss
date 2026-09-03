@@ -16,6 +16,28 @@
   --overlay: rgb(35 24 10 / 45%);
   --shadow: #{vars.$shadow-card};
 
+  // The bartop's counter. Decorative wood, derived from the malt brand tone
+  // rather than from any status colour: a lit top surface, a darker front
+  // face and the lip between them are what make the glasses read as standing
+  // on something rather than floating on a stripe.
+  --wood-top: #{color.adjust(vars.$color-malt, $lightness: 16%)};
+  --wood-top-far: #{color.adjust(vars.$color-malt, $lightness: -2%)};
+  --wood-lip: #{color.adjust(vars.$color-malt, $lightness: 30%)};
+  --wood-face: #{color.adjust(vars.$color-malt, $lightness: -14%)};
+  --wood-face-low: #{color.adjust(vars.$color-malt, $lightness: -30%)};
+  --wood-mark: rgb(255 246 224 / 34%);
+  // Hour labels sit on the dark front face, so they need real contrast — the
+  // tick marks can stay faint, but the numbers have to be readable.
+  --wood-label: rgb(255 246 224 / 72%);
+  --glass-foam: #{vars.$color-foam};
+  // What shows through an emptied glass: the counter behind it, so a drained
+  // drink reads as clear glass rather than as a differently-coloured drink.
+  --glass-drained: #{color.adjust(vars.$color-malt, $lightness: -6%)};
+  // The barkeeper's rag. Linen rather than any status colour.
+  --cloth-lit: #fbf3e2;
+  --cloth-mid: #e2d4b4;
+  --cloth-shade: #b9a888;
+
   color-scheme: light;
 }
 
@@ -31,6 +53,20 @@
   --danger: #{color.adjust(vars.$color-danger, $lightness: 8%)};
   --overlay: rgb(0 0 0 / 62%);
   --shadow: #{vars.$shadow-lifted};
+
+  // Against a near-black page the same wood reads as lit from within, so the
+  // whole counter drops a few steps and the marks brighten to compensate.
+  --wood-top: #{color.adjust(vars.$color-malt, $lightness: 8%)};
+  --wood-top-far: #{color.adjust(vars.$color-malt, $lightness: -8%)};
+  --wood-lip: #{color.adjust(vars.$color-malt, $lightness: 22%)};
+  --wood-face: #{color.adjust(vars.$color-malt, $lightness: -20%)};
+  --wood-face-low: #{color.adjust(vars.$color-malt, $lightness: -34%)};
+  --wood-mark: rgb(255 246 224 / 26%);
+  --wood-label: rgb(255 246 224 / 66%);
+  --glass-drained: #{color.adjust(vars.$color-malt, $lightness: -16%)};
+  --cloth-lit: #e8dcc2;
+  --cloth-mid: #c9b894;
+  --cloth-shade: #93826a;
 
   color-scheme: dark;
 }

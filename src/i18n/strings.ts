@@ -103,6 +103,9 @@ export const en = {
   'session.startedAt': 'Round started {time}',
   'empty.title': 'Nothing on the tab yet',
   'empty.body': 'Tap a drink below to start counting.',
+  'bartop.empty': 'The bar is empty.',
+  'bartop.ask': 'What can I get you?',
+  'bartop.summary': '{count} glasses on the bar.',
 } as const;
 
 export type MessageKey = keyof typeof en;
@@ -209,6 +212,9 @@ export const de: Messages = {
   'session.startedAt': 'Runde gestartet {time}',
   'empty.title': 'Noch nichts auf dem Deckel',
   'empty.body': 'Tippe unten auf ein Getränk, um zu zählen.',
+  'bartop.empty': 'Der Tresen ist leer.',
+  'bartop.ask': 'Was darf es sein?',
+  'bartop.summary': '{count} Gläser auf dem Tresen.',
 };
 
 export const fr: Messages = {
@@ -312,6 +318,9 @@ export const fr: Messages = {
   'session.startedAt': 'Tournée commencée {time}',
   'empty.title': "Rien sur l'ardoise",
   'empty.body': 'Touchez une boisson ci-dessous pour commencer.',
+  'bartop.empty': 'Le comptoir est vide.',
+  'bartop.ask': 'Qu\'est-ce que ce sera ?',
+  'bartop.summary': '{count} verres sur le comptoir.',
 };
 
 export const es: Messages = {
@@ -415,6 +424,9 @@ export const es: Messages = {
   'session.startedAt': 'Ronda iniciada {time}',
   'empty.title': 'Nada en la cuenta todavía',
   'empty.body': 'Toca una bebida para empezar a contar.',
+  'bartop.empty': 'La barra está vacía.',
+  'bartop.ask': '¿Qué te pongo?',
+  'bartop.summary': '{count} vasos en la barra.',
 };
 
 export const it: Messages = {
@@ -518,6 +530,9 @@ export const it: Messages = {
   'session.startedAt': 'Giro iniziato {time}',
   'empty.title': 'Ancora niente sul conto',
   'empty.body': 'Tocca una bevanda per iniziare a contare.',
+  'bartop.empty': 'Il bancone è vuoto.',
+  'bartop.ask': 'Cosa ti porto?',
+  'bartop.summary': '{count} bicchieri sul bancone.',
 };
 
 export const nl: Messages = {
@@ -621,6 +636,9 @@ export const nl: Messages = {
   'session.startedAt': 'Ronde gestart {time}',
   'empty.title': 'Nog niets op de rekening',
   'empty.body': 'Tik hieronder op een drankje om te tellen.',
+  'bartop.empty': 'De bar is leeg.',
+  'bartop.ask': 'Wat mag het zijn?',
+  'bartop.summary': '{count} glazen op de bar.',
 };
 
 export const pl: Messages = {
@@ -724,6 +742,9 @@ export const pl: Messages = {
   'session.startedAt': 'Kolejka rozpoczęta {time}',
   'empty.title': 'Nic jeszcze na rachunku',
   'empty.body': 'Dotknij napoju poniżej, aby zacząć liczyć.',
+  'bartop.empty': 'Bar jest pusty.',
+  'bartop.ask': 'Czego się napijesz?',
+  'bartop.summary': 'Szklanki na barze: {count}.',
 };
 
 export const pt: Messages = {
@@ -827,6 +848,9 @@ export const pt: Messages = {
   'session.startedAt': 'Rodada iniciada {time}',
   'empty.title': 'Nada na conta ainda',
   'empty.body': 'Toque numa bebida abaixo para começar a contar.',
+  'bartop.empty': 'O balcão está vazio.',
+  'bartop.ask': 'O que vai ser?',
+  'bartop.summary': '{count} copos no balcão.',
 };
 
 export const cs: Messages = {
@@ -930,6 +954,9 @@ export const cs: Messages = {
   'session.startedAt': 'Kolo začalo {time}',
   'empty.title': 'Zatím nic na účtu',
   'empty.body': 'Klepněte na nápoj níže a začněte počítat.',
+  'bartop.empty': 'Barový pult je prázdný.',
+  'bartop.ask': 'Co to bude?',
+  'bartop.summary': 'Sklenic na pultu: {count}.',
 };
 
 export const da: Messages = {
@@ -1033,6 +1060,9 @@ export const da: Messages = {
   'session.startedAt': 'Omgang startet {time}',
   'empty.title': 'Intet på regningen endnu',
   'empty.body': 'Tryk på en drink nedenfor for at tælle.',
+  'bartop.empty': 'Baren er tom.',
+  'bartop.ask': 'Hvad skulle det være?',
+  'bartop.summary': '{count} glas på baren.',
 };
 
 export const sv: Messages = {
@@ -1136,6 +1166,9 @@ export const sv: Messages = {
   'session.startedAt': 'Runda startad {time}',
   'empty.title': 'Inget på notan än',
   'empty.body': 'Tryck på en dryck nedan för att börja räkna.',
+  'bartop.empty': 'Baren är tom.',
+  'bartop.ask': 'Vad får det lov att vara?',
+  'bartop.summary': '{count} glas på baren.',
 };
 
 export const tr: Messages = {
@@ -1239,6 +1272,9 @@ export const tr: Messages = {
   'session.startedAt': 'Tur başladı {time}',
   'empty.title': 'Hesapta henüz bir şey yok',
   'empty.body': 'Saymaya başlamak için aşağıdan bir içeceğe dokun.',
+  'bartop.empty': 'Bar boş.',
+  'bartop.ask': 'Ne alırsınız?',
+  'bartop.summary': 'Barda {count} bardak var.',
 };
 
 export const ru: Messages = {
@@ -1342,6 +1378,9 @@ export const ru: Messages = {
   'session.startedAt': 'Круг начат {time}',
   'empty.title': 'В счёте пока пусто',
   'empty.body': 'Нажмите на напиток ниже, чтобы начать счёт.',
+  'bartop.empty': 'Барная стойка пуста.',
+  'bartop.ask': 'Что будете пить?',
+  'bartop.summary': 'Стаканов на стойке: {count}.',
 };
 
 export const ja: Messages = {
@@ -1445,6 +1484,9 @@ export const ja: Messages = {
   'session.startedAt': 'ラウンド開始 {time}',
   'empty.title': 'まだ何も飲んでいません',
   'empty.body': '下の飲み物をタップして記録を始めましょう。',
+  'bartop.empty': 'カウンターは空です。',
+  'bartop.ask': '何にしましょう？',
+  'bartop.summary': 'カウンターにグラス {count} 杯。',
 };
 
 export const zh: Messages = {
@@ -1547,6 +1589,9 @@ export const zh: Messages = {
   'session.startedAt': '本轮开始于 {time}',
   'empty.title': '账单上还是空的',
   'empty.body': '点击下方饮品开始计数。',
+  'bartop.empty': '吧台是空的。',
+  'bartop.ask': '想喝点什么？',
+  'bartop.summary': '吧台上有 {count} 杯。',
 };
 
 export const CATALOGUES: Record<string, Messages> = {

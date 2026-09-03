@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { BeverageRow } from './components/BeverageRow';
+import { Bartop } from './components/Bartop';
 import { UiIcon } from './components/UiIcon';
 import { BeverageSheet } from './components/BeverageSheet';
 import { SettingsSheet } from './components/SettingsSheet';
@@ -13,6 +14,7 @@ import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
 import { useInstallPrompt } from './lib/useInstallPrompt';
 import { useViewportInset } from './lib/useViewportInset';
+import { useBarClock } from './lib/useBarClock';
 import { formatMoney, defaultCurrencyFor } from './lib/money';
 import './App.scss';
 
@@ -47,6 +49,9 @@ export function App() {
 
   // Keeps sheets clear of the on-screen keyboard.
   useViewportInset();
+
+  // Drives the bartop's "now" marker.
+  const now = useBarClock();
 
   // Never reload out from under someone mid-round — offer it instead.
   const update = useAppUpdate();
@@ -157,6 +162,17 @@ export function App() {
             ))}
           </ul>
         </main>
+
+        {/* Docked under the list: the round's shape stays visible while the
+            list above it scrolls. It only gets out of the way for the sheets
+            that have a text field — the reset confirmation deliberately keeps
+            the counter on screen, since it is what you are about to clear. */}
+        <Bartop
+          beverages={beverages}
+          tallies={tallies}
+          now={now}
+          hidden={dialog.kind === 'add' || dialog.kind === 'edit' || dialog.kind === 'settings'}
+        />
 
         {install.bannerVisible && (
           <div className="app__install">

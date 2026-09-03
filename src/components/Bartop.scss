@@ -1,0 +1,312 @@
+@use 'sass:math';
+@use '../styles/vars' as vars;
+
+// Counter geometry. The top surface and the front face are separate bands:
+// that split, plus the lip between them, is what gives the bar its depth.
+$counter-top: 11px;
+$counter-face: 15px;
+$counter-height: $counter-top + $counter-face;
+$glass-size: 27px;
+
+.bartop {
+  position: relative;
+  flex: none;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+
+  // The keyboard takes the bottom of the screen and an editing sheet sits
+  // right above it; a counter competing for that space helps nobody.
+  // useViewportInset already publishes the keyboard's height on <html>, so
+  // hiding the bar is a style rule rather than another resize listener.
+  &--hidden {
+    display: none;
+  }
+
+  &__scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    // A visible scrollbar under the counter would read as part of the bar.
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__track {
+    position: relative;
+    // Glasses stand on the counter, so the track has to be tall enough for
+    // both. Not a fixed height on a reusable card — this element *is* the
+    // counter, and its height is the drawing.
+    height: $counter-height + $glass-size + 3px;
+    min-width: 100%;
+  }
+
+  // The counter is built from discrete layers rather than one gradient: the
+  // top surface and the front face have to read as two planes meeting at an
+  // edge, and a single ramp through both just looks like a painted stripe.
+
+  // The front face, in shadow — the plane you would see from a bar stool.
+  &__counter {
+    position: absolute;
+    inset: auto 0 0;
+    height: $counter-face;
+    background: linear-gradient(180deg, var(--wood-face) 0, var(--wood-face-low) 100%);
+    // The face turns away from the light towards the floor.
+    box-shadow: inset 0 -3px 5px rgb(0 0 0 / 35%);
+  }
+
+  // The top surface, lit and receding towards the back of the bar.
+  &__surface {
+    position: absolute;
+    inset: auto 0 $counter-face;
+    height: $counter-top;
+    // Light falls from behind the bar, so the far edge is brightest and the
+    // near edge — where the glasses stand — is in the counter's own shadow.
+    // A single flat tone here is what made the whole thing read as 2D.
+    background: linear-gradient(
+      180deg,
+      var(--wood-top) 0,
+      var(--wood-top-far) 62%,
+      var(--wood-face) 100%
+    );
+  }
+
+  // The lit edge where the two planes meet. Without it they read as two flat
+  // bands of colour rather than as a surface with a thickness.
+  &__lip {
+    position: absolute;
+    inset: auto 0 $counter-face;
+    height: 3px;
+    background: linear-gradient(180deg, var(--wood-lip) 0, var(--wood-top-far) 100%);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 45%);
+  }
+
+  // Grain belongs to the top surface only. Running it down the front face as
+  // well flattened the whole counter, because the same texture on both planes
+  // removes the cue that they are at different angles.
+  &__grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.2;
+    background: repeating-linear-gradient(93deg, transparent 0 9px, rgb(0 0 0 / 55%) 9px 10px);
+  }
+
+  // The polish on the wood: a bright band at the back edge fading forward, so
+  // the surface is lit from behind the bar and visibly recedes. Without it the
+  // top is one flat colour and the whole counter reads as a painted stripe.
+  &__sheen {
+    position: absolute;
+    inset: auto 0 $counter-face;
+    height: $counter-top;
+    background: linear-gradient(
+      180deg,
+      rgb(255 246 224 / 26%) 0,
+      rgb(255 246 224 / 6%) 45%,
+      rgb(0 0 0 / 18%) 100%
+    );
+  }
+
+  &__hour {
+    position: absolute;
+    inset: auto auto 0;
+  }
+
+  &__hour-tick {
+    position: absolute;
+    inset: auto auto $counter-face;
+    width: 1px;
+    height: $counter-top;
+    background: var(--wood-mark);
+  }
+
+  // Centred in the front face rather than offset from its bottom: the face is
+  // only a couple of pixels taller than the line box, so any nudge pushes the
+  // digits up onto the wood.
+  &__hour-label {
+    position: absolute;
+    inset: auto auto 0;
+    transform: translateX(-50%);
+    font-size: 10px;
+    line-height: $counter-face;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--wood-label);
+    // The face is a gradient, so the number crosses several tones; a shadow
+    // keeps it legible over all of them.
+    text-shadow: 0 1px 2px rgb(0 0 0 / 60%);
+  }
+
+  // Where the evening has got to. Early in a round most of the counter is
+  // still ahead of this, which is the point of anchoring left.
+  &__now {
+    position: absolute;
+    inset: auto auto $counter-face;
+    width: 2px;
+    height: $counter-top;
+    background: var(--accent);
+    opacity: 0.85;
+  }
+
+  // Shares the track's coordinate space exactly, so a glass sits centred over
+  // the same instant as the hour mark and the "now" line beneath it. Insetting
+  // this layer to stop edge glasses clipping shifted every glass half its own
+  // width to the right of its timestamp; the track's lead-in keeps the opening
+  // glass clear of the edge instead.
+  &__glasses {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__glass,
+  &__keeper {
+    position: absolute;
+    inset: auto auto $counter-height - 1px;
+    transform: translateX(-50%);
+    color: var(--accent);
+    // Two shadows: a tight dark one where the glass meets the wood, and a
+    // softer one further down. A single blur reads as a sticker with a
+    // drop shadow; the contact shadow is what puts it *on* the counter.
+    filter: drop-shadow(0 1px 0 rgb(0 0 0 / 55%)) drop-shadow(0 3px 4px rgb(0 0 0 / 45%));
+  }
+
+  &__glass-figure {
+    display: block;
+    font-size: $glass-size;
+  }
+
+  &__keeper {
+    // Centred in the visible window rather than at a timestamp: with nothing
+    // counted there is no timestamp to stand at.
+    left: 50%;
+  }
+
+  // Sits above his head, so an empty counter says what it is for rather than
+  // just showing a figure standing there.
+  &__ask {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: vars.$space-xs;
+    padding: 3px vars.$space-sm;
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: nowrap;
+    color: var(--text-muted);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: vars.$radius-pill;
+  }
+
+  &__keeper-figure {
+    display: block;
+    font-size: $glass-size + 9px;
+    opacity: 0.9;
+  }
+
+  // Room for the speech bubble above his head.
+  &--empty &__track {
+    height: $counter-height + $glass-size + 34px;
+  }
+
+  // --- the wipe -----------------------------------------------------------
+  // On reset the cloth crosses the counter and the glasses go with it. This
+  // is the one animation in the app that reports a real state change rather
+  // than decorating an idle screen, which is why it exists at all.
+
+  &__cloth {
+    position: absolute;
+    // Stands on the counter exactly where the glasses do, rather than lying
+    // flat across the surface's depth. Drawn on the surface plane it read as a
+    // floor tile sliding past upright glasses — two different projections in
+    // one picture. Sitting on the same line, bunched and slightly taller than
+    // it is wide, it reads as a rag being dragged along the bar.
+    inset: auto auto $counter-height - 2px;
+    z-index: 1;
+    width: 30px;
+    height: 17px;
+    border-radius: 7px 7px 5px 5px;
+    background:
+      linear-gradient(170deg, var(--cloth-lit) 0, var(--cloth-mid) 46%, var(--cloth-shade) 100%);
+    box-shadow:
+      0 2px 3px rgb(0 0 0 / 50%),
+      inset 0 -3px 4px rgb(0 0 0 / 18%);
+    transform: translateX(-50%) rotate(-6deg);
+    // Linear, deliberately: Bartop.tsx works out when the cloth arrives at each
+    // glass by mapping the glass's position into this travel. An eased curve
+    // makes the cloth cover most of the counter in the first third of the
+    // sweep, and the glasses then tip over nowhere near it.
+    animation: bartop-cloth vars.$wipe-duration linear forwards;
+  }
+
+  // Each glass is swept off as the cloth arrives at it: picked up, tipped, and
+  // gone. The stagger comes from a per-glass animation-delay set inline from
+  // the glass's own position, so the timing follows the cloth exactly.
+  &--wiping &__glass {
+    // `both`, not `backwards`: backwards holds the *start* state through the
+    // delay but releases the end state when the animation finishes, so every
+    // glass snapped back to full opacity the moment it had been swept and then
+    // vanished again when the wipe timer expired.
+    animation: bartop-swept 260ms vars.$ease both;
+  }
+
+  // Announced to screen readers; the counter itself is decoration on top of
+  // the totals and rows, which already carry the numbers.
+  &__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+// Starts and ends off the counter so it enters and leaves rather than popping
+// into existence mid-bar. Bartop.tsx maps a glass's position into this same
+// range to work out when the cloth arrives at it — CLOTH_FROM / CLOTH_TO there
+// are these two numbers.
+@keyframes bartop-cloth {
+  from {
+    left: -6%;
+  }
+
+  to {
+    left: 106%;
+  }
+}
+
+// The cloth travels left to right and takes the glasses with it, so what stays
+// visible is the stretch of counter *ahead* of it: the clip's left edge follows
+// the cloth, clearing each glass as it is reached and leaving the untouched
+// right-hand side standing until its turn.
+@keyframes bartop-swept {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
+
+  // Lifted off the counter as the cloth catches it, rather than dissolving in
+  // place: a glass that fades where it stands does not read as being cleared
+  // away by anything.
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-9px) rotate(-14deg);
+  }
+}
+
+// The wipe is feedback, not decoration, so without motion the glasses still
+// have to go — they just go at once instead of being swept.
+@media (prefers-reduced-motion: reduce) {
+  .bartop__cloth {
+    display: none;
+  }
+
+  .bartop--wiping .bartop__glass {
+    animation: none;
+    opacity: 0;
+  }
+}
