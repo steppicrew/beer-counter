@@ -14,41 +14,80 @@ export interface BarGlass {
   isCurrent: boolean;
 }
 
+const HOUR_MS = 3_600_000;
+const MINUTE_MS = 60_000;
+
+/** Width given to one hour of counter. The stage is however many fit. */
+export const PX_PER_HOUR = 74;
+
+/** Marks every two hours, always — the stage is a fixed width, so a fixed
+ *  step keeps their spacing constant instead of rescaling under the glasses. */
+export const MARK_STEP_MS = 2 * HOUR_MS;
+
 /**
- * The stretch of time the counter draws.
+ * Counter kept clear at the left, in ms.
  *
- * `start` is pinned to the first drink of the round rather than to `now`, so
- * the evening fills the bar left to right and the glasses never slide around
- * under a tap. Before anything is counted there is no first drink to pin to,
- * and the window simply starts now.
+ * A glass is centred on its timestamp and is ~27px wide, which at 74px/hour is
+ * a shade over 11 minutes. A glass whose centre is inside this margin is
+ * already hanging over the edge, so this is also where it falls.
+ */
+export const BRINK_MS = 13 * MINUTE_MS;
+
+/**
+ * The stretch of time the counter currently shows.
+ *
+ * Unlike the scrolling strip this replaced, the stage is a fixed width and
+ * time moves through it: the scale never changes, so a glass never resizes or
+ * respaces under a drag.
+ *
+ * The round still *starts* at the left, exactly as before — the first drink
+ * stands just inside the left brink and the evening fills the counter
+ * rightward. The window only begins to travel once `now` would fall off the
+ * right end: from then on the bar cannot show both the first drink and the
+ * present, and the present wins. The run slides left, and what crosses the
+ * left brink goes over the edge.
  */
 export interface BarWindow {
   start: number;
   end: number;
 }
 
-/** Hours of bar shown before it has to scroll. */
-export const WINDOW_HOURS = 4;
-
-const HOUR_MS = 3_600_000;
-export const WINDOW_MS = WINDOW_HOURS * HOUR_MS;
-
 /**
- * Counter drawn to the left of the first drink, so it has somewhere to stand.
+ * The window at rest, before any scrolling back.
  *
- * A glass is centred on its timestamp and is about 27px wide, which at the
- * counter's scale of 74px per hour is a shade over 11 minutes — so anything
- * less than that leaves the opening glass hanging over the left edge.
+ * `offsetMs` drags it further into the past; zero is wherever the bar sits on
+ * its own, which is *not* necessarily the present — early in a round it is
+ * still anchored to the first drink, with the future spread out to the right.
  */
-const LEAD_IN_MS = 14 * 60_000;
+export function restingWindow(glasses: BarGlass[], now: number, spanMs: number): BarWindow {
+  const first = glasses[0]?.at;
+  // Nothing counted yet: the counter opens at the present, ready to be filled.
+  if (first === undefined) return { start: now - BRINK_MS, end: now - BRINK_MS + spanMs };
+
+  // Anchored to the first drink for as long as the present still fits on the
+  // stage. `- BRINK_MS` puts that drink just inside the left edge rather than
+  // hanging over it.
+  const anchored = first - BRINK_MS;
+  if (now <= anchored + spanMs - BRINK_MS) return { start: anchored, end: anchored + spanMs };
+
+  // The evening has outrun the counter, so the right edge takes over and holds
+  // the present, keeping it the same distance inside the edge that the first
+  // drink had.
+  const end = now + BRINK_MS;
+  return { start: end - spanMs, end };
+}
+
+/** Slides a window further into the past by `offsetMs`. */
+export function scrolledBy(window: BarWindow, offsetMs: number): BarWindow {
+  return { start: window.start - offsetMs, end: window.end - offsetMs };
+}
 
 /**
  * How much is left in a glass.
  *
  * Only the newest drink of each kind can still have anything in it — you
  * nurse one beer at a time, and ordering the next one means the last is
- * finished. Every earlier glass of that kind is empty regardless of age, so a
- * round of five beers is four empties and one you are still working on.
+ * finished. Every earlier glass of that kind is empty regardless of age.
  *
  * The current glass then drains with age, on the app's existing sense of time:
  * an hour is where `useRelativeTime` stops counting in minutes, and by then
@@ -56,7 +95,7 @@ const LEAD_IN_MS = 14 * 60_000;
  */
 export type GlassFill = 'full' | 'half' | 'empty';
 
-const HALF_AFTER_MS = 20 * 60_000;
+const HALF_AFTER_MS = 20 * MINUTE_MS;
 const EMPTY_AFTER_MS = HOUR_MS;
 
 export function glassFill(at: number, now: number, isCurrent: boolean): GlassFill {
@@ -93,87 +132,92 @@ export function collectGlasses(beverages: Beverage[], tallies: Record<string, Ta
 }
 
 /**
- * The window to draw for a given round.
+ * How far back the stage may be dragged, in ms behind where it rests.
  *
- * It always spans at least `WINDOW_HOURS` — early in the evening that means
- * most of the counter is still empty future, which is the point: the first
- * beer stands at the left and the night fills the bar as it goes. Once the
- * round outruns four hours the window keeps its left edge and grows rightward,
- * so the track scrolls instead of rescaling.
+ * Both ends are pinned to something real rather than to open time, so the bar
+ * can never be dragged into a void:
+ *
+ * - `0` is the resting view — the newest end of the round.
+ * - `max` puts the *first* drink of the round back at the left brink, which is
+ *   the oldest arrangement that still shows it standing.
+ *
+ * While the round still fits on the counter the two coincide and there is
+ * nothing to scroll: everything is already on screen.
  */
-export function barWindow(glasses: BarGlass[], now: number): BarWindow {
-  // A few minutes of counter before the first drink. Without it the opening
-  // glass sits exactly on the left edge and is drawn half outside the track —
-  // and a first round is several taps in quick succession, so they pile up
-  // there together.
-  //
-  // The empty counter uses the same offset, so the "now" marker already stands
-  // where the first drink will land. Anchoring an empty bar at `now` itself put
-  // the marker hard against the right edge, and the first tap then re-anchored
-  // the window and threw it back to the left.
-  const first = (glasses[0]?.at ?? now) - LEAD_IN_MS;
-  // A clock correction (or an imported round) can leave a tap in the future;
-  // the window must still contain `now` or the marker falls off the end.
-  const last = Math.max(glasses.at(-1)?.at ?? now, now);
+export interface ScrollBounds {
+  min: number;
+  max: number;
+}
 
-  return { start: first, end: Math.max(first + WINDOW_MS, last) };
+export function scrollBounds(resting: BarWindow, glasses: BarGlass[]): ScrollBounds {
+  const first = glasses[0]?.at;
+  if (first === undefined) return { min: 0, max: 0 };
+
+  // How far the resting window has already travelled past the opening drink.
+  const anchored = first - BRINK_MS;
+  return { min: 0, max: Math.max(0, resting.start - anchored) };
 }
 
 /**
  * Position of an instant within the window, 0–1 from the left edge.
  *
- * Clamped because the clock and the taps are not read at the same moment: the
- * bar's `now` is sampled once a minute while a tap stamps `Date.now()`, so the
- * first glass of a round is usually a few milliseconds *after* the cached now.
- * Left unclamped that put the marker at a fractionally negative offset, far
- * enough outside the track to clip it.
+ * Deliberately *not* clamped: the stage is a fixed window onto a longer
+ * evening, so a glass outside it is genuinely off-stage and the caller decides
+ * whether that means "fallen", "not yet poured" or simply "don't draw it".
+ * Clamping would stack every past glass on the left edge instead.
  */
 export function positionIn(window: BarWindow, at: number): number {
   const span = window.end - window.start;
   if (span <= 0) return 0;
-  return Math.min(1, Math.max(0, (at - window.start) / span));
+  return (at - window.start) / span;
 }
 
 /**
- * Whole-hour marks inside the window, as epoch ms.
+ * Two-hourly marks inside the window, as epoch ms.
  *
- * The first mark is the hour boundary at or after `start`, so the labels read
- * as clock times ("21") rather than as offsets from an arbitrary first sip.
- *
- * The step widens with the span. A tab left open for days is a real state —
- * counts survive until the next reset — and marking every hour of it would
- * both crowd the counter and, when this was capped at a fixed number of marks,
- * simply stop drawing them partway along the bar.
+ * Only the marks actually on stage are returned. The old adaptive step existed
+ * because a strip that grew for days drew marks until it hit a cap and then
+ * silently stopped; a fixed-width stage has no such span to cover, so the step
+ * can stay constant and the count stays small no matter how old the round is.
  */
 export function hourMarks(window: BarWindow): number[] {
-  const span = window.end - window.start;
-  const step = markStep(span);
   const marks: number[] = [];
 
-  // Snap to a boundary of the step in *local* time, so a 3-hourly run lands on
-  // 00:00, 03:00, 06:00 on the clock. Aligning on the epoch instead would drift
-  // in any zone that is not a whole number of hours from UTC.
-  const stepHours = step / HOUR_MS;
+  // Snap to a 2-hour boundary in *local* time, so marks land on even hours of
+  // the clock. Aligning on the epoch would drift in any zone that is not a
+  // whole number of hours from UTC.
   const cursor = new Date(window.start);
   cursor.setMinutes(0, 0, 0);
-  if (stepHours > 1) {
-    cursor.setHours(Math.floor(cursor.getHours() / stepHours) * stepHours);
-  }
-  let at = cursor.getTime();
-  while (at < window.start) at += step;
+  cursor.setHours(Math.floor(cursor.getHours() / 2) * 2);
 
+  let at = cursor.getTime();
+  while (at < window.start) at += MARK_STEP_MS;
+
+  // A DST jump makes the local step briefly 1h or 3h; recomputing from the
+  // Date rather than adding a constant keeps the marks on even local hours.
   while (at <= window.end) {
     marks.push(at);
-    at += step;
+    const next = new Date(at);
+    next.setHours(next.getHours() + 2, 0, 0, 0);
+    at = next.getTime();
   }
 
   return marks;
 }
 
-/** Hours between marks, chosen so a span never draws more than ~14 of them. */
-function markStep(span: number): number {
-  for (const hours of [1, 2, 3, 6, 12, 24, 48]) {
-    if (span / (hours * HOUR_MS) <= 14) return hours * HOUR_MS;
-  }
-  return 7 * 24 * HOUR_MS;
+/**
+ * Whether a mark needs a date rather than just an hour.
+ *
+ * Scrolled back far enough, "22" alone is ambiguous — it could be tonight or
+ * three nights ago. The day only gets named when the mark is not on the same
+ * calendar day as the round's present.
+ */
+export function marksAnotherDay(at: number, now: number): boolean {
+  const a = new Date(at);
+  const b = new Date(now);
+  return (
+    a.getDate() !== b.getDate() ||
+    a.getMonth() !== b.getMonth() ||
+    a.getFullYear() !== b.getFullYear()
+  );
 }

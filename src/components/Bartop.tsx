@@ -1,17 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { GlassIcon } from './GlassIcon';
 import { Barkeeper } from './Barkeeper';
+import { ShardPile } from './ShardPile';
 import { useI18n } from '../i18n';
 import {
-  barWindow,
   collectGlasses,
   glassFill,
   hourMarks,
+  marksAnotherDay,
   positionIn,
-  WINDOW_HOURS,
+  PX_PER_HOUR,
+  restingWindow,
+  scrolledBy,
+  scrollBounds,
 } from '../lib/bartop';
-import type { BarGlass } from '../lib/bartop';
+import type { BarGlass, BarWindow } from '../lib/bartop';
+import { hasFallen } from '../lib/shards';
+import { useBarScroll } from '../lib/useBarScroll';
 import type { Beverage, Tally } from '../lib/types';
 import './Bartop.scss';
 
@@ -28,43 +34,56 @@ interface Props {
   hidden: boolean;
 }
 
-/** Width given to one hour of bar. Four of these is the visible window. */
-const PX_PER_HOUR = 74;
-
 /** How long the cloth takes to cross the counter, in ms. Matches the CSS. */
 const WIPE_MS = 900;
 
 /**
  * The cloth starts just off the left edge and ends just past the right, so it
- * covers more than the track's own width — see the `bartop-cloth` keyframes.
- * A glass is therefore reached partway into that longer journey, not at its
- * own position along the track, and using the raw position tips the glasses
- * over before the cloth gets to them.
+ * covers more than the stage's own width — see the `bartop-cloth` keyframes.
  */
 const CLOTH_FROM = -0.06;
 const CLOTH_TO = 1.06;
 
-/** When the cloth arrives at a point on the track, in ms from the start. */
+/** When the cloth arrives at a point on the counter, in ms from the start. */
 function clothReaches(position: number): number {
   return ((position - CLOTH_FROM) / (CLOTH_TO - CLOTH_FROM)) * WIPE_MS;
 }
 
+/** Until the stage has been measured, assume a typical phone's width. */
+const ASSUMED_WIDTH = 360;
+
+const HOUR_MS = 3_600_000;
+
 export function Bartop({ beverages, tallies, now, hidden }: Props) {
-  const { t } = useI18n();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const pinnedRef = useRef(false);
+  const { t, locale } = useI18n();
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  // The stage is as wide as the screen gives it, and that width *is* the
+  // window: no fixed number of hours any more, so a tablet simply sees more of
+  // the evening at once rather than the same hours stretched wider.
+  const [width, setWidth] = useState(ASSUMED_WIDTH);
+
+  useLayoutEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const next = entry?.contentRect.width ?? 0;
+      if (next > 0) setWidth(next);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const spanMs = (width / PX_PER_HOUR) * HOUR_MS;
 
   const live = collectGlasses(beverages, tallies);
 
   // A reset empties the store outright, so by the time this renders the
   // glasses are already gone and there is nothing left to wipe away. Holding
-  // the last non-empty round for the length of the animation is what gives
-  // the cloth something to clear.
-  // Adjusting state from a prop change, rather than from an effect: the round
-  // that was on the counter last render is state, so React re-renders straight
-  // away and the bar never paints an empty frame before the cloth appears. A
-  // ref would be read and written during render, which is exactly the pattern
-  // that breaks under concurrent rendering.
+  // the last non-empty round for the length of the animation is what gives the
+  // cloth something to clear. Adjusting state from a prop change rather than
+  // from an effect: React re-renders straight away and the bar never paints an
+  // empty frame before the cloth appears.
   const [wiping, setWiping] = useState<BarGlass[] | null>(null);
   const [previous, setPrevious] = useState<BarGlass[]>(live);
 
@@ -73,8 +92,6 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
     setPrevious(live);
   }
 
-  // Owned by the wipe itself, so the once-a-minute clock re-rendering the bar
-  // does not cancel the pending timer and strand the cloth mid-counter.
   useEffect(() => {
     if (wiping === null) return;
     const timer = setTimeout(() => setWiping(null), WIPE_MS);
@@ -82,26 +99,27 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
   }, [wiping]);
 
   const glasses = wiping ?? live;
-  const window = barWindow(glasses, now);
-  const spanHours = (window.end - window.start) / 3_600_000;
-  const trackWidth = Math.max(spanHours, WINDOW_HOURS) * PX_PER_HOUR;
 
-  // The round starts pinned to its first drink, so the counter opens showing
-  // hours that have not happened yet. Once the evening outruns the window the
-  // track is wider than the viewport, and reopening the app should land on the
-  // present rather than on a beer from four hours ago — but only once, or
-  // every re-render would yank the bar back while it is being dragged.
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || pinnedRef.current) return;
-    if (el.scrollWidth <= el.clientWidth) return;
+  // Where the bar sits when left alone: anchored to the opening drink until
+  // the present would fall off the right end, and travelling from then on.
+  const resting = restingWindow(glasses, now, spanMs);
+  const bounds = scrollBounds(resting, glasses);
+  const scroll = useBarScroll(bounds);
+  const window: BarWindow = scrolledBy(resting, scroll.offset);
 
-    el.scrollLeft = el.scrollWidth - el.clientWidth;
-    pinnedRef.current = true;
-  }, [trackWidth]);
+  // Everything to the left of the brink has gone over the edge. Counted rather
+  // than filtered per-glass at draw time, since the pile only needs the total
+  // and the standing glasses are the ones that survive the same test.
+  const standing = glasses.filter((glass) => !hasFallen(glass, window));
+  const fallen = glasses.length - standing.length;
 
+  const nowAt = positionIn(window, now);
   const isEmpty = glasses.length === 0;
   const isWiping = wiping !== null;
+
+  // Named days only appear once the round has run past midnight, so an
+  // ordinary evening keeps bare hours on the counter.
+  const dayLabel = new Intl.DateTimeFormat(locale, { weekday: 'short' });
 
   return (
     <div
@@ -109,11 +127,16 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
         'bartop',
         isEmpty && 'bartop--empty',
         isWiping && 'bartop--wiping',
+        scroll.travelling && 'bartop--travelling',
         hidden && 'bartop--hidden',
       )}
     >
-      <div className="bartop__scroll" ref={scrollRef}>
-        <div className="bartop__track" style={{ width: `${trackWidth}px` }}>
+      <div
+        className="bartop__stage"
+        ref={stageRef}
+        {...(isEmpty ? {} : scroll.handlers)}
+      >
+        <div className="bartop__track">
           <div className="bartop__counter" aria-hidden="true" />
           <div className="bartop__surface" aria-hidden="true">
             <span className="bartop__grain" />
@@ -129,15 +152,26 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
               aria-hidden="true"
             >
               <span className="bartop__hour-tick" />
-              <span className="bartop__hour-label">{new Date(at).getHours()}</span>
+              <span className="bartop__hour-label">
+                {marksAnotherDay(at, now)
+                  ? `${dayLabel.format(new Date(at))} ${new Date(at).getHours()}`
+                  : new Date(at).getHours()}
+              </span>
             </span>
           ))}
 
-          <span
-            className="bartop__now"
-            style={{ left: `${positionIn(window, now) * 100}%` }}
-            aria-hidden="true"
-          />
+          {/* Early in a round this stands well inside the counter, with the
+              evening still to come to the right of it; once the bar starts
+              travelling it settles near the right edge. Drawn only while it is
+              actually on stage — scrolled far enough back, the present is off
+              the end and a marker pinned to the edge would be a lie. */}
+          {nowAt >= 0 && nowAt <= 1 && (
+            <span
+              className="bartop__now"
+              style={{ left: `${nowAt * 100}%` }}
+              aria-hidden="true"
+            />
+          )}
 
           {isWiping && <span className="bartop__cloth" aria-hidden="true" />}
 
@@ -148,16 +182,12 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
                 <Barkeeper className="bartop__keeper-figure" />
               </span>
             ) : (
-              glasses.map((glass) => (
+              standing.map((glass) => (
                 <span
                   key={`${glass.beverageId}-${glass.at}`}
                   className="bartop__glass"
                   style={{
                     left: `${positionIn(window, glass.at) * 100}%`,
-                    // Each glass leaves at the moment the cloth reaches it. A
-                    // single clip across the whole layer cannot express this:
-                    // it either erases glasses before the cloth arrives or
-                    // leaves them standing behind it.
                     ...(isWiping
                       ? {
                           animationDelay: `${clothReaches(positionIn(window, glass.at))}ms`,
@@ -174,8 +204,30 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
               ))
             )}
           </span>
+
+          {/* On the floor at the left end, under the brink the glasses go over.
+              Hidden during a wipe: the cloth clears the counter, and a pile
+              surviving it would say the round had not really been reset. */}
+          {fallen > 0 && !isWiping && (
+            <span className="bartop__shards">
+              <ShardPile count={fallen} className="bartop__shard-figure" />
+            </span>
+          )}
         </div>
       </div>
+
+      {/* Getting home from a long scroll back. Only offered when there is a
+          back to come from — at the present it would do nothing. */}
+      {scroll.travelling && !isEmpty && (
+        <button
+          type="button"
+          className="bartop__present"
+          onClick={scroll.toPresent}
+          aria-label={t('bartop.toPresent')}
+        >
+          ›
+        </button>
+      )}
 
       {/* The counter is decorative; the round it represents is already read out
           by the totals and the per-drink rows. */}
