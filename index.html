@@ -6,7 +6,14 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1"
     />
-    <meta name="theme-color" content="#f0a500" />
+    <!--
+      Matches the page background per scheme, not the brand amber: this colour
+      backs the system bars, and an amber strip above a foam-coloured page read
+      as a stray band. App.tsx overwrites the active one when the in-app theme
+      setting overrides the OS.
+    -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff6e0" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#12100e" />
     <meta name="description" content="Count your drinks — fully offline." />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
