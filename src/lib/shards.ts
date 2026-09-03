@@ -44,20 +44,26 @@ export function hasFallen(glass: BarGlass, window: BarWindow): boolean {
 export interface Shard {
   /** Fraction across the pile's own width. */
   x: number;
-  /** Pixels above the floor line. */
-  y: number;
+  /** Which of the drawn silhouettes to use. */
+  shape: number;
+  /** Degrees; small, since a shard lies where it fell. */
   rotate: number;
   scale: number;
 }
 
+/**
+ * Shards lie flat on the counter rather than standing up, so the pile is wide
+ * and low. Upright triangles read as bunting or arrowheads — the giveaway that
+ * the first attempt looked like decoration rather than breakage.
+ */
 const SHARD_LAYOUT: readonly Shard[] = [
-  { x: 0.5, y: 0, rotate: -8, scale: 1 },
-  { x: 0.22, y: 1, rotate: 14, scale: 0.85 },
-  { x: 0.78, y: 0.5, rotate: -22, scale: 0.9 },
-  { x: 0.36, y: 4, rotate: 6, scale: 0.7 },
-  { x: 0.64, y: 4.5, rotate: -14, scale: 0.75 },
-  { x: 0.12, y: 5, rotate: 26, scale: 0.6 },
-  { x: 0.88, y: 5.5, rotate: -30, scale: 0.62 },
+  { x: 0.46, shape: 0, rotate: -4, scale: 1 },
+  { x: 0.16, shape: 1, rotate: 9, scale: 0.9 },
+  { x: 0.74, shape: 2, rotate: -11, scale: 0.95 },
+  { x: 0.32, shape: 2, rotate: 14, scale: 0.7 },
+  { x: 0.6, shape: 1, rotate: -7, scale: 0.78 },
+  { x: 0.89, shape: 0, rotate: 5, scale: 0.68 },
+  { x: 0.03, shape: 2, rotate: -15, scale: 0.6 },
 ];
 
 export function shardsFor(count: number): Shard[] {

@@ -18,6 +18,7 @@ import {
 import type { BarGlass, BarWindow } from '../lib/bartop';
 import { hasFallen } from '../lib/shards';
 import { useBarScroll } from '../lib/useBarScroll';
+import { usePageVisible } from '../lib/usePageVisible';
 import type { Beverage, Tally } from '../lib/types';
 import './Bartop.scss';
 
@@ -57,6 +58,8 @@ const HOUR_MS = 3_600_000;
 export function Bartop({ beverages, tallies, now, hidden }: Props) {
   const { t, locale } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
+  // Animating a counter nobody can see costs battery and buys nothing.
+  const visible = usePageVisible();
 
   // The stage is as wide as the screen gives it, and that width *is* the
   // window: no fixed number of hours any more, so a tablet simply sees more of
@@ -128,6 +131,7 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
         isEmpty && 'bartop--empty',
         isWiping && 'bartop--wiping',
         scroll.travelling && 'bartop--travelling',
+        !visible && 'bartop--asleep',
         hidden && 'bartop--hidden',
       )}
     >
