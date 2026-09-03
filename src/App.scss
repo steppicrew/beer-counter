@@ -3,7 +3,11 @@
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  // A fixed viewport rather than a page that grows: the bartop and the add
+  // button are pinned to the bottom and only the drink list scrolls, so a
+  // long list can never push the counter off screen. `100dvh` follows the
+  // mobile browser's shrinking chrome, which `vh` does not.
+  height: 100dvh;
   max-width: 560px;
   margin: 0 auto;
 
@@ -91,12 +95,29 @@
     }
   }
 
+  // The only scrolling region. It gives up its height first, so the counter
+  // below it stays put however many drinks are on the list.
   &__main {
     flex: 1;
+    min-height: 0;
+    overflow-y: auto;
     padding: vars.$space-md;
     display: flex;
     flex-direction: column;
     gap: vars.$space-md;
+    // The list runs on under the bartop rather than stopping at it: the bar is
+    // transparent above its own wood, so a row scrolling up is still visible
+    // between the glasses and only disappears where the counter itself is.
+    // A short fade at the very bottom keeps the last sliver from ending on a
+    // hard edge; a long ramp made rows dissolve in the open air above the bar,
+    // which read as the list running out rather than passing behind something.
+    // The ramp starts above the counter so a row is already dimming as it
+    // reaches the glasses, rather than staying at full strength and then
+    // cutting out at the wood.
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 46px), transparent calc(100% - 8px));
+    // Room at the bottom so the last row can be scrolled clear of the counter
+    // that overlaps it, instead of being stranded behind the wood.
+    padding-bottom: 30px;
   }
 
   &__empty {
@@ -199,9 +220,10 @@
     color: var(--accent-contrast);
   }
 
+  // Pinned under the bartop. Not sticky any more — the app is a fixed column
+  // now, so this is simply the last row of it.
   &__footer {
-    position: sticky;
-    bottom: 0;
+    flex: none;
     padding: vars.$space-md;
     padding-bottom: calc(#{vars.$space-md} + env(safe-area-inset-bottom));
     background: linear-gradient(to top, var(--bg) 62%, transparent);

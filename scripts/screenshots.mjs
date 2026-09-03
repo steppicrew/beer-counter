@@ -182,6 +182,24 @@ for (const locale of targets) {
     for (const scene of SCENES) {
       const page = await context.newPage();
 
+      // These images represent the packaged Android app, which never draws
+      // the web-only legal footer ("Android app · Privacy · Legal notice").
+      // The app gates that on `isNativeApp()`, which reads Capacitor's
+      // injected global rather than the URL — deliberately, since Capacitor's
+      // Android scheme is `https://localhost` and indistinguishable from this
+      // preview server. So make the capture look native rather than weakening
+      // the detection.
+      //
+      // Assigning `window.Capacitor` here does not work: the bundle carries
+      // Capacitor's own runtime, which initialises afterwards and overwrites
+      // `isNativePlatform` with its own `() => getPlatform() !== 'web'`. What
+      // that reads is `window.androidBridge` — the object the real Android
+      // WebView injects — so setting it is what actually makes the page
+      // believe it is native, and it survives the runtime loading on top.
+      await page.addInitScript(() => {
+        window.androidBridge = { postMessage: () => {} };
+      });
+
       // Seed state before the app's first paint so nothing flashes empty.
       await page.addInitScript(
         ({ state, theme, code }) => {

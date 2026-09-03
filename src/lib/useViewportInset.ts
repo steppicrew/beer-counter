@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 /** Below this, an inset is rounding noise rather than a keyboard. */
 const MIN_INSET = 24;
 
 /**
- * Publishes the on-screen keyboard's height as `--keyboard-inset` on <html>.
+ * Publishes the on-screen keyboard's height as `--keyboard-inset` on <html>,
+ * and reports whether it is up.
  *
  * The virtual keyboard shrinks the *visual* viewport but leaves the layout
  * viewport alone, so a bottom-anchored sheet keeps sizing itself to the full
@@ -16,8 +17,14 @@ const MIN_INSET = 24;
  * above that toolbar, and no viewport API exposes its size. The sheet is then
  * positioned correctly against everything the page can observe, but still sits
  * a toolbar's height above the keyboard itself.
+ *
+ * The returned flag is for components that have to get out of the keyboard's
+ * way entirely rather than merely sit above it — the bartop, which cannot
+ * share the bottom of the screen with an editing sheet.
  */
-export function useViewportInset(): void {
+export function useViewportInset(): boolean {
+  const [keyboardUp, setKeyboardUp] = useState(false);
+
   useEffect(() => {
     const vv = window.visualViewport;
     if (!vv) return;
@@ -37,6 +44,7 @@ export function useViewportInset(): void {
 
       // Sub-pixel jitter while the keyboard animates would thrash layout.
       root.style.setProperty('--keyboard-inset', `${inset}px`);
+      setKeyboardUp(inset > 0);
     };
 
     apply();
@@ -49,4 +57,6 @@ export function useViewportInset(): void {
       root.style.removeProperty('--keyboard-inset');
     };
   }, []);
+
+  return keyboardUp;
 }
