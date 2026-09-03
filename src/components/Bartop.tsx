@@ -9,6 +9,7 @@ import {
   collectGlasses,
   glassFill,
   hourMarks,
+  markFits,
   marksAnotherDay,
   positionIn,
   PX_PER_HOUR,
@@ -149,6 +150,12 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
     return () => clearTimeout(timer);
   }, [dropping]);
 
+  // Half a label's width as a share of the counter, so a mark whose digits
+  // would hang off either end can be dropped. A weekday label ("Mon 22") is
+  // much wider than a bare hour, so the widest form in play sets the margin.
+  const counterWidth = Math.max(1, width - BAR_INSET_PX);
+  const labelRoom = (marksAnotherDay(window.start, now) ? 26 : 9) / counterWidth;
+
   const nowAt = positionIn(window, now);
   const isEmpty = glasses.length === 0;
   const isWiping = wiping !== null;
@@ -185,7 +192,9 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
               that starts where the wood does — a percentage then maps across
               the counter rather than across the floor beside it. */}
           <span className="bartop__over-counter">
-            {hourMarks(window).map((at) => (
+            {hourMarks(window)
+              .filter((at) => markFits(positionIn(window, at), labelRoom))
+              .map((at) => (
               <span
                 key={at}
                 className="bartop__hour"
