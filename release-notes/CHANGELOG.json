@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.6.4",
+      "date": "2026-09-03",
+      "notes": {
+        "en": "The clock and the navigation buttons are readable again in the light theme: the status bar no longer shows white icons on a pale background.",
+        "de": "Uhrzeit und Navigationsschaltflächen sind im hellen Design wieder lesbar: Die Statusleiste zeigt keine weißen Symbole mehr auf hellem Grund.",
+        "fr": "L'heure et les boutons de navigation redeviennent lisibles en thème clair : la barre d'état n'affiche plus d'icônes blanches sur fond pâle.",
+        "es": "La hora y los botones de navegación vuelven a leerse en el tema claro: la barra de estado ya no muestra iconos blancos sobre fondo pálido.",
+        "it": "L'ora e i pulsanti di navigazione tornano leggibili nel tema chiaro: la barra di stato non mostra più icone bianche su sfondo chiaro.",
+        "nl": "De klok en de navigatieknoppen zijn in het lichte thema weer leesbaar: de statusbalk toont geen witte pictogrammen meer op een lichte achtergrond.",
+        "pl": "Zegar i przyciski nawigacji są znów czytelne w jasnym motywie: pasek stanu nie pokazuje już białych ikon na jasnym tle.",
+        "pt": "As horas e os botões de navegação voltam a ler-se no tema claro: a barra de estado deixou de mostrar ícones brancos sobre fundo claro.",
+        "cs": "Hodiny a navigační tlačítka jsou ve světlém motivu opět čitelné: stavový řádek už nezobrazuje bílé ikony na světlém pozadí.",
+        "da": "Uret og navigationsknapperne kan læses igen i det lyse tema: statuslinjen viser ikke længere hvide ikoner på lys baggrund.",
+        "sv": "Klockan och navigeringsknapparna går att läsa igen i det ljusa temat: statusfältet visar inte längre vita ikoner mot ljus bakgrund.",
+        "tr": "Saat ve gezinme düğmeleri açık temada yeniden okunabiliyor: durum çubuğu artık açık zeminde beyaz simgeler göstermiyor.",
+        "ru": "Часы и кнопки навигации снова читаются в светлой теме: строка состояния больше не показывает белые значки на светлом фоне.",
+        "ja": "ライトテーマで時計とナビゲーションボタンが再び読めるようになりました。ステータスバーの白いアイコンが明るい背景に重なる問題を修正しています。",
+        "zh": "浅色主题下时钟和导航按钮重新清晰可辨：状态栏不再在浅色背景上显示白色图标。"
+      }
+    },
+    {
       "version": "1.6.3",
       "date": "2026-09-03",
       "notes": {
