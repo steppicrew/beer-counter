@@ -33,8 +33,8 @@ export function ShardPile({ count, className }: Props) {
       // rendered larger than 1:1 — at native size a shard was a five-pixel
       // speck, and the pile has to be legible at a glance to say anything.
       viewBox="0 0 34 8"
-      width="44"
-      height="10"
+      width="28"
+      height="9"
       aria-hidden="true"
       focusable="false"
     >
