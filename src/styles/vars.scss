@@ -8,6 +8,23 @@ $color-amber-deep: #d98c00;
 $color-foam: #fff6e0;
 $color-malt: #7a4b12;
 
+// ---------------------------------------------------------------------------
+// Drink liquids
+// ---------------------------------------------------------------------------
+// What is *in* the glass, per drink. Decorative and deliberately separate from
+// the brand amber: the point is that a glance at the colour identifies the
+// drink, so these are the real-world liquid tones and must not be swapped for
+// accent or status colours. Beer is the one that also needs a head, so it
+// carries a foam tone alongside the liquid.
+$liquid-beer: #eda100;
+$liquid-beer-pale: #f5c542; // wheat beer — cloudier and lighter than a lager
+$liquid-wine: #8e1c34;
+$liquid-schnapps: #eae2cf; // clear spirit: near-colourless, just off the glass
+$liquid-cocktail: #e2603f;
+$liquid-coffee: #4a2c17;
+$liquid-water: #4aa3d8;
+$liquid-head: #fffaf0; // the white foam on a poured beer
+
 // Semantic (status) colours — never reused for decoration.
 $color-danger: #d7443e;
 $color-success: #3f9d5a;

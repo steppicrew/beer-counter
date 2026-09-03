@@ -30,6 +30,20 @@
   // tick marks can stay faint, but the numbers have to be readable.
   --wood-label: rgb(255 246 224 / 72%);
   --glass-foam: #{vars.$color-foam};
+
+  // Per-drink liquids. Both icon components read these by name, so a drink's
+  // colour is defined once and stays the same in the row button, the icon
+  // picker and on the bartop.
+  --liquid-beer-large: #{vars.$liquid-beer};
+  --liquid-beer-small: #{vars.$liquid-beer};
+  --liquid-wheat-beer: #{vars.$liquid-beer-pale};
+  --liquid-wine: #{vars.$liquid-wine};
+  --liquid-schnapps: #{vars.$liquid-schnapps};
+  --liquid-cocktail: #{vars.$liquid-cocktail};
+  --liquid-coffee: #{vars.$liquid-coffee};
+  --liquid-water: #{vars.$liquid-water};
+  // The head on a beer. Only the three beers draw one.
+  --liquid-head: #{vars.$liquid-head};
   // What shows through an emptied glass: the counter behind it, so a drained
   // drink reads as clear glass rather than as a differently-coloured drink.
   --glass-drained: #{color.adjust(vars.$color-malt, $lightness: -6%)};
@@ -68,6 +82,18 @@
   --wood-mark: rgb(255 246 224 / 26%);
   --wood-label: rgb(255 246 224 / 66%);
   --glass-drained: #{color.adjust(vars.$color-malt, $lightness: -16%)};
+
+  // The liquids lift a few steps in the dark theme: the deep ones (wine,
+  // coffee) go nearly black against the page otherwise, and the pale ones
+  // gain a little saturation so they still read as a drink and not as glare.
+  --liquid-beer-large: #{color.adjust(vars.$liquid-beer, $lightness: 6%)};
+  --liquid-beer-small: #{color.adjust(vars.$liquid-beer, $lightness: 6%)};
+  --liquid-wheat-beer: #{color.adjust(vars.$liquid-beer-pale, $lightness: 4%)};
+  --liquid-wine: #{color.adjust(vars.$liquid-wine, $lightness: 14%)};
+  --liquid-schnapps: #{color.adjust(vars.$liquid-schnapps, $lightness: -6%)};
+  --liquid-cocktail: #{color.adjust(vars.$liquid-cocktail, $lightness: 6%)};
+  --liquid-coffee: #{color.adjust(vars.$liquid-coffee, $lightness: 16%)};
+  --liquid-water: #{color.adjust(vars.$liquid-water, $lightness: 6%)};
   --shard: rgb(198 219 226 / 62%);
   --shard-edge: rgb(232 246 250 / 70%);
   --cloth-lit: #e8dcc2;
