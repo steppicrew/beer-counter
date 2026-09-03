@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.6.5",
+      "date": "2026-09-03",
+      "notes": {
+        "en": "The bar top reads better late at night: hours after midnight no longer repeat the weekday, and the pile of broken glass keeps growing as the round goes on.",
+        "de": "Der Tresen liest sich spät abends besser: Stunden nach Mitternacht wiederholen den Wochentag nicht mehr, und der Scherbenhaufen wächst weiter, je länger die Runde dauert.",
+        "fr": "Le comptoir se lit mieux tard le soir : les heures après minuit ne répètent plus le jour de la semaine, et le tas de verre brisé continue de grandir au fil de la tournée.",
+        "es": "La barra se lee mejor de madrugada: las horas después de medianoche ya no repiten el día de la semana, y el montón de cristales sigue creciendo según avanza la ronda.",
+        "it": "Il bancone si legge meglio a tarda notte: le ore dopo mezzanotte non ripetono più il giorno della settimana e il mucchio di vetri continua a crescere con la serata.",
+        "nl": "De toog leest 's avonds laat beter: uren na middernacht herhalen de weekdag niet meer, en de hoop glasscherven blijft groeien naarmate de ronde vordert.",
+        "pl": "Bar czyta się lepiej późną nocą: godziny po północy nie powtarzają już dnia tygodnia, a sterta potłuczonego szkła rośnie dalej w miarę trwania kolejki.",
+        "pt": "O balcão lê-se melhor de madrugada: as horas depois da meia-noite já não repetem o dia da semana, e a pilha de vidros continua a crescer ao longo da rodada.",
+        "cs": "Barový pult je pozdě v noci čitelnější: hodiny po půlnoci už neopakují den v týdnu a hromada střepů dál roste, jak kolo pokračuje.",
+        "da": "Baren er nemmere at læse sent om aftenen: timer efter midnat gentager ikke længere ugedagen, og bunken af glasskår bliver ved med at vokse.",
+        "sv": "Bardisken blir lättare att läsa sent på kvällen: timmar efter midnatt upprepar inte längre veckodagen, och högen av glasskärvor fortsätter växa.",
+        "tr": "Bar tezgâhı gece geç saatlerde daha iyi okunuyor: gece yarısından sonraki saatler artık haftanın gününü tekrarlamıyor ve kırık cam yığını tur boyunca büyümeye devam ediyor.",
+        "ru": "Барная стойка читается лучше поздней ночью: часы после полуночи больше не повторяют день недели, а куча осколков продолжает расти по ходу вечера.",
+        "ja": "深夜のカウンターが見やすくなりました。0時以降の時刻に曜日が繰り返し表示されなくなり、割れたグラスの山も飲み進めるほど大きくなります。",
+        "zh": "深夜的吧台更易辨读：午夜之后的时刻不再重复显示星期，碎玻璃堆也会随着这一轮继续变大。"
+      }
+    },
+    {
       "version": "1.6.4",
       "date": "2026-09-03",
       "notes": {
