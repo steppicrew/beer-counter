@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.5.0",
+      "date": "2026-09-03",
+      "notes": {
+        "en": "New: a bar at the bottom of the screen shows your evening as glasses, each standing at the time you ordered it. Finished drinks empty out, and a barkeeper waits when the tab is clear.",
+        "de": "Neu: Ein Tresen am unteren Bildschirmrand zeigt deinen Abend als Gläser — jedes steht zu der Zeit, zu der du bestellt hast. Ausgetrunkene Gläser leeren sich, und bei leerem Deckel wartet der Wirt.",
+        "fr": "Nouveau : un comptoir en bas de l'écran montre votre soirée sous forme de verres, chacun à l'heure où vous l'avez commandé. Les verres finis se vident, et un barman attend quand l'ardoise est vide.",
+        "es": "Nuevo: una barra en la parte inferior muestra tu noche como vasos, cada uno a la hora en que lo pediste. Los vasos terminados se vacían y, si no hay nada, te espera el camarero.",
+        "it": "Novità: un bancone in fondo allo schermo mostra la serata come bicchieri, ognuno all’ora in cui l’hai ordinato. I bicchieri finiti si svuotano e, a conto vuoto, ti aspetta il barista.",
+        "nl": "Nieuw: een bar onderaan het scherm toont je avond als glazen, elk op het tijdstip waarop je bestelde. Lege glazen lopen leeg en bij een lege rekening wacht de barman.",
+        "pl": "Nowość: bar na dole ekranu pokazuje twój wieczór jako szklanki, każda o godzinie zamówienia. Wypite szklanki pustoszeją, a przy pustym rachunku czeka barman.",
+        "pt": "Novo: um balcão no fundo do ecrã mostra a sua noite como copos, cada um à hora em que pediu. Os copos acabados esvaziam-se e, sem nada na conta, o empregado espera.",
+        "cs": "Novinka: pult ve spodní části obrazovky ukazuje váš večer jako sklenice, každou v čase objednávky. Dopité sklenice se vyprázdní a u prázdného účtu čeká barman.",
+        "da": "Nyt: en bardisk nederst viser din aften som glas, hvert placeret på det tidspunkt du bestilte. Tomme glas tømmes, og ved en tom regning venter bartenderen.",
+        "sv": "Nytt: en bardisk längst ned visar din kväll som glas, vart och ett vid tiden du beställde. Urdruckna glas töms, och vid tom nota väntar bartendern.",
+        "tr": "Yeni: ekranın altındaki tezgâh akşamını bardaklar hâlinde gösterir; her biri sipariş verdiğin saatte durur. Biten bardaklar boşalır, hesap boşken barmen bekler.",
+        "ru": "Новое: барная стойка внизу экрана показывает ваш вечер стаканами — каждый стоит на времени заказа. Допитые пустеют, а при пустом счёте вас ждёт бармен.",
+        "ja": "新機能: 画面下のカウンターに、注文した時刻の位置でグラスが並びます。飲み終えたグラスは空になり、何もないときはバーテンダーが待っています。",
+        "zh": "新功能：屏幕底部的吧台按下单时间排列酒杯。喝完的杯子会变空，账单为空时酒保在等你。"
+      }
+    },
+    {
       "version": "1.4.4",
       "date": "2026-08-30",
       "notes": {
