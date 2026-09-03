@@ -2,7 +2,7 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
-      "version": "1.6.2",
+      "version": "1.6.3",
       "date": "2026-09-03",
       "notes": {
         "en": "Every drink now looks like what is in the glass: golden beer under a white head, red wine, blue water. The glasses on the bar show it too, and empty as the evening goes on.",
