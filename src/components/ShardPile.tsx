@@ -12,6 +12,16 @@ interface Props {
  * about 30px across, and a handful of triangles in one element keeps the DOM
  * flat however long the evening runs.
  */
+/**
+ * Three silhouettes, all wider than they are tall: a shard on a bar top lies
+ * down. Drawn from the origin, which is the point it rests on.
+ */
+const SHAPES = [
+  'M-4.2,0 L-2.9,-2.8 L0.9,-3.4 L4.1,0 Z',
+  'M-3.4,0 L-1.2,-2.2 L2.6,-1.6 L3.4,0 Z',
+  'M-2.8,0 L-0.6,-3.1 L2.2,-1.2 L3.0,0 Z',
+];
+
 export function ShardPile({ count, className }: Props) {
   const shards = shardsFor(count);
   if (shards.length === 0) return null;
@@ -19,24 +29,27 @@ export function ShardPile({ count, className }: Props) {
   return (
     <svg
       className={className}
-      viewBox="0 0 32 12"
-      width="32"
-      height="12"
+      // Drawn on a 34x8 grid: wide and low, because the pieces lie flat. It is
+      // rendered larger than 1:1 — at native size a shard was a five-pixel
+      // speck, and the pile has to be legible at a glance to say anything.
+      viewBox="0 0 34 8"
+      width="44"
+      height="10"
       aria-hidden="true"
       focusable="false"
     >
       {shards.map((shard, i) => (
-        <polygon
+        <path
           key={i}
-          // A sliver of glass: narrow, uneven, and catching the light on one
-          // edge. Three points is enough at 6px — anything more detailed just
-          // fills in to a blob.
-          points="0,0 3.4,-5.2 5.6,0"
+          d={SHAPES[shard.shape]}
           fill="var(--shard)"
+          // Lit along the top edge only, the way a chip of glass catches the
+          // light from behind the bar. A full outline made them read as solid
+          // objects rather than as something transparent.
           stroke="var(--shard-edge)"
-          strokeWidth="0.4"
+          strokeWidth="0.3"
           strokeLinejoin="round"
-          transform={`translate(${shard.x * 26 + 1} ${11 - shard.y}) rotate(${shard.rotate}) scale(${shard.scale})`}
+          transform={`translate(${shard.x * 26 + 5} ${7.4}) rotate(${shard.rotate}) scale(${shard.scale})`}
         />
       ))}
     </svg>

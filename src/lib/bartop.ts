@@ -25,13 +25,19 @@ export const PX_PER_HOUR = 74;
 export const MARK_STEP_MS = 2 * HOUR_MS;
 
 /**
- * Counter kept clear at the left, in ms.
+ * Counter kept clear at each end, in ms.
  *
  * A glass is centred on its timestamp and is ~27px wide, which at 74px/hour is
- * a shade over 11 minutes. A glass whose centre is inside this margin is
- * already hanging over the edge, so this is also where it falls.
+ * a shade over 11 minutes — so half a glass is ~5.5 minutes and a margin of
+ * merely that leaves it flush with the edge. This is a full glass plus a
+ * little air, so the drink standing at the newest end is completely on the
+ * counter rather than clipped by it, and the opening drink has the same
+ * clearance at the other end.
+ *
+ * It is also the line a glass falls over: once its centre is inside the left
+ * margin it is hanging off the end of the bar.
  */
-export const BRINK_MS = 13 * MINUTE_MS;
+export const BRINK_MS = 16 * MINUTE_MS;
 
 /**
  * The stretch of time the counter currently shows.

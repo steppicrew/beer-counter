@@ -27,7 +27,14 @@ $glass-size: 27px;
   // window (see useBarScroll), so nothing here overflows and there is no
   // scrollbar to hide.
   &__stage {
-    overflow: hidden;
+    // `clip` rather than `hidden`, with the axis named: glasses stand *above*
+    // the counter and the taller ones (and the barkeeper's speech bubble)
+    // reach past the top of the stage. `hidden` clips both axes and lopped
+    // their heads off; `clip` with `overflow-clip-margin` lets them overhang
+    // vertically while time is still cut off cleanly at the left and right.
+    overflow-x: clip;
+    overflow-y: visible;
+    overflow-clip-margin: content-box;
     touch-action: pan-y;
     cursor: grab;
     // A drag across glasses would otherwise start a text/image selection.
@@ -221,15 +228,17 @@ $glass-size: 27px;
   // pile sits below the counter's own face, so it reads as being on the floor
   // in front of the bar rather than as something standing on it.
 
+  // Swept to the end of the counter rather than dropped on the floor. The bar
+  // is only a few dozen pixels tall and the user has twice asked for less of
+  // it, so there is no room for a floor strip below the face — and a pile
+  // drawn over the face fights the hour labels for the darkest band on screen.
+  // On the wood, standing on the same line as the glasses, the shards read as
+  // what is left where the drink went over the edge.
   &__shards {
     position: absolute;
-    inset: auto auto 0 0;
+    inset: auto auto $counter-height - 3px 0;
     z-index: 2;
     pointer-events: none;
-    // Slightly off the left edge, as if they had bounced away from the foot of
-    // the bar. Fully centred under the brink they looked placed rather than
-    // dropped.
-    transform: translateX(-3px);
   }
 
   &__shard-figure {
@@ -367,6 +376,16 @@ $glass-size: 27px;
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+// Nothing on the counter is worth animating when nobody can see it. A hidden
+// webview still runs CSS animations — compositing frames for a screen that is
+// off — so the app marks itself hidden and everything here stops. Paused
+// rather than removed, so a wipe interrupted by a screen lock finishes where
+// it left off instead of jumping to its end state.
+.bartop--asleep * {
+  animation-play-state: paused !important;
+  transition: none !important;
 }
 
 // The wipe is feedback, not decoration, so without motion the glasses still
