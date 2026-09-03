@@ -13,6 +13,7 @@ import { computeTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
 import { useInstallPrompt } from './lib/useInstallPrompt';
+import { useSystemDark } from './lib/useSystemDark';
 import { useViewportInset } from './lib/useViewportInset';
 import { useBarClock } from './lib/useBarClock';
 import { formatMoney, defaultCurrencyFor } from './lib/money';
@@ -31,6 +32,12 @@ type Dialog =
   | { kind: 'reset' }
   | { kind: 'share' };
 
+// The page backgrounds, mirroring --bg in styles/theme.scss. Duplicated here
+// because the system bars need the value as a plain colour before any
+// stylesheet has resolved, and a computed style would read the old theme.
+const LIGHT_BG = '#fff6e0';
+const DARK_BG = '#12100e';
+
 export function App() {
   const beverages = useAppStore((s) => s.beverages);
   const tallies = useAppStore((s) => s.tallies);
@@ -46,6 +53,7 @@ export function App() {
   const resetSession = useAppStore((s) => s.resetSession);
 
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
+  const systemDark = useSystemDark();
 
   // Keeps sheets clear of the on-screen keyboard, and tells the bartop when
   // to stand down.
@@ -66,11 +74,34 @@ export function App() {
   const t = useMemo(() => createTranslator(locale), [locale]);
 
   // Reflect theme on <html> so the CSS tokens follow the explicit choice.
+  //
+  // The system bars are the reason this does more than set an attribute. The
+  // app draws edge-to-edge on Android, so the bars show the page's own
+  // background and take their icon colour from `color-scheme` and
+  // `theme-color`. The static tags in index.html follow the OS via a media
+  // query, which is wrong whenever the in-app setting overrides it — light
+  // theme on a dark-mode phone left white icons on the pale background.
   useEffect(() => {
     const root = document.documentElement;
     if (theme === 'system') root.removeAttribute('data-theme');
     else root.setAttribute('data-theme', theme);
-  }, [theme]);
+
+    const dark = theme === 'dark' || (theme === 'system' && systemDark);
+
+    // Tells the platform which way to shade the bar icons.
+    root.style.colorScheme = theme === 'system' ? '' : theme;
+
+    // A single un-media'd tag wins over the media-query pair in index.html,
+    // so the active colour is whatever this writes.
+    let meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"][data-dynamic]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      meta.dataset.dynamic = '';
+      document.head.appendChild(meta);
+    }
+    meta.content = dark ? DARK_BG : LIGHT_BG;
+  }, [theme, systemDark]);
 
   // Keep the document itself in the active language: `lang` drives the
   // browser's translation prompt, hyphenation and screen-reader voice, and

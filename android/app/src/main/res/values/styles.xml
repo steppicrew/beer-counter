@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -13,10 +13,32 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
+
+        <!--
+          From API 35 the app is edge-to-edge and the system bars are
+          transparent, so they show the page's own background: the pale foam
+          colour in the light theme. The icons in them default to white, which
+          leaves the clock and the navigation gesture bar nearly invisible.
+
+          These two ask the system for *dark* icons, which is what contrasts
+          against a light background. The values-night variant leaves them
+          false so the dark theme keeps its white icons — that combination was
+          already correct and must not change.
+        -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 
 
+    <!--
+      The launch theme governs the splash window, before BridgeActivity swaps
+      in AppTheme.NoActionBar. It carries the same light-icon flags so the
+      bars are already legible on the very first frame rather than correcting
+      themselves once the WebView is up.
+    -->
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
         <item name="android:background">@drawable/splash</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 </resources>
