@@ -106,6 +106,7 @@ export const en = {
   'bartop.empty': 'The bar is empty.',
   'bartop.ask': 'What can I get you?',
   'bartop.summary': '{count} glasses on the bar.',
+  'bartop.toPresent': 'Back to now',
 } as const;
 
 export type MessageKey = keyof typeof en;
@@ -215,6 +216,7 @@ export const de: Messages = {
   'bartop.empty': 'Der Tresen ist leer.',
   'bartop.ask': 'Was darf es sein?',
   'bartop.summary': '{count} Gläser auf dem Tresen.',
+  'bartop.toPresent': 'Zurück zu jetzt',
 };
 
 export const fr: Messages = {
@@ -321,6 +323,7 @@ export const fr: Messages = {
   'bartop.empty': 'Le comptoir est vide.',
   'bartop.ask': 'Qu\'est-ce que ce sera ?',
   'bartop.summary': '{count} verres sur le comptoir.',
+  'bartop.toPresent': 'Revenir à maintenant',
 };
 
 export const es: Messages = {
@@ -427,6 +430,7 @@ export const es: Messages = {
   'bartop.empty': 'La barra está vacía.',
   'bartop.ask': '¿Qué te pongo?',
   'bartop.summary': '{count} vasos en la barra.',
+  'bartop.toPresent': 'Volver al presente',
 };
 
 export const it: Messages = {
@@ -533,6 +537,7 @@ export const it: Messages = {
   'bartop.empty': 'Il bancone è vuoto.',
   'bartop.ask': 'Cosa ti porto?',
   'bartop.summary': '{count} bicchieri sul bancone.',
+  'bartop.toPresent': 'Torna a ora',
 };
 
 export const nl: Messages = {
@@ -639,6 +644,7 @@ export const nl: Messages = {
   'bartop.empty': 'De bar is leeg.',
   'bartop.ask': 'Wat mag het zijn?',
   'bartop.summary': '{count} glazen op de bar.',
+  'bartop.toPresent': 'Terug naar nu',
 };
 
 export const pl: Messages = {
@@ -745,6 +751,7 @@ export const pl: Messages = {
   'bartop.empty': 'Bar jest pusty.',
   'bartop.ask': 'Czego się napijesz?',
   'bartop.summary': 'Szklanki na barze: {count}.',
+  'bartop.toPresent': 'Wróć do teraz',
 };
 
 export const pt: Messages = {
@@ -851,6 +858,7 @@ export const pt: Messages = {
   'bartop.empty': 'O balcão está vazio.',
   'bartop.ask': 'O que vai ser?',
   'bartop.summary': '{count} copos no balcão.',
+  'bartop.toPresent': 'Voltar ao agora',
 };
 
 export const cs: Messages = {
@@ -957,6 +965,7 @@ export const cs: Messages = {
   'bartop.empty': 'Barový pult je prázdný.',
   'bartop.ask': 'Co to bude?',
   'bartop.summary': 'Sklenic na pultu: {count}.',
+  'bartop.toPresent': 'Zpět na teď',
 };
 
 export const da: Messages = {
@@ -1063,6 +1072,7 @@ export const da: Messages = {
   'bartop.empty': 'Baren er tom.',
   'bartop.ask': 'Hvad skulle det være?',
   'bartop.summary': '{count} glas på baren.',
+  'bartop.toPresent': 'Tilbage til nu',
 };
 
 export const sv: Messages = {
@@ -1169,6 +1179,7 @@ export const sv: Messages = {
   'bartop.empty': 'Baren är tom.',
   'bartop.ask': 'Vad får det lov att vara?',
   'bartop.summary': '{count} glas på baren.',
+  'bartop.toPresent': 'Tillbaka till nu',
 };
 
 export const tr: Messages = {
@@ -1275,6 +1286,7 @@ export const tr: Messages = {
   'bartop.empty': 'Bar boş.',
   'bartop.ask': 'Ne alırsınız?',
   'bartop.summary': 'Barda {count} bardak var.',
+  'bartop.toPresent': 'Şimdiye dön',
 };
 
 export const ru: Messages = {
@@ -1381,6 +1393,7 @@ export const ru: Messages = {
   'bartop.empty': 'Барная стойка пуста.',
   'bartop.ask': 'Что будете пить?',
   'bartop.summary': 'Стаканов на стойке: {count}.',
+  'bartop.toPresent': 'Вернуться к настоящему',
 };
 
 export const ja: Messages = {
@@ -1487,6 +1500,7 @@ export const ja: Messages = {
   'bartop.empty': 'カウンターは空です。',
   'bartop.ask': '何にしましょう？',
   'bartop.summary': 'カウンターにグラス {count} 杯。',
+  'bartop.toPresent': '現在に戻る',
 };
 
 export const zh: Messages = {
@@ -1592,6 +1606,7 @@ export const zh: Messages = {
   'bartop.empty': '吧台是空的。',
   'bartop.ask': '想喝点什么？',
   'bartop.summary': '吧台上有 {count} 杯。',
+  'bartop.toPresent': '回到现在',
 };
 
 export const CATALOGUES: Record<string, Messages> = {

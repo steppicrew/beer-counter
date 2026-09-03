@@ -22,19 +22,25 @@ $glass-size: 27px;
     display: none;
   }
 
-  &__scroll {
-    overflow-x: auto;
-    overflow-y: hidden;
-    // A visible scrollbar under the counter would read as part of the bar.
-    scrollbar-width: none;
+  // A fixed window onto the evening rather than a strip that scrolls: time
+  // moves through it, the counter itself never moves. Dragging scrubs the
+  // window (see useBarScroll), so nothing here overflows and there is no
+  // scrollbar to hide.
+  &__stage {
+    overflow: hidden;
+    touch-action: pan-y;
+    cursor: grab;
+    // A drag across glasses would otherwise start a text/image selection.
+    user-select: none;
+  }
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  &--travelling &__stage {
+    cursor: grabbing;
   }
 
   &__track {
     position: relative;
+    width: 100%;
     // Glasses stand on the counter, so the track has to be tall enough for
     // both. Not a fixed height on a reusable card — this element *is* the
     // counter, and its height is the drawing.
@@ -210,6 +216,51 @@ $glass-size: 27px;
     height: $counter-height + $glass-size + 34px;
   }
 
+  // --- the floor ----------------------------------------------------------
+  // What is left of the glasses the evening has pushed off the left end. The
+  // pile sits below the counter's own face, so it reads as being on the floor
+  // in front of the bar rather than as something standing on it.
+
+  &__shards {
+    position: absolute;
+    inset: auto auto 0 0;
+    z-index: 2;
+    pointer-events: none;
+    // Slightly off the left edge, as if they had bounced away from the foot of
+    // the bar. Fully centred under the brink they looked placed rather than
+    // dropped.
+    transform: translateX(-3px);
+  }
+
+  &__shard-figure {
+    display: block;
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 55%));
+    // Each new arrival settles onto the pile rather than blinking into it.
+    animation: bartop-settle 220ms vars.$ease;
+  }
+
+  // Getting back to the present after a scroll into the past. Sits over the
+  // right end of the counter, where the present is.
+  &__present {
+    position: absolute;
+    inset: auto vars.$space-xs $counter-face + 2px auto;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1;
+    color: var(--accent-contrast);
+    background: var(--accent);
+    border: 0;
+    border-radius: vars.$radius-pill;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 45%);
+    cursor: pointer;
+  }
+
   // --- the wipe -----------------------------------------------------------
   // On reset the cloth crosses the counter and the glasses go with it. This
   // is the one animation in the app that reports a real state change rather
@@ -298,6 +349,26 @@ $glass-size: 27px;
   }
 }
 
+// A shard landing on the pile: a short drop and a bounce settling out. The
+// glass itself is already gone by then — it fell off the counter, and what
+// arrives here is the aftermath.
+@keyframes bartop-settle {
+  0% {
+    opacity: 0;
+    transform: translateY(-7px) scale(0.9);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(1px) scale(1.02);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 // The wipe is feedback, not decoration, so without motion the glasses still
 // have to go — they just go at once instead of being swept.
 @media (prefers-reduced-motion: reduce) {
@@ -308,5 +379,10 @@ $glass-size: 27px;
   .bartop--wiping .bartop__glass {
     animation: none;
     opacity: 0;
+  }
+
+  // The pile is state, not motion — it just appears without the drop.
+  .bartop__shard-figure {
+    animation: none;
   }
 }

@@ -33,6 +33,10 @@
   // What shows through an emptied glass: the counter behind it, so a drained
   // drink reads as clear glass rather than as a differently-coloured drink.
   --glass-drained: #{color.adjust(vars.$color-malt, $lightness: -6%)};
+  // Broken glass on the floor. Cool and pale against the warm wood, so the
+  // pile reads as glass rather than as more of the bar.
+  --shard: rgb(226 240 244 / 78%);
+  --shard-edge: rgb(255 255 255 / 85%);
   // The barkeeper's rag. Linen rather than any status colour.
   --cloth-lit: #fbf3e2;
   --cloth-mid: #e2d4b4;
@@ -64,6 +68,8 @@
   --wood-mark: rgb(255 246 224 / 26%);
   --wood-label: rgb(255 246 224 / 66%);
   --glass-drained: #{color.adjust(vars.$color-malt, $lightness: -16%)};
+  --shard: rgb(198 219 226 / 62%);
+  --shard-edge: rgb(232 246 250 / 70%);
   --cloth-lit: #e8dcc2;
   --cloth-mid: #c9b894;
   --cloth-shade: #93826a;
