@@ -22,8 +22,16 @@ const PATHS: Record<IconKey, React.ReactNode> = {
         d="M6 3h9a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"
         fill="var(--liquid-beer-large)"
       />
-      {/* The head, sitting on top of the beer inside the same body. */}
-      <path d="M6 3h9a1 1 0 0 1 1 1v4H5V4a1 1 0 0 1 1-1Z" fill="var(--liquid-head)" />
+      {/* The head, with bubbles bulging down into the beer — the same foam
+          the bartop glasses carry. Overlapping circles rather than a wavy
+          edge: at 36px a shallow curve flattens into a straight line, while
+          the circles still read as foam settling into the drink. */}
+      <g fill="var(--liquid-head)">
+        <path d="M6 3h9a1 1 0 0 1 1 1v4H5V4a1 1 0 0 1 1-1Z" />
+        <circle cx="6.8" cy="8" r="1.45" />
+        <circle cx="10.2" cy="8.35" r="1.75" />
+        <circle cx="13.8" cy="8" r="1.35" />
+      </g>
       <path d="M5 9h1v6H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2Z" fill="none" />
       <path
         d="M6 3h9a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm10 5h2a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3h-2"
@@ -32,32 +40,23 @@ const PATHS: Record<IconKey, React.ReactNode> = {
         strokeWidth="1.6"
         strokeLinejoin="round"
       />
-      <path
-        d="M5 8h11"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
     </>
   ),
   'beer-small': (
     <>
       <path d="M8 8h8v11a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8Z" fill="var(--liquid-beer-small)" />
-      <path d="M7.6 5h8.8l-.15 4H7.75L7.6 5Z" fill="var(--liquid-head)" />
+      <g fill="var(--liquid-head)">
+        <path d="M7.6 5h8.8l-.15 4H7.75L7.6 5Z" />
+        <circle cx="9.2" cy="9" r="1.15" />
+        <circle cx="12" cy="9.35" r="1.45" />
+        <circle cx="14.8" cy="9" r="1.1" />
+      </g>
       <path
         d="M7.5 5h9l-.7 14a1.5 1.5 0 0 1-1.5 1.4H9.7a1.5 1.5 0 0 1-1.5-1.4L7.5 5Z"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinejoin="round"
-      />
-      <path
-        d="M7.7 9h8.6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
       />
     </>
   ),
@@ -74,6 +73,12 @@ const PATHS: Record<IconKey, React.ReactNode> = {
         d="M8.7 6.4c0-1.6 1.5-2.8 3.3-2.8s3.3 1.2 3.3 2.8l-.5 3.4H9.2L8.7 6.4Z"
         fill="var(--liquid-head)"
       />
+      {/* Bubbles bulging into the beer, as on the bartop glasses. */}
+      <g fill="var(--liquid-head)">
+        <circle cx="10.2" cy="9.8" r="1.05" />
+        <circle cx="12.4" cy="10.1" r="1.3" />
+        <circle cx="14.5" cy="9.8" r="0.95" />
+      </g>
       {/* The Weizen outline in one stroke: flared bell, pinched waist, bulged
           body. The silhouette is the whole point — it is what separates this
           from the straight-sided glasses above it. */}
@@ -83,14 +88,6 @@ const PATHS: Record<IconKey, React.ReactNode> = {
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinejoin="round"
-      />
-      {/* The waist, where the bell narrows into the body. */}
-      <path
-        d="M9.1 9.8h5.8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.3"
-        strokeLinecap="round"
       />
     </>
   ),
@@ -110,19 +107,24 @@ const PATHS: Record<IconKey, React.ReactNode> = {
   schnapps: (
     <>
       <path d="M9 12h6l-.6 7a1 1 0 0 1-1 .9h-2.8a1 1 0 0 1-1-.9L9 12Z" fill="var(--liquid-schnapps)" />
+      {/* The surface. A clear spirit needs a line to show where the fill sits,
+          but the full-weight rule the other drinks used read as a divider
+          cutting the glass in two — this is thin and faint enough to be the
+          liquid's own edge. */}
+      <path
+        d="M9 12h6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="0.7"
+        strokeOpacity="0.45"
+        strokeLinecap="round"
+      />
       <path
         d="M8.4 4h7.2l-1.2 15.1a1.5 1.5 0 0 1-1.5 1.4h-1.8a1.5 1.5 0 0 1-1.5-1.4L8.4 4Z"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.6"
         strokeLinejoin="round"
-      />
-      <path
-        d="M8.7 12h6.6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
       />
     </>
   ),
