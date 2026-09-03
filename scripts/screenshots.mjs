@@ -38,6 +38,18 @@ const targets = only ? LOCALES.filter((l) => only.has(l.code)) : LOCALES;
  * Each scene seeds localStorage directly, so a screenshot never depends on
  * click choreography that could break with a UI change.
  */
+/**
+ * A tally from minutes-ago offsets, newest last.
+ *
+ * The scenes used to carry the legacy `{ count, lastAt }` shape, which the
+ * store migrates by stamping every drink of a kind with the same timestamp —
+ * so on the bartop all four beers stood on one spot at the left edge instead
+ * of across the evening.
+ */
+const at = (t, ...minutesAgo) => ({
+  times: minutesAgo.map((m) => t - m * 60_000).sort((a, b) => a - b),
+});
+
 const SCENES = [
   {
     file: '01-counting',
@@ -50,9 +62,9 @@ const SCENES = [
         { id: 'schnapps', nameKey: 'drink.schnapps', icon: 'schnapps', scope: 'default' },
       ],
       tallies: {
-        beer: { count: 4, lastAt: t - 3 * 60_000 },
-        'beer-small': { count: 1, lastAt: t - 26 * 60_000 },
-        wine: { count: 2, lastAt: t - 48 * 60_000 },
+        beer: at(t, 196, 148, 74, 3),
+        'beer-small': at(t, 26),
+        wine: at(t, 121, 48),
       },
     }),
   },
@@ -68,10 +80,10 @@ const SCENES = [
         { id: 'session-shot', name: 'Aperol', icon: 'cocktail', scope: 'session' },
       ],
       tallies: {
-        beer: { count: 6, lastAt: t - 42_000 },
-        'beer-small': { count: 2, lastAt: t - 12 * 60_000 },
-        wine: { count: 1, lastAt: t - 71 * 60_000 },
-        'session-shot': { count: 3, lastAt: t - 5 * 60_000 },
+        beer: at(t, 205, 166, 128, 84, 39, 0.7),
+        'beer-small': at(t, 143, 12),
+        wine: at(t, 71),
+        'session-shot': at(t, 96, 55, 5),
       },
     }),
   },
@@ -84,7 +96,7 @@ const SCENES = [
         { id: 'beer-small', nameKey: 'drink.beerSmall', icon: 'beer-small', scope: 'default' },
         { id: 'wine', nameKey: 'drink.wine', icon: 'wine', scope: 'default' },
       ],
-      tallies: { beer: { count: 3, lastAt: t - 9 * 60_000 } },
+      tallies: { beer: at(t, 97, 51, 9) },
     }),
     async after(page) {
       await page.locator('.app__add').click();
@@ -103,9 +115,9 @@ const SCENES = [
         { id: 'schnapps', nameKey: 'drink.schnapps', icon: 'schnapps', scope: 'default' },
       ],
       tallies: {
-        beer: { count: 5, lastAt: t - 2 * 60_000 },
-        'beer-small': { count: 2, lastAt: t - 33 * 60_000 },
-        schnapps: { count: 1, lastAt: t - 7 * 60_000 },
+        beer: at(t, 178, 132, 88, 41, 2),
+        'beer-small': at(t, 154, 33),
+        schnapps: at(t, 7),
       },
     }),
     async after(page) {
