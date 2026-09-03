@@ -139,20 +139,41 @@ export function positionIn(window: BarWindow, at: number): number {
  *
  * The first mark is the hour boundary at or after `start`, so the labels read
  * as clock times ("21") rather than as offsets from an arbitrary first sip.
+ *
+ * The step widens with the span. A tab left open for days is a real state —
+ * counts survive until the next reset — and marking every hour of it would
+ * both crowd the counter and, when this was capped at a fixed number of marks,
+ * simply stop drawing them partway along the bar.
  */
 export function hourMarks(window: BarWindow): number[] {
+  const span = window.end - window.start;
+  const step = markStep(span);
   const marks: number[] = [];
 
-  const first = new Date(window.start);
-  first.setMinutes(0, 0, 0);
-  let at = first.getTime();
-  if (at < window.start) at += HOUR_MS;
+  // Snap to a boundary of the step in *local* time, so a 3-hourly run lands on
+  // 00:00, 03:00, 06:00 on the clock. Aligning on the epoch instead would drift
+  // in any zone that is not a whole number of hours from UTC.
+  const stepHours = step / HOUR_MS;
+  const cursor = new Date(window.start);
+  cursor.setMinutes(0, 0, 0);
+  if (stepHours > 1) {
+    cursor.setHours(Math.floor(cursor.getHours() / stepHours) * stepHours);
+  }
+  let at = cursor.getTime();
+  while (at < window.start) at += step;
 
-  // Guard against a pathological window rather than trusting the arithmetic.
-  for (let i = 0; at <= window.end && i < 64; i += 1) {
+  while (at <= window.end) {
     marks.push(at);
-    at += HOUR_MS;
+    at += step;
   }
 
   return marks;
+}
+
+/** Hours between marks, chosen so a span never draws more than ~14 of them. */
+function markStep(span: number): number {
+  for (const hours of [1, 2, 3, 6, 12, 24, 48]) {
+    if (span / (hours * HOUR_MS) <= 14) return hours * HOUR_MS;
+  }
+  return 7 * 24 * HOUR_MS;
 }
