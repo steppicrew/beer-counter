@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.5.1",
+      "date": "2026-09-03",
+      "notes": {
+        "en": "The bar now keeps its time marks when a tab has been open for several days.",
+        "de": "Der Tresen behält jetzt seine Zeitmarken, auch wenn ein Deckel mehrere Tage offen ist.",
+        "fr": "Le comptoir garde désormais ses repères horaires quand une ardoise reste ouverte plusieurs jours.",
+        "es": "La barra ahora mantiene sus marcas de hora cuando una cuenta lleva varios días abierta.",
+        "it": "Il bancone ora mantiene i segni orari anche quando un conto resta aperto per giorni.",
+        "nl": "De bar houdt nu zijn tijdmarkeringen als een rekening dagenlang openstaat.",
+        "pl": "Bar zachowuje teraz znaczniki czasu, gdy rachunek jest otwarty przez kilka dni.",
+        "pt": "O balcão mantém agora as marcas de hora quando uma conta fica aberta vários dias.",
+        "cs": "Pult si nyní zachová časové značky, i když je účet otevřený několik dní.",
+        "da": "Bardisken beholder nu sine tidsmarkeringer, når en regning har været åben i flere dage.",
+        "sv": "Bardisken behåller nu sina tidsmarkeringar när en nota varit öppen i flera dagar.",
+        "tr": "Tezgâh, hesap günlerce açık kaldığında da saat işaretlerini koruyor.",
+        "ru": "Стойка теперь сохраняет отметки времени, если счёт открыт несколько дней.",
+        "ja": "数日にわたって記録を続けても、カウンターの時刻目盛りが表示されるようになりました。",
+        "zh": "账单开启多天时，吧台现在也会继续显示时间刻度。"
+      }
+    },
+    {
       "version": "1.5.0",
       "date": "2026-09-03",
       "notes": {
