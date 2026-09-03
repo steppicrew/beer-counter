@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.6.2",
+      "date": "2026-09-03",
+      "notes": {
+        "en": "Every drink now looks like what is in the glass: golden beer under a white head, red wine, blue water. The glasses on the bar show it too, and empty as the evening goes on.",
+        "de": "Jedes Getränk sieht jetzt aus wie sein Inhalt: goldenes Bier mit weißer Schaumkrone, roter Wein, blaues Wasser. Auch die Gläser auf dem Tresen zeigen das und leeren sich im Lauf des Abends.",
+        "fr": "Chaque boisson ressemble enfin à son contenu : bière dorée à faux col blanc, vin rouge, eau bleue. Les verres sur le comptoir le montrent aussi et se vident au fil de la soirée.",
+        "es": "Cada bebida se parece ahora a su contenido: cerveza dorada con espuma blanca, vino tinto, agua azul. Las copas de la barra también lo muestran y se vacían con la noche.",
+        "it": "Ogni bevanda ora somiglia al suo contenuto: birra dorata con schiuma bianca, vino rosso, acqua blu. Anche i bicchieri sul bancone lo mostrano e si svuotano con la serata.",
+        "nl": "Elk drankje ziet er nu uit als de inhoud: goudgeel bier met witte schuimkraag, rode wijn, blauw water. Ook de glazen op de bar laten dat zien en raken leeg in de loop van de avond.",
+        "pl": "Każdy napój wygląda teraz jak jego zawartość: złote piwo z białą pianką, czerwone wino, niebieska woda. Szklanki na barze też to pokazują i pustoszeją w miarę wieczoru.",
+        "pt": "Cada bebida parece agora aquilo que tem dentro: cerveja dourada com espuma branca, vinho tinto, água azul. Os copos no balcão também o mostram e vão esvaziando ao longo da noite.",
+        "cs": "Každý nápoj teď vypadá jako svůj obsah: zlaté pivo s bílou pěnou, červené víno, modrá voda. Sklenice na pultu to ukazují také a během večera se vyprazdňují.",
+        "da": "Hver drink ligner nu sit indhold: gylden øl med hvid skum, rødvin, blåt vand. Glassene på baren viser det også og tømmes i løbet af aftenen.",
+        "sv": "Varje dryck ser nu ut som sitt innehåll: gyllene öl med vitt skum, rött vin, blått vatten. Glasen på baren visar det också och töms under kvällens gång.",
+        "tr": "Her içecek artık içindekine benziyor: beyaz köpüklü altın sarısı bira, kırmızı şarap, mavi su. Tezgâhtaki bardaklar da bunu gösteriyor ve akşam ilerledikçe boşalıyor.",
+        "ru": "Каждый напиток теперь выглядит как его содержимое: золотое пиво с белой пеной, красное вино, голубая вода. Бокалы на стойке тоже это показывают и пустеют к концу вечера.",
+        "ja": "飲み物がグラスの中身どおりの見た目になりました。白い泡をのせた黄金色のビール、赤いワイン、青い水。カウンターのグラスも同じで、夜が更けるにつれて空いていきます。",
+        "zh": "每种酒水现在都与杯中之物相符：金色啤酒配白色泡沫、红色葡萄酒、蓝色清水。吧台上的酒杯同样如此，并随着夜晚渐渐见底。"
+      }
+    },
+    {
       "version": "1.6.1",
       "date": "2026-09-03",
       "notes": {
