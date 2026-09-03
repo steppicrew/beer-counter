@@ -213,19 +213,19 @@ export function GlassIcon({ icon, className, fill = 'full' }: Props) {
             </g>
           </>
         )}
-        {/* The surface highlight. Only a beer gets it in foam white — on a
-            wine or a coffee a white band across the liquid reads as a gap in
-            the drink, so everything else gets a faint lightening of its own
-            colour instead, just enough to stop a flat fill looking like a
-            block. A drained glass gets none at all. */}
-        {fill !== 'empty' && (
+        {/* The surface highlight: the one thing keeping a flat fill from
+            reading as a coloured block. A beer does not get it — the head is
+            already the light band at the surface, and a second white line
+            over it just rules a hard edge across the foam. A drained glass
+            gets none either. */}
+        {fill !== 'empty' && !showHead && (
           <path
             d={shape.liquid}
             fill="none"
-            stroke={showHead ? 'var(--liquid-head)' : '#ffffff'}
-            strokeWidth={showHead ? 1.6 : 1.2}
+            stroke="#ffffff"
+            strokeWidth="1.2"
             strokeLinecap="round"
-            strokeOpacity={showHead ? 0.9 : 0.28}
+            strokeOpacity="0.28"
             transform={`translate(0 ${surfaceY - shape.liquidY})`}
           />
         )}
