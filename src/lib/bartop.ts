@@ -64,6 +64,14 @@ export interface BarWindow {
  * `offsetMs` drags it further into the past; zero is wherever the bar sits on
  * its own, which is *not* necessarily the present — early in a round it is
  * still anchored to the first drink, with the future spread out to the right.
+ *
+ * Time only carries the bar along while there is still something on it. Once
+ * following the present would push the newest drink over the left end, the
+ * window stops there and lets `now` run off the right instead: an empty
+ * counter tells you nothing, and the alternative is a bar you have to drag
+ * back through a day and a half to find out the round ever happened. Ordering
+ * the next drink releases it — that glass is inside the right brink, so the
+ * window jumps forward to hold it exactly as it holds the present.
  */
 export function restingWindow(glasses: BarGlass[], now: number, spanMs: number): BarWindow {
   const first = glasses[0]?.at;
@@ -76,10 +84,19 @@ export function restingWindow(glasses: BarGlass[], now: number, spanMs: number):
   const anchored = first - BRINK_MS;
   if (now <= anchored + spanMs - BRINK_MS) return { start: anchored, end: anchored + spanMs };
 
-  // The evening has outrun the counter, so the right edge takes over and holds
-  // the present, keeping it the same distance inside the edge that the first
-  // drink had.
-  const end = now + BRINK_MS;
+  // The evening has outrun the counter, so the right edge takes over and
+  // follows the present — but only while that still leaves something to look
+  // at. Time may carry the bar along until the *newest* drink reaches the left
+  // brink, and there it stops: pass that point and the counter is blank, with
+  // the whole round sitting a day's worth of dragging off to the left.
+  //
+  // Note this is a floor on the window, not a freeze. The present keeps moving
+  // across the counter while the round is live, and only once it has run a
+  // full span ahead of the last drink does the bar stop travelling with it.
+  // Ordering the next drink lifts the floor again — that glass is newer, so
+  // the window is free to follow `now` and jumps forward to hold it.
+  const last = glasses.at(-1)?.at ?? first;
+  const end = Math.min(now, last + spanMs - 2 * BRINK_MS) + BRINK_MS;
   return { start: end - spanMs, end };
 }
 
