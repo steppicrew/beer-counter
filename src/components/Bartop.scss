@@ -215,6 +215,9 @@ $face-setback: 4px;
     line-height: $counter-face;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
+    // A 12-hour label ("10 PM") is two words and wrapped onto a second line
+    // inside a face only one line tall, which pushed the digits out of sight.
+    white-space: nowrap;
     color: var(--wood-label);
     // The face is a gradient, so the number crosses several tones; a shadow
     // keeps it legible over all of them.
