@@ -1,4 +1,5 @@
 import type { GlassFill } from '../lib/bartop';
+import { hasFoam, liquidVar } from '../lib/liquids';
 import type { IconKey } from '../lib/types';
 
 interface Props {
@@ -13,9 +14,11 @@ interface Props {
  *
  * The row icons are stroked on a 24x24 grid and read well at 36px, but on the
  * bartop a glass is ~27px tall and a 1.6px stroke closes up into a blob: at
- * that size only a solid shape still says "glass". The liquid line is drawn in
- * the foam colour and clipped to the body so it reads as a fill level rather
- * than a stripe across the glass.
+ * that size only a solid shape still says "glass". Each drink is filled with
+ * its own `--liquid-*` colour rather than the accent, so a row of glasses on
+ * the counter can be read as beer, wine and water at a glance; the beers carry
+ * a white head on the surface, which is what tells a lager from a whisky at
+ * 27px when both are amber.
  */
 const SHAPES: Record<
   IconKey,
@@ -45,12 +48,16 @@ const SHAPES: Record<
     floor: 19.8,
     clip: 'M7.5 5h9l-.7 14a1.5 1.5 0 0 1-1.5 1.4H9.7a1.5 1.5 0 0 1-1.5-1.4L7.5 5Z',
   },
+  // The Weizen glass: flared bell, pinched waist, wide foot. At 27px the
+  // silhouette alone separates it from the straight-sided lager beside it.
   'wheat-beer': {
-    body: <path d="M8.6 3h7.8l.6 16a2 2 0 0 1-2 2.1h-5A2 2 0 0 1 8 19L8.6 3Z" />,
-    liquid: 'M8.3 8h8.4',
-    liquidY: 8,
-    floor: 20.6,
-    clip: 'M8.6 3h7.8l.6 16a2 2 0 0 1-2 2.1h-5A2 2 0 0 1 8 19L8.6 3Z',
+    body: (
+      <path d="M8.9 3.4h6.2a.7.7 0 0 1 .7.8l-.9 4.6a3 3 0 0 0-.1 1.2l1 8.3a2.5 2.5 0 0 1-2.5 2.8h-2.6a2.5 2.5 0 0 1-2.5-2.8l1-8.3a3 3 0 0 0-.1-1.2l-.9-4.6a.7.7 0 0 1 .7-.8Z" />
+    ),
+    liquid: 'M8.9 6.2h6.2',
+    liquidY: 6.2,
+    floor: 19.6,
+    clip: 'M8.9 3.4h6.2a.7.7 0 0 1 .7.8l-.9 4.6a3 3 0 0 0-.1 1.2l1 8.3a2.5 2.5 0 0 1-2.5 2.8h-2.6a2.5 2.5 0 0 1-2.5-2.8l1-8.3a3 3 0 0 0-.1-1.2l-.9-4.6a.7.7 0 0 1 .7-.8Z',
   },
   wine: {
     body: (
@@ -121,6 +128,9 @@ const SHAPES: Record<
   },
 };
 
+/** How deep the head sits on a poured beer, in grid units. */
+const HEAD_DEPTH = 2.6;
+
 /**
  * SVG ids are document-global, so a clip path shared by every glass on the bar
  * would collide. `useId` is not needed here — the key is stable per icon and
@@ -142,6 +152,19 @@ export function GlassIcon({ icon, className, fill = 'full' }: Props) {
       : fill === 'half'
         ? shape.liquidY + drop * 0.55
         : shape.floor - 1.4;
+
+  // A drained glass shows the counter through it rather than a pale version of
+  // the drink — the drink is gone, and tinting the dregs would keep claiming
+  // there is still something in it.
+  const liquidColor = fill === 'empty' ? 'var(--glass-drained)' : liquidVar(icon);
+  // The heel is the last smear in an emptied glass, not a drink: kept faint so
+  // it reads as a used glass rather than as a dark measure still standing.
+  const liquidOpacity = fill === 'empty' ? 0.45 : 1;
+
+  // The head rides on the surface, so it drops with the beer. It is only worth
+  // drawing while there is beer under it: on the heel left in an empty glass
+  // the head would be the whole remaining volume.
+  const showHead = hasFoam(icon) && fill !== 'empty';
 
   return (
     <svg
@@ -170,16 +193,39 @@ export function GlassIcon({ icon, className, fill = 'full' }: Props) {
         {shape.body}
       </g>
       <g clipPath={`url(#${clipId})`}>
-        <g fill="currentColor">
-          <rect x="0" y={surfaceY} width="24" height={24 - surfaceY} />
-        </g>
+        <rect
+          x="0"
+          y={surfaceY}
+          width="24"
+          height={24 - surfaceY}
+          fill={liquidColor}
+          opacity={liquidOpacity}
+        />
+        {showHead && (
+          <>
+            <rect x="0" y={surfaceY} width="24" height={HEAD_DEPTH} fill="var(--liquid-head)" />
+            {/* Bubbles breaking the head's lower edge. Clipped to the glass
+                like everything else, so they only show where there is foam. */}
+            <g fill="var(--liquid-head)">
+              <circle cx="9.4" cy={surfaceY + HEAD_DEPTH} r="0.9" />
+              <circle cx="12.4" cy={surfaceY + HEAD_DEPTH + 0.3} r="1.1" />
+              <circle cx="15.2" cy={surfaceY + HEAD_DEPTH} r="0.8" />
+            </g>
+          </>
+        )}
+        {/* The surface highlight. Only a beer gets it in foam white — on a
+            wine or a coffee a white band across the liquid reads as a gap in
+            the drink, so everything else gets a faint lightening of its own
+            colour instead, just enough to stop a flat fill looking like a
+            block. A drained glass gets none at all. */}
         {fill !== 'empty' && (
           <path
             d={shape.liquid}
             fill="none"
-            stroke="var(--glass-foam)"
-            strokeWidth="1.6"
+            stroke={showHead ? 'var(--liquid-head)' : '#ffffff'}
+            strokeWidth={showHead ? 1.6 : 1.2}
             strokeLinecap="round"
+            strokeOpacity={showHead ? 0.9 : 0.28}
             transform={`translate(0 ${surfaceY - shape.liquidY})`}
           />
         )}

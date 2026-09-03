@@ -113,13 +113,15 @@
     border: 2px solid var(--border);
     border-radius: vars.$radius-md;
 
-    --icon-fill: transparent;
+    // Each drink already draws itself in its own colour, so an unselected
+    // option is dimmed rather than drained: the swatch still identifies the
+    // drink while the selected one is the only fully saturated tile.
+    opacity: 0.62;
 
     &--selected {
       border-color: var(--accent);
       color: var(--accent);
-
-      --icon-fill: #{rgba(vars.$color-amber, 0.3)};
+      opacity: 1;
     }
   }
 }
