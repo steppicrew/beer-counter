@@ -230,10 +230,20 @@ export function markFits(position: number, edgeFraction: number): boolean {
  * Whether a mark needs a date rather than just an hour.
  *
  * Scrolled back far enough, "22" alone is ambiguous — it could be tonight or
- * three nights ago. The day only gets named when the mark is not on the same
- * calendar day as the round's present.
+ * three nights ago, so a mark on an earlier calendar day than the round's
+ * present gets its day named.
+ *
+ * Marks *ahead* of the present never do, even once the strip runs past
+ * midnight: the hour after 23 is plainly the coming one, and "Fri 12 AM" on a
+ * tick a few pixels wide says nothing you did not already know from sitting at
+ * the bar. The rule has to be directional for that — the calendar day differs
+ * either side of midnight, and only the backward case is ambiguous. Once the
+ * round has actually run past midnight those same marks fall behind `now` and
+ * start naming their day again, which is when it matters.
  */
 export function marksAnotherDay(at: number, now: number): boolean {
+  if (at > now) return false;
+
   const a = new Date(at);
   const b = new Date(now);
   return (
