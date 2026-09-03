@@ -212,6 +212,21 @@ export function hourMarks(window: BarWindow): number[] {
 }
 
 /**
+ * Whether a mark is far enough onto the counter to draw.
+ *
+ * A label is centred on its tick and reaches about half its own width to
+ * either side, so a mark close to the end of the bar hangs its digits out over
+ * the floor beside it. Such a mark is dropped: it is seconds from scrolling
+ * off anyway, and the next one along says the same thing.
+ *
+ * `edgeFraction` is that half-width expressed as a share of the counter, which
+ * is what the caller has to hand — positions here are all fractions.
+ */
+export function markFits(position: number, edgeFraction: number): boolean {
+  return position >= edgeFraction && position <= 1 - edgeFraction;
+}
+
+/**
  * Whether a mark needs a date rather than just an hour.
  *
  * Scrolled back far enough, "22" alone is ambiguous — it could be tonight or

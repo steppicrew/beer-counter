@@ -141,12 +141,16 @@ $face-setback: 4px;
 
   // Everything positioned by timestamp lives inside this, so a percentage
   // maps across the *counter* rather than the whole bar. The strip to the left
-  // of $bar-inset is floor, not wood: a mark or a glass placed there would be
+  // of the counter is floor, not wood: a mark or a glass placed there would be
   // standing over the drop, and the earliest hour label used to sit out in the
   // gap next to the shards.
+  //
+  // Aligned to the *face*, which is the innermost of the two planes — the
+  // surface starts $face-setback further left, so a layer aligned to that put
+  // ticks in the sliver where there is wood on top but nothing beneath them.
   &__over-counter {
     position: absolute;
-    inset: 0 0 0 $bar-inset;
+    inset: 0 0 0 $bar-inset + $face-setback;
   }
 
   &__hour {
@@ -165,6 +169,12 @@ $face-setback: 4px;
   // Centred in the front face rather than offset from its bottom: the face is
   // only a couple of pixels taller than the line box, so any nudge pushes the
   // digits up onto the wood.
+  //
+  // The label is centred on its tick, so it reaches about half its own width
+  // further left. A mark too close to the end of the bar for that to fit is
+  // dropped in Bartop.tsx rather than clamped here: shoving the digits right
+  // to keep them on the wood would leave them no longer under their own tick,
+  // which is worse than simply not drawing a mark that is about to scroll off.
   &__hour-label {
     position: absolute;
     inset: auto auto 0;
