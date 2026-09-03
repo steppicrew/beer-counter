@@ -1,7 +1,7 @@
 {
   "name": "beer-counter",
-  "version": "1.6.4",
-  "androidVersionCode": 21,
+  "version": "1.6.5",
+  "androidVersionCode": 22,
   "private": true,
   "type": "module",
   "packageManager": "yarn@4.18.0",
