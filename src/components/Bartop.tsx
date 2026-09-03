@@ -175,11 +175,7 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
         hidden && 'bartop--hidden',
       )}
     >
-      <div
-        className="bartop__stage"
-        ref={stageRef}
-        {...(isEmpty ? {} : scroll.handlers)}
-      >
+      <div className="bartop__stage" ref={stageRef}>
         <div className="bartop__track">
           <div className="bartop__counter" aria-hidden="true" />
           <div className="bartop__surface" aria-hidden="true">
@@ -187,6 +183,11 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
           </div>
           <span className="bartop__lip" aria-hidden="true" />
           <span className="bartop__sheen" aria-hidden="true" />
+
+          {/* Takes the drag. Covers the counter only: the rest of the bar's
+              height is air the drink list shows through, and swallowing
+              events there would break tapping the rows underneath. */}
+          {!isEmpty && <span className="bartop__grip" {...scroll.handlers} />}
 
           {/* Everything below is placed by timestamp, so it lives in a layer
               that starts where the wood does — a percentage then maps across

@@ -47,8 +47,9 @@ export function App() {
 
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
 
-  // Keeps sheets clear of the on-screen keyboard.
-  useViewportInset();
+  // Keeps sheets clear of the on-screen keyboard, and tells the bartop when
+  // to stand down.
+  const keyboardUp = useViewportInset();
 
   // Drives the bartop's "now" marker.
   const now = useBarClock();
@@ -163,16 +164,11 @@ export function App() {
           </ul>
         </main>
 
-        {/* Docked under the list: the round's shape stays visible while the
-            list above it scrolls. It only gets out of the way for the sheets
-            that have a text field — the reset confirmation deliberately keeps
-            the counter on screen, since it is what you are about to clear. */}
-        <Bartop
-          beverages={beverages}
-          tallies={tallies}
-          now={now}
-          hidden={dialog.kind === 'add' || dialog.kind === 'edit' || dialog.kind === 'settings'}
-        />
+        {/* Docked above the add button and always on screen: the drink list
+            scrolls underneath it and fades out behind the counter rather than
+            pushing it away. The keyboard is the only thing that takes it —
+            it and an editing sheet cannot share the bottom of the screen. */}
+        <Bartop beverages={beverages} tallies={tallies} now={now} hidden={keyboardUp} />
 
         {install.bannerVisible && (
           <div className="app__install">

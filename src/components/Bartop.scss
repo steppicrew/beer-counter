@@ -24,13 +24,34 @@ $face-setback: 4px;
 .bartop {
   position: relative;
   flex: none;
-  background: var(--bg);
-  border-top: 1px solid var(--border);
+  // Deliberately transparent. The counter, its glasses and the shards are
+  // opaque in their own right, and the space above them is *empty air* — the
+  // drink list scrolls up through it and goes behind the wood and the
+  // glassware, which is what makes the bar read as standing in front of the
+  // list rather than as a panel bolted over it. A background here (and the
+  // border-top that used to go with it) turned the whole strip into an opaque
+  // rectangle that simply covered the rows.
+  background: transparent;
+  // Above the list, so rows pass behind it rather than over it.
+  z-index: 1;
+  // Pulled up over the list's last stretch: the glasses stand well above the
+  // wood, and without the overlap that empty air is dead space between the
+  // rows and the counter. The list scrolls up into it.
+  margin-top: -($glass-size + 4px);
+  // The overlap must not swallow taps meant for the rows underneath: the bar
+  // reaches a glass-height above its own wood, and that air belongs to the
+  // list. The wood itself takes events back (see &__grip), so dragging the
+  // counter still works.
+  pointer-events: none;
 
-  // The keyboard takes the bottom of the screen and an editing sheet sits
-  // right above it; a counter competing for that space helps nobody.
-  // useViewportInset already publishes the keyboard's height on <html>, so
-  // hiding the bar is a style rule rather than another resize listener.
+  // The keyboard is the one thing that takes the counter away. It owns the
+  // bottom of the screen together with the sheet above it, and there is no
+  // room to compete; everything else — a long drink list, an open sheet
+  // without a text field — leaves the bar where it is, because the bar is the
+  // app's picture of the evening and is worth more than the rows it covers.
+  //
+  // Driven straight off the variable useViewportInset already publishes on
+  // <html>, so no prop has to be threaded down for it.
   &--hidden {
     display: none;
   }
@@ -48,14 +69,6 @@ $face-setback: 4px;
     overflow-x: clip;
     overflow-y: visible;
     overflow-clip-margin: content-box;
-    touch-action: pan-y;
-    cursor: grab;
-    // A drag across glasses would otherwise start a text/image selection.
-    user-select: none;
-  }
-
-  &--travelling &__stage {
-    cursor: grabbing;
   }
 
   &__track {
@@ -151,6 +164,25 @@ $face-setback: 4px;
   &__over-counter {
     position: absolute;
     inset: 0 0 0 $bar-inset + $face-setback;
+  }
+
+  // The draggable region: exactly the counter, not the air above it. The
+  // handlers live here rather than on the stage because the stage spans the
+  // glasses' full height, and taking events there would steal taps from the
+  // drink rows the bar overlaps.
+  &__grip {
+    position: absolute;
+    inset: auto 0 0 $bar-inset;
+    height: $counter-height;
+    z-index: 4;
+    pointer-events: auto;
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+  }
+
+  &--travelling &__grip {
+    cursor: grabbing;
   }
 
   &__hour {
@@ -304,6 +336,7 @@ $face-setback: 4px;
   // Getting back to the present after a scroll into the past. Sits over the
   // right end of the counter, where the present is.
   &__present {
+    pointer-events: auto;
     position: absolute;
     inset: auto vars.$space-xs $counter-face + 2px auto;
     z-index: 3;
