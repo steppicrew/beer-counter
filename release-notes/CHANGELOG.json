@@ -2,7 +2,7 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
-      "version": "1.6.0",
+      "version": "1.6.1",
       "date": "2026-09-03",
       "notes": {
         "en": "The bar now stays on screen: drinks stand on a counter that time moves through, and glasses that fall off it break. Drag the bar back to revisit the evening.",
