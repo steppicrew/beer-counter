@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.6.7",
+      "date": "2026-09-04",
+      "notes": {
+        "en": "The clock and navigation buttons are readable again in the dark theme: the status bar no longer shows dark icons on the dark background.",
+        "de": "Uhrzeit und Navigationsschaltflächen sind im dunklen Design wieder lesbar: Die Statusleiste zeigt keine dunklen Symbole mehr auf dunklem Grund.",
+        "fr": "L'heure et les boutons de navigation redeviennent lisibles en thème sombre : la barre d'état n'affiche plus d'icônes sombres sur fond sombre.",
+        "es": "La hora y los botones de navegación vuelven a leerse en el tema oscuro: la barra de estado ya no muestra iconos oscuros sobre fondo oscuro.",
+        "it": "L'ora e i pulsanti di navigazione tornano leggibili nel tema scuro: la barra di stato non mostra più icone scure su sfondo scuro.",
+        "nl": "De klok en navigatieknoppen zijn weer leesbaar in het donkere thema: de statusbalk toont geen donkere pictogrammen meer op een donkere achtergrond.",
+        "pl": "Zegar i przyciski nawigacji są znów czytelne w ciemnym motywie: pasek stanu nie pokazuje już ciemnych ikon na ciemnym tle.",
+        "pt": "As horas e os botões de navegação voltam a ler-se no tema escuro: a barra de estado já não mostra ícones escuros sobre fundo escuro.",
+        "cs": "Hodiny a navigační tlačítka jsou v tmavém motivu opět čitelné: stavový řádek už nezobrazuje tmavé ikony na tmavém pozadí.",
+        "da": "Uret og navigationsknapperne er læsbare igen i det mørke tema: statuslinjen viser ikke længere mørke ikoner på mørk baggrund.",
+        "sv": "Klockan och navigeringsknapparna går att läsa igen i det mörka temat: statusfältet visar inte längre mörka ikoner mot mörk bakgrund.",
+        "tr": "Saat ve gezinme düğmeleri koyu temada yeniden okunuyor: durum çubuğu artık koyu zeminde koyu simgeler göstermiyor.",
+        "ru": "Часы и кнопки навигации снова читаются в тёмной теме: строка состояния больше не показывает тёмные значки на тёмном фоне.",
+        "ja": "ダークテーマで時計とナビゲーションボタンが再び読めるようになりました。ステータスバーの暗いアイコンが暗い背景に重なる問題を修正しています。",
+        "zh": "深色主题下时钟和导航按钮重新清晰可辨：状态栏不再在深色背景上显示深色图标。"
+      }
+    },
+    {
       "version": "1.6.6",
       "date": "2026-09-04",
       "notes": {
