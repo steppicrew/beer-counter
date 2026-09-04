@@ -21,6 +21,16 @@ function render(out, size, extra = []) {
     master,
     '-resize', `${size}x${size}`,
     ...extra,
+    // Byte-for-byte reproducible output. Without these the PNG carries a
+    // tIME chunk and ImageMagick's own date properties, so a rerun from an
+    // unchanged master produced a file with identical pixels but a new
+    // sha256 — which made every Play publish re-upload the icon in all
+    // fifteen languages instead of skipping it.
+    //
+    // `-strip` drops the date properties; tIME survives it and needs naming
+    // explicitly. Both are metadata only: the pixels are untouched.
+    '-strip',
+    '-define', 'png:exclude-chunk=time',
     out,
   ]);
   console.log(`  ${out.replace(`${root}/`, '')}  ${size}x${size}`);
