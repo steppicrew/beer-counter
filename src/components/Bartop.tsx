@@ -187,12 +187,24 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
   const isEmpty = glasses.length === 0;
   const isWiping = wiping !== null;
 
-  // The round has been left standing: the counter has stopped travelling with
-  // time to keep the last drink on the wood, so the present is somewhere off
-  // to the right of the bar. Measured on the *resting* window rather than the
-  // one being looked at — dragging back into the past also puts `now` off the
-  // right end, and there the barkeeper has nothing to be impatient about.
-  const isStale = !isEmpty && !isWiping && positionIn(resting, now) > 1;
+  // The round has been left standing long enough to notice: the newest drink
+  // has drifted past the middle of the counter, so the whole right half is
+  // empty and waiting. That is well before the bar stops travelling — keyed on
+  // the present instead, he only turned up once the last glass had reached the
+  // far left, by which time the counter had been bare for hours.
+  //
+  // Measured on the *resting* window rather than the one being looked at:
+  // dragging back into the past also pushes the last drink leftward, and there
+  // the barkeeper has nothing to be impatient about.
+  // Not while the window is still anchored to the opening drink. Early in a
+  // round the evening is spread out to the right of it, so a single fresh
+  // glass also sits left of centre — and without this he turned up the moment
+  // the first drink was poured, which is the opposite of what he means. Once
+  // the bar is travelling, the last drink drifting past halfway is the signal.
+  const lastAt = glasses.at(-1)?.at;
+  const anchored = glasses[0] !== undefined && resting.start === glasses[0].at - BRINK_MS;
+  const isStale =
+    !isEmpty && !isWiping && !anchored && lastAt !== undefined && positionIn(resting, lastAt) < 0.5;
 
   return (
     <div
@@ -256,11 +268,9 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
 
             {isWiping && <span className="bartop__cloth" aria-hidden="true" />}
 
-            {/* Waiting at the far end of the bar for the next order. He only
-                appears once the counter has stopped following the clock, which
-                is the moment the round reads as abandoned rather than paused —
-                and he stands past the last glass, where the drink he is
-                waiting to pour would go. */}
+            {/* Waiting at the newest end of the bar for the next order, in the
+                empty stretch the last drink has drifted away from — which is
+                where the glass he is waiting to pour would go. */}
             {isStale && (
               <span className="bartop__keeper bartop__keeper--waiting">
                 <span className="bartop__ask">{t('bartop.another')}</span>

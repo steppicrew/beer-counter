@@ -296,14 +296,30 @@ $face-setback: 4px;
   // drink he is asking about would be poured. Kept a little inside the edge so
   // the speech bubble has somewhere to sit without leaving the stage.
   &__keeper--waiting {
+    // Stood well inside the right end rather than against it. His speech
+    // bubble is centred on him and sized by its text, so hard against the edge
+    // it ran off the stage in every language whose phrase is longer than the
+    // English one — which is most of them. This is far enough in that even the
+    // widest ("Jeszcze jedno?", "Bir tane daha?") stays on the counter, and
+    // still clearly at the newest end where the next drink would be poured.
     left: auto;
-    right: vars.$space-xs;
+    right: 22%;
     transform: none;
     z-index: 1;
     // The counter has stopped moving with the clock, so he is the one thing on
     // the bar that still is. Slow enough to read as waiting rather than as
     // something demanding attention — this is a bar, not a notification.
     animation: bartop-waiting 3.2s ease-in-out infinite;
+  }
+
+  // The bubble is the widest thing about him, so it — not the figure — is what
+  // decides whether he fits. Clamped to the stage and allowed to wrap, it can
+  // no longer push its ends off the counter no matter how long the phrase is.
+  &__keeper--waiting &__ask {
+    max-width: min(72vw, 190px);
+    white-space: normal;
+    text-align: center;
+    text-wrap: balance;
   }
 
   // Room for the speech bubble above his head — needed whenever he is on the
