@@ -187,6 +187,13 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
   const isEmpty = glasses.length === 0;
   const isWiping = wiping !== null;
 
+  // The round has been left standing: the counter has stopped travelling with
+  // time to keep the last drink on the wood, so the present is somewhere off
+  // to the right of the bar. Measured on the *resting* window rather than the
+  // one being looked at — dragging back into the past also puts `now` off the
+  // right end, and there the barkeeper has nothing to be impatient about.
+  const isStale = !isEmpty && !isWiping && positionIn(resting, now) > 1;
+
   return (
     <div
       className={clsx(
@@ -248,6 +255,18 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
             )}
 
             {isWiping && <span className="bartop__cloth" aria-hidden="true" />}
+
+            {/* Waiting at the far end of the bar for the next order. He only
+                appears once the counter has stopped following the clock, which
+                is the moment the round reads as abandoned rather than paused —
+                and he stands past the last glass, where the drink he is
+                waiting to pour would go. */}
+            {isStale && (
+              <span className="bartop__keeper bartop__keeper--waiting">
+                <span className="bartop__ask">{t('bartop.another')}</span>
+                <Barkeeper className="bartop__keeper-figure" />
+              </span>
+            )}
 
             <span className="bartop__glasses">
               {isEmpty ? (

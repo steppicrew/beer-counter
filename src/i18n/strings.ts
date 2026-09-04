@@ -105,6 +105,7 @@ export const en = {
   'empty.body': 'Tap a drink below to start counting.',
   'bartop.empty': 'The bar is empty.',
   'bartop.ask': 'What can I get you?',
+  'bartop.another': 'Another one?',
   'bartop.summary': '{count} glasses on the bar.',
   'bartop.toPresent': 'Back to now',
 } as const;
@@ -215,6 +216,7 @@ export const de: Messages = {
   'empty.body': 'Tippe unten auf ein Getränk, um zu zählen.',
   'bartop.empty': 'Der Tresen ist leer.',
   'bartop.ask': 'Was darf es sein?',
+  'bartop.another': 'Noch eins?',
   'bartop.summary': '{count} Gläser auf dem Tresen.',
   'bartop.toPresent': 'Zurück zu jetzt',
 };
@@ -322,6 +324,7 @@ export const fr: Messages = {
   'empty.body': 'Touchez une boisson ci-dessous pour commencer.',
   'bartop.empty': 'Le comptoir est vide.',
   'bartop.ask': 'Qu\'est-ce que ce sera ?',
+  'bartop.another': 'Encore un ?',
   'bartop.summary': '{count} verres sur le comptoir.',
   'bartop.toPresent': 'Revenir à maintenant',
 };
@@ -429,6 +432,7 @@ export const es: Messages = {
   'empty.body': 'Toca una bebida para empezar a contar.',
   'bartop.empty': 'La barra está vacía.',
   'bartop.ask': '¿Qué te pongo?',
+  'bartop.another': '¿Otra más?',
   'bartop.summary': '{count} vasos en la barra.',
   'bartop.toPresent': 'Volver al presente',
 };
@@ -536,6 +540,7 @@ export const it: Messages = {
   'empty.body': 'Tocca una bevanda per iniziare a contare.',
   'bartop.empty': 'Il bancone è vuoto.',
   'bartop.ask': 'Cosa ti porto?',
+  'bartop.another': 'Un altro?',
   'bartop.summary': '{count} bicchieri sul bancone.',
   'bartop.toPresent': 'Torna a ora',
 };
@@ -643,6 +648,7 @@ export const nl: Messages = {
   'empty.body': 'Tik hieronder op een drankje om te tellen.',
   'bartop.empty': 'De bar is leeg.',
   'bartop.ask': 'Wat mag het zijn?',
+  'bartop.another': 'Nog eentje?',
   'bartop.summary': '{count} glazen op de bar.',
   'bartop.toPresent': 'Terug naar nu',
 };
@@ -750,6 +756,7 @@ export const pl: Messages = {
   'empty.body': 'Dotknij napoju poniżej, aby zacząć liczyć.',
   'bartop.empty': 'Bar jest pusty.',
   'bartop.ask': 'Czego się napijesz?',
+  'bartop.another': 'Jeszcze jedno?',
   'bartop.summary': 'Szklanki na barze: {count}.',
   'bartop.toPresent': 'Wróć do teraz',
 };
@@ -857,6 +864,7 @@ export const pt: Messages = {
   'empty.body': 'Toque numa bebida abaixo para começar a contar.',
   'bartop.empty': 'O balcão está vazio.',
   'bartop.ask': 'O que vai ser?',
+  'bartop.another': 'Mais uma?',
   'bartop.summary': '{count} copos no balcão.',
   'bartop.toPresent': 'Voltar ao agora',
 };
@@ -964,6 +972,7 @@ export const cs: Messages = {
   'empty.body': 'Klepněte na nápoj níže a začněte počítat.',
   'bartop.empty': 'Barový pult je prázdný.',
   'bartop.ask': 'Co to bude?',
+  'bartop.another': 'Ještě jedno?',
   'bartop.summary': 'Sklenic na pultu: {count}.',
   'bartop.toPresent': 'Zpět na teď',
 };
@@ -1071,6 +1080,7 @@ export const da: Messages = {
   'empty.body': 'Tryk på en drink nedenfor for at tælle.',
   'bartop.empty': 'Baren er tom.',
   'bartop.ask': 'Hvad skulle det være?',
+  'bartop.another': 'En til?',
   'bartop.summary': '{count} glas på baren.',
   'bartop.toPresent': 'Tilbage til nu',
 };
@@ -1178,6 +1188,7 @@ export const sv: Messages = {
   'empty.body': 'Tryck på en dryck nedan för att börja räkna.',
   'bartop.empty': 'Baren är tom.',
   'bartop.ask': 'Vad får det lov att vara?',
+  'bartop.another': 'En till?',
   'bartop.summary': '{count} glas på baren.',
   'bartop.toPresent': 'Tillbaka till nu',
 };
@@ -1285,6 +1296,7 @@ export const tr: Messages = {
   'empty.body': 'Saymaya başlamak için aşağıdan bir içeceğe dokun.',
   'bartop.empty': 'Bar boş.',
   'bartop.ask': 'Ne alırsınız?',
+  'bartop.another': 'Bir tane daha?',
   'bartop.summary': 'Barda {count} bardak var.',
   'bartop.toPresent': 'Şimdiye dön',
 };
@@ -1392,6 +1404,7 @@ export const ru: Messages = {
   'empty.body': 'Нажмите на напиток ниже, чтобы начать счёт.',
   'bartop.empty': 'Барная стойка пуста.',
   'bartop.ask': 'Что будете пить?',
+  'bartop.another': 'Ещё одну?',
   'bartop.summary': 'Стаканов на стойке: {count}.',
   'bartop.toPresent': 'Вернуться к настоящему',
 };
@@ -1499,6 +1512,7 @@ export const ja: Messages = {
   'empty.body': '下の飲み物をタップして記録を始めましょう。',
   'bartop.empty': 'カウンターは空です。',
   'bartop.ask': '何にしましょう？',
+  'bartop.another': 'もう一杯どうぞ？',
   'bartop.summary': 'カウンターにグラス {count} 杯。',
   'bartop.toPresent': '現在に戻る',
 };
@@ -1605,6 +1619,7 @@ export const zh: Messages = {
   'empty.body': '点击下方饮品开始计数。',
   'bartop.empty': '吧台是空的。',
   'bartop.ask': '想喝点什么？',
+  'bartop.another': '再来一杯？',
   'bartop.summary': '吧台上有 {count} 杯。',
   'bartop.toPresent': '回到现在',
 };
