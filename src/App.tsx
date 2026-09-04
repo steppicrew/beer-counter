@@ -88,8 +88,11 @@ export function App() {
 
     const dark = theme === 'dark' || (theme === 'system' && systemDark);
 
-    // Tells the platform which way to shade the bar icons.
-    root.style.colorScheme = theme === 'system' ? '' : theme;
+    // Tells the platform which way to shade the bar icons. It has to name the
+    // *resolved* scheme, not the setting: leaving it empty on 'system' — the
+    // default — let the WebView fall back to its own idea of light, which put
+    // dark icons over the dark page and hid the clock.
+    root.style.colorScheme = dark ? 'dark' : 'light';
 
     // A single un-media'd tag wins over the media-query pair in index.html,
     // so the active colour is whatever this writes.
