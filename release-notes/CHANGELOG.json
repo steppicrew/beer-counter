@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.6.6",
+      "date": "2026-09-04",
+      "notes": {
+        "en": "Come back to a round from yesterday and the last drinks are still on the bar instead of scrolled out of sight — and the barkeeper waits there for your next order.",
+        "de": "Wenn du zu einer Runde von gestern zurückkehrst, stehen die letzten Getränke noch auf dem Tresen statt aus dem Bild gescrollt zu sein — und der Wirt wartet dort auf deine nächste Bestellung.",
+        "fr": "En revenant sur une tournée d'hier, les derniers verres sont encore sur le comptoir au lieu d'avoir défilé hors de vue, et le barman y attend votre prochaine commande.",
+        "es": "Si vuelves a una ronda de ayer, las últimas bebidas siguen en la barra en vez de haberse desplazado fuera de vista, y el camarero espera allí tu próximo pedido.",
+        "it": "Tornando a un giro di ieri, gli ultimi bicchieri sono ancora sul bancone invece di essere scorsi via, e il barista aspetta lì la prossima ordinazione.",
+        "nl": "Kom je terug bij een ronde van gisteren, dan staan de laatste drankjes nog op de toog in plaats van uit beeld gescrold — en de barman wacht daar op je volgende bestelling.",
+        "pl": "Po powrocie do wczorajszej kolejki ostatnie drinki wciąż stoją na barze, zamiast zniknąć poza ekranem, a barman czeka tam na następne zamówienie.",
+        "pt": "Ao voltares a uma rodada de ontem, as últimas bebidas continuam no balcão em vez de terem saído do ecrã — e o barman espera ali pelo teu próximo pedido.",
+        "cs": "Když se vrátíš ke včerejšímu kolu, poslední nápoje pořád stojí na baru místo aby odjely mimo obraz, a barman tam čeká na další objednávku.",
+        "da": "Vender du tilbage til en omgang fra i går, står de sidste drinks stadig på baren i stedet for at være rullet ud af syne — og bartenderen venter på din næste bestilling.",
+        "sv": "Kommer du tillbaka till en omgång från igår står de sista dryckerna kvar på baren i stället för att ha rullat utom synhåll — och bartendern väntar på din nästa beställning.",
+        "tr": "Dünkü bir tura döndüğünde son içkiler görüş alanından kaymak yerine hâlâ barda duruyor ve barmen bir sonraki siparişini orada bekliyor.",
+        "ru": "Вернувшись к вчерашнему кругу, вы увидите последние напитки всё ещё на стойке, а не уехавшими за край, и бармена, который ждёт следующий заказ.",
+        "ja": "昨日の一巡に戻っても、最後の一杯がまだカウンターに残っていて画面外に流れません。バーテンダーが次の注文を待っています。",
+        "zh": "回到昨天的一轮时，最后几杯仍留在吧台上，而不会滚出视野，酒保也在那里等你点下一杯。"
+      }
+    },
+    {
       "version": "1.6.5",
       "date": "2026-09-03",
       "notes": {
