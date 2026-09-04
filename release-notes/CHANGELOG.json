@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.6.8",
+      "date": "2026-09-04",
+      "notes": {
+        "en": "The barkeeper steps up as soon as the last drink passes the middle of the bar, and his question now fits on screen in every language.",
+        "de": "Der Wirt kommt, sobald das letzte Getränk die Tresenmitte passiert, und seine Frage passt jetzt in jeder Sprache aufs Display.",
+        "fr": "Le barman se présente dès que le dernier verre dépasse le milieu du comptoir, et sa question tient enfin à l'écran.",
+        "es": "El camarero se acerca cuando la última bebida pasa el centro de la barra, y su pregunta ya cabe en pantalla.",
+        "it": "Il barista si avvicina quando l'ultimo bicchiere supera il centro del bancone, e la domanda ora entra nello schermo.",
+        "nl": "De barman komt zodra het laatste drankje het midden van de toog passeert, en zijn vraag past nu op het scherm.",
+        "pl": "Barman podchodzi, gdy ostatni drink minie środek baru, a jego pytanie mieści się już na ekranie.",
+        "pt": "O barman aproxima-se quando a última bebida passa o meio do balcão, e a pergunta já cabe no ecrã.",
+        "cs": "Barman přijde, jakmile poslední nápoj mine střed baru, a jeho otázka se teď vejde na obrazovku.",
+        "da": "Bartenderen kommer, når den sidste drink passerer midten af baren, og hans spørgsmål er der nu plads til.",
+        "sv": "Bartendern kommer när den sista drycken passerar mitten av baren, och hans fråga får nu plats på skärmen.",
+        "tr": "Son içki barın ortasını geçince barmen yanınıza geliyor ve sorusu artık ekrana sığıyor.",
+        "ru": "Бармен подходит, когда последний напиток минует середину стойки, и его вопрос теперь помещается на экране.",
+        "ja": "最後の一杯がカウンター中ほどを過ぎるとバーテンダーが声をかけます。問いかけも画面に収まります。",
+        "zh": "最后一杯越过吧台中间时酒保就会上前，他的问话现在也能完整显示。"
+      }
+    },
+    {
       "version": "1.6.7",
       "date": "2026-09-04",
       "notes": {
