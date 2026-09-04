@@ -292,8 +292,24 @@ $face-setback: 4px;
     opacity: 0.9;
   }
 
-  // Room for the speech bubble above his head.
-  &--empty &__track {
+  // Waiting at the newest end of the bar, past the last glass — where the
+  // drink he is asking about would be poured. Kept a little inside the edge so
+  // the speech bubble has somewhere to sit without leaving the stage.
+  &__keeper--waiting {
+    left: auto;
+    right: vars.$space-xs;
+    transform: none;
+    z-index: 1;
+    // The counter has stopped moving with the clock, so he is the one thing on
+    // the bar that still is. Slow enough to read as waiting rather than as
+    // something demanding attention — this is a bar, not a notification.
+    animation: bartop-waiting 3.2s ease-in-out infinite;
+  }
+
+  // Room for the speech bubble above his head — needed whenever he is on the
+  // counter, whether the bar is empty or the round has been left standing.
+  &--empty &__track,
+  &:has(&__keeper--waiting) &__track {
     height: $counter-height + $glass-size + 34px;
   }
 
@@ -499,6 +515,20 @@ $face-setback: 4px;
 
 // The wipe is feedback, not decoration, so without motion the glasses still
 // have to go — they just go at once instead of being swept.
+// Shifting his weight while he waits. A rotation about the feet rather than a
+// bob: a figure that moves straight up and down reads as bouncing, which is
+// cheerful, and the point here is that he has been standing there a while.
+@keyframes bartop-waiting {
+  0%,
+  100% {
+    transform: rotate(-1.6deg);
+  }
+
+  50% {
+    transform: rotate(1.6deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bartop__cloth {
     display: none;
@@ -511,6 +541,11 @@ $face-setback: 4px;
 
   // The pile is state, not motion — it just appears without the drop.
   .bartop__shard-figure {
+    animation: none;
+  }
+
+  // He is still standing there waiting; he just stops fidgeting about it.
+  .bartop__keeper--waiting {
     animation: none;
   }
 
