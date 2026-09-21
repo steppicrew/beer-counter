@@ -41,8 +41,26 @@ const CJK_FONTS = {
 function fontsFor(code) {
   return CJK_FONTS[code] ?? { regular: FONT, bold: FONT };
 }
-const TEXT_X = 470;
-const MAX_TEXT_WIDTH = 1024 - TEXT_X - 56;
+/**
+ * Play does not show the 1024x500 graphic whole. The developer and store
+ * listings request it at w416-h235 and paint it with `object-fit: cover` into
+ * a 16:9 box, so the sides are cropped: only 500 * 16/9 = 889px of the 1024
+ * survive, centred — 67.5px falls off each edge. Text laid out to the file's
+ * own edge is therefore sliced mid-word on the store page even though the PNG
+ * itself looks fine.
+ *
+ * Everything that must stay readable lives inside SAFE_LEFT..SAFE_RIGHT, with
+ * a margin on top of the crop so the headline does not merely touch the cut.
+ */
+const CROP_ASPECT = 16 / 9;
+const CROP_INSET = Math.round((1024 - 500 * CROP_ASPECT) / 2); // 68
+const SAFE_MARGIN = 28;
+const SAFE_RIGHT = 1024 - CROP_INSET - SAFE_MARGIN;
+
+// The mug ends at x=419; start the column just clear of it so the lost width
+// on the right is bought back from the gap rather than from the type size.
+const TEXT_X = 455;
+const MAX_TEXT_WIDTH = SAFE_RIGHT - TEXT_X;
 
 
 /**
