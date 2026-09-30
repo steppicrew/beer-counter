@@ -139,7 +139,7 @@ const HEAD_DEPTH = 2.6;
  */
 export function GlassIcon({ icon, className, fill = 'full' }: Props) {
   const shape = SHAPES[icon];
-  const clipId = `glass-clip-${icon}`;
+  const clipId = `glass-inside-${icon}`;
 
   // The liquid line marks a full glass and `floor` the bottom of the volume,
   // so a partial fill is just that line slid down between the two. An emptied
@@ -176,23 +176,15 @@ export function GlassIcon({ icon, className, fill = 'full' }: Props) {
       focusable="false"
     >
       <defs>
-        <clipPath id={clipId}>
-          <path d={shape.clip} />
-        </clipPath>
+        {/* The drink fills the glass up to the *inside* of its rim: the
+            glass's shape, minus the rim's stroke. A plain clip stops at the
+            outer edge, and through the half-transparent rim the drink then
+            showed right out to the border, as if spilling over it. */}
+        <mask id={clipId} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+          <path d={shape.clip} fill="#fff" stroke="#000" strokeWidth="1.5" strokeLinejoin="round" />
+        </mask>
       </defs>
-      {/* The empty part of the glass is drawn as an outline and the drink as
-          a solid fill, so a drained glass still reads as glassware standing on
-          the bar rather than as a blank gap. */}
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-        opacity="0.55"
-      >
-        {shape.body}
-      </g>
-      <g clipPath={`url(#${clipId})`}>
+      <g mask={`url(#${clipId})`}>
         <rect
           x="0"
           y={surfaceY}
@@ -229,6 +221,18 @@ export function GlassIcon({ icon, className, fill = 'full' }: Props) {
             transform={`translate(0 ${surfaceY - shape.liquidY})`}
           />
         )}
+      </g>
+      {/* The glass itself: an outline over the drink, so a drained glass
+          still reads as glassware standing on the bar rather than as a blank
+          gap. Drawn last, over the drink, which stops at its inner edge. */}
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        opacity="0.55"
+      >
+        {shape.body}
       </g>
     </svg>
   );
