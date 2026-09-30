@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.6",
+      "date": "2026-10-01",
+      "notes": {
+        "en": "A new barman stands behind the counter, shaking cocktails. Forgot to tap? Count a drink earlier from its edit sheet, or hold a glass on the bar and slide it back. The tip jar now stands at the end of the bar, one coin per tip. And the navigation bar stays readable in the light theme.",
+        "de": "Ein neuer Wirt steht hinter dem Tresen und mixt Cocktails. Tippen vergessen? Ein Getränk nachträglich zählen oder ein Glas auf dem Tresen festhalten und zurückschieben. Das Trinkgeldglas steht jetzt am Ende des Tresens, eine Münze pro Trinkgeld. Und die Navigationsleiste bleibt im hellen Design lesbar.",
+        "fr": "Un nouveau barman se tient derrière le comptoir et secoue des cocktails. Un appui oublié ? Comptez un verre plus tôt, ou maintenez un verre sur le comptoir et faites-le glisser en arrière. Le pot à pourboires est au bout du comptoir, une pièce par pourboire. Et la barre de navigation reste lisible en thème clair.",
+        "es": "Un nuevo camarero está tras la barra agitando cócteles. ¿Se te olvidó tocar? Cuenta una bebida antes, o mantén pulsado un vaso en la barra y deslízalo hacia atrás. El bote de propinas está al final de la barra, una moneda por propina. Y la barra de navegación se lee bien en el tema claro.",
+        "it": "Un nuovo barista sta dietro il bancone e shakera cocktail. Tocco dimenticato? Conta un drink prima, oppure tieni premuto un bicchiere sul bancone e trascinalo indietro. Il barattolo delle mance è in fondo al bancone, una moneta per mancia. E la barra di navigazione resta leggibile nel tema chiaro.",
+        "nl": "Een nieuwe barman staat achter de toog en shakt cocktails. Tik vergeten? Tel een drankje eerder, of houd een glas op de toog vast en schuif het terug. De fooienpot staat nu aan het eind van de toog, één munt per fooi. En de navigatiebalk blijft leesbaar in het lichte thema.",
+        "pl": "Za barem stoi nowy barman i shakuje koktajle. Zapomniałeś dotknąć? Dolicz napój wcześniej albo przytrzymaj szklankę na barze i przesuń ją wstecz. Słoik na napiwki stoi teraz na końcu baru, jedna moneta za napiwek. A pasek nawigacji jest czytelny w jasnym motywie.",
+        "pt": "Um novo barman está atrás do balcão a agitar cocktails. Esqueceste-te de tocar? Conta uma bebida antes, ou mantém premido um copo no balcão e arrasta-o para trás. O frasco das gorjetas está no fim do balcão, uma moeda por gorjeta. E a barra de navegação fica legível no tema claro.",
+        "cs": "Za barem stojí nový barman a míchá koktejly. Zapomněl jsi klepnout? Připočítej nápoj dřív, nebo podrž sklenici na baru a posuň ji zpět. Sklenička na spropitné teď stojí na konci baru, jedna mince za každé spropitné. A navigační lišta je čitelná i ve světlém motivu.",
+        "da": "En ny bartender står bag baren og ryster cocktails. Glemt at trykke? Tæl en drink tidligere, eller hold et glas på baren og skub det tilbage. Drikkepengeglasset står nu for enden af baren, én mønt pr. drikkepenge. Og navigationslinjen kan læses i det lyse tema.",
+        "sv": "En ny bartender står bakom disken och skakar drinkar. Glömde du trycka? Räkna en dryck tidigare, eller håll ett glas på disken och dra det bakåt. Dricksburken står nu längst bort på disken, ett mynt per dricks. Och navigeringsfältet går att läsa i det ljusa temat.",
+        "tr": "Tezgâhın arkasında kokteyl sallayan yeni bir barmen var. Dokunmayı mı unuttun? Bir içeceği daha önceye say ya da bardaki bir bardağı basılı tutup geri kaydır. Bahşiş kavanozu artık tezgâhın ucunda, her bahşiş için bir bozuk para. Gezinme çubuğu da açık temada okunabilir.",
+        "ru": "За стойкой — новый бармен, он смешивает коктейли. Забыли нажать? Добавьте напиток задним числом или зажмите стакан на стойке и сдвиньте его назад. Баночка для чаевых теперь стоит в конце стойки, по монете за каждые чаевые. А панель навигации видна и в светлой теме.",
+        "ja": "カウンターの奥に、カクテルを振る新しいマスターが登場。タップし忘れても、あとから追加したり、カウンターのグラスを長押しして後ろへずらせます。チップ箱はカウンターの端に置かれ、チップ1回ごとにコインが1枚増えます。ライトテーマでもナビゲーションバーが見やすくなりました。",
+        "zh": "吧台后站着一位摇调酒的新酒保。忘了点？可以补记一杯，或长按吧台上的杯子把它往回拖。小费罐现在放在吧台尽头，每次打赏多一枚硬币。浅色主题下导航栏也清晰可见。"
+      }
+    },
+    {
       "version": "1.7.5",
       "date": "2026-09-30",
       "notes": {
