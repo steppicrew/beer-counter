@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.3",
+      "date": "2026-09-30",
+      "notes": {
+        "en": "The tip jar is a little larger now and wears a label with your currency, so it's recognisable at a glance.",
+        "de": "Das Trinkgeldglas ist jetzt etwas größer und trägt ein Etikett mit deiner Währung — so erkennt man es auf einen Blick.",
+        "fr": "Le pot à pourboires est un peu plus grand et porte une étiquette à votre devise, reconnaissable d'un coup d'œil.",
+        "es": "El bote de propinas es algo más grande y lleva una etiqueta con tu moneda, para reconocerlo de un vistazo.",
+        "it": "Il barattolo delle mance è un po' più grande e ha un'etichetta con la tua valuta, così si riconosce a colpo d'occhio.",
+        "nl": "De fooienpot is nu iets groter en heeft een etiket met je valuta, zodat je hem meteen herkent.",
+        "pl": "Słoik na napiwki jest teraz nieco większy i ma etykietę z Twoją walutą, więc łatwo go rozpoznać.",
+        "pt": "O frasco das gorjetas está um pouco maior e tem um rótulo com a tua moeda, para se reconhecer num relance.",
+        "cs": "Sklenička na spropitné je teď o něco větší a má štítek s tvou měnou, takže ji poznáš na první pohled.",
+        "da": "Drikkepengeglasset er nu lidt større og har en etiket med din valuta, så det er let at genkende.",
+        "sv": "Dricksburken är nu lite större och har en etikett med din valuta, så du känner igen den direkt.",
+        "tr": "Bahşiş kavanozu artık biraz daha büyük ve para biriminin yazılı olduğu bir etiket taşıyor; bir bakışta tanınıyor.",
+        "ru": "Баночка для чаевых стала чуть больше и получила этикетку с вашей валютой — её видно сразу.",
+        "ja": "チップ箱が少し大きくなり、通貨記号のラベルが付いてひと目でわかるようになりました。",
+        "zh": "小费罐稍微变大了，还贴上了你所用货币的标签，一眼就能认出来。"
+      }
+    },
+    {
       "version": "1.7.2",
       "date": "2026-09-30",
       "notes": {
