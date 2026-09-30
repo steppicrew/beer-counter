@@ -20,6 +20,11 @@ interface AppState {
   history: Round[];
   /** Off means a reset discards the round, as it did before history existed. */
   historyEnabled: boolean;
+  /**
+   * Set once the barkeeper has pointed at the tip jar, or the user has
+   * tipped. He asks once ever — a bar that keeps asking is a nag.
+   */
+  tipAsked: boolean;
 
   theme: ThemeMode;
   /** null = follow browser/system language. */
@@ -49,6 +54,7 @@ interface AppState {
   resetSession: () => void;
   setHistoryEnabled: (enabled: boolean) => void;
   clearHistory: () => void;
+  markTipAsked: () => void;
 
   setTheme: (theme: ThemeMode) => void;
   setLocale: (locale: string | null) => void;
@@ -68,6 +74,7 @@ export const useAppStore = create<AppState>()(
         sessionStartedAt: Date.now(),
         history: [],
         historyEnabled: true,
+        tipAsked: false,
         theme: 'system',
         locale: null,
         currency: null,
@@ -156,6 +163,7 @@ export const useAppStore = create<AppState>()(
 
         setHistoryEnabled: (historyEnabled) => set({ historyEnabled }),
         clearHistory: () => set({ history: [] }),
+        markTipAsked: () => set({ tipAsked: true }),
 
         setTheme: (theme) => set({ theme }),
         setLocale: (locale) => set({ locale }),
@@ -200,6 +208,7 @@ export const useAppStore = create<AppState>()(
           sessionStartedAt: state.sessionStartedAt,
           history: state.history,
           historyEnabled: state.historyEnabled,
+          tipAsked: state.tipAsked,
           theme: state.theme,
           locale: state.locale,
           currency: state.currency,

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { BeverageRow } from './components/BeverageRow';
 import { Bartop } from './components/Bartop';
 import { UiIcon } from './components/UiIcon';
@@ -13,7 +13,7 @@ import type { Beverage, Tally } from './lib/types';
 import { computeTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
-import { TIP_URL } from './lib/tips';
+import { REGULAR_AFTER_ROUNDS, TIP_URL, useTipOffers } from './lib/tips';
 import { useInstallPrompt } from './lib/useInstallPrompt';
 import { useSystemDark } from './lib/useSystemDark';
 import { useViewportInset } from './lib/useViewportInset';
@@ -30,7 +30,7 @@ type Dialog =
   | { kind: 'none' }
   | { kind: 'add' }
   | { kind: 'edit'; beverage: Beverage }
-  | { kind: 'settings' }
+  | { kind: 'settings'; focusTip?: boolean }
   | { kind: 'reset' }
   | { kind: 'share' }
   | { kind: 'stats' };
@@ -54,6 +54,9 @@ export function App() {
   const updateBeverage = useAppStore((s) => s.updateBeverage);
   const removeBeverage = useAppStore((s) => s.removeBeverage);
   const resetSession = useAppStore((s) => s.resetSession);
+  const rounds = useAppStore((s) => s.history.length);
+  const tipAsked = useAppStore((s) => s.tipAsked);
+  const markTipAsked = useAppStore((s) => s.markTipAsked);
 
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
   const systemDark = useSystemDark();
@@ -127,6 +130,21 @@ export function App() {
   const totals = computeTotals(beverages, tallies);
   const total = totals.drinks;
   const currency = storedCurrency ?? defaultCurrencyFor(locale);
+
+  // The barkeeper mentions the tip jar once, to a regular, on an empty bar —
+  // and only where there is a jar: Play products in the app, the link on the
+  // web. Never tied to how much has been drunk.
+  const tipOffers = useTipOffers();
+  const canTip = isNativeApp() ? tipOffers.length > 0 : TIP_URL !== null;
+  const tipJarAsk = canTip && !tipAsked && rounds >= REGULAR_AFTER_ROUNDS && total === 0;
+
+  // Seen and passed over counts as asked: once the round starts, his line is
+  // gone and must not come back next time.
+  const askedShown = useRef(false);
+  useEffect(() => {
+    if (tipJarAsk) askedShown.current = true;
+    else if (askedShown.current && !tipAsked) markTipAsked();
+  }, [tipJarAsk, tipAsked, markTipAsked]);
 
   return (
     <I18nContext.Provider value={{ locale, t }}>
@@ -213,7 +231,20 @@ export function App() {
             scrolls underneath it and fades out behind the counter rather than
             pushing it away. The keyboard is the only thing that takes it —
             it and an editing sheet cannot share the bottom of the screen. */}
-        <Bartop beverages={beverages} tallies={tallies} now={now} hidden={keyboardUp} />
+        <Bartop
+          beverages={beverages}
+          tallies={tallies}
+          now={now}
+          hidden={keyboardUp}
+          onTipJar={
+            tipJarAsk
+              ? () => {
+                  markTipAsked();
+                  setDialog({ kind: 'settings', focusTip: true });
+                }
+              : undefined
+          }
+        />
 
         {install.bannerVisible && (
           <div className="app__install">
@@ -307,7 +338,12 @@ export function App() {
           />
         )}
 
-        {dialog.kind === 'settings' && <SettingsSheet onClose={() => setDialog({ kind: 'none' })} />}
+        {dialog.kind === 'settings' && (
+          <SettingsSheet
+            focusTip={dialog.focusTip ?? false}
+            onClose={() => setDialog({ kind: 'none' })}
+          />
+        )}
 
         {dialog.kind === 'stats' && <StatsSheet onClose={() => setDialog({ kind: 'none' })} />}
 

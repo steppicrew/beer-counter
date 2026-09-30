@@ -45,6 +45,13 @@ export interface TipOffer {
 }
 
 /**
+ * How many finished rounds make someone a regular — the point at which the
+ * barkeeper mentions the tip jar. By then they have come back often enough to
+ * know whether they like the place.
+ */
+export const REGULAR_AFTER_ROUNDS = 5;
+
+/**
  * The Play offers, in the fixed small → round order, or an empty list when
  * this is not the native app or Play did not answer — the section then hides
  * rather than showing buttons that cannot work.

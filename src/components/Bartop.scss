@@ -322,11 +322,33 @@ $face-setback: 4px;
     text-wrap: balance;
   }
 
+  // The tip-jar line is a sentence, not a question: it wraps inside a bubble
+  // clamped to the stage, and is the one bubble that takes a tap.
+  &__ask--tip {
+    // Positioned inside a figure-wide box, so without an explicit width the
+    // bubble shrinks to the barkeeper and stacks one word per line.
+    width: max-content;
+    max-width: min(78vw, 230px);
+    border-radius: vars.$radius-md;
+    white-space: normal;
+    text-align: center;
+    text-wrap: balance;
+    pointer-events: auto;
+    cursor: pointer;
+    color: var(--text);
+    border-color: var(--accent);
+  }
+
   // Room for the speech bubble above his head — needed whenever he is on the
   // counter, whether the bar is empty or the round has been left standing.
   &--empty &__track,
   &:has(&__keeper--waiting) &__track {
     height: $counter-height + $glass-size + 34px;
+  }
+
+  // Up to three lines of bubble in the longer languages.
+  &--tip &__track {
+    height: $counter-height + $glass-size + 66px;
   }
 
   // A glass going over the left end. It is drawn for the length of the fall
