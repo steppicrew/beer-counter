@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { Sheet } from './Sheet';
 import { TipSection } from './TipSection';
+import { DataSection } from './DataSection';
 import { useI18n, LOCALES } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
 import type { ThemeMode } from '../lib/types';
@@ -104,6 +105,8 @@ export function SettingsSheet({
           )}
         </div>
       )}
+
+      <DataSection />
 
       <TipSection focus={focusTip} />
 
