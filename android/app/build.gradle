@@ -45,6 +45,14 @@ android {
     }
 
     buildTypes {
+        // A debug build installs beside the Play version instead of over it:
+        // Play signs with Google's app-signing key, so a locally signed build
+        // could only replace it after an uninstall, which deletes the user's
+        // data. The suffix makes it a separate app with its own storage.
+        debug {
+            applicationIdSuffix '.preview'
+            versionNameSuffix '-preview'
+        }
         release {
             minifyEnabled true
             shrinkResources true
