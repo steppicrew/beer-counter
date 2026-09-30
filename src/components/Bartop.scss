@@ -325,9 +325,11 @@ $ink-line: 2px;
     font-size: vars.$font-sm;
     line-height: 1.35;
     white-space: normal;
-    color: var(--text-muted);
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
+    // In his own pen and on his own paper, so the bubble reads as part of
+    // the drawing rather than as an app label laid over it.
+    color: var(--bar-ink);
+    background: var(--bar-paper);
+    border: 1px solid var(--bar-ink);
     border-radius: vars.$radius-pill;
     // The bubble is the widest thing about him, so it — not the figure — is
     // what decides whether he fits. Clamped to the stage and allowed to wrap,
@@ -456,7 +458,6 @@ $ink-line: 2px;
     border-radius: vars.$radius-md;
     pointer-events: auto;
     cursor: pointer;
-    color: var(--text);
     border-color: var(--accent);
   }
 
