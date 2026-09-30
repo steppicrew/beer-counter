@@ -108,7 +108,6 @@
     place-items: center;
     aspect-ratio: 1;
     font-size: 28px;
-    color: var(--text-muted);
     background: var(--bg-sunken);
     border: 2px solid var(--border);
     border-radius: vars.$radius-md;
@@ -116,7 +115,7 @@
     // Each drink already draws itself in its own colour, so an unselected
     // option is dimmed rather than drained: the swatch still identifies the
     // drink while the selected one is the only fully saturated tile. The
-    // glassware keeps `--text-muted` throughout — the border marks the
+    // glassware keeps its own ink throughout — the border marks the
     // selection, and recolouring the glass would make the same drink look
     // different here than in its row.
     opacity: 0.62;

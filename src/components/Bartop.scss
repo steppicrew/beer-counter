@@ -9,7 +9,8 @@ $counter-top: 11px;
 $counter-face: 22px;
 $label-line: 15px;
 $counter-height: $counter-top + $counter-face;
-$glass-size: 27px;
+// The same size as the icon on a counting row: it is the same drawing.
+$glass-size: 36px;
 // The barkeeper: the full sprite, 92 rows to the hem of his shirt plus 8 rows
 // of headroom for the bob. Tall enough to be a person next to the glasses, not
 // so tall that he crowds the rows above.
@@ -228,11 +229,6 @@ $ink-line: 2px;
     position: absolute;
     inset: auto auto $counter-height - 1px;
     transform: translateX(-50%);
-    color: var(--accent);
-    // Two shadows: a tight dark one where the glass meets the wood, and a
-    // softer one further down. A single blur reads as a sticker with a
-    // drop shadow; the contact shadow is what puts it *on* the counter.
-    filter: drop-shadow(0 1px 0 rgb(0 0 0 / 55%)) drop-shadow(0 3px 4px rgb(0 0 0 / 45%));
   }
 
   &__glass-figure {
@@ -252,7 +248,6 @@ $ink-line: 2px;
     // showing it made his shirt flicker. No shadow — the bubble keeps its own.
     bottom: $counter-height - 6px;
     z-index: -1;
-    filter: none;
   }
 
   // A glass can be held and slid back to when it was really drunk (see
@@ -266,14 +261,13 @@ $ink-line: 2px;
     -webkit-touch-callout: none;
   }
 
-  // Lifted off the counter while held: higher, with a deeper shadow, and the
-  // glass itself a little larger, so it reads as picked up rather than
-  // selected. The scale is on the figure only — on the whole glass it would
-  // enlarge the time bubble too, off the type scale.
+  // Lifted off the counter while held: higher, and the glass itself a little
+  // larger, so it reads as picked up rather than selected. The scale is on
+  // the figure only — on the whole glass it would enlarge the time bubble
+  // too, off the type scale.
   &__glass--held {
     z-index: 2;
     transform: translateX(-50%) translateY(-5px);
-    filter: drop-shadow(0 6px 6px rgb(0 0 0 / 40%));
     transition: transform 120ms vars.$ease;
 
     .bartop__glass-figure {
@@ -486,7 +480,6 @@ $ink-line: 2px;
     position: absolute;
     inset: auto auto $counter-height - 1px;
     transform: translateX(-50%);
-    color: var(--accent);
     pointer-events: none;
     animation: bartop-fall 420ms vars.$ease forwards;
   }
@@ -512,7 +505,6 @@ $ink-line: 2px;
 
   &__shard-figure {
     display: block;
-    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 55%));
     // Each new arrival settles onto the pile rather than blinking into it.
     animation: bartop-settle 220ms vars.$ease;
   }

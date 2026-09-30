@@ -9,7 +9,7 @@
   --bg-sunken: #{color.adjust(vars.$color-foam, $lightness: -4%)};
   --border: #{color.adjust(vars.$color-foam, $lightness: -12%)};
   --text: #23180a;
-  --text-muted: #7d6a4f;
+  --text-muted: #{vars.$color-ink};
   --accent: #{vars.$color-amber-deep};
   --accent-contrast: #ffffff;
   --danger: #{vars.$color-danger};

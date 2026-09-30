@@ -34,16 +34,16 @@ export const NOW_AT = 0.82;
 /**
  * Counter kept clear at the left end, in ms.
  *
- * A glass is centred on its timestamp and is ~27px wide, which at 74px/hour is
- * a shade over 11 minutes — so half a glass is ~5.5 minutes and a margin of
- * merely that leaves it flush with the edge. This is a full glass plus a
- * little air, so a drink standing at the end is completely on the counter
- * rather than clipped by it.
+ * A glass is centred on its timestamp and is 36px wide, which at 74px/hour is
+ * about 29 minutes — so half a glass is ~15 minutes and a margin of merely
+ * that leaves it flush with the edge. This is half a glass plus a little air,
+ * so a drink standing at the end is completely on the counter rather than
+ * clipped by it.
  *
  * It is also the line a glass falls over: once its centre is inside the left
  * margin it is hanging off the end of the bar.
  */
-export const BRINK_MS = 16 * MINUTE_MS;
+export const BRINK_MS = 20 * MINUTE_MS;
 
 /**
  * The stretch of time the counter currently shows.
