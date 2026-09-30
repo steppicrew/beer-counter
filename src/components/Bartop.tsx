@@ -269,8 +269,10 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   const isWiping = wiping !== null;
 
   // The round has been left standing long enough for him to ask: the newest
-  // drink has drifted from his side past the middle of the counter, so the
-  // stretch between them is empty and waiting. Keyed on the last glass rather
+  // drink has drifted from his side halfway to the far end, so the stretch
+  // between them is empty and waiting. Halfway along the past, not the middle
+  // of the counter: the present now sits left of the middle on a phone, where
+  // "past the middle" held for a glass poured that very moment. Keyed on the last glass rather
   // than on wall-clock age so the question arrives at a distance you can see.
   //
   // Measured on the *resting* window rather than the one being looked at:
@@ -278,7 +280,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   // the barkeeper has nothing to be impatient about.
   const lastAt = glasses.at(-1)?.at;
   const isStale =
-    !isEmpty && !isWiping && lastAt !== undefined && positionIn(resting, lastAt) < 0.5;
+    !isEmpty && !isWiping && lastAt !== undefined && positionIn(resting, lastAt) < nowAtFraction / 2;
 
   // The clink belongs to the coin hitting the bottom of the jar, so it waits
   // for the drop; with reduced motion there is no drop to wait for.
