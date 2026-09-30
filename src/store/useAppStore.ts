@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { subscribeWithSelector } from 'zustand/middleware';
 import type {
-  ArchivedDrink,
   Beverage,
   CurrencyCode,
   IconKey,
@@ -11,6 +10,7 @@ import type {
   ThemeMode,
 } from '../lib/types';
 import { DEFAULT_BEVERAGES } from '../lib/defaults';
+import { archiveRound } from '../lib/stats';
 
 interface AppState {
   beverages: Beverage[];
@@ -58,25 +58,6 @@ interface AppState {
 }
 
 const emptyTally: Tally = { times: [] };
-
-/** The round as it stands, or null when nothing was counted. */
-function archiveRound(beverages: Beverage[], tallies: Record<string, Tally>): Round | null {
-  const drinks: ArchivedDrink[] = [];
-  for (const b of beverages) {
-    const times = tallies[b.id]?.times ?? [];
-    if (times.length === 0) continue;
-    drinks.push({
-      ...(b.nameKey === undefined ? {} : { nameKey: b.nameKey }),
-      ...(b.name === undefined ? {} : { name: b.name }),
-      icon: b.icon,
-      ...(b.priceCents === undefined ? {} : { priceCents: b.priceCents }),
-      times,
-    });
-  }
-  if (drinks.length === 0) return null;
-  const all = drinks.flatMap((d) => d.times);
-  return { startedAt: Math.min(...all), endedAt: Math.max(...all), drinks };
-}
 
 export const useAppStore = create<AppState>()(
   subscribeWithSelector(
