@@ -374,7 +374,15 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
             <span
               ref={keeperRef}
               className={clsx('bartop__keeper', isStale && 'bartop__keeper--waiting')}
-              style={{ right: `${keeperRightPx}px` }}
+              style={
+                {
+                  right: `${keeperRightPx}px`,
+                  // The room left of him, which every bubble must fit in: they
+                  // speak towards the glasses, and on a phone that side is
+                  // narrow — a longer phrase wraps rather than leaving the screen.
+                  '--bubble-room': `${Math.max(90, BAR_INSET_PX + counterPx - keeperRightPx - keeperWidth - 14)}px`,
+                } as React.CSSProperties
+              }
             >
               {isEmpty && onTipJar ? (
                 // Only ever at the start of a round, before anything is
@@ -383,8 +391,6 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                   type="button"
                   className="bartop__ask bartop__ask--tip"
                   onClick={onTipJar}
-                  // Only as wide as the room left of him, so it stays on screen.
-                  style={{ maxWidth: `${Math.max(90, BAR_INSET_PX + counterPx - keeperRightPx - keeperWidth - 14)}px` }}
                 >
                   {t('bartop.tipJar')}
                 </button>
