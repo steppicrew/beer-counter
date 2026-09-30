@@ -135,9 +135,9 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
 
   const glasses = wiping ?? live;
 
-  // Where the bar sits when left alone: anchored to the opening drink until
-  // the present would fall off the right end, and travelling from then on.
-  const resting = restingWindow(glasses, now, spanMs);
+  // Where the bar sits when left alone: the present beside the barman, the
+  // round drifting away to the left of it.
+  const resting = restingWindow(now, spanMs);
   const bounds = scrollBounds(resting, glasses);
   const scroll = useBarScroll(bounds);
   const window: BarWindow = scrolledBy(resting, scroll.offset);
@@ -210,23 +210,16 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
   const isWiping = wiping !== null;
 
   // The round has been left standing long enough for him to ask: the newest
-  // drink has drifted past the middle of the counter, so the whole right half
-  // is empty and waiting. That is well before the bar stops travelling — keyed
-  // on the present instead, he only asked once the last glass had reached the
-  // far left, by which time the counter had been bare for hours.
+  // drink has drifted from his side past the middle of the counter, so the
+  // stretch between them is empty and waiting. Keyed on the last glass rather
+  // than on wall-clock age so the question arrives at a distance you can see.
   //
   // Measured on the *resting* window rather than the one being looked at:
   // dragging back into the past also pushes the last drink leftward, and there
   // the barkeeper has nothing to be impatient about.
-  // Not while the window is still anchored to the opening drink. Early in a
-  // round the evening is spread out to the right of it, so a single fresh
-  // glass also sits left of centre — and without this he asked the moment the
-  // first drink was poured, which is the opposite of what he means. Once
-  // the bar is travelling, the last drink drifting past halfway is the signal.
   const lastAt = glasses.at(-1)?.at;
-  const anchored = glasses[0] !== undefined && resting.start === glasses[0].at - BRINK_MS;
   const isStale =
-    !isEmpty && !isWiping && !anchored && lastAt !== undefined && positionIn(resting, lastAt) < 0.5;
+    !isEmpty && !isWiping && lastAt !== undefined && positionIn(resting, lastAt) < 0.5;
 
   // The clink belongs to the coin hitting the bottom of the jar, so it waits
   // for the drop; with reduced motion there is no drop to wait for.
@@ -293,12 +286,12 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
               </span>
             ))}
 
-            {/* Early in a round this stands well inside the counter, with the
-                evening still to come to the right of it; once the bar starts
-                travelling it settles near the right edge. Drawn only while it
-                is actually on stage — scrolled far enough back, the present is
-                off the end and a marker pinned to the edge would be a lie. */}
-            {nowAt >= 0 && nowAt <= 1 && (
+            {/* Beside the barman, where the next glass goes. Drawn only while
+                it is actually on stage — scrolled far enough back, the present
+                is off the end and a marker pinned to the edge would be a lie.
+                Not under the tip jar either: that stands on the same spot of
+                an empty counter, and a line poking out beneath it is noise. */}
+            {nowAt >= 0 && nowAt <= 1 && !(isEmpty && tipJar) && (
               <span
                 className="bartop__now"
                 style={{ left: `${nowAt * 100}%` }}

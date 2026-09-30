@@ -32,6 +32,10 @@ $face-setback: 4px;
 // The pen's line weight: the counter's outlines match the barman's at his size.
 $ink-line: 2px;
 
+// Where the present sits on the counter. Duplicated from NOW_AT in
+// lib/bartop.ts, which places the glasses and the marks; this places him.
+$now-at: 82%;
+
 .bartop {
   position: relative;
   flex: none;
@@ -240,14 +244,14 @@ $ink-line: 2px;
   }
 
   &__keeper {
-    // At the newest end of the bar, where the next glass would be poured, in
-    // every state: he does not move house when the first drink lands. Stood
-    // well inside the right end rather than against it, so his speech bubble
-    // — centred on him and sized by its text — stays on the counter even in
-    // the languages whose phrases run longest ("Jeszcze jedno?", "Bir tane
-    // daha?"), and clear of the tip jar at the very end.
+    // Just left of the present, so the next glass is poured at his elbow:
+    // half a glass plus a little air clear of the "now" line. Being that far
+    // inside the right end is also what keeps his speech bubble — centred on
+    // him and sized by its text — on the counter in the languages whose
+    // phrases run longest ("Jeszcze jedno?", "Bir tane daha?"), and keeps
+    // him clear of the tip jar at the very end.
     left: auto;
-    right: 22%;
+    right: calc(100% - $now-at + $glass-size * 0.5 + 4px);
     transform: none;
     // Behind the bar, not on it: layered under the wood and dipped a few
     // pixels into it, so the counter top hides the hem. The sprite ends at the
