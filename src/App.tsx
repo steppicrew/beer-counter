@@ -57,6 +57,9 @@ export function App() {
   const rounds = useAppStore((s) => s.history.length);
   const tipAsked = useAppStore((s) => s.tipAsked);
   const markTipAsked = useAppStore((s) => s.markTipAsked);
+  const tipped = useAppStore((s) => s.tipped);
+  const coinPending = useAppStore((s) => s.coinPending);
+  const clearCoin = useAppStore((s) => s.clearCoin);
 
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
   const systemDark = useSystemDark();
@@ -136,7 +139,18 @@ export function App() {
   // web. Never tied to how much has been drunk.
   const tipOffers = useTipOffers();
   const canTip = isNativeApp() ? tipOffers.length > 0 : TIP_URL !== null;
-  const tipJarAsk = canTip && !tipAsked && rounds >= REGULAR_AFTER_ROUNDS && total === 0;
+  const regular = canTip && rounds >= REGULAR_AFTER_ROUNDS && total === 0;
+  const tipJarAsk = regular && !tipAsked && !tipped;
+
+  // After the one line, the jar just stands at the end of every empty bar
+  // until a tip — then once more, with the coin, and never again. The coin
+  // waits for no sheet to be open, so the drop is actually seen.
+  const showJar = regular && (!tipped || coinPending);
+  const coinNow = coinPending && dialog.kind === 'none';
+  const openTips = () => {
+    markTipAsked();
+    setDialog({ kind: 'settings', focusTip: true });
+  };
 
   // Seen and passed over counts as asked: once the round starts, his line is
   // gone and must not come back next time.
@@ -145,6 +159,17 @@ export function App() {
     if (tipJarAsk) askedShown.current = true;
     else if (askedShown.current && !tipAsked) markTipAsked();
   }, [tipJarAsk, tipAsked, markTipAsked]);
+
+  // The coin is a thank-you for one round: once it has been seen and the
+  // next drink is counted, the jar goes with it.
+  const coinShown = useRef(false);
+  useEffect(() => {
+    if (showJar && coinNow) coinShown.current = true;
+    else if (coinShown.current && total > 0) {
+      coinShown.current = false;
+      clearCoin();
+    }
+  }, [showJar, coinNow, total, clearCoin]);
 
   return (
     <I18nContext.Provider value={{ locale, t }}>
@@ -236,14 +261,8 @@ export function App() {
           tallies={tallies}
           now={now}
           hidden={keyboardUp}
-          onTipJar={
-            tipJarAsk
-              ? () => {
-                  markTipAsked();
-                  setDialog({ kind: 'settings', focusTip: true });
-                }
-              : undefined
-          }
+          onTipJar={tipJarAsk ? openTips : undefined}
+          tipJar={showJar ? { coin: coinNow, onOpen: openTips } : undefined}
         />
 
         {install.bannerVisible && (
