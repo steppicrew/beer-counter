@@ -446,6 +446,13 @@ $now-at: 82%;
   &__ask--tip {
     // A sentence rather than a question: wider than the other bubbles.
     max-width: min(78vw, 230px);
+    // Too wide to centre on him: he stands near the right end, so a centred
+    // sentence ran half off the screen. It ends at his right edge and opens
+    // leftwards, where the counter has room — and its ➔ still points on to
+    // the jar just past him.
+    left: auto;
+    right: 0;
+    transform: none;
     border-radius: vars.$radius-md;
     pointer-events: auto;
     cursor: pointer;
