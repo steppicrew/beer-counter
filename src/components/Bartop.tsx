@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { GlassIcon } from './GlassIcon';
+import { BeverageIcon } from './BeverageIcon';
 import { Barkeeper } from './Barkeeper';
 import { TipJar } from './TipJar';
 import { ShardPile } from './ShardPile';
@@ -469,7 +469,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                         </span>
                       </>
                     )}
-                    <GlassIcon
+                    <BeverageIcon
                       icon={glass.icon}
                       className="bartop__glass-figure"
                       fill={glassFill(glass.at, now, glass.isCurrent)}
@@ -490,7 +490,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                 className="bartop__falling"
                 style={{ left: `${BAR_INSET_PX}px` }}
               >
-                <GlassIcon icon={glass.icon} className="bartop__glass-figure" fill="empty" />
+                <BeverageIcon icon={glass.icon} className="bartop__glass-figure" fill="empty" />
               </span>
             ))}
 

@@ -36,9 +36,6 @@
   &__icon {
     flex: none;
     font-size: 36px;
-    // Only the glassware: the contents come from the drink's own liquid
-    // colour, so the tile no longer tints every drink the same amber.
-    color: var(--text-muted);
   }
 
   &__text {

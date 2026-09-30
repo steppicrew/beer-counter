@@ -1,8 +1,7 @@
 import type { IconKey } from './types';
 
 /**
- * What is in each glass, shared by `BeverageIcon` (the row and picker buttons)
- * and `GlassIcon` (the bartop), so a drink looks the same wherever it appears.
+ * What is in each glass, for `BeverageIcon`.
  *
  * The colours themselves live in `styles/theme.scss` as `--liquid-*` tokens —
  * only the token *name* is built here, so the light and dark palettes stay in
