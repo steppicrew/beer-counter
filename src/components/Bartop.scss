@@ -333,8 +333,6 @@ $ink-line: 2px;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: vars.$radius-pill;
-    // The shadow the keeper no longer casts, kept on the bubble alone.
-    filter: drop-shadow(0 1px 0 rgb(0 0 0 / 55%)) drop-shadow(0 3px 4px rgb(0 0 0 / 45%));
     // The bubble is the widest thing about him, so it — not the figure — is
     // what decides whether he fits. Clamped to the stage and allowed to wrap,
     // it can no longer push its ends off the counter no matter how long the
