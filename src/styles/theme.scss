@@ -17,9 +17,10 @@
   --shadow: #{vars.$shadow-card};
 
   // The barman and the counter are line art from the same pen: this ink on
-  // the elevated background. The counter's planes are told apart by their
-  // outlines alone, the way the sprite's shirt is.
-  --ink: #{vars.$color-ink};
+  // this paper. The counter's planes are told apart by their outlines alone,
+  // the way the sprite's shirt is.
+  --bar-ink: #{vars.$color-ink};
+  --bar-paper: #{vars.$color-paper};
   --glass-foam: #{vars.$color-foam};
 
   // Per-drink liquids. Both icon components read these by name, so a drink's
@@ -42,7 +43,7 @@
   --jar-label-ink: #{vars.$jar-label-ink};
   // What shows through an emptied glass: the counter behind it, so a drained
   // drink reads as clear glass rather than as a differently-coloured drink.
-  --glass-drained: var(--bg-elevated);
+  --glass-drained: var(--bar-paper);
   // Broken glass on the floor. Cool and pale against the warm wood, so the
   // pile reads as glass rather than as more of the bar.
   --shard: rgb(226 240 244 / 78%);
@@ -59,7 +60,7 @@
   --bg: #12100e;
   --bg-elevated: #1e1b17;
   --bg-sunken: #0b0a09;
-  --border: #332e27;
+  --border: #{vars.$color-umber};
   --text: #f4ece0;
   --text-muted: #a2957f;
   --accent: #{vars.$color-amber};
@@ -68,9 +69,10 @@
   --overlay: rgb(0 0 0 / 62%);
   --shadow: #{vars.$shadow-lifted};
 
-  // The pen goes pale on the dark page, the way the line work inverts on a
-  // negative: the same brown would sink into the elevated background.
-  --ink: #{color.adjust(vars.$color-ink, $lightness: 30%)};
+  // The drawing dims rather than inverts: umber on parchment, so he and the
+  // counter still read as ink on paper without glaring off the dark page.
+  --bar-ink: #{vars.$color-umber};
+  --bar-paper: #{vars.$color-parchment};
 
   // The liquids lift a few steps in the dark theme: the deep ones (wine,
   // coffee) go nearly black against the page otherwise, and the pale ones

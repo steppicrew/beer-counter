@@ -7,8 +7,13 @@ $color-amber: #f0a500;
 $color-amber-deep: #d98c00;
 $color-foam: #fff6e0;
 $color-malt: #7a4b12;
-// The barman's pen: the one colour he and the counter are drawn in.
+// The barman's pen and paper: he and the counter are drawn in these. In the
+// dark theme the drawing dims rather than inverts — the ink goes to the same
+// umber the dark theme's borders use, the paper to parchment.
 $color-ink: #735631;
+$color-paper: #ffffff;
+$color-umber: #332e27;
+$color-parchment: #dbc7b3;
 
 // ---------------------------------------------------------------------------
 // Drink liquids
