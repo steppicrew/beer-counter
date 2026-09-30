@@ -44,7 +44,11 @@ echo "Building Steppi's Beer Counter ${VERSION} (versionCode ${VERSION_CODE})"
 # --- web build -------------------------------------------------------------
 echo
 echo "==> Building web assets"
-yarn build
+# No outside donation link in the app: Play's payments policy counts it as
+# steering around Play Billing, which the app uses for tips instead. Blanking
+# it here (the environment beats .env in Vite) keeps it out of the bundle
+# entirely, not merely hidden at runtime.
+VITE_TIP_URL= yarn build
 
 # .env may override the application id (see ANDROID_APP_ID).
 yarn node scripts/sync-app-id.mjs
