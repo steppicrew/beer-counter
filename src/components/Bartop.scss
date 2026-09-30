@@ -7,6 +7,7 @@ $counter-top: 11px;
 $counter-face: 15px;
 $counter-height: $counter-top + $counter-face;
 $glass-size: 27px;
+$tip-jar-size: 32px;
 
 // The counter stops short of the left edge, leaving the floor beside it open.
 // Without that gap a glass has nowhere to fall — it would simply stop existing
@@ -363,27 +364,29 @@ $face-setback: 4px;
   &__tip-jar-label {
     position: absolute;
     left: 50%;
-    bottom: 8px;
+    bottom: 10px;
     transform: translateX(-50%);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
     line-height: 1;
     color: var(--text-muted);
     pointer-events: none;
 
     &--len2 {
-      font-size: 8px;
+      font-size: 9px;
     }
 
     &--len3 {
-      font-size: 7px;
+      font-size: 8px;
       letter-spacing: -0.03em;
     }
   }
 
+  // A little larger than a glass: it stands alone at the end of an empty
+  // counter and has to read as a jar with a sign on it, not as one more drink.
   &__tip-jar-figure {
     display: block;
-    font-size: $glass-size;
+    font-size: $tip-jar-size;
   }
 
   // The tip-jar line is a sentence, not a question: it wraps inside a bubble
