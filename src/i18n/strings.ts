@@ -128,6 +128,17 @@ export const en = {
   'tip.pending': 'Thank you! Google Play will confirm the payment.',
   'tip.failed': 'That didn’t go through. Nothing was charged.',
   'tip.jar': 'Tip jar',
+  'data.title': 'Your data',
+  'data.hint': 'Save everything — drinks, counts, history and settings — to a file, and load it on your next phone. Nothing is uploaded anywhere.',
+  'data.export': 'Export',
+  'data.import': 'Import',
+  'data.exported': 'Saved.',
+  'data.invalid': 'That file is not a Beer Counter export.',
+  'data.newer': 'That file comes from a newer version of the app. Update the app first.',
+  'data.failed': 'That didn’t work. Nothing was changed.',
+  'data.importTitle': 'Replace all data?',
+  'data.importBody': 'Everything on this device — drinks, counts, history and settings — is replaced by the file. This cannot be undone.',
+  'data.importConfirm': 'Replace',
 } as const;
 
 export type MessageKey = keyof typeof en;
@@ -259,6 +270,17 @@ export const de: Messages = {
   'tip.pending': 'Danke! Google Play bestätigt die Zahlung noch.',
   'tip.failed': 'Das hat nicht geklappt. Es wurde nichts abgebucht.',
   'tip.jar': 'Trinkgeldglas',
+  'data.title': 'Deine Daten',
+  'data.hint': 'Alles — Getränke, Zählerstände, Verlauf und Einstellungen — in eine Datei sichern und auf dem nächsten Handy wieder laden. Nichts wird irgendwo hochgeladen.',
+  'data.export': 'Exportieren',
+  'data.import': 'Importieren',
+  'data.exported': 'Gespeichert.',
+  'data.invalid': 'Diese Datei ist kein Export des Bierzählers.',
+  'data.newer': 'Diese Datei stammt aus einer neueren App-Version. Aktualisiere zuerst die App.',
+  'data.failed': 'Das hat nicht geklappt. Es wurde nichts verändert.',
+  'data.importTitle': 'Alle Daten ersetzen?',
+  'data.importBody': 'Alles auf diesem Gerät — Getränke, Zählerstände, Verlauf und Einstellungen — wird durch die Datei ersetzt. Das lässt sich nicht rückgängig machen.',
+  'data.importConfirm': 'Ersetzen',
 };
 
 export const fr: Messages = {
@@ -387,6 +409,17 @@ export const fr: Messages = {
   'tip.pending': 'Merci ! Google Play confirmera le paiement.',
   'tip.failed': 'Ça n’a pas abouti. Rien n’a été débité.',
   'tip.jar': 'Pot à pourboires',
+  'data.title': 'Vos données',
+  'data.hint': 'Enregistrez tout — boissons, comptes, historique et réglages — dans un fichier, et rechargez-le sur votre prochain téléphone. Rien n’est envoyé nulle part.',
+  'data.export': 'Exporter',
+  'data.import': 'Importer',
+  'data.exported': 'Enregistré.',
+  'data.invalid': 'Ce fichier n’est pas un export du Compteur de bières.',
+  'data.newer': 'Ce fichier provient d’une version plus récente de l’app. Mettez d’abord l’app à jour.',
+  'data.failed': 'Ça n’a pas fonctionné. Rien n’a été modifié.',
+  'data.importTitle': 'Remplacer toutes les données ?',
+  'data.importBody': 'Tout ce qui se trouve sur cet appareil — boissons, comptes, historique et réglages — est remplacé par le fichier. Cette action est irréversible.',
+  'data.importConfirm': 'Remplacer',
 };
 
 export const es: Messages = {
@@ -515,6 +548,17 @@ export const es: Messages = {
   'tip.pending': '¡Gracias! Google Play confirmará el pago.',
   'tip.failed': 'No se ha completado. No se ha cobrado nada.',
   'tip.jar': 'Bote de propinas',
+  'data.title': 'Tus datos',
+  'data.hint': 'Guarda todo —bebidas, cuentas, historial y ajustes— en un archivo y cárgalo en tu próximo móvil. No se sube nada a ningún sitio.',
+  'data.export': 'Exportar',
+  'data.import': 'Importar',
+  'data.exported': 'Guardado.',
+  'data.invalid': 'Ese archivo no es una exportación del contador de cervezas.',
+  'data.newer': 'Ese archivo es de una versión más reciente de la app. Actualiza la app primero.',
+  'data.failed': 'No ha funcionado. No se ha cambiado nada.',
+  'data.importTitle': '¿Sustituir todos los datos?',
+  'data.importBody': 'Todo lo que hay en este dispositivo —bebidas, cuentas, historial y ajustes— se sustituye por el archivo. Esto no se puede deshacer.',
+  'data.importConfirm': 'Sustituir',
 };
 
 export const it: Messages = {
@@ -643,6 +687,17 @@ export const it: Messages = {
   'tip.pending': 'Grazie! Google Play confermerà il pagamento.',
   'tip.failed': 'Non è andato a buon fine. Non è stato addebitato nulla.',
   'tip.jar': 'Barattolo delle mance',
+  'data.title': 'I tuoi dati',
+  'data.hint': 'Salva tutto — bevande, conteggi, storico e impostazioni — in un file e ricaricalo sul tuo prossimo telefono. Non viene caricato nulla da nessuna parte.',
+  'data.export': 'Esporta',
+  'data.import': 'Importa',
+  'data.exported': 'Salvato.',
+  'data.invalid': 'Questo file non è un’esportazione del contabirre.',
+  'data.newer': 'Questo file viene da una versione più recente dell’app. Aggiorna prima l’app.',
+  'data.failed': 'Non ha funzionato. Non è stato modificato nulla.',
+  'data.importTitle': 'Sostituire tutti i dati?',
+  'data.importBody': 'Tutto ciò che c’è su questo dispositivo — bevande, conteggi, storico e impostazioni — viene sostituito dal file. L’azione non è reversibile.',
+  'data.importConfirm': 'Sostituisci',
 };
 
 export const nl: Messages = {
@@ -771,6 +826,17 @@ export const nl: Messages = {
   'tip.pending': 'Bedankt! Google Play bevestigt de betaling nog.',
   'tip.failed': 'Dat is niet gelukt. Er is niets afgeschreven.',
   'tip.jar': 'Fooienpot',
+  'data.title': 'Je gegevens',
+  'data.hint': 'Bewaar alles — drankjes, tellingen, geschiedenis en instellingen — in een bestand en laad het op je volgende telefoon. Er wordt niets geüpload.',
+  'data.export': 'Exporteren',
+  'data.import': 'Importeren',
+  'data.exported': 'Opgeslagen.',
+  'data.invalid': 'Dit bestand is geen export van de Bierteller.',
+  'data.newer': 'Dit bestand komt uit een nieuwere versie van de app. Werk de app eerst bij.',
+  'data.failed': 'Dat is niet gelukt. Er is niets gewijzigd.',
+  'data.importTitle': 'Alle gegevens vervangen?',
+  'data.importBody': 'Alles op dit apparaat — drankjes, tellingen, geschiedenis en instellingen — wordt door het bestand vervangen. Dit kan niet ongedaan worden gemaakt.',
+  'data.importConfirm': 'Vervangen',
 };
 
 export const pl: Messages = {
@@ -899,6 +965,17 @@ export const pl: Messages = {
   'tip.pending': 'Dziękuję! Google Play potwierdzi płatność.',
   'tip.failed': 'Nie udało się. Nic nie zostało pobrane.',
   'tip.jar': 'Słoik na napiwki',
+  'data.title': 'Twoje dane',
+  'data.hint': 'Zapisz wszystko — napoje, liczniki, historię i ustawienia — do pliku i wczytaj go na następnym telefonie. Nic nie jest nigdzie wysyłane.',
+  'data.export': 'Eksportuj',
+  'data.import': 'Importuj',
+  'data.exported': 'Zapisano.',
+  'data.invalid': 'Ten plik nie jest eksportem licznika piw.',
+  'data.newer': 'Ten plik pochodzi z nowszej wersji aplikacji. Najpierw zaktualizuj aplikację.',
+  'data.failed': 'Nie udało się. Nic nie zostało zmienione.',
+  'data.importTitle': 'Zastąpić wszystkie dane?',
+  'data.importBody': 'Wszystko na tym urządzeniu — napoje, liczniki, historia i ustawienia — zostanie zastąpione plikiem. Tego nie można cofnąć.',
+  'data.importConfirm': 'Zastąp',
 };
 
 export const pt: Messages = {
@@ -1027,6 +1104,17 @@ export const pt: Messages = {
   'tip.pending': 'Obrigado! O Google Play vai confirmar o pagamento.',
   'tip.failed': 'Não foi concluído. Nada foi cobrado.',
   'tip.jar': 'Frasco das gorjetas',
+  'data.title': 'Os teus dados',
+  'data.hint': 'Guarda tudo — bebidas, contagens, histórico e definições — num ficheiro e carrega-o no teu próximo telemóvel. Nada é enviado para lado nenhum.',
+  'data.export': 'Exportar',
+  'data.import': 'Importar',
+  'data.exported': 'Guardado.',
+  'data.invalid': 'Esse ficheiro não é uma exportação do contador de cervejas.',
+  'data.newer': 'Esse ficheiro vem de uma versão mais recente da app. Atualiza primeiro a app.',
+  'data.failed': 'Não funcionou. Nada foi alterado.',
+  'data.importTitle': 'Substituir todos os dados?',
+  'data.importBody': 'Tudo o que está neste dispositivo — bebidas, contagens, histórico e definições — é substituído pelo ficheiro. Isto não pode ser anulado.',
+  'data.importConfirm': 'Substituir',
 };
 
 export const cs: Messages = {
@@ -1155,6 +1243,17 @@ export const cs: Messages = {
   'tip.pending': 'Děkuju! Google Play platbu ještě potvrdí.',
   'tip.failed': 'Nepovedlo se. Nic nebylo strženo.',
   'tip.jar': 'Sklenička na spropitné',
+  'data.title': 'Tvoje data',
+  'data.hint': 'Ulož všechno — nápoje, počty, historii a nastavení — do souboru a načti ho v dalším telefonu. Nic se nikam nenahrává.',
+  'data.export': 'Exportovat',
+  'data.import': 'Importovat',
+  'data.exported': 'Uloženo.',
+  'data.invalid': 'Tento soubor není export počítadla piv.',
+  'data.newer': 'Tento soubor pochází z novější verze aplikace. Nejdřív aplikaci aktualizuj.',
+  'data.failed': 'Nepovedlo se. Nic se nezměnilo.',
+  'data.importTitle': 'Nahradit všechna data?',
+  'data.importBody': 'Vše v tomto zařízení — nápoje, počty, historie a nastavení — bude nahrazeno souborem. Tuto akci nelze vrátit zpět.',
+  'data.importConfirm': 'Nahradit',
 };
 
 export const da: Messages = {
@@ -1283,6 +1382,17 @@ export const da: Messages = {
   'tip.pending': 'Tak! Google Play bekræfter betalingen.',
   'tip.failed': 'Det gik ikke igennem. Der blev ikke trukket noget.',
   'tip.jar': 'Drikkepengeglas',
+  'data.title': 'Dine data',
+  'data.hint': 'Gem det hele — drikke, tællinger, historik og indstillinger — i en fil, og indlæs den på din næste telefon. Intet uploades nogen steder.',
+  'data.export': 'Eksportér',
+  'data.import': 'Importér',
+  'data.exported': 'Gemt.',
+  'data.invalid': 'Den fil er ikke en eksport fra øltælleren.',
+  'data.newer': 'Den fil er fra en nyere version af appen. Opdater appen først.',
+  'data.failed': 'Det lykkedes ikke. Intet blev ændret.',
+  'data.importTitle': 'Erstat alle data?',
+  'data.importBody': 'Alt på denne enhed — drikke, tællinger, historik og indstillinger — erstattes af filen. Det kan ikke fortrydes.',
+  'data.importConfirm': 'Erstat',
 };
 
 export const sv: Messages = {
@@ -1411,6 +1521,17 @@ export const sv: Messages = {
   'tip.pending': 'Tack! Google Play bekräftar betalningen.',
   'tip.failed': 'Det gick inte igenom. Inget drogs.',
   'tip.jar': 'Dricksburk',
+  'data.title': 'Dina data',
+  'data.hint': 'Spara allt — drycker, räkningar, historik och inställningar — i en fil och läs in den på din nästa telefon. Inget laddas upp någonstans.',
+  'data.export': 'Exportera',
+  'data.import': 'Importera',
+  'data.exported': 'Sparat.',
+  'data.invalid': 'Den filen är ingen export från ölräknaren.',
+  'data.newer': 'Den filen kommer från en nyare version av appen. Uppdatera appen först.',
+  'data.failed': 'Det fungerade inte. Inget ändrades.',
+  'data.importTitle': 'Ersätta all data?',
+  'data.importBody': 'Allt på den här enheten — drycker, räkningar, historik och inställningar — ersätts av filen. Det går inte att ångra.',
+  'data.importConfirm': 'Ersätt',
 };
 
 export const tr: Messages = {
@@ -1539,6 +1660,17 @@ export const tr: Messages = {
   'tip.pending': 'Teşekkürler! Google Play ödemeyi onaylayacak.',
   'tip.failed': 'İşlem tamamlanmadı. Ücret alınmadı.',
   'tip.jar': 'Bahşiş kavanozu',
+  'data.title': 'Verilerin',
+  'data.hint': 'Her şeyi — içecekler, sayılar, geçmiş ve ayarlar — bir dosyaya kaydet ve bir sonraki telefonunda yükle. Hiçbir şey hiçbir yere yüklenmez.',
+  'data.export': 'Dışa aktar',
+  'data.import': 'İçe aktar',
+  'data.exported': 'Kaydedildi.',
+  'data.invalid': 'Bu dosya bir bira sayacı dışa aktarımı değil.',
+  'data.newer': 'Bu dosya uygulamanın daha yeni bir sürümünden. Önce uygulamayı güncelle.',
+  'data.failed': 'Olmadı. Hiçbir şey değiştirilmedi.',
+  'data.importTitle': 'Tüm veriler değiştirilsin mi?',
+  'data.importBody': 'Bu cihazdaki her şey — içecekler, sayılar, geçmiş ve ayarlar — dosyadakilerle değiştirilir. Bu geri alınamaz.',
+  'data.importConfirm': 'Değiştir',
 };
 
 export const ru: Messages = {
@@ -1667,6 +1799,17 @@ export const ru: Messages = {
   'tip.pending': 'Спасибо! Google Play подтвердит платёж.',
   'tip.failed': 'Не получилось. Деньги не списаны.',
   'tip.jar': 'Баночка для чаевых',
+  'data.title': 'Ваши данные',
+  'data.hint': 'Сохраните всё — напитки, счёт, историю и настройки — в файл и загрузите его на следующем телефоне. Ничего никуда не отправляется.',
+  'data.export': 'Экспорт',
+  'data.import': 'Импорт',
+  'data.exported': 'Сохранено.',
+  'data.invalid': 'Этот файл — не экспорт счётчика пива.',
+  'data.newer': 'Этот файл из более новой версии приложения. Сначала обновите приложение.',
+  'data.failed': 'Не получилось. Ничего не изменилось.',
+  'data.importTitle': 'Заменить все данные?',
+  'data.importBody': 'Всё на этом устройстве — напитки, счёт, история и настройки — будет заменено данными из файла. Отменить это нельзя.',
+  'data.importConfirm': 'Заменить',
 };
 
 export const ja: Messages = {
@@ -1795,6 +1938,17 @@ export const ja: Messages = {
   'tip.pending': 'ありがとう！支払いはGoogle Playが確認します。',
   'tip.failed': '完了しませんでした。請求はされていません。',
   'tip.jar': 'チップ箱',
+  'data.title': 'あなたのデータ',
+  'data.hint': '飲み物・カウント・履歴・設定をすべてファイルに保存し、次のスマホで読み込めます。どこにもアップロードされません。',
+  'data.export': 'エクスポート',
+  'data.import': 'インポート',
+  'data.exported': '保存しました。',
+  'data.invalid': 'このファイルはビールカウンターのエクスポートではありません。',
+  'data.newer': 'このファイルは新しいバージョンのアプリで作られています。先にアプリを更新してください。',
+  'data.failed': 'うまくいきませんでした。何も変更されていません。',
+  'data.importTitle': 'すべてのデータを置き換えますか？',
+  'data.importBody': 'この端末の飲み物・カウント・履歴・設定はすべてファイルの内容に置き換わります。元に戻せません。',
+  'data.importConfirm': '置き換える',
 };
 
 export const zh: Messages = {
@@ -1922,6 +2076,17 @@ export const zh: Messages = {
   'tip.pending': '谢谢！Google Play 将确认付款。',
   'tip.failed': '未能完成，未产生任何扣款。',
   'tip.jar': '小费罐',
+  'data.title': '你的数据',
+  'data.hint': '把所有内容——饮品、计数、历史记录和设置——保存到一个文件，在下一部手机上再导入。不会上传到任何地方。',
+  'data.export': '导出',
+  'data.import': '导入',
+  'data.exported': '已保存。',
+  'data.invalid': '这个文件不是啤酒计数器的导出文件。',
+  'data.newer': '这个文件来自更新版本的应用，请先更新应用。',
+  'data.failed': '操作未成功，没有任何更改。',
+  'data.importTitle': '替换全部数据？',
+  'data.importBody': '此设备上的所有内容——饮品、计数、历史记录和设置——都将被文件中的数据替换。此操作无法撤销。',
+  'data.importConfirm': '替换',
 };
 
 export const CATALOGUES: Record<string, Messages> = {

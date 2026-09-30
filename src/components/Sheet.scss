@@ -128,6 +128,18 @@
   }
 }
 
+// Two equal buttons side by side, wrapping to one per row where the labels
+// are long ("Exportieren" / "Importieren" at 320px).
+.data-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$space-sm;
+
+  .btn {
+    flex: 1 1 8em;
+  }
+}
+
 .segmented {
   display: flex;
   gap: vars.$space-xs;
