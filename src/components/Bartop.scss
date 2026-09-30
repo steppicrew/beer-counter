@@ -322,6 +322,33 @@ $face-setback: 4px;
     text-wrap: balance;
   }
 
+  // At the far end of an empty counter, where a real bar keeps its jar. A
+  // button for the tap and the screen reader, dressed as an object: no
+  // background, no border, and above all no motion — it waits, it does not ask.
+  &__tip-jar {
+    position: absolute;
+    right: 7%;
+    bottom: $counter-height - 1px;
+    z-index: 1;
+    // A 48px target around a glass-sized jar, standing on the wood.
+    display: grid;
+    place-items: end center;
+    width: vars.$tap-min;
+    height: vars.$tap-min;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: var(--text-muted);
+    pointer-events: auto;
+    cursor: pointer;
+    filter: drop-shadow(0 1px 0 rgb(0 0 0 / 45%));
+  }
+
+  &__tip-jar-figure {
+    display: block;
+    font-size: $glass-size;
+  }
+
   // The tip-jar line is a sentence, not a question: it wraps inside a bubble
   // clamped to the stage, and is the one bubble that takes a tap.
   &__ask--tip {
@@ -567,7 +594,43 @@ $face-setback: 4px;
   }
 }
 
+// The thank-you coin: falls in over the rim, lands with the clink, and gives
+// one small bounce. Moves in the SVG's own units via fill-box, so the drop is
+// the same at any icon size.
+.tip-jar__coin {
+  transform-box: fill-box;
+  animation: bartop-coin 520ms cubic-bezier(0.5, 0, 0.75, 0) both;
+}
+
+@keyframes bartop-coin {
+  0% {
+    transform: translateY(-340%);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  73% {
+    transform: translateY(0);
+  }
+
+  86% {
+    transform: translateY(-22%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  // The coin is simply in the jar.
+  .tip-jar__coin {
+    animation: none;
+  }
+
   .bartop__cloth {
     display: none;
   }

@@ -44,6 +44,8 @@
   --liquid-water: #{vars.$liquid-water};
   // The head on a beer. Only the three beers draw one.
   --liquid-head: #{vars.$liquid-head};
+  --coin: #{vars.$coin};
+  --coin-edge: #{vars.$coin-edge};
   // What shows through an emptied glass: the counter behind it, so a drained
   // drink reads as clear glass rather than as a differently-coloured drink.
   --glass-drained: #{color.adjust(vars.$color-malt, $lightness: -6%)};

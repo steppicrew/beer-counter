@@ -23,7 +23,7 @@ const RESULT: Partial<Record<TipStatus, MessageKey>> = {
 /** Settings section; renders nothing when there is no way to tip here. */
 export function TipSection({ focus = false }: { focus?: boolean }) {
   const { t } = useI18n();
-  const markTipAsked = useAppStore((s) => s.markTipAsked);
+  const recordTip = useAppStore((s) => s.recordTip);
   const ref = useRef<HTMLDivElement>(null);
   const native = isNativeApp();
   const offers = useTipOffers();
@@ -58,8 +58,11 @@ export function TipSection({ focus = false }: { focus?: boolean }) {
                 setBusy(true);
                 setResult(null);
                 void buyTip(offer.id).then((status) => {
-                  // Someone who has tipped is never asked by the barkeeper.
-                  if (status === 'purchased' || status === 'pending') markTipAsked();
+                  // Someone who has tipped is never asked again, and the jar
+                  // leaves the bar — after a coin, if the money arrived.
+                  if (status === 'purchased' || status === 'pending') {
+                    recordTip(status === 'purchased');
+                  }
                   setResult(status);
                   setBusy(false);
                 });
@@ -74,7 +77,9 @@ export function TipSection({ focus = false }: { focus?: boolean }) {
         <a className="btn btn--ghost tip-link" href={TIP_URL ?? undefined}
           target="_blank"
           rel="noopener"
-          onClick={markTipAsked}
+          // Nothing on the web can tell whether they paid; the click is the
+          // closest thing to a tip it will ever see.
+          onClick={() => recordTip(false)}
         >
           <BeverageIcon icon="beer-large" className="tip-link__icon" />
           {t('tip.title')}

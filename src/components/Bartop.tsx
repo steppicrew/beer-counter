@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { GlassIcon } from './GlassIcon';
 import { Barkeeper } from './Barkeeper';
+import { TipJar } from './TipJar';
 import { ShardPile } from './ShardPile';
 import { useI18n } from '../i18n';
 import {
@@ -21,6 +22,7 @@ import type { BarGlass, BarWindow } from '../lib/bartop';
 import { hasFallen } from '../lib/shards';
 import { useBarScroll } from '../lib/useBarScroll';
 import { usePageVisible } from '../lib/usePageVisible';
+import { playClink } from '../lib/clink';
 import type { Beverage, Tally } from '../lib/types';
 import './Bartop.scss';
 
@@ -40,7 +42,15 @@ interface Props {
    * asking for an order; tapping his line calls this.
    */
   onTipJar?: (() => void) | undefined;
+  /**
+   * The tip jar at the end of an empty counter: silent, still, and gone with
+   * the first drink. `coin` drops the thank-you coin into it.
+   */
+  tipJar?: { coin: boolean; onOpen: () => void } | undefined;
 }
+
+/** Coin drop, matching `bartop-coin` in the stylesheet: the clink lands with it. */
+const COIN_LANDS_MS = 380;
 
 /** How long the cloth takes to cross the counter, in ms. Matches the CSS. */
 const WIPE_MS = 900;
@@ -68,7 +78,7 @@ const BAR_INSET_PX = 30;
 
 const HOUR_MS = 3_600_000;
 
-export function Bartop({ beverages, tallies, now, hidden, onTipJar }: Props) {
+export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Props) {
   const { t, locale } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
   // Animating a counter nobody can see costs battery and buys nothing.
@@ -211,6 +221,17 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar }: Props) {
   const isStale =
     !isEmpty && !isWiping && !anchored && lastAt !== undefined && positionIn(resting, lastAt) < 0.5;
 
+  // The clink belongs to the coin hitting the bottom of the jar, so it waits
+  // for the drop; with reduced motion there is no drop to wait for.
+  const coinShown = isEmpty && tipJar?.coin === true;
+  useEffect(() => {
+    if (!coinShown) return;
+    // `window` in this component is the bar's time window, hence globalThis.
+    const still = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const timer = globalThis.setTimeout(playClink, still ? 0 : COIN_LANDS_MS);
+    return () => globalThis.clearTimeout(timer);
+  }, [coinShown]);
+
   return (
     <div
       className={clsx(
@@ -282,6 +303,17 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar }: Props) {
                 <span className="bartop__ask">{t('bartop.another')}</span>
                 <Barkeeper className="bartop__keeper-figure" />
               </span>
+            )}
+
+            {isEmpty && tipJar && (
+              <button
+                type="button"
+                className="bartop__tip-jar"
+                onClick={tipJar.onOpen}
+                aria-label={t('tip.jar')}
+              >
+                <TipJar className="bartop__tip-jar-figure" coin={tipJar.coin} />
+              </button>
             )}
 
             <span className="bartop__glasses">

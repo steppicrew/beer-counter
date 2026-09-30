@@ -127,6 +127,7 @@ export const en = {
   'tip.thanks': 'Cheers — thank you!',
   'tip.pending': 'Thank you! Google Play will confirm the payment.',
   'tip.failed': 'That didn’t go through. Nothing was charged.',
+  'tip.jar': 'Tip jar',
 } as const;
 
 export type MessageKey = keyof typeof en;
@@ -257,6 +258,7 @@ export const de: Messages = {
   'tip.thanks': 'Prost — danke dir!',
   'tip.pending': 'Danke! Google Play bestätigt die Zahlung noch.',
   'tip.failed': 'Das hat nicht geklappt. Es wurde nichts abgebucht.',
+  'tip.jar': 'Trinkgeldglas',
 };
 
 export const fr: Messages = {
@@ -384,6 +386,7 @@ export const fr: Messages = {
   'tip.thanks': 'Santé — merci !',
   'tip.pending': 'Merci ! Google Play confirmera le paiement.',
   'tip.failed': 'Ça n’a pas abouti. Rien n’a été débité.',
+  'tip.jar': 'Pot à pourboires',
 };
 
 export const es: Messages = {
@@ -511,6 +514,7 @@ export const es: Messages = {
   'tip.thanks': '¡Salud, gracias!',
   'tip.pending': '¡Gracias! Google Play confirmará el pago.',
   'tip.failed': 'No se ha completado. No se ha cobrado nada.',
+  'tip.jar': 'Bote de propinas',
 };
 
 export const it: Messages = {
@@ -638,6 +642,7 @@ export const it: Messages = {
   'tip.thanks': 'Cin cin — grazie!',
   'tip.pending': 'Grazie! Google Play confermerà il pagamento.',
   'tip.failed': 'Non è andato a buon fine. Non è stato addebitato nulla.',
+  'tip.jar': 'Barattolo delle mance',
 };
 
 export const nl: Messages = {
@@ -765,6 +770,7 @@ export const nl: Messages = {
   'tip.thanks': 'Proost — bedankt!',
   'tip.pending': 'Bedankt! Google Play bevestigt de betaling nog.',
   'tip.failed': 'Dat is niet gelukt. Er is niets afgeschreven.',
+  'tip.jar': 'Fooienpot',
 };
 
 export const pl: Messages = {
@@ -892,6 +898,7 @@ export const pl: Messages = {
   'tip.thanks': 'Na zdrowie — dziękuję!',
   'tip.pending': 'Dziękuję! Google Play potwierdzi płatność.',
   'tip.failed': 'Nie udało się. Nic nie zostało pobrane.',
+  'tip.jar': 'Słoik na napiwki',
 };
 
 export const pt: Messages = {
@@ -1019,6 +1026,7 @@ export const pt: Messages = {
   'tip.thanks': 'Saúde — obrigado!',
   'tip.pending': 'Obrigado! O Google Play vai confirmar o pagamento.',
   'tip.failed': 'Não foi concluído. Nada foi cobrado.',
+  'tip.jar': 'Frasco das gorjetas',
 };
 
 export const cs: Messages = {
@@ -1146,6 +1154,7 @@ export const cs: Messages = {
   'tip.thanks': 'Na zdraví — děkuju!',
   'tip.pending': 'Děkuju! Google Play platbu ještě potvrdí.',
   'tip.failed': 'Nepovedlo se. Nic nebylo strženo.',
+  'tip.jar': 'Sklenička na spropitné',
 };
 
 export const da: Messages = {
@@ -1273,6 +1282,7 @@ export const da: Messages = {
   'tip.thanks': 'Skål — tak!',
   'tip.pending': 'Tak! Google Play bekræfter betalingen.',
   'tip.failed': 'Det gik ikke igennem. Der blev ikke trukket noget.',
+  'tip.jar': 'Drikkepengeglas',
 };
 
 export const sv: Messages = {
@@ -1400,6 +1410,7 @@ export const sv: Messages = {
   'tip.thanks': 'Skål — tack!',
   'tip.pending': 'Tack! Google Play bekräftar betalningen.',
   'tip.failed': 'Det gick inte igenom. Inget drogs.',
+  'tip.jar': 'Dricksburk',
 };
 
 export const tr: Messages = {
@@ -1527,6 +1538,7 @@ export const tr: Messages = {
   'tip.thanks': 'Şerefe — teşekkürler!',
   'tip.pending': 'Teşekkürler! Google Play ödemeyi onaylayacak.',
   'tip.failed': 'İşlem tamamlanmadı. Ücret alınmadı.',
+  'tip.jar': 'Bahşiş kavanozu',
 };
 
 export const ru: Messages = {
@@ -1654,6 +1666,7 @@ export const ru: Messages = {
   'tip.thanks': 'Будем здоровы — спасибо!',
   'tip.pending': 'Спасибо! Google Play подтвердит платёж.',
   'tip.failed': 'Не получилось. Деньги не списаны.',
+  'tip.jar': 'Баночка для чаевых',
 };
 
 export const ja: Messages = {
@@ -1781,6 +1794,7 @@ export const ja: Messages = {
   'tip.thanks': '乾杯、ありがとう！',
   'tip.pending': 'ありがとう！支払いはGoogle Playが確認します。',
   'tip.failed': '完了しませんでした。請求はされていません。',
+  'tip.jar': 'チップ箱',
 };
 
 export const zh: Messages = {
@@ -1907,6 +1921,7 @@ export const zh: Messages = {
   'tip.thanks': '干杯，谢谢你！',
   'tip.pending': '谢谢！Google Play 将确认付款。',
   'tip.failed': '未能完成，未产生任何扣款。',
+  'tip.jar': '小费罐',
 };
 
 export const CATALOGUES: Record<string, Messages> = {

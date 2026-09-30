@@ -25,6 +25,10 @@ interface AppState {
    * tipped. He asks once ever — a bar that keeps asking is a nag.
    */
   tipAsked: boolean;
+  /** Takes the tip jar off the bar for good. */
+  tipped: boolean;
+  /** A paid tip not yet thanked for: the coin drops at the next empty bar. */
+  coinPending: boolean;
 
   theme: ThemeMode;
   /** null = follow browser/system language. */
@@ -55,6 +59,12 @@ interface AppState {
   setHistoryEnabled: (enabled: boolean) => void;
   clearHistory: () => void;
   markTipAsked: () => void;
+  /**
+   * `paid` is true only when Play confirmed the money; a pending payment or a
+   * click on the web link still retires the jar, but earns no coin.
+   */
+  recordTip: (paid: boolean) => void;
+  clearCoin: () => void;
 
   setTheme: (theme: ThemeMode) => void;
   setLocale: (locale: string | null) => void;
@@ -75,6 +85,8 @@ export const useAppStore = create<AppState>()(
         history: [],
         historyEnabled: true,
         tipAsked: false,
+        tipped: false,
+        coinPending: false,
         theme: 'system',
         locale: null,
         currency: null,
@@ -164,6 +176,13 @@ export const useAppStore = create<AppState>()(
         setHistoryEnabled: (historyEnabled) => set({ historyEnabled }),
         clearHistory: () => set({ history: [] }),
         markTipAsked: () => set({ tipAsked: true }),
+        recordTip: (paid) =>
+          set((state) => ({
+            tipAsked: true,
+            tipped: true,
+            coinPending: state.coinPending || paid,
+          })),
+        clearCoin: () => set({ coinPending: false }),
 
         setTheme: (theme) => set({ theme }),
         setLocale: (locale) => set({ locale }),
@@ -209,6 +228,8 @@ export const useAppStore = create<AppState>()(
           history: state.history,
           historyEnabled: state.historyEnabled,
           tipAsked: state.tipAsked,
+          tipped: state.tipped,
+          coinPending: state.coinPending,
           theme: state.theme,
           locale: state.locale,
           currency: state.currency,
