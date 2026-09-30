@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.getcapacitor.BridgeActivity;
 
 import de.steppicrew.beercounter.datafile.DataFilePlugin;
+import de.steppicrew.beercounter.systembars.SystemBarsPlugin;
 import de.steppicrew.beercounter.tips.TipsPlugin;
 
 public class MainActivity extends BridgeActivity {
@@ -14,6 +15,7 @@ public class MainActivity extends BridgeActivity {
         // before the bridge starts.
         registerPlugin(TipsPlugin.class);
         registerPlugin(DataFilePlugin.class);
+        registerPlugin(SystemBarsPlugin.class);
         super.onCreate(savedInstanceState);
     }
 }
