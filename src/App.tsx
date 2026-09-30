@@ -18,7 +18,7 @@ import { useInstallPrompt } from './lib/useInstallPrompt';
 import { useSystemDark } from './lib/useSystemDark';
 import { useViewportInset } from './lib/useViewportInset';
 import { useBarClock } from './lib/useBarClock';
-import { formatMoney, defaultCurrencyFor } from './lib/money';
+import { formatMoney, defaultCurrencyFor, currencySymbol } from './lib/money';
 import './App.scss';
 
 const EMPTY_TALLY: Tally = { times: [] };
@@ -262,7 +262,11 @@ export function App() {
           now={now}
           hidden={keyboardUp}
           onTipJar={tipJarAsk ? openTips : undefined}
-          tipJar={showJar ? { coin: coinNow, onOpen: openTips } : undefined}
+          tipJar={
+            showJar
+              ? { coin: coinNow, onOpen: openTips, label: currencySymbol(currency, locale) }
+              : undefined
+          }
         />
 
         {install.bannerVisible && (

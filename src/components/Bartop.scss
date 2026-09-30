@@ -358,6 +358,29 @@ $face-setback: 4px;
     animation: bartop-heart 1.3s ease-out 380ms both;
   }
 
+  // On the jar's belly, above where a coin would lie. Positioned against the
+  // 48px button, whose bottom the 27px jar stands on.
+  &__tip-jar-label {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text-muted);
+    pointer-events: none;
+
+    &--len2 {
+      font-size: 8px;
+    }
+
+    &--len3 {
+      font-size: 7px;
+      letter-spacing: -0.03em;
+    }
+  }
+
   &__tip-jar-figure {
     display: block;
     font-size: $glass-size;
