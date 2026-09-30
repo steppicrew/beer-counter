@@ -13,7 +13,14 @@ const THEMES: { mode: ThemeMode; labelKey: 'settings.themeSystem' | 'settings.th
   { mode: 'dark', labelKey: 'settings.themeDark' },
 ];
 
-export function SettingsSheet({ onClose }: { onClose: () => void }) {
+export function SettingsSheet({
+  onClose,
+  focusTip = false,
+}: {
+  onClose: () => void;
+  /** Opened from the barkeeper's tip-jar line: scroll the tip section into view. */
+  focusTip?: boolean;
+}) {
   const { t, locale } = useI18n();
   const theme = useAppStore((s) => s.theme);
   const setTheme = useAppStore((s) => s.setTheme);
@@ -98,7 +105,7 @@ export function SettingsSheet({ onClose }: { onClose: () => void }) {
         </div>
       )}
 
-      <TipSection />
+      <TipSection focus={focusTip} />
 
       <p className="field__hint">
         {t('settings.version', { version: __APP_VERSION__ })} · {t('settings.offline')}

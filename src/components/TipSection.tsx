@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BeverageIcon } from './BeverageIcon';
 import { useI18n } from '../i18n';
 import type { MessageKey } from '../i18n';
 import { isNativeApp } from '../lib/platform';
+import { useAppStore } from '../store/useAppStore';
 import { TIP_URL, buyTip, useTipOffers } from '../lib/tips';
 import type { TipProductId, TipStatus } from '../lib/tips';
 import './TipSection.scss';
@@ -20,19 +21,29 @@ const RESULT: Partial<Record<TipStatus, MessageKey>> = {
 };
 
 /** Settings section; renders nothing when there is no way to tip here. */
-export function TipSection() {
+export function TipSection({ focus = false }: { focus?: boolean }) {
   const { t } = useI18n();
+  const markTipAsked = useAppStore((s) => s.markTipAsked);
+  const ref = useRef<HTMLDivElement>(null);
   const native = isNativeApp();
   const offers = useTipOffers();
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<TipStatus | null>(null);
 
-  if (native ? offers.length === 0 : TIP_URL === null) return null;
+  const shown = native ? offers.length > 0 : TIP_URL !== null;
+
+  // In the app the offers arrive from Play a moment after the sheet opens, so
+  // this waits for the section to exist rather than running once on mount.
+  useEffect(() => {
+    if (focus && shown) ref.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }, [focus, shown]);
+
+  if (!shown) return null;
 
   const message = result ? RESULT[result] : undefined;
 
   return (
-    <div className="field">
+    <div className="field" ref={ref}>
       <span className="field__label">{t('tip.title')}</span>
       <span className="field__hint">{t('tip.hint')}</span>
       {native ? (
@@ -47,6 +58,8 @@ export function TipSection() {
                 setBusy(true);
                 setResult(null);
                 void buyTip(offer.id).then((status) => {
+                  // Someone who has tipped is never asked by the barkeeper.
+                  if (status === 'purchased' || status === 'pending') markTipAsked();
                   setResult(status);
                   setBusy(false);
                 });
@@ -58,7 +71,11 @@ export function TipSection() {
           ))}
         </div>
       ) : (
-        <a className="btn btn--ghost tip-link" href={TIP_URL ?? undefined} target="_blank" rel="noopener">
+        <a className="btn btn--ghost tip-link" href={TIP_URL ?? undefined}
+          target="_blank"
+          rel="noopener"
+          onClick={markTipAsked}
+        >
           <BeverageIcon icon="beer-large" className="tip-link__icon" />
           {t('tip.title')}
         </a>

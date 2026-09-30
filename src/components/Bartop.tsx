@@ -35,6 +35,11 @@ interface Props {
    * screen is spoken for.
    */
   hidden: boolean;
+  /**
+   * When set, the barkeeper on an empty bar points at the tip jar instead of
+   * asking for an order; tapping his line calls this.
+   */
+  onTipJar?: (() => void) | undefined;
 }
 
 /** How long the cloth takes to cross the counter, in ms. Matches the CSS. */
@@ -63,7 +68,7 @@ const BAR_INSET_PX = 30;
 
 const HOUR_MS = 3_600_000;
 
-export function Bartop({ beverages, tallies, now, hidden }: Props) {
+export function Bartop({ beverages, tallies, now, hidden, onTipJar }: Props) {
   const { t, locale } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
   // Animating a counter nobody can see costs battery and buys nothing.
@@ -211,6 +216,7 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
       className={clsx(
         'bartop',
         isEmpty && 'bartop--empty',
+        isEmpty && onTipJar && 'bartop--tip',
         isWiping && 'bartop--wiping',
         scroll.travelling && 'bartop--travelling',
         !visible && 'bartop--asleep',
@@ -281,7 +287,15 @@ export function Bartop({ beverages, tallies, now, hidden }: Props) {
             <span className="bartop__glasses">
               {isEmpty ? (
                 <span className="bartop__keeper">
-                  <span className="bartop__ask">{t('bartop.ask')}</span>
+                  {onTipJar ? (
+                    // Only ever at the start of a round, before anything is
+                    // poured: never a request made to someone mid-evening.
+                    <button type="button" className="bartop__ask bartop__ask--tip" onClick={onTipJar}>
+                      {t('bartop.tipJar')}
+                    </button>
+                  ) : (
+                    <span className="bartop__ask">{t('bartop.ask')}</span>
+                  )}
                   <Barkeeper className="bartop__keeper-figure" />
                 </span>
               ) : (
