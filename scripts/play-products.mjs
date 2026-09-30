@@ -43,32 +43,38 @@ const packageName = JSON.parse(
 const VAT_DE = 0.19;
 const OPTION = 'tip';
 
+/**
+ * Per Play language: the three titles (small, large, round — the same words
+ * the app's buttons use, from src/i18n/strings.ts) and one description.
+ */
+const LISTINGS = {
+  'en-US': [['Small beer', 'Beer', 'A round'], 'A thank-you for the app. It unlocks nothing — the app stays complete and free.'],
+  'de-DE': [['Kleines Bier', 'Bier', 'Eine Runde'], 'Ein Dankeschön für die App. Schaltet nichts frei — die App bleibt vollständig und kostenlos.'],
+  'fr-FR': [['Demi', 'Bière', 'Une tournée'], 'Un merci pour l’app. Rien n’est débloqué — l’app reste complète et gratuite.'],
+  'es-ES': [['Caña', 'Cerveza', 'Una ronda'], 'Un agradecimiento por la app. No desbloquea nada: la app sigue completa y gratis.'],
+  'it-IT': [['Birra piccola', 'Birra', 'Un giro'], 'Un grazie per l’app. Non sblocca nulla: l’app resta completa e gratuita.'],
+  'nl-NL': [['Klein bier', 'Bier', 'Een rondje'], 'Een bedankje voor de app. Er wordt niets ontgrendeld — de app blijft compleet en gratis.'],
+  'pl-PL': [['Małe piwo', 'Piwo', 'Kolejka dla wszystkich'], 'Podziękowanie za aplikację. Niczego nie odblokowuje — aplikacja pozostaje kompletna i darmowa.'],
+  'pt-PT': [['Imperial', 'Cerveja', 'Uma rodada'], 'Um obrigado pela app. Não desbloqueia nada — a app continua completa e gratuita.'],
+  'cs-CZ': [['Malé pivo', 'Pivo', 'Runda pro všechny'], 'Poděkování za aplikaci. Nic neodemyká — aplikace zůstává kompletní a zdarma.'],
+  'da-DK': [['Lille øl', 'Øl', 'En omgang'], 'Et tak for appen. Den låser intet op — appen forbliver komplet og gratis.'],
+  'sv-SE': [['Liten öl', 'Öl', 'En runda'], 'Ett tack för appen. Den låser inte upp något — appen förblir komplett och gratis.'],
+  'tr-TR': [['Küçük bira', 'Bira', 'Herkese bir tur'], 'Uygulama için bir teşekkür. Hiçbir şeyin kilidini açmaz — uygulama eksiksiz ve ücretsiz kalır.'],
+  'ru-RU': [['Маленькое пиво', 'Пиво', 'Круг на всех'], 'Спасибо за приложение. Ничего не открывает — приложение остаётся полным и бесплатным.'],
+  'ja-JP': [['小ジョッキ', 'ビール', 'みんなに一杯'], 'アプリへの感謝の気持ちです。何も解放されません。アプリは無料のまま、すべての機能を使えます。'],
+  'zh-CN': [['小杯啤酒', '啤酒', '请大家喝一轮'], '对本应用的一份谢意。不解锁任何内容——应用始终免费且功能完整。'],
+};
+
 const PRODUCTS = [
-  {
-    id: 'tip_small',
-    priceDe: 3,
-    listings: {
-      'en-US': ['Small beer', 'A small thank-you. It unlocks nothing — the app stays complete and free.'],
-      'de-DE': ['Kleines Bier', 'Ein kleines Dankeschön. Schaltet nichts frei — die App bleibt vollständig und kostenlos.'],
-    },
-  },
-  {
-    id: 'tip_large',
-    priceDe: 5,
-    listings: {
-      'en-US': ['Beer', 'A thank-you. It unlocks nothing — the app stays complete and free.'],
-      'de-DE': ['Bier', 'Ein Dankeschön. Schaltet nichts frei — die App bleibt vollständig und kostenlos.'],
-    },
-  },
-  {
-    id: 'tip_round',
-    priceDe: 10,
-    listings: {
-      'en-US': ['A round', 'A big thank-you. It unlocks nothing — the app stays complete and free.'],
-      'de-DE': ['Eine Runde', 'Ein großes Dankeschön. Schaltet nichts frei — die App bleibt vollständig und kostenlos.'],
-    },
-  },
-];
+  { id: 'tip_small', priceDe: 3 },
+  { id: 'tip_large', priceDe: 5 },
+  { id: 'tip_round', priceDe: 10 },
+].map((p, i) => ({
+  ...p,
+  listings: Object.fromEntries(
+    Object.entries(LISTINGS).map(([lang, [titles, description]]) => [lang, [titles[i], description]]),
+  ),
+}));
 
 /** Google's Money: whole units plus nanos. */
 function money(currencyCode, amount) {
@@ -78,7 +84,7 @@ function money(currencyCode, amount) {
 
 console.log(`Package  ${packageName}`);
 for (const p of PRODUCTS) {
-  console.log(`  ${p.id.padEnd(10)} ${p.priceDe.toFixed(2)} EUR (DE, incl. VAT)  ${Object.keys(p.listings).join(' ')}`);
+  console.log(`  ${p.id.padEnd(10)} ${p.priceDe.toFixed(2)} EUR (DE, incl. VAT)  ${Object.keys(p.listings).length} languages`);
 }
 if (dryRun) {
   console.log('\nDry run complete.');
