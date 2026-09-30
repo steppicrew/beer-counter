@@ -25,9 +25,9 @@ export const PX_PER_HOUR = 74;
 export const MARK_STEP_MS = 2 * HOUR_MS;
 
 /**
- * Where the present sits on the counter, 0–1 from the left end: just right of
- * the barman, who is what the newest glass is poured beside. Duplicated as
- * `$now-at` in Bartop.scss, which stands him next to it.
+ * Where the present sits on the counter, 0–1 from the left end, when nothing
+ * better is known. The bar itself derives it from the barman's measured width
+ * and the screen (see Bartop.tsx) and passes it to `restingWindow`.
  */
 export const NOW_AT = 0.82;
 
@@ -72,8 +72,8 @@ export interface BarWindow {
  * honest picture, and the pile is what says the round happened. Dragging back
  * (see `scrollBounds`) still reaches all the way to the opening drink.
  */
-export function restingWindow(now: number, spanMs: number): BarWindow {
-  const end = now + (1 - NOW_AT) * spanMs;
+export function restingWindow(now: number, spanMs: number, nowAt = NOW_AT): BarWindow {
+  const end = now + (1 - nowAt) * spanMs;
   return { start: end - spanMs, end };
 }
 
