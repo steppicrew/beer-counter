@@ -1,5 +1,6 @@
 package de.steppicrew.beercounter.tips;
 
+import android.content.pm.ApplicationInfo;
 import android.util.Log;
 
 import com.android.billingclient.api.BillingClient;
@@ -19,9 +20,12 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -43,6 +47,9 @@ public class TipsPlugin extends Plugin {
     /** Must match TIP_PRODUCTS in src/lib/tips.ts. */
     private static final List<String> PRODUCT_IDS = Arrays.asList("tip_small", "tip_large", "tip_round");
 
+    /** Demo prices for debug builds, in euros, in PRODUCT_IDS order. */
+    private static final int[] DEMO_EUROS = {3, 5, 10};
+
     private BillingClient client;
     private final Map<String, ProductDetails> details = new ConcurrentHashMap<>();
 
@@ -63,9 +70,26 @@ public class TipsPlugin extends Plugin {
         withClient(() -> queryProducts(call), () -> resolveProducts(call));
     }
 
+    /**
+     * A debug build (the .preview app beside the Play version) has no products
+     * in Play, so it offers demo tips instead: fixed prices, and a "purchase"
+     * that succeeds at once without Play or money. That keeps the jar and the
+     * whole coin-drop flow testable on a phone. Release builds are never
+     * debuggable, so this cannot reach the store version.
+     */
+    private boolean demo() {
+        return (getContext().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+    }
+
     @PluginMethod
     public void buy(PluginCall call) {
         String id = call.getString("id");
+        if (demo() && id != null && PRODUCT_IDS.contains(id) && !details.containsKey(id)) {
+            JSObject out = new JSObject();
+            out.put("status", "purchased");
+            call.resolve(out);
+            return;
+        }
         ProductDetails product = id == null ? null : details.get(id);
         if (product == null) {
             call.reject("Unknown or unloaded product: " + id);
@@ -153,6 +177,16 @@ public class TipsPlugin extends Plugin {
             entry.put("id", id);
             entry.put("price", offer.getFormattedPrice());
             products.put(entry);
+        }
+        if (products.length() == 0 && demo()) {
+            NumberFormat money = NumberFormat.getCurrencyInstance(Locale.getDefault());
+            money.setCurrency(Currency.getInstance("EUR"));
+            for (int i = 0; i < PRODUCT_IDS.size(); i++) {
+                JSObject entry = new JSObject();
+                entry.put("id", PRODUCT_IDS.get(i));
+                entry.put("price", money.format(DEMO_EUROS[i]));
+                products.put(entry);
+            }
         }
         JSObject out = new JSObject();
         out.put("products", products);
