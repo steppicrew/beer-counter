@@ -13,6 +13,7 @@ import type { Beverage, Tally } from './lib/types';
 import { computeTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
+import { setSystemBars } from './lib/systemBars';
 import { REGULAR_AFTER_ROUNDS, TIP_URL, useTipOffers } from './lib/tips';
 import { useInstallPrompt } from './lib/useInstallPrompt';
 import { useSystemDark } from './lib/useSystemDark';
@@ -103,6 +104,10 @@ export function App() {
     // default — let the WebView fall back to its own idea of light, which put
     // dark icons over the dark page and hid the clock.
     root.style.colorScheme = dark ? 'dark' : 'light';
+
+    // …and on Android the bar icons are also set natively, because the native
+    // theme's flags follow the phone's dark mode, not this setting.
+    setSystemBars(dark);
 
     // A single un-media'd tag wins over the media-query pair in index.html,
     // so the active colour is whatever this writes.
