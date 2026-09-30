@@ -338,9 +338,8 @@ $ink-line: 2px;
   }
 
   &__keeper-figure {
-    display: block;
     height: $keeper-height;
-    // The width follows from the viewBox, which is cropped to him.
+    // The width follows from his aspect ratio, set by the figure itself.
     width: auto;
     // The sprite's black is currentColor: his own ink, shared with the counter.
     color: var(--bar-ink);
