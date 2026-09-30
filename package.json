@@ -18,6 +18,7 @@
     "android:build": "./scripts/build-android.sh",
     "dev:host": "./scripts/dev.sh",
     "store-listing": "yarn node scripts/store-listing.mjs",
+    "barman:import": "yarn node scripts/import-barman.mjs",
     "check-locales": "yarn node scripts/check-locales.mjs",
     "play:publish": "yarn node scripts/play-publish.mjs",
     "play:products": "yarn node scripts/play-products.mjs",
