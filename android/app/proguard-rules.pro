@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Play Billing references Google's datatransport/Firebase telemetry uploader,
+# which app/build.gradle excludes. Billing's logger constructs it inside a
+# catch-all (billing 9.1.0, class zzdt) and switches logging off when it is
+# missing, so the absence is handled at runtime; R8 only needs to not fail.
+-dontwarn com.google.android.datatransport.**
+-dontwarn com.google.firebase.**

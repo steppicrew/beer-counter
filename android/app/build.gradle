@@ -82,6 +82,13 @@ dependencies {
     implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
     implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
     implementation project(':capacitor-android')
+    // Tips (src/lib/tips.ts). Billing drags in Google's datatransport/Firebase
+    // telemetry uploader; with no INTERNET permission it could never send, but
+    // an app that promises "no tracking" should not ship a dormant pipeline.
+    implementation("com.android.billingclient:billing:$billingVersion") {
+        exclude group: 'com.google.android.datatransport'
+        exclude group: 'com.google.firebase'
+    }
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
