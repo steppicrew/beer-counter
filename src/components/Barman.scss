@@ -1,0 +1,27 @@
+// The barman's own layout: a box of his sprite's proportions (the aspect
+// ratio is set inline from the frames), holding two moving parts that each
+// hold every frame of that part stacked on the same spot.
+.barman {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+// The head and the body. Moved by CSS transform from BarmanFigure, and
+// promoted to their own layers so the move is the compositor's job.
+.barman__part {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+// One frame. Each on its own layer too, so a swap is a visibility flip of a
+// bitmap the browser already holds rather than a fresh rasterisation of a few
+// hundred curves.
+.barman__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}

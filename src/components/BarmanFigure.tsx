@@ -1,24 +1,38 @@
 import { useEffect, useRef, useState } from 'react';
 import { CONTENT, HAND_FRAMES, HAND_SIZE, HEAD_FRAMES } from '../generated/barman';
-import {
-  HAND_X,
-  HAND_Y,
-  HEAD_H,
-  HEADROOM,
-  makeBarman,
-  NECK_X,
-} from '../lib/barman';
+import { HAND_X, HAND_Y, HEAD_H, HEADROOM, makeBarman, NECK_X } from '../lib/barman';
 import { usePageVisible } from '../lib/usePageVisible';
+import './Barman.scss';
 
 interface Props {
   className?: string;
 }
 
-/** The transform that puts the head on its neck for a given pose. */
-function headTransform(y: number, angle: number, scaleX: number, scaleY: number): string {
-  // Rotate and stretch about the top of the neck, then bob the whole head.
-  return `translate(${NECK_X} ${HEAD_H + y}) rotate(${angle}) scale(${scaleX} ${scaleY}) translate(${-NECK_X} ${-HEAD_H})`;
-}
+/** The sprite strip cropped to him, in sprite px: what every frame's viewBox shows. */
+const VIEW = {
+  x: CONTENT.left - 2,
+  y: -HEADROOM,
+  w: CONTENT.right - CONTENT.left + 4,
+  h: HAND_Y + HAND_SIZE.h + HEADROOM,
+};
+const VIEW_BOX = `${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}`;
+
+/** A sprite-px offset as a share of the box, for CSS transforms that must scale with him. */
+const pct = (spritePx: number, of: number) => `${(spritePx / of) * 100}%`;
+
+/** Left alone this long, he stops moving until the next touch. */
+const IDLE_MS = 90_000;
+
+/**
+ * The added motion is written to the page only in steps this coarse: a fifth
+ * of a sprite pixel, a fifth of a degree, half a percent of stretch. Finer
+ * than the eye picks up at his size, and it means the breathing — a sine
+ * wave that never quite repeats a value — produces a handful of writes a
+ * second instead of one per display frame, so the compositor sleeps between
+ * the frame swaps rather than composing sixty pictures a second of a man
+ * moving a hundredth of a pixel.
+ */
+const quantise = (value: number, step: number) => Math.round(value / step) * step;
 
 /** Whether the system asks for no decorative motion; tracks the setting live. */
 function usePrefersStill(): boolean {
@@ -42,17 +56,23 @@ function usePrefersStill(): boolean {
  * ink is `currentColor` and the paper `--bar-paper`, so he is line art in the
  * app's palette rather than a black-and-white bitmap pasted on.
  *
- * All sixteen frames are in the DOM from the start and the loop only flips
- * their visibility and two transforms, straight on the elements: React is not
- * asked to re-render sixty times a second for a figure in the corner.
+ * Built for the battery, not for the DOM's convenience. Every frame is its
+ * own SVG on its own compositor layer, and the head and the body are boxes
+ * moved with CSS transforms: the browser rasterises each frame once, and from
+ * then on a frame swap is a visibility flip and the bob a GPU transform. The
+ * first version moved SVG groups with the `transform` attribute, which
+ * re-rasterised a few hundred curves every display frame — a fan heater in
+ * the shape of a cartoon.
  *
- * Drawn in full, down to the hem of his shirt. BAR clipped him to its 78-row
- * strip; here the counter is what he stands behind, so the sprite ends where
- * the wood begins.
+ * The loop writes straight to the elements; React is not asked to re-render
+ * sixty times a second for a figure in the corner. He stops when the page is
+ * hidden, when the system asks for reduced motion, and after a minute and a
+ * half without a touch — a phone left lying on the table with the screen on
+ * is exactly when nobody is watching him.
  */
 export default function BarmanFigure({ className }: Props) {
-  const headRef = useRef<SVGGElement>(null);
-  const bodyRef = useRef<SVGGElement>(null);
+  const headRef = useRef<HTMLSpanElement>(null);
+  const bodyRef = useRef<HTMLSpanElement>(null);
   const visible = usePageVisible();
   const still = usePrefersStill();
 
@@ -60,27 +80,35 @@ export default function BarmanFigure({ className }: Props) {
     const head = headRef.current;
     const body = bodyRef.current;
     if (!head || !body) return;
-    const faces = Array.from(head.children) as SVGGElement[];
-    const hands = Array.from(body.children) as SVGGElement[];
+    const faces = Array.from(head.children) as HTMLElement[];
+    const hands = Array.from(body.children) as HTMLElement[];
 
-    const show = (frames: SVGGElement[], index: number) => {
-      frames.forEach((frame, i) => frame.setAttribute('visibility', i === index ? 'visible' : 'hidden'));
+    const show = (frames: HTMLElement[], index: number) => {
+      frames.forEach((frame, i) => {
+        frame.style.visibility = i === index ? 'visible' : 'hidden';
+      });
     };
 
     // Off screen or asked not to move: the neutral frame, at rest.
     if (!visible || still) {
       show(faces, 0);
       show(hands, 0);
-      head.setAttribute('transform', headTransform(0, 0, 1, 1));
-      body.setAttribute('transform', `translate(${HAND_X} ${HAND_Y})`);
+      head.style.transform = '';
+      body.style.transform = '';
       return;
     }
 
     const barman = makeBarman();
     let shownFace = -1;
     let shownHand = -1;
+    let headTransform = '';
+    let bodyTransform = '';
     let raf = 0;
+    let lastTouch = performance.now();
+
     const loop = (t: number) => {
+      raf = 0;
+      if (t - lastTouch > IDLE_MS) return; // holds the pose he is in
       const pose = barman(t);
       if (pose.face !== shownFace) {
         show(faces, pose.face);
@@ -90,44 +118,75 @@ export default function BarmanFigure({ className }: Props) {
         show(hands, pose.hand);
         shownHand = pose.hand;
       }
-      head.setAttribute(
-        'transform',
-        headTransform(pose.head.y, pose.head.angle, pose.head.scaleX, pose.head.scaleY),
-      );
-      body.setAttribute('transform', `translate(${HAND_X} ${HAND_Y + pose.body.y})`);
+      const { y, angle, scaleX, scaleY } = pose.head;
+      const nextHead = `translateY(${pct(quantise(y, 0.2), VIEW.h)}) rotate(${quantise(angle, 0.2)}deg) scale(${quantise(scaleX, 0.005)}, ${quantise(scaleY, 0.005)})`;
+      if (nextHead !== headTransform) {
+        head.style.transform = nextHead;
+        headTransform = nextHead;
+      }
+      const nextBody = `translateY(${pct(quantise(pose.body.y, 0.2), VIEW.h)})`;
+      if (nextBody !== bodyTransform) {
+        body.style.transform = nextBody;
+        bodyTransform = nextBody;
+      }
       raf = requestAnimationFrame(loop);
     };
+
+    // Any touch wakes him; while he is running it just postpones the nap.
+    const onTouch = () => {
+      lastTouch = performance.now();
+      if (raf === 0) raf = requestAnimationFrame(loop);
+    };
     raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    window.addEventListener('pointerdown', onTouch, { passive: true });
+    window.addEventListener('keydown', onTouch, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('pointerdown', onTouch);
+      window.removeEventListener('keydown', onTouch);
+    };
   }, [visible, still]);
 
   return (
-    <svg
-      className={className}
-      // Cropped to the columns he actually occupies, with a little air either
-      // side for the tilt: BAR's strip is wider than him, and the empty part
-      // would put him off-centre under his own speech bubble.
-      viewBox={`${CONTENT.left - 2} ${-HEADROOM} ${CONTENT.right - CONTENT.left + 4} ${HAND_Y + HAND_SIZE.h + HEADROOM}`}
+    <span
+      className={['barman', className].filter(Boolean).join(' ')}
+      style={{ aspectRatio: `${VIEW.w} / ${VIEW.h}` }}
       aria-hidden="true"
-      focusable="false"
     >
       {/* The head first and the hand over it, in BAR's blit order: the shaker crosses the chin. */}
-      <g ref={headRef} transform={headTransform(0, 0, 1, 1)}>
+      <span
+        ref={headRef}
+        className="barman__part"
+        // Rotates and stretches about the top of the neck.
+        style={{ transformOrigin: `${pct(NECK_X - VIEW.x, VIEW.w)} ${pct(HEAD_H - VIEW.y, VIEW.h)}` }}
+      >
         {HEAD_FRAMES.map((frame, i) => (
-          <g key={i} visibility={i === 0 ? 'visible' : 'hidden'}>
+          <svg
+            key={i}
+            className="barman__frame"
+            viewBox={VIEW_BOX}
+            style={{ visibility: i === 0 ? 'visible' : 'hidden' }}
+          >
             <path fill="var(--bar-paper)" fillRule="evenodd" d={frame.paper} />
             <path fill="currentColor" fillRule="evenodd" d={frame.ink} />
-          </g>
+          </svg>
         ))}
-      </g>
-      <g ref={bodyRef} transform={`translate(${HAND_X} ${HAND_Y})`}>
+      </span>
+      <span ref={bodyRef} className="barman__part">
         {HAND_FRAMES.map((frame, i) => (
-          <g key={i} visibility={i === 0 ? 'visible' : 'hidden'}>
-            <path fill="var(--bar-paper)" fillRule="evenodd" d={frame.paper} />
-            <path fill="currentColor" fillRule="evenodd" d={frame.ink} />
-          </g>
+          <svg
+            key={i}
+            className="barman__frame"
+            viewBox={VIEW_BOX}
+            style={{ visibility: i === 0 ? 'visible' : 'hidden' }}
+          >
+            <g transform={`translate(${HAND_X} ${HAND_Y})`}>
+              <path fill="var(--bar-paper)" fillRule="evenodd" d={frame.paper} />
+              <path fill="currentColor" fillRule="evenodd" d={frame.ink} />
+            </g>
+          </svg>
         ))}
-      </g>
-    </svg>
+      </span>
+    </span>
   );
 }
