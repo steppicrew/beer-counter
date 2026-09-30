@@ -25,14 +25,20 @@ export const PX_PER_HOUR = 74;
 export const MARK_STEP_MS = 2 * HOUR_MS;
 
 /**
- * Counter kept clear at each end, in ms.
+ * Where the present sits on the counter, 0–1 from the left end: just right of
+ * the barman, who is what the newest glass is poured beside. Duplicated as
+ * `$now-at` in Bartop.scss, which stands him next to it.
+ */
+export const NOW_AT = 0.82;
+
+/**
+ * Counter kept clear at the left end, in ms.
  *
  * A glass is centred on its timestamp and is ~27px wide, which at 74px/hour is
  * a shade over 11 minutes — so half a glass is ~5.5 minutes and a margin of
  * merely that leaves it flush with the edge. This is a full glass plus a
- * little air, so the drink standing at the newest end is completely on the
- * counter rather than clipped by it, and the opening drink has the same
- * clearance at the other end.
+ * little air, so a drink standing at the end is completely on the counter
+ * rather than clipped by it.
  *
  * It is also the line a glass falls over: once its centre is inside the left
  * margin it is hanging off the end of the bar.
@@ -46,12 +52,10 @@ export const BRINK_MS = 16 * MINUTE_MS;
  * time moves through it: the scale never changes, so a glass never resizes or
  * respaces under a drag.
  *
- * The round still *starts* at the left, exactly as before — the first drink
- * stands just inside the left brink and the evening fills the counter
- * rightward. The window only begins to travel once `now` would fall off the
- * right end: from then on the bar cannot show both the first drink and the
- * present, and the present wins. The run slides left, and what crosses the
- * left brink goes over the edge.
+ * The present is pinned to one spot on the counter, beside the barman, and
+ * the evening runs leftward from it: every glass is poured at that spot and
+ * drifts towards the far end as it ages, the hour marks with it, and what
+ * crosses the left brink goes over the edge.
  */
 export interface BarWindow {
   start: number;
@@ -59,44 +63,17 @@ export interface BarWindow {
 }
 
 /**
- * The window at rest, before any scrolling back.
+ * The window at rest, before any scrolling back: the present at `NOW_AT`,
+ * the past to its left, and the little that is right of it still to come.
  *
- * `offsetMs` drags it further into the past; zero is wherever the bar sits on
- * its own, which is *not* necessarily the present — early in a round it is
- * still anchored to the first drink, with the future spread out to the right.
- *
- * Time only carries the bar along while there is still something on it. Once
- * following the present would push the newest drink over the left end, the
- * window stops there and lets `now` run off the right instead: an empty
- * counter tells you nothing, and the alternative is a bar you have to drag
- * back through a day and a half to find out the round ever happened. Ordering
- * the next drink releases it — that glass is inside the right brink, so the
- * window jumps forward to hold it exactly as it holds the present.
+ * The bar follows the clock without exception. A round left standing drifts
+ * to the far end and goes over it glass by glass, and once the last one has
+ * fallen the counter is bare but for the pile on the floor — which is the
+ * honest picture, and the pile is what says the round happened. Dragging back
+ * (see `scrollBounds`) still reaches all the way to the opening drink.
  */
-export function restingWindow(glasses: BarGlass[], now: number, spanMs: number): BarWindow {
-  const first = glasses[0]?.at;
-  // Nothing counted yet: the counter opens at the present, ready to be filled.
-  if (first === undefined) return { start: now - BRINK_MS, end: now - BRINK_MS + spanMs };
-
-  // Anchored to the first drink for as long as the present still fits on the
-  // stage. `- BRINK_MS` puts that drink just inside the left edge rather than
-  // hanging over it.
-  const anchored = first - BRINK_MS;
-  if (now <= anchored + spanMs - BRINK_MS) return { start: anchored, end: anchored + spanMs };
-
-  // The evening has outrun the counter, so the right edge takes over and
-  // follows the present — but only while that still leaves something to look
-  // at. Time may carry the bar along until the *newest* drink reaches the left
-  // brink, and there it stops: pass that point and the counter is blank, with
-  // the whole round sitting a day's worth of dragging off to the left.
-  //
-  // Note this is a floor on the window, not a freeze. The present keeps moving
-  // across the counter while the round is live, and only once it has run a
-  // full span ahead of the last drink does the bar stop travelling with it.
-  // Ordering the next drink lifts the floor again — that glass is newer, so
-  // the window is free to follow `now` and jumps forward to hold it.
-  const last = glasses.at(-1)?.at ?? first;
-  const end = Math.min(now, last + spanMs - 2 * BRINK_MS) + BRINK_MS;
+export function restingWindow(now: number, spanMs: number): BarWindow {
+  const end = now + (1 - NOW_AT) * spanMs;
   return { start: end - spanMs, end };
 }
 
@@ -160,11 +137,11 @@ export function collectGlasses(beverages: Beverage[], tallies: Record<string, Ta
  * Both ends are pinned to something real rather than to open time, so the bar
  * can never be dragged into a void:
  *
- * - `0` is the resting view — the newest end of the round.
+ * - `0` is the resting view — the present beside the barman.
  * - `max` puts the *first* drink of the round back at the left brink, which is
  *   the oldest arrangement that still shows it standing.
  *
- * While the round still fits on the counter the two coincide and there is
+ * While the whole round is still on the counter the two coincide and there is
  * nothing to scroll: everything is already on screen.
  */
 export interface ScrollBounds {
