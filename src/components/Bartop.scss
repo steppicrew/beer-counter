@@ -7,6 +7,10 @@ $counter-top: 11px;
 $counter-face: 15px;
 $counter-height: $counter-top + $counter-face;
 $glass-size: 27px;
+// The barkeeper: the full sprite, 92 rows to the hem of his shirt plus 8 rows
+// of headroom for the bob. Tall enough to be a person next to the glasses, not
+// so tall that he crowds the rows above.
+$keeper-height: 120px;
 $tip-jar-size: 42px;
 
 // The counter stops short of the left edge, leaving the floor beside it open.
@@ -267,6 +271,13 @@ $face-setback: 4px;
     // Centred in the visible window rather than at a timestamp: with nothing
     // counted there is no timestamp to stand at.
     left: 50%;
+    // Behind the bar, not on it: layered under the wood and dipped a few
+    // pixels into it, so the counter top hides the hem. The sprite ends at the
+    // bitmap's edge, a ragged line that differs from frame to frame, and
+    // showing it made his shirt flicker. No shadow — the bubble keeps its own.
+    bottom: $counter-height - 6px;
+    z-index: -1;
+    filter: none;
   }
 
   // Sits above his head, so an empty counter says what it is for rather than
@@ -285,12 +296,17 @@ $face-setback: 4px;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: vars.$radius-pill;
+    // The shadow the keeper no longer casts, kept on the bubble alone.
+    filter: drop-shadow(0 1px 0 rgb(0 0 0 / 55%)) drop-shadow(0 3px 4px rgb(0 0 0 / 45%));
   }
 
   &__keeper-figure {
     display: block;
-    font-size: $glass-size + 9px;
-    opacity: 0.9;
+    height: $keeper-height;
+    // The width follows from the viewBox, which is cropped to him.
+    width: auto;
+    // Line art in the app's ink: the sprite's black is currentColor.
+    color: var(--text);
   }
 
   // Waiting at the newest end of the bar, past the last glass — where the
@@ -306,11 +322,6 @@ $face-setback: 4px;
     left: auto;
     right: 22%;
     transform: none;
-    z-index: 1;
-    // The counter has stopped moving with the clock, so he is the one thing on
-    // the bar that still is. Slow enough to read as waiting rather than as
-    // something demanding attention — this is a bar, not a notification.
-    animation: bartop-waiting 3.2s ease-in-out infinite;
   }
 
   // The bubble is the widest thing about him, so it — not the figure — is what
@@ -422,14 +433,18 @@ $face-setback: 4px;
 
   // Room for the speech bubble above his head — needed whenever he is on the
   // counter, whether the bar is empty or the round has been left standing.
-  &--empty &__track,
+  &--empty &__track {
+    height: $counter-height + $keeper-height + 30px;
+  }
+
+  // His question wraps to two lines in a box as narrow as he is.
   &:has(&__keeper--waiting) &__track {
-    height: $counter-height + $glass-size + 34px;
+    height: $counter-height + $keeper-height + 47px;
   }
 
   // Up to three lines of bubble in the longer languages.
   &--tip &__track {
-    height: $counter-height + $glass-size + 66px;
+    height: $counter-height + $keeper-height + 62px;
   }
 
   // A glass going over the left end. It is drawn for the length of the fall
@@ -634,20 +649,6 @@ $face-setback: 4px;
 
 // The wipe is feedback, not decoration, so without motion the glasses still
 // have to go — they just go at once instead of being swept.
-// Shifting his weight while he waits. A rotation about the feet rather than a
-// bob: a figure that moves straight up and down reads as bouncing, which is
-// cheerful, and the point here is that he has been standing there a while.
-@keyframes bartop-waiting {
-  0%,
-  100% {
-    transform: rotate(-1.6deg);
-  }
-
-  50% {
-    transform: rotate(1.6deg);
-  }
-}
-
 // The thank-you coin: falls in over the rim, lands with the clink, and gives
 // one small bounce. Moves in the SVG's own units via fill-box, so the drop is
 // the same at any icon size.
@@ -718,11 +719,6 @@ $face-setback: 4px;
 
   // The pile is state, not motion — it just appears without the drop.
   .bartop__shard-figure {
-    animation: none;
-  }
-
-  // He is still standing there waiting; he just stops fidgeting about it.
-  .bartop__keeper--waiting {
     animation: none;
   }
 
