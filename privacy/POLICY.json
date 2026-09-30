@@ -17,7 +17,7 @@
         ],
         [
           "Where your data lives",
-          "The drinks you add, your counts, prices and settings are stored only in your own device's local storage. They never leave the device. Uninstalling the app, or clearing the app's storage, deletes them permanently — there is no backup and no way for anyone, including the developer, to recover them."
+          "The drinks you add, your counts, round history, prices and settings are stored only in your own device's local storage. The Android app is excluded from Google's cloud backup, so they never leave the device on their own. You can export them to a file yourself (Settings → Your data) and import that file on another device; the file goes only where you save or send it. On Android 12 and later, the direct phone-to-phone transfer when setting up a new phone can also copy them — from device to device, not through a server. Uninstalling the app or clearing its storage deletes them permanently; without an export, there is no way for anyone, including the developer, to recover them."
         ],
         [
           "No network access",
@@ -63,7 +63,7 @@
         ],
         [
           "Wo Ihre Daten liegen",
-          "Die von Ihnen angelegten Getränke, Ihre Zählerstände, Preise und Einstellungen werden ausschließlich im lokalen Speicher Ihres Geräts abgelegt. Sie verlassen das Gerät nie. Deinstallieren der App oder Löschen des App-Speichers löscht sie endgültig — es gibt keine Sicherung und keine Möglichkeit, sie wiederherzustellen, auch nicht für den Entwickler."
+          "Die von Ihnen angelegten Getränke, Ihre Zählerstände, der Rundenverlauf, Preise und Einstellungen werden ausschließlich im lokalen Speicher Ihres Geräts abgelegt. Die Android-App ist von der Cloud-Sicherung von Google ausgenommen, die Daten verlassen das Gerät also nicht von selbst. Sie können sie selbst in eine Datei exportieren (Einstellungen → Deine Daten) und diese Datei auf einem anderen Gerät importieren; die Datei gelangt nur dorthin, wo Sie sie speichern oder hinschicken. Ab Android 12 kann auch die direkte Übertragung von Handy zu Handy beim Einrichten eines neuen Geräts sie mitnehmen — von Gerät zu Gerät, nicht über einen Server. Deinstallieren der App oder Löschen des App-Speichers löscht sie endgültig; ohne Export gibt es keine Möglichkeit, sie wiederherzustellen, auch nicht für den Entwickler."
         ],
         [
           "Kein Netzwerkzugriff",
@@ -109,7 +109,7 @@
         ],
         [
           "Où vivent vos données",
-          "Les boissons que vous ajoutez, vos compteurs, vos prix et vos réglages sont stockés uniquement dans le stockage local de votre appareil. Ils ne le quittent jamais. Désinstaller l'application ou effacer son stockage les supprime définitivement — il n'existe aucune sauvegarde et aucun moyen de les récupérer, pas même pour le développeur."
+          "Les boissons que vous ajoutez, vos comptes, l'historique des tournées, les prix et les réglages sont stockés uniquement dans le stockage local de votre appareil. L'application Android est exclue de la sauvegarde cloud de Google : ces données ne quittent donc jamais l'appareil d'elles-mêmes. Vous pouvez les exporter vous-même dans un fichier (Réglages → Vos données) et importer ce fichier sur un autre appareil ; le fichier va uniquement là où vous l'enregistrez ou l'envoyez. À partir d'Android 12, le transfert direct d'un téléphone à l'autre lors de la configuration d'un nouvel appareil peut aussi les copier — d'appareil à appareil, sans passer par un serveur. Désinstaller l'application ou effacer son stockage les supprime définitivement ; sans export, personne, pas même le développeur, ne peut les récupérer."
         ],
         [
           "Aucun accès réseau",
@@ -155,7 +155,7 @@
         ],
         [
           "Dónde están tus datos",
-          "Las bebidas que añades, tus contadores, precios y ajustes se guardan únicamente en el almacenamiento local de tu dispositivo. Nunca salen de él. Desinstalar la aplicación o borrar su almacenamiento los elimina de forma permanente: no hay copia de seguridad ni forma de recuperarlos, tampoco para el desarrollador."
+          "Las bebidas que añades, tus cuentas, el historial de rondas, los precios y los ajustes se guardan solo en el almacenamiento local de tu dispositivo. La aplicación de Android está excluida de la copia de seguridad en la nube de Google, así que esos datos nunca salen del dispositivo por sí solos. Puedes exportarlos tú mismo a un archivo (Ajustes → Tus datos) e importar ese archivo en otro dispositivo; el archivo solo va adonde tú lo guardes o lo envíes. A partir de Android 12, la transferencia directa de móvil a móvil al configurar un teléfono nuevo también puede copiarlos, de dispositivo a dispositivo y sin pasar por un servidor. Desinstalar la aplicación o borrar su almacenamiento los elimina para siempre; sin una exportación, nadie, ni siquiera el desarrollador, puede recuperarlos."
         ],
         [
           "Sin acceso a la red",
@@ -201,7 +201,7 @@
         ],
         [
           "Dove stanno i tuoi dati",
-          "Le bevande che aggiungi, i tuoi conteggi, i prezzi e le impostazioni sono archiviati solo nella memoria locale del tuo dispositivo. Non lo lasciano mai. Disinstallare l'app o cancellarne la memoria li elimina definitivamente: non esiste backup né modo di recuperarli, nemmeno per lo sviluppatore."
+          "Le bevande che aggiungi, i tuoi conteggi, lo storico dei giri, i prezzi e le impostazioni sono salvati solo nella memoria locale del tuo dispositivo. L'app Android è esclusa dal backup cloud di Google, quindi questi dati non lasciano mai il dispositivo da soli. Puoi esportarli tu stesso in un file (Impostazioni → I tuoi dati) e importare quel file su un altro dispositivo; il file va solo dove lo salvi o lo invii. Da Android 12 in poi, anche il trasferimento diretto da telefono a telefono durante la configurazione di un nuovo dispositivo può copiarli, da dispositivo a dispositivo e senza passare da un server. Disinstallare l'app o cancellarne la memoria li elimina definitivamente; senza un'esportazione nessuno, nemmeno lo sviluppatore, può recuperarli."
         ],
         [
           "Nessun accesso alla rete",
@@ -247,7 +247,7 @@
         ],
         [
           "Waar je gegevens staan",
-          "De drankjes die je toevoegt, je tellers, prijzen en instellingen worden uitsluitend in de lokale opslag van je eigen apparaat bewaard. Ze verlaten het apparaat nooit. De app verwijderen of de opslag wissen verwijdert ze definitief — er is geen back-up en geen manier om ze terug te halen, ook niet voor de ontwikkelaar."
+          "De drankjes die je toevoegt, je tellingen, de rondegeschiedenis, prijzen en instellingen worden alleen in de lokale opslag van je eigen apparaat bewaard. De Android-app is uitgesloten van de cloudback-up van Google, dus ze verlaten het apparaat nooit vanzelf. Je kunt ze zelf naar een bestand exporteren (Instellingen → Je gegevens) en dat bestand op een ander apparaat importeren; het bestand gaat alleen naar de plek waar je het opslaat of naartoe stuurt. Vanaf Android 12 kan ook de directe overdracht van telefoon naar telefoon bij het instellen van een nieuw toestel ze meenemen — van apparaat naar apparaat, niet via een server. De app verwijderen of de opslag wissen verwijdert ze definitief; zonder export kan niemand ze herstellen, ook de ontwikkelaar niet."
         ],
         [
           "Geen netwerktoegang",
@@ -293,7 +293,7 @@
         ],
         [
           "Gdzie są Twoje dane",
-          "Dodane napoje, liczniki, ceny i ustawienia są przechowywane wyłącznie w lokalnej pamięci Twojego urządzenia. Nigdy go nie opuszczają. Odinstalowanie aplikacji lub wyczyszczenie jej pamięci usuwa je trwale — nie ma kopii zapasowej ani możliwości ich odzyskania, również przez autora."
+          "Dodane napoje, liczniki, historia kolejek, ceny i ustawienia są przechowywane wyłącznie w pamięci lokalnej Twojego urządzenia. Aplikacja na Androida jest wyłączona z kopii zapasowej Google w chmurze, więc dane nigdy same nie opuszczają urządzenia. Możesz je samodzielnie wyeksportować do pliku (Ustawienia → Twoje dane) i zaimportować ten plik na innym urządzeniu; plik trafia tylko tam, gdzie go zapiszesz lub wyślesz. Od Androida 12 również bezpośrednie przenoszenie danych z telefonu na telefon podczas konfiguracji nowego urządzenia może je skopiować — z urządzenia na urządzenie, nie przez serwer. Odinstalowanie aplikacji lub wyczyszczenie jej pamięci usuwa je na zawsze; bez eksportu nikt, także deweloper, nie może ich odzyskać."
         ],
         [
           "Brak dostępu do sieci",
@@ -339,7 +339,7 @@
         ],
         [
           "Onde ficam os seus dados",
-          "As bebidas que adiciona, os seus contadores, preços e definições são guardados apenas no armazenamento local do seu dispositivo. Nunca saem dele. Desinstalar a aplicação ou limpar o seu armazenamento apaga-os permanentemente — não há cópia de segurança nem forma de os recuperar, nem sequer pelo programador."
+          "As bebidas que adiciona, as suas contagens, o histórico de rodadas, os preços e as definições são guardados apenas no armazenamento local do seu dispositivo. A aplicação Android está excluída da cópia de segurança na nuvem da Google, por isso esses dados nunca saem do dispositivo por si. Pode exportá-los para um ficheiro (Definições → Os teus dados) e importar esse ficheiro noutro dispositivo; o ficheiro só vai para onde o guardar ou enviar. A partir do Android 12, a transferência direta de telemóvel para telemóvel ao configurar um novo aparelho também os pode copiar — de dispositivo para dispositivo, sem passar por um servidor. Desinstalar a aplicação ou limpar o seu armazenamento apaga-os definitivamente; sem uma exportação, ninguém, nem o programador, os pode recuperar."
         ],
         [
           "Sem acesso à rede",
@@ -385,7 +385,7 @@
         ],
         [
           "Kde jsou vaše data",
-          "Nápoje, které přidáte, vaše počty, ceny a nastavení se ukládají výhradně do místního úložiště vašeho zařízení. Nikdy je neopustí. Odinstalování aplikace nebo vymazání jejího úložiště je trvale smaže — neexistuje záloha ani způsob, jak je obnovit, a to ani pro vývojáře."
+          "Přidané nápoje, vaše počty, historie kol, ceny a nastavení se ukládají výhradně do místního úložiště vašeho zařízení. Aplikace pro Android je vyřazena z cloudového zálohování Googlu, takže data zařízení sama nikdy neopustí. Můžete je sami exportovat do souboru (Nastavení → Tvoje data) a tento soubor importovat v jiném zařízení; soubor se dostane jen tam, kam ho uložíte nebo pošlete. Od Androidu 12 je může přenést i přímý přenos z telefonu do telefonu při nastavování nového zařízení — ze zařízení do zařízení, ne přes server. Odinstalováním aplikace nebo vymazáním jejího úložiště se nenávratně smažou; bez exportu je nikdo, ani vývojář, nemůže obnovit."
         ],
         [
           "Žádný přístup k síti",
@@ -431,7 +431,7 @@
         ],
         [
           "Hvor dine data ligger",
-          "De drinks du tilføjer, dine tællere, priser og indstillinger gemmes udelukkende i din egen enheds lokale lager. De forlader aldrig enheden. Afinstallation af appen eller rydning af dens lager sletter dem permanent — der findes ingen sikkerhedskopi og ingen måde at gendanne dem på, heller ikke for udvikleren."
+          "De drikkevarer, du tilføjer, dine tællinger, historikken over omgange, priser og indstillinger gemmes kun i din egen enheds lokale lager. Android-appen er undtaget fra Googles cloud-backup, så de forlader aldrig enheden af sig selv. Du kan selv eksportere dem til en fil (Indstillinger → Dine data) og importere filen på en anden enhed; filen havner kun dér, hvor du gemmer eller sender den. Fra Android 12 kan den direkte overførsel fra telefon til telefon, når en ny telefon sættes op, også kopiere dem — fra enhed til enhed, ikke via en server. Afinstallation af appen eller sletning af dens lager sletter dem permanent; uden en eksport kan ingen, heller ikke udvikleren, gendanne dem."
         ],
         [
           "Ingen netværksadgang",
@@ -477,7 +477,7 @@
         ],
         [
           "Var dina uppgifter finns",
-          "Dryckerna du lägger till, dina räknare, priser och inställningar lagras enbart i din egen enhets lokala lagring. De lämnar aldrig enheten. Att avinstallera appen eller rensa dess lagring raderar dem permanent — det finns ingen säkerhetskopia och inget sätt att återställa dem, inte heller för utvecklaren."
+          "De drycker du lägger till, dina räkningar, rundhistoriken, priser och inställningar lagras bara i enhetens egen lokala lagring. Android-appen är undantagen från Googles molnsäkerhetskopiering, så uppgifterna lämnar aldrig enheten av sig själva. Du kan själv exportera dem till en fil (Inställningar → Dina data) och importera filen på en annan enhet; filen hamnar bara där du sparar eller skickar den. Från Android 12 kan även den direkta överföringen från telefon till telefon när en ny telefon konfigureras kopiera dem — från enhet till enhet, inte via en server. Att avinstallera appen eller rensa dess lagring raderar dem permanent; utan en export kan ingen, inte ens utvecklaren, återställa dem."
         ],
         [
           "Ingen nätverksåtkomst",
@@ -523,7 +523,7 @@
         ],
         [
           "Verileriniz nerede",
-          "Eklediğiniz içecekler, sayaçlarınız, fiyatlar ve ayarlar yalnızca kendi cihazınızın yerel depolamasında tutulur. Cihazdan asla çıkmazlar. Uygulamayı kaldırmak veya depolamasını temizlemek bunları kalıcı olarak siler — yedek yoktur ve geliştirici dahil hiç kimsenin bunları kurtarma imkânı yoktur."
+          "Eklediğiniz içecekler, sayılarınız, tur geçmişi, fiyatlar ve ayarlar yalnızca cihazınızın yerel depolama alanında saklanır. Android uygulaması Google'ın bulut yedeklemesinin dışında tutulur; bu yüzden veriler cihazdan kendiliğinden hiç çıkmaz. Bunları kendiniz bir dosyaya aktarabilir (Ayarlar → Verilerin) ve bu dosyayı başka bir cihazda içe aktarabilirsiniz; dosya yalnızca kaydettiğiniz ya da gönderdiğiniz yere gider. Android 12 ve sonrasında, yeni bir telefon kurulurken yapılan doğrudan telefondan telefona aktarım da bunları kopyalayabilir — sunucu üzerinden değil, cihazdan cihaza. Uygulamayı kaldırmak veya depolama alanını temizlemek bunları kalıcı olarak siler; dışa aktarım olmadan, geliştirici dahil hiç kimse bunları geri getiremez."
         ],
         [
           "Ağ erişimi yok",
@@ -569,7 +569,7 @@
         ],
         [
           "Где хранятся ваши данные",
-          "Добавленные вами напитки, счётчики, цены и настройки хранятся только в локальном хранилище вашего устройства. Они никогда его не покидают. Удаление приложения или очистка его хранилища удаляет их безвозвратно — резервной копии нет, и восстановить их невозможно, в том числе разработчику."
+          "Добавленные вами напитки, счёт, история кругов, цены и настройки хранятся только в локальном хранилище вашего устройства. Android-приложение исключено из облачного резервного копирования Google, поэтому сами по себе данные никогда не покидают устройство. Вы можете сами экспортировать их в файл (Настройки → Ваши данные) и импортировать этот файл на другом устройстве; файл попадает только туда, куда вы его сохраните или отправите. Начиная с Android 12 их также может перенести прямая передача с телефона на телефон при настройке нового устройства — напрямую между устройствами, а не через сервер. Удаление приложения или очистка его хранилища стирает их навсегда; без экспорта никто, включая разработчика, не сможет их восстановить."
         ],
         [
           "Нет доступа к сети",
@@ -615,7 +615,7 @@
         ],
         [
           "データの保存場所",
-          "追加した飲み物、杯数、価格、設定は、お使いの端末のローカルストレージにのみ保存されます。端末外に出ることはありません。アプリのアンインストールまたはストレージの消去により完全に削除され、バックアップは存在せず、開発者を含め誰も復元できません。"
+          "追加した飲み物、カウント、ラウンドの履歴、価格、設定は、お使いの端末のローカルストレージにのみ保存されます。Android版はGoogleのクラウドバックアップの対象外にしているため、データが勝手に端末の外へ出ることはありません。ご自身でファイルにエクスポートし（設定 → あなたのデータ）、別の端末でそのファイルをインポートできます。ファイルは保存先や送信先として選んだ場所にだけ置かれます。Android 12以降では、新しいスマホの初期設定時に行う端末間の直接転送でもコピーされることがあります（サーバーを経由せず端末から端末へ）。アプリのアンインストールやストレージの消去でデータは完全に削除され、エクスポートがなければ開発者を含め誰も復元できません。"
         ],
         [
           "ネットワークアクセスなし",
@@ -661,7 +661,7 @@
         ],
         [
           "你的数据存放在哪里",
-          "你添加的饮品、计数、价格和设置仅保存在你自己设备的本地存储中，绝不会离开设备。卸载应用或清除应用存储会将其永久删除——没有备份，任何人（包括开发者）都无法恢复。"
+          "您添加的饮品、计数、每轮历史记录、价格和设置仅保存在您设备的本地存储中。Android 应用已排除在 Google 云备份之外，因此这些数据不会自行离开设备。您可以自行将其导出为文件（设置 → 你的数据），并在另一台设备上导入该文件；文件只会到达您保存或发送的地方。在 Android 12 及以上版本中，设置新手机时的手机间直接传输也可能复制这些数据——在设备之间直接进行，不经过服务器。卸载应用或清除其存储会永久删除这些数据；如果没有导出，任何人（包括开发者）都无法恢复。"
         ],
         [
           "无网络访问权限",
