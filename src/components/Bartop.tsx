@@ -224,11 +224,20 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
   // The clink belongs to the coin hitting the bottom of the jar, so it waits
   // for the drop; with reduced motion there is no drop to wait for.
   const coinShown = isEmpty && tipJar?.coin === true;
+  // Set when the coin lands, and never reset: the coin shows once ever, so
+  // there is no second landing to reset for.
+  const [landed, setLanded] = useState(false);
   useEffect(() => {
     if (!coinShown) return;
     // `window` in this component is the bar's time window, hence globalThis.
     const still = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const timer = globalThis.setTimeout(playClink, still ? 0 : COIN_LANDS_MS);
+    const timer = globalThis.setTimeout(
+      () => {
+        playClink();
+        setLanded(true);
+      },
+      still ? 0 : COIN_LANDS_MS,
+    );
     return () => globalThis.clearTimeout(timer);
   }, [coinShown]);
 
@@ -313,6 +322,14 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
                 aria-label={t('tip.jar')}
               >
                 <TipJar className="bartop__tip-jar-figure" coin={tipJar.coin} />
+                {tipJar.coin && (
+                  <svg className="bartop__heart" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M12 20.5s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.8a4.3 4.3 0 0 1 7.5 2.6c0 5.5-7.5 10.1-7.5 10.1Z"
+                      fill="var(--heart)"
+                    />
+                  </svg>
+                )}
               </button>
             )}
 
@@ -326,7 +343,11 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
                       {t('bartop.tipJar')}
                     </button>
                   ) : (
-                    <span className="bartop__ask">{t('bartop.ask')}</span>
+                    // Thanks in words once the coin is in; until the next
+                    // drink, then back to taking orders.
+                    <span className="bartop__ask">
+                      {coinShown && landed ? t('tip.thanks') : t('bartop.ask')}
+                    </span>
                   )}
                   <Barkeeper className="bartop__keeper-figure" />
                 </span>
