@@ -681,7 +681,7 @@ $ink-line: 2px;
 // The thank-you coin: falls in over the rim, lands with the clink, and gives
 // one small bounce. Moves in the SVG's own units via fill-box, so the drop is
 // the same at any icon size.
-.tip-jar__coin {
+.tip-jar__coin--dropping {
   transform-box: fill-box;
   animation: bartop-coin 520ms cubic-bezier(0.5, 0, 0.75, 0) both;
 }
@@ -733,7 +733,7 @@ $ink-line: 2px;
   }
 
   // The coin is simply in the jar.
-  .tip-jar__coin {
+  .tip-jar__coin--dropping {
     animation: none;
   }
 

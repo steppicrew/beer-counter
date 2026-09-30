@@ -27,8 +27,10 @@ interface AppState {
   tipAsked: boolean;
   /** Takes the tip jar off the bar for good. */
   tipped: boolean;
-  /** A paid tip not yet thanked for: the coin drops at the next empty bar. */
+  /** A paid tip not yet thanked for: its coin drops when nothing covers the bar. */
   coinPending: boolean;
+  /** Tips Play confirmed as paid: one coin each in the jar. */
+  tips: number;
 
   theme: ThemeMode;
   /** null = follow browser/system language. */
@@ -91,6 +93,7 @@ export const useAppStore = create<AppState>()(
         tipAsked: false,
         tipped: false,
         coinPending: false,
+        tips: 0,
         theme: 'system',
         locale: null,
         currency: null,
@@ -212,6 +215,7 @@ export const useAppStore = create<AppState>()(
             tipAsked: true,
             tipped: true,
             coinPending: state.coinPending || paid,
+            tips: state.tips + (paid ? 1 : 0),
           })),
         clearCoin: () => set({ coinPending: false }),
 
@@ -261,6 +265,7 @@ export const useAppStore = create<AppState>()(
           tipAsked: state.tipAsked,
           tipped: state.tipped,
           coinPending: state.coinPending,
+          tips: state.tips,
           theme: state.theme,
           locale: state.locale,
           currency: state.currency,
