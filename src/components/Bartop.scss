@@ -194,9 +194,9 @@ $now-at: 82%;
     transform: translateX(-50%);
     // The same size as the "5 min ago" line on a row: the two are the app's
     // only clock readings and should read as one voice.
-    font-size: 13px;
+    font-size: vars.$font-sm;
     line-height: $label-line;
-    font-weight: 600;
+    font-weight: vars.$weight-semibold;
     font-variant-numeric: tabular-nums;
     // A 12-hour label ("10 PM") is two words and wrapped onto a second line
     // inside a face only one line tall, which pushed the digits out of sight.
@@ -273,13 +273,20 @@ $now-at: 82%;
     -webkit-touch-callout: none;
   }
 
-  // Lifted off the counter while held: a little larger and higher, with a
-  // deeper shadow, so it reads as picked up rather than selected.
+  // Lifted off the counter while held: higher, with a deeper shadow, and the
+  // glass itself a little larger, so it reads as picked up rather than
+  // selected. The scale is on the figure only — on the whole glass it would
+  // enlarge the time bubble too, off the type scale.
   &__glass--held {
     z-index: 2;
-    transform: translateX(-50%) translateY(-5px) scale(1.18);
+    transform: translateX(-50%) translateY(-5px);
     filter: drop-shadow(0 6px 6px rgb(0 0 0 / 40%));
     transition: transform 120ms vars.$ease;
+
+    .bartop__glass-figure {
+      transform: scale(1.18);
+      transform-origin: 50% 100%;
+    }
   }
 
   // The time it would land on, well above the held glass: the finger holding
@@ -292,8 +299,8 @@ $now-at: 82%;
     left: 50%;
     // Large on purpose: it is read at a glance mid-drag, at arm's length.
     padding: 4px vars.$space-md;
-    font-size: 16px;
-    font-weight: 800;
+    font-size: vars.$font-lg;
+    font-weight: vars.$weight-semibold;
     line-height: 1.3;
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
@@ -326,7 +333,7 @@ $now-at: 82%;
     transform: translateX(-50%);
     margin-bottom: vars.$space-xs;
     padding: 3px vars.$space-sm;
-    font-size: 11px;
+    font-size: vars.$font-xs;
     line-height: 1.4;
     white-space: normal;
     color: var(--text-muted);
@@ -405,7 +412,7 @@ $now-at: 82%;
     width: $tip-jar-size * 0.5;
     height: $tip-jar-size * 0.26;
     font-size: $tip-jar-size * 0.26;
-    font-weight: 800;
+    font-weight: vars.$weight-heavy;
     line-height: $tip-jar-size * 0.26;
     text-align: center;
     color: var(--jar-label-ink);

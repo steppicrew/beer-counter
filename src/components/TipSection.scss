@@ -16,15 +16,15 @@
     gap: 2px;
     padding: vars.$space-sm vars.$space-xs;
     border-radius: vars.$radius-md;
-    font-size: 13px;
+    font-size: vars.$font-sm;
     line-height: 1.2;
     text-align: center;
     overflow-wrap: anywhere;
   }
 
   &__price {
-    font-size: 15px;
-    font-weight: 800;
+    font-size: vars.$font-md;
+    font-weight: vars.$weight-heavy;
     color: var(--accent);
     font-variant-numeric: tabular-nums;
   }

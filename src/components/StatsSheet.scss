@@ -22,11 +22,11 @@
 
   &__label {
     margin: 0;
-    font-size: 16px;
+    font-size: vars.$font-lg;
   }
 
   &__sum {
-    font-size: 13px;
+    font-size: vars.$font-sm;
     color: var(--text-muted);
     font-variant-numeric: tabular-nums;
   }
@@ -58,11 +58,11 @@
     // than push the count off the row.
     min-width: 0;
     overflow-wrap: anywhere;
-    font-size: 14px;
+    font-size: vars.$font-md;
   }
 
   &__count {
-    font-weight: 700;
+    font-weight: vars.$weight-heavy;
     font-variant-numeric: tabular-nums;
   }
 

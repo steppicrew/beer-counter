@@ -58,7 +58,7 @@
 
   &__title {
     margin: 0;
-    font-size: 20px;
+    font-size: vars.$font-xl;
   }
 
   @media (width >= 560px) {
@@ -78,8 +78,8 @@
   gap: vars.$space-xs;
 
   &__label {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: vars.$font-sm;
+    font-weight: vars.$weight-semibold;
     color: var(--text-muted);
   }
 
@@ -93,7 +93,7 @@
   }
 
   &__hint {
-    font-size: 12px;
+    font-size: vars.$font-sm;
     color: var(--text-muted);
   }
 }
@@ -148,7 +148,7 @@
   }
 
   &__time {
-    font-weight: 400;
+    font-weight: vars.$weight-regular;
     font-variant-numeric: tabular-nums;
     opacity: 0.85;
   }
@@ -185,8 +185,8 @@
     flex: 1;
     min-height: 40px;
     border-radius: vars.$radius-sm;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: vars.$font-md;
+    font-weight: vars.$weight-semibold;
     color: var(--text-muted);
 
     &--selected {
@@ -243,7 +243,7 @@
   min-height: vars.$tap-min;
   padding: 0 vars.$space-lg;
   border-radius: vars.$radius-pill;
-  font-weight: 600;
+  font-weight: vars.$weight-semibold;
 
   &--primary {
     background: var(--accent);

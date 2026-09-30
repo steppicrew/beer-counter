@@ -49,22 +49,22 @@
   }
 
   &__name {
-    font-size: 17px;
-    font-weight: 600;
+    font-size: vars.$font-lg;
+    font-weight: vars.$weight-semibold;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   &__time {
-    font-size: 13px;
+    font-size: vars.$font-sm;
     color: var(--text-muted);
     font-variant-numeric: tabular-nums;
 
     // The "you just tapped this" warning state.
     &--fresh {
       color: var(--accent);
-      font-weight: 600;
+      font-weight: vars.$weight-semibold;
     }
   }
 
@@ -78,16 +78,16 @@
 
   &__count {
     min-width: 2.2ch;
-    font-size: 30px;
+    font-size: vars.$font-display;
     line-height: 1.1;
-    font-weight: 800;
+    font-weight: vars.$weight-heavy;
     text-align: right;
     font-variant-numeric: tabular-nums;
     color: var(--accent);
   }
 
   &__money {
-    font-size: 12px;
+    font-size: vars.$font-sm;
     color: var(--text-muted);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;

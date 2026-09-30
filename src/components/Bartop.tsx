@@ -219,10 +219,11 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   // Half a label's width as a share of the counter, so a mark whose digits
   // would hang off either end can be dropped. The widest form in play sets the
   // margin: a 12-hour label ("11 PM") is roughly twice a bare "23", and a
-  // weekday prefix ("Mon 11 PM") wider still.
+  // weekday prefix ("Mon 11 PM") wider still. Sized for $font-sm (13px), the
+  // labels' size since they match a row's "5 min ago".
   const counterWidth = Math.max(1, width - BAR_INSET_PX);
   const twelveHour = hourLabel.format(new Date(now)).length > 2;
-  const halfLabelPx = (twelveHour ? 18 : 9) + (marksAnotherDay(window.start, now) ? 17 : 0);
+  const halfLabelPx = (twelveHour ? 23 : 12) + (marksAnotherDay(window.start, now) ? 22 : 0);
   const labelRoom = halfLabelPx / counterWidth;
 
   const nowAt = positionIn(window, now);

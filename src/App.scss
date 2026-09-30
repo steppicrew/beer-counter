@@ -42,7 +42,7 @@
   }
 
   &__total-label {
-    font-size: 14px;
+    font-size: vars.$font-md;
     line-height: 1;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -50,7 +50,7 @@
   }
 
   &__total-money {
-    font-size: 13px;
+    font-size: vars.$font-sm;
     line-height: 1;
     color: var(--text-muted);
     font-variant-numeric: tabular-nums;
@@ -58,9 +58,9 @@
   }
 
   &__total-value {
-    font-size: 34px;
+    font-size: vars.$font-display;
     line-height: 1;
-    font-weight: 800;
+    font-weight: vars.$weight-heavy;
     font-variant-numeric: tabular-nums;
     color: var(--accent);
   }
@@ -128,14 +128,14 @@
 
   &__empty-title {
     margin: 0 0 vars.$space-xs;
-    font-size: 17px;
-    font-weight: 700;
+    font-size: vars.$font-lg;
+    font-weight: vars.$weight-semibold;
     color: var(--text);
   }
 
   &__empty-body {
     margin: 0;
-    font-size: 14px;
+    font-size: vars.$font-md;
   }
 
   &__list {
@@ -158,7 +158,7 @@
     gap: vars.$space-md;
     margin: 0 vars.$space-md vars.$space-sm;
     padding: vars.$space-sm vars.$space-sm vars.$space-sm vars.$space-md;
-    font-size: 14px;
+    font-size: vars.$font-md;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
     border-radius: vars.$radius-md;
@@ -179,7 +179,7 @@
   &__install-dismiss {
     min-height: 36px;
     padding: 0 vars.$space-sm;
-    font-size: 13px;
+    font-size: vars.$font-sm;
     color: var(--text-muted);
     border-radius: vars.$radius-pill;
   }
@@ -187,7 +187,7 @@
   &__install-btn {
     min-height: 36px;
     padding: 0 vars.$space-md;
-    font-weight: 600;
+    font-weight: vars.$weight-semibold;
     border-radius: vars.$radius-pill;
     background: var(--accent);
     color: var(--accent-contrast);
@@ -203,7 +203,7 @@
     gap: vars.$space-md;
     margin: 0 vars.$space-md;
     padding: vars.$space-sm vars.$space-sm vars.$space-sm vars.$space-md;
-    font-size: 14px;
+    font-size: vars.$font-md;
     background: var(--bg-elevated);
     border: 1px solid var(--accent);
     border-radius: vars.$radius-md;
@@ -214,7 +214,7 @@
     flex: none;
     min-height: 36px;
     padding: 0 vars.$space-md;
-    font-weight: 600;
+    font-weight: vars.$weight-semibold;
     border-radius: vars.$radius-pill;
     background: var(--accent);
     color: var(--accent-contrast);
@@ -243,7 +243,7 @@
     gap: vars.$space-sm;
     row-gap: vars.$space-xs;
     margin-top: vars.$space-sm;
-    font-size: 12px;
+    font-size: vars.$font-sm;
     color: var(--text-muted);
 
     a,
