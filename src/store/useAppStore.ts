@@ -1,13 +1,25 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { subscribeWithSelector } from 'zustand/middleware';
-import type { Beverage, CurrencyCode, IconKey, Tally, ThemeMode } from '../lib/types';
+import type {
+  ArchivedDrink,
+  Beverage,
+  CurrencyCode,
+  IconKey,
+  Round,
+  Tally,
+  ThemeMode,
+} from '../lib/types';
 import { DEFAULT_BEVERAGES } from '../lib/defaults';
 
 interface AppState {
   beverages: Beverage[];
   tallies: Record<string, Tally>;
   sessionStartedAt: number;
+  /** Finished rounds, oldest first. Only ever written by resetSession. */
+  history: Round[];
+  /** Off means a reset discards the round, as it did before history existed. */
+  historyEnabled: boolean;
 
   theme: ThemeMode;
   /** null = follow browser/system language. */
@@ -30,8 +42,13 @@ interface AppState {
   ) => void;
   removeBeverage: (id: string) => void;
 
-  /** Zeroes every count and drops session-only drinks. Defaults survive. */
+  /**
+   * Archives the round into the history, then zeroes every count and drops
+   * session-only drinks. Defaults survive.
+   */
   resetSession: () => void;
+  setHistoryEnabled: (enabled: boolean) => void;
+  clearHistory: () => void;
 
   setTheme: (theme: ThemeMode) => void;
   setLocale: (locale: string | null) => void;
@@ -42,6 +59,25 @@ interface AppState {
 
 const emptyTally: Tally = { times: [] };
 
+/** The round as it stands, or null when nothing was counted. */
+function archiveRound(beverages: Beverage[], tallies: Record<string, Tally>): Round | null {
+  const drinks: ArchivedDrink[] = [];
+  for (const b of beverages) {
+    const times = tallies[b.id]?.times ?? [];
+    if (times.length === 0) continue;
+    drinks.push({
+      ...(b.nameKey === undefined ? {} : { nameKey: b.nameKey }),
+      ...(b.name === undefined ? {} : { name: b.name }),
+      icon: b.icon,
+      ...(b.priceCents === undefined ? {} : { priceCents: b.priceCents }),
+      times,
+    });
+  }
+  if (drinks.length === 0) return null;
+  const all = drinks.flatMap((d) => d.times);
+  return { startedAt: Math.min(...all), endedAt: Math.max(...all), drinks };
+}
+
 export const useAppStore = create<AppState>()(
   subscribeWithSelector(
     persist(
@@ -49,6 +85,8 @@ export const useAppStore = create<AppState>()(
         beverages: DEFAULT_BEVERAGES,
         tallies: {},
         sessionStartedAt: Date.now(),
+        history: [],
+        historyEnabled: true,
         theme: 'system',
         locale: null,
         currency: null,
@@ -123,11 +161,20 @@ export const useAppStore = create<AppState>()(
           }),
 
         resetSession: () =>
-          set((state) => ({
-            beverages: state.beverages.filter((b) => b.scope === 'default'),
-            tallies: {},
-            sessionStartedAt: Date.now(),
-          })),
+          set((state) => {
+            const round = state.historyEnabled
+              ? archiveRound(state.beverages, state.tallies)
+              : null;
+            return {
+              beverages: state.beverages.filter((b) => b.scope === 'default'),
+              tallies: {},
+              sessionStartedAt: Date.now(),
+              history: round ? [...state.history, round] : state.history,
+            };
+          }),
+
+        setHistoryEnabled: (historyEnabled) => set({ historyEnabled }),
+        clearHistory: () => set({ history: [] }),
 
         setTheme: (theme) => set({ theme }),
         setLocale: (locale) => set({ locale }),
@@ -139,7 +186,7 @@ export const useAppStore = create<AppState>()(
       {
         name: 'beer-counter-state',
         storage: createJSONStorage(() => localStorage),
-        version: 2,
+        version: 3,
         /**
          * v1 stored `{ count, lastAt }`. Only the newest drink had a time, so
          * the older entries are unknowable — they are seeded to that same
@@ -147,6 +194,9 @@ export const useAppStore = create<AppState>()(
          * and only affects undo history the user never had anyway.
          */
         migrate: (persisted, version) => {
+          // v3 only added the history. persist's merge fills the missing
+          // fields from the initial state, so it starts empty and the round in
+          // progress becomes its first entry.
           if (version >= 2) return persisted as AppState;
           const state = persisted as { tallies?: Record<string, unknown> };
           const tallies: Record<string, Tally> = {};
@@ -167,6 +217,8 @@ export const useAppStore = create<AppState>()(
           beverages: state.beverages,
           tallies: state.tallies,
           sessionStartedAt: state.sessionStartedAt,
+          history: state.history,
+          historyEnabled: state.historyEnabled,
           theme: state.theme,
           locale: state.locale,
           currency: state.currency,

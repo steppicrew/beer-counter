@@ -53,3 +53,29 @@ export type ThemeMode = 'system' | 'light' | 'dark';
 
 /** ISO 4217 code used to format every price; chosen once in settings. */
 export type CurrencyCode = string;
+
+/**
+ * A drink as it stood when its round was archived. Name, icon and price are
+ * copied rather than referenced by id: a later rename, reprice or delete must
+ * not rewrite what was actually drunk, and session drinks do not survive the
+ * reset that archives them.
+ */
+export interface ArchivedDrink {
+  /** Kept instead of the resolved name so built-ins follow the language. */
+  nameKey?: string;
+  name?: string;
+  icon: IconKey;
+  priceCents?: number;
+  times: number[];
+}
+
+/** One finished round, written to the history when it is reset. */
+export interface Round {
+  /**
+   * First and last drink, not the reset times: a round reset on Monday and
+   * drunk on Saturday belongs to Saturday.
+   */
+  startedAt: number;
+  endedAt: number;
+  drinks: ArchivedDrink[];
+}
