@@ -20,9 +20,6 @@ const VIEW_BOX = `${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}`;
 /** A sprite-px offset as a share of the box, for CSS transforms that must scale with him. */
 const pct = (spritePx: number, of: number) => `${(spritePx / of) * 100}%`;
 
-/** Left alone this long, he stops moving until the next touch. */
-const IDLE_MS = 90_000;
-
 /**
  * The added motion is written to the page only in steps this coarse: a fifth
  * of a sprite pixel, a fifth of a degree, half a percent of stretch. Finer
@@ -66,9 +63,10 @@ function usePrefersStill(): boolean {
  *
  * The loop writes straight to the elements; React is not asked to re-render
  * sixty times a second for a figure in the corner. He stops when the page is
- * hidden, when the system asks for reduced motion, and after a minute and a
- * half without a touch — a phone left lying on the table with the screen on
- * is exactly when nobody is watching him.
+ * hidden — which is what the screen going dark, the app going to the
+ * background or another tab coming to the front all amount to — and when
+ * the system asks for reduced motion. While the screen is on and the app is
+ * in front, he moves: an idle timer was tried and read as the app hanging.
  */
 export default function BarmanFigure({ className }: Props) {
   const headRef = useRef<HTMLSpanElement>(null);
@@ -104,11 +102,8 @@ export default function BarmanFigure({ className }: Props) {
     let headTransform = '';
     let bodyTransform = '';
     let raf = 0;
-    let lastTouch = performance.now();
 
     const loop = (t: number) => {
-      raf = 0;
-      if (t - lastTouch > IDLE_MS) return; // holds the pose he is in
       const pose = barman(t);
       if (pose.face !== shownFace) {
         show(faces, pose.face);
@@ -131,20 +126,8 @@ export default function BarmanFigure({ className }: Props) {
       }
       raf = requestAnimationFrame(loop);
     };
-
-    // Any touch wakes him; while he is running it just postpones the nap.
-    const onTouch = () => {
-      lastTouch = performance.now();
-      if (raf === 0) raf = requestAnimationFrame(loop);
-    };
     raf = requestAnimationFrame(loop);
-    window.addEventListener('pointerdown', onTouch, { passive: true });
-    window.addEventListener('keydown', onTouch, { passive: true });
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('pointerdown', onTouch);
-      window.removeEventListener('keydown', onTouch);
-    };
+    return () => cancelAnimationFrame(raf);
   }, [visible, still]);
 
   return (
