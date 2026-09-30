@@ -39,8 +39,8 @@ function usePrefersStill(): boolean {
  * the original state machine (`lib/barman`), with springs and breathing on
  * top so the swaps read as one moving body. The sixteen frames are baked into
  * `generated/barman` from the graphics repo and drawn as inline paths: the
- * ink is `currentColor` and the paper the elevated background, so he is line
- * art in the app's palette rather than a black-and-white bitmap pasted on.
+ * ink is `currentColor` and the paper `--bar-paper`, so he is line art in the
+ * app's palette rather than a black-and-white bitmap pasted on.
  *
  * All sixteen frames are in the DOM from the start and the loop only flips
  * their visibility and two transforms, straight on the elements: React is not
@@ -115,7 +115,7 @@ export default function BarmanFigure({ className }: Props) {
       <g ref={headRef} transform={headTransform(0, 0, 1, 1)}>
         {HEAD_FRAMES.map((frame, i) => (
           <g key={i} visibility={i === 0 ? 'visible' : 'hidden'}>
-            <path fill="var(--bg-elevated)" fillRule="evenodd" d={frame.paper} />
+            <path fill="var(--bar-paper)" fillRule="evenodd" d={frame.paper} />
             <path fill="currentColor" fillRule="evenodd" d={frame.ink} />
           </g>
         ))}
@@ -123,7 +123,7 @@ export default function BarmanFigure({ className }: Props) {
       <g ref={bodyRef} transform={`translate(${HAND_X} ${HAND_Y})`}>
         {HAND_FRAMES.map((frame, i) => (
           <g key={i} visibility={i === 0 ? 'visible' : 'hidden'}>
-            <path fill="var(--bg-elevated)" fillRule="evenodd" d={frame.paper} />
+            <path fill="var(--bar-paper)" fillRule="evenodd" d={frame.paper} />
             <path fill="currentColor" fillRule="evenodd" d={frame.ink} />
           </g>
         ))}

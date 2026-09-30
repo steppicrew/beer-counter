@@ -95,7 +95,7 @@ $ink-line: 2px;
   }
 
   // The counter is drawn the way the barman is, in his ink: the top surface
-  // outlined on the elevated background, the front face solid, like his shirt.
+  // outlined on his paper, the front face solid, like his shirt.
   // Two planes meeting at an edge, told apart by line and fill rather than by
   // light and shade. No right-hand edge on either: the bar runs on past the
   // screen.
@@ -106,7 +106,7 @@ $ink-line: 2px;
     position: absolute;
     inset: auto 0 0 $bar-inset + $face-setback;
     height: $counter-face;
-    background: var(--ink);
+    background: var(--bar-ink);
   }
 
   // The top surface, receding towards the back of the bar.
@@ -114,8 +114,8 @@ $ink-line: 2px;
     position: absolute;
     inset: auto 0 $counter-face $bar-inset;
     height: $counter-top;
-    background: var(--bg-elevated);
-    border: $ink-line solid var(--ink);
+    background: var(--bar-paper);
+    border: $ink-line solid var(--bar-ink);
     border-bottom: 0;
     border-right: 0;
     border-radius: $end-round 0 0 0;
@@ -127,7 +127,7 @@ $ink-line: 2px;
     position: absolute;
     inset: auto 0 $counter-face - $ink-line $bar-inset;
     height: $ink-line;
-    background: var(--ink);
+    background: var(--bar-ink);
   }
 
   // Everything positioned by timestamp lives inside this, so a percentage
@@ -173,7 +173,7 @@ $ink-line: 2px;
     inset: auto auto $counter-face;
     width: 1px;
     height: $counter-top;
-    background: var(--ink);
+    background: var(--bar-ink);
     opacity: 0.45;
   }
 
@@ -199,7 +199,7 @@ $ink-line: 2px;
     // inside a face only one line tall, which pushed the digits out of sight.
     white-space: nowrap;
     // Paper on ink: the label is cut out of the solid face.
-    color: var(--bg-elevated);
+    color: var(--bar-paper);
   }
 
   // Where the evening has got to. Early in a round most of the counter is
@@ -349,7 +349,7 @@ $ink-line: 2px;
     // The width follows from the viewBox, which is cropped to him.
     width: auto;
     // The sprite's black is currentColor: his own ink, shared with the counter.
-    color: var(--ink);
+    color: var(--bar-ink);
   }
 
   // At the far end of an empty counter, where a real bar keeps its jar. A
