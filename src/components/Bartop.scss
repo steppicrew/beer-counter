@@ -352,12 +352,14 @@ $ink-line: 2px;
     color: var(--bar-ink);
   }
 
-  // At the far end of an empty counter, where a real bar keeps its jar. A
+  // At the far end of the counter, where a real bar keeps its jar. A
   // button for the tap and the screen reader, dressed as an object: no
   // background, no border, and above all no motion — it waits, it does not ask.
   &__tip-jar {
     position: absolute;
-    right: 7%;
+    // Right at the end of the counter: the barman and the present to its left
+    // get all the room it does not take. Matches JAR_RIGHT_PX in Bartop.tsx.
+    right: 6px;
     bottom: $counter-height - 1px;
     z-index: 1;
     // A 48px target around a glass-sized jar, standing on the wood.

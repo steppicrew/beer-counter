@@ -93,9 +93,9 @@ const BAR_INSET_PX = 30;
 const HOUR_MS = 3_600_000;
 /** The barman's width until he has been measured, at $keeper-height. */
 const ASSUMED_KEEPER_PX = 139;
-/** The tip jar's box and its gap from the right end: $tap-min and `right: 7%`. */
+/** The tip jar's box and its gap from the right end: $tap-min and `right: 6px`. */
 const JAR_BOX_PX = 48;
-const JAR_RIGHT = 0.07;
+const JAR_RIGHT_PX = 6;
 /** How far the present reaches into his width: the newest glass at his elbow. */
 const NOW_INTO_KEEPER_PX = 40;
 const MINUTE = 60_000;
@@ -173,7 +173,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   // screen's: far left on a narrow phone, further right on a tablet.
   const counterPx = Math.max(1, width - BAR_INSET_PX);
   const jarShown = tipJar !== undefined;
-  const jarRightPx = counterPx * JAR_RIGHT;
+  const jarRightPx = JAR_RIGHT_PX;
   const keeperRightPx = jarShown ? jarRightPx + JAR_BOX_PX + 2 : jarRightPx;
   const nowPx = counterPx - keeperRightPx - keeperWidth - 4 - 13.5 + NOW_INTO_KEEPER_PX;
   const nowAtFraction = Math.min(0.9, Math.max(0.1, nowPx / counterPx));
