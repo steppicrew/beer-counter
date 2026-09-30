@@ -13,6 +13,7 @@ import type { Beverage, Tally } from './lib/types';
 import { computeTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
+import { TIP_URL } from './lib/tips';
 import { useInstallPrompt } from './lib/useInstallPrompt';
 import { useSystemDark } from './lib/useSystemDark';
 import { useViewportInset } from './lib/useViewportInset';
@@ -276,6 +277,14 @@ export function App() {
               <a href="./privacy/">{t('legal.privacy')}</a>
               <span aria-hidden="true">·</span>
               <a href="./impressum/">{t('legal.imprint')}</a>
+              {TIP_URL && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <a href={TIP_URL} target="_blank" rel="noopener">
+                    {t('tip.title')}
+                  </a>
+                </>
+              )}
             </nav>
           )}
         </footer>

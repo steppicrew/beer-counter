@@ -120,6 +120,12 @@ export const en = {
   'stats.clear': 'Clear history',
   'stats.clearTitle': 'Clear the history?',
   'stats.clearBody': 'All past rounds are deleted. The current round stays. This cannot be undone.',
+  'tip.title': 'Buy me a beer',
+  'tip.hint': 'The app stays free, with everything in it. A tip just says thanks.',
+  'tip.round': 'A round',
+  'tip.thanks': 'Cheers — thank you!',
+  'tip.pending': 'Thank you! Google Play will confirm the payment.',
+  'tip.failed': 'That didn’t go through. Nothing was charged.',
 } as const;
 
 export type MessageKey = keyof typeof en;
@@ -243,6 +249,12 @@ export const de: Messages = {
   'stats.clear': 'Verlauf löschen',
   'stats.clearTitle': 'Verlauf löschen?',
   'stats.clearBody': 'Alle vergangenen Runden werden gelöscht. Die aktuelle Runde bleibt. Das lässt sich nicht rückgängig machen.',
+  'tip.title': 'Spendier mir ein Bier',
+  'tip.hint': 'Die App bleibt kostenlos und vollständig. Ein Trinkgeld sagt einfach Danke.',
+  'tip.round': 'Eine Runde',
+  'tip.thanks': 'Prost — danke dir!',
+  'tip.pending': 'Danke! Google Play bestätigt die Zahlung noch.',
+  'tip.failed': 'Das hat nicht geklappt. Es wurde nichts abgebucht.',
 };
 
 export const fr: Messages = {
@@ -363,6 +375,12 @@ export const fr: Messages = {
   'stats.clear': 'Effacer l’historique',
   'stats.clearTitle': 'Effacer l’historique ?',
   'stats.clearBody': 'Toutes les tournées passées sont supprimées. La tournée en cours est conservée. Cette action est irréversible.',
+  'tip.title': 'Offrez-moi une bière',
+  'tip.hint': 'L’app reste gratuite et complète. Un pourboire, c’est juste pour dire merci.',
+  'tip.round': 'Une tournée',
+  'tip.thanks': 'Santé — merci !',
+  'tip.pending': 'Merci ! Google Play confirmera le paiement.',
+  'tip.failed': 'Ça n’a pas abouti. Rien n’a été débité.',
 };
 
 export const es: Messages = {
@@ -483,6 +501,12 @@ export const es: Messages = {
   'stats.clear': 'Borrar historial',
   'stats.clearTitle': '¿Borrar el historial?',
   'stats.clearBody': 'Se borran todas las rondas pasadas. La ronda actual se queda. Esto no se puede deshacer.',
+  'tip.title': 'Invítame a una cerveza',
+  'tip.hint': 'La app sigue siendo gratis y completa. Una propina es solo para dar las gracias.',
+  'tip.round': 'Una ronda',
+  'tip.thanks': '¡Salud, gracias!',
+  'tip.pending': '¡Gracias! Google Play confirmará el pago.',
+  'tip.failed': 'No se ha completado. No se ha cobrado nada.',
 };
 
 export const it: Messages = {
@@ -603,6 +627,12 @@ export const it: Messages = {
   'stats.clear': 'Cancella lo storico',
   'stats.clearTitle': 'Cancellare lo storico?',
   'stats.clearBody': 'Tutti i giri passati vengono cancellati. Il giro in corso resta. L’azione non è reversibile.',
+  'tip.title': 'Offrimi una birra',
+  'tip.hint': 'L’app resta gratuita e completa. Una mancia è solo un grazie.',
+  'tip.round': 'Un giro',
+  'tip.thanks': 'Cin cin — grazie!',
+  'tip.pending': 'Grazie! Google Play confermerà il pagamento.',
+  'tip.failed': 'Non è andato a buon fine. Non è stato addebitato nulla.',
 };
 
 export const nl: Messages = {
@@ -723,6 +753,12 @@ export const nl: Messages = {
   'stats.clear': 'Geschiedenis wissen',
   'stats.clearTitle': 'Geschiedenis wissen?',
   'stats.clearBody': 'Alle eerdere rondes worden gewist. De huidige ronde blijft. Dit kan niet ongedaan worden gemaakt.',
+  'tip.title': 'Trakteer me op een biertje',
+  'tip.hint': 'De app blijft gratis en compleet. Een fooi is gewoon een bedankje.',
+  'tip.round': 'Een rondje',
+  'tip.thanks': 'Proost — bedankt!',
+  'tip.pending': 'Bedankt! Google Play bevestigt de betaling nog.',
+  'tip.failed': 'Dat is niet gelukt. Er is niets afgeschreven.',
 };
 
 export const pl: Messages = {
@@ -843,6 +879,12 @@ export const pl: Messages = {
   'stats.clear': 'Wyczyść historię',
   'stats.clearTitle': 'Wyczyścić historię?',
   'stats.clearBody': 'Wszystkie poprzednie kolejki zostaną usunięte. Bieżąca kolejka zostaje. Tego nie można cofnąć.',
+  'tip.title': 'Postaw mi piwo',
+  'tip.hint': 'Aplikacja pozostaje darmowa i kompletna. Napiwek to po prostu podziękowanie.',
+  'tip.round': 'Kolejka dla wszystkich',
+  'tip.thanks': 'Na zdrowie — dziękuję!',
+  'tip.pending': 'Dziękuję! Google Play potwierdzi płatność.',
+  'tip.failed': 'Nie udało się. Nic nie zostało pobrane.',
 };
 
 export const pt: Messages = {
@@ -963,6 +1005,12 @@ export const pt: Messages = {
   'stats.clear': 'Apagar histórico',
   'stats.clearTitle': 'Apagar o histórico?',
   'stats.clearBody': 'Todas as rodadas anteriores são apagadas. A rodada atual fica. Isto não pode ser anulado.',
+  'tip.title': 'Paga-me uma cerveja',
+  'tip.hint': 'A app continua gratuita e completa. Uma gorjeta é só um obrigado.',
+  'tip.round': 'Uma rodada',
+  'tip.thanks': 'Saúde — obrigado!',
+  'tip.pending': 'Obrigado! O Google Play vai confirmar o pagamento.',
+  'tip.failed': 'Não foi concluído. Nada foi cobrado.',
 };
 
 export const cs: Messages = {
@@ -1083,6 +1131,12 @@ export const cs: Messages = {
   'stats.clear': 'Smazat historii',
   'stats.clearTitle': 'Smazat historii?',
   'stats.clearBody': 'Všechna minulá kola budou smazána. Aktuální kolo zůstane. Tuto akci nelze vrátit zpět.',
+  'tip.title': 'Kup mi pivo',
+  'tip.hint': 'Aplikace zůstává zdarma a kompletní. Spropitné je jen poděkování.',
+  'tip.round': 'Runda pro všechny',
+  'tip.thanks': 'Na zdraví — děkuju!',
+  'tip.pending': 'Děkuju! Google Play platbu ještě potvrdí.',
+  'tip.failed': 'Nepovedlo se. Nic nebylo strženo.',
 };
 
 export const da: Messages = {
@@ -1203,6 +1257,12 @@ export const da: Messages = {
   'stats.clear': 'Ryd historik',
   'stats.clearTitle': 'Ryd historikken?',
   'stats.clearBody': 'Alle tidligere omgange slettes. Den aktuelle omgang bliver. Det kan ikke fortrydes.',
+  'tip.title': 'Giv mig en øl',
+  'tip.hint': 'Appen forbliver gratis og komplet. Drikkepenge er bare et tak.',
+  'tip.round': 'En omgang',
+  'tip.thanks': 'Skål — tak!',
+  'tip.pending': 'Tak! Google Play bekræfter betalingen.',
+  'tip.failed': 'Det gik ikke igennem. Der blev ikke trukket noget.',
 };
 
 export const sv: Messages = {
@@ -1323,6 +1383,12 @@ export const sv: Messages = {
   'stats.clear': 'Rensa historik',
   'stats.clearTitle': 'Rensa historiken?',
   'stats.clearBody': 'Alla tidigare rundor raderas. Den pågående rundan finns kvar. Det går inte att ångra.',
+  'tip.title': 'Bjud mig på en öl',
+  'tip.hint': 'Appen förblir gratis och komplett. Dricks är bara ett tack.',
+  'tip.round': 'En runda',
+  'tip.thanks': 'Skål — tack!',
+  'tip.pending': 'Tack! Google Play bekräftar betalningen.',
+  'tip.failed': 'Det gick inte igenom. Inget drogs.',
 };
 
 export const tr: Messages = {
@@ -1443,6 +1509,12 @@ export const tr: Messages = {
   'stats.clear': 'Geçmişi temizle',
   'stats.clearTitle': 'Geçmiş temizlensin mi?',
   'stats.clearBody': 'Geçmiş tüm turlar silinir. Mevcut tur kalır. Bu geri alınamaz.',
+  'tip.title': 'Bana bir bira ısmarla',
+  'tip.hint': 'Uygulama ücretsiz ve eksiksiz kalır. Bahşiş sadece bir teşekkürdür.',
+  'tip.round': 'Herkese bir tur',
+  'tip.thanks': 'Şerefe — teşekkürler!',
+  'tip.pending': 'Teşekkürler! Google Play ödemeyi onaylayacak.',
+  'tip.failed': 'İşlem tamamlanmadı. Ücret alınmadı.',
 };
 
 export const ru: Messages = {
@@ -1563,6 +1635,12 @@ export const ru: Messages = {
   'stats.clear': 'Очистить историю',
   'stats.clearTitle': 'Очистить историю?',
   'stats.clearBody': 'Все прошлые круги будут удалены. Текущий круг останется. Отменить это нельзя.',
+  'tip.title': 'Угостите меня пивом',
+  'tip.hint': 'Приложение остаётся бесплатным и полным. Чаевые — просто спасибо.',
+  'tip.round': 'Круг на всех',
+  'tip.thanks': 'Будем здоровы — спасибо!',
+  'tip.pending': 'Спасибо! Google Play подтвердит платёж.',
+  'tip.failed': 'Не получилось. Деньги не списаны.',
 };
 
 export const ja: Messages = {
@@ -1683,6 +1761,12 @@ export const ja: Messages = {
   'stats.clear': '履歴を消去',
   'stats.clearTitle': '履歴を消去しますか？',
   'stats.clearBody': '過去のラウンドはすべて削除されます。現在のラウンドは残ります。元に戻せません。',
+  'tip.title': 'ビールをおごる',
+  'tip.hint': 'アプリは無料のまま、機能もすべて使えます。チップは感謝の気持ちです。',
+  'tip.round': 'みんなに一杯',
+  'tip.thanks': '乾杯、ありがとう！',
+  'tip.pending': 'ありがとう！支払いはGoogle Playが確認します。',
+  'tip.failed': '完了しませんでした。請求はされていません。',
 };
 
 export const zh: Messages = {
@@ -1802,6 +1886,12 @@ export const zh: Messages = {
   'stats.clear': '清除历史记录',
   'stats.clearTitle': '清除历史记录？',
   'stats.clearBody': '所有过去的轮次都将被删除，当前这一轮保留。此操作无法撤销。',
+  'tip.title': '请我喝杯啤酒',
+  'tip.hint': '应用始终免费且功能完整。打赏只是一份谢意。',
+  'tip.round': '请大家喝一轮',
+  'tip.thanks': '干杯，谢谢你！',
+  'tip.pending': '谢谢！Google Play 将确认付款。',
+  'tip.failed': '未能完成，未产生任何扣款。',
 };
 
 export const CATALOGUES: Record<string, Messages> = {

@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Sheet } from './Sheet';
+import { TipSection } from './TipSection';
 import { useI18n, LOCALES } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
 import type { ThemeMode } from '../lib/types';
@@ -96,6 +97,8 @@ export function SettingsSheet({ onClose }: { onClose: () => void }) {
           )}
         </div>
       )}
+
+      <TipSection />
 
       <p className="field__hint">
         {t('settings.version', { version: __APP_VERSION__ })} · {t('settings.offline')}
