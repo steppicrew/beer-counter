@@ -54,6 +54,7 @@ export function App() {
   const updateBeverage = useAppStore((s) => s.updateBeverage);
   const removeBeverage = useAppStore((s) => s.removeBeverage);
   const resetSession = useAppStore((s) => s.resetSession);
+  const moveDrink = useAppStore((s) => s.moveDrink);
   const rounds = useAppStore((s) => s.history.length);
   const tipAsked = useAppStore((s) => s.tipAsked);
   const markTipAsked = useAppStore((s) => s.markTipAsked);
@@ -261,6 +262,7 @@ export function App() {
           tallies={tallies}
           now={now}
           hidden={keyboardUp}
+          onMoveGlass={moveDrink}
           onTipJar={tipJarAsk ? openTips : undefined}
           tipJar={
             showJar
