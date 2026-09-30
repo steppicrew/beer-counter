@@ -60,6 +60,7 @@ export function App() {
   const tipAsked = useAppStore((s) => s.tipAsked);
   const markTipAsked = useAppStore((s) => s.markTipAsked);
   const tipped = useAppStore((s) => s.tipped);
+  const tips = useAppStore((s) => s.tips);
   const coinPending = useAppStore((s) => s.coinPending);
   const clearCoin = useAppStore((s) => s.clearCoin);
 
@@ -148,11 +149,13 @@ export function App() {
   const regular = canTip && rounds >= REGULAR_AFTER_ROUNDS && total === 0;
   const tipJarAsk = regular && !tipAsked && !tipped;
 
-  // After the one line, the jar just stands at the end of every empty bar
-  // until a tip — then once more, with the coin, and never again. The coin
-  // waits for no sheet to be open, so the drop is actually seen.
-  const showJar = regular && (!tipped || coinPending);
-  const coinNow = coinPending && dialog.kind === 'none';
+  // The jar itself is always on the bar wherever a tip is possible — silent,
+  // still, at the right end. After a tip the coin drops in once, when no
+  // sheet covers it, so the drop is actually seen; from then on it lies there.
+  const showJar = canTip;
+  const dropping = coinPending && dialog.kind === 'none';
+  // The pending coin is only drawn once it can be seen falling in.
+  const coins = coinPending && !dropping ? tips - 1 : tips;
   const openTips = () => {
     markTipAsked();
     setDialog({ kind: 'settings', focusTip: true });
@@ -166,16 +169,16 @@ export function App() {
     else if (askedShown.current && !tipAsked) markTipAsked();
   }, [tipJarAsk, tipAsked, markTipAsked]);
 
-  // The coin is a thank-you for one round: once it has been seen and the
-  // next drink is counted, the jar goes with it.
-  const coinShown = useRef(false);
+  // The drop and the barman's thanks last until the next drink is counted;
+  // after that the coin simply lies in the jar.
+  const totalAtDrop = useRef<number | null>(null);
   useEffect(() => {
-    if (showJar && coinNow) coinShown.current = true;
-    else if (coinShown.current && total > 0) {
-      coinShown.current = false;
+    if (dropping && totalAtDrop.current === null) totalAtDrop.current = total;
+    else if (totalAtDrop.current !== null && total !== totalAtDrop.current) {
+      totalAtDrop.current = null;
       clearCoin();
     }
-  }, [showJar, coinNow, total, clearCoin]);
+  }, [dropping, total, clearCoin]);
 
   return (
     <I18nContext.Provider value={{ locale, t }}>
@@ -271,7 +274,7 @@ export function App() {
           onTipJar={tipJarAsk ? openTips : undefined}
           tipJar={
             showJar
-              ? { coin: coinNow, onOpen: openTips, label: currencySymbol(currency, locale) }
+              ? { coins, dropping, onOpen: openTips, label: currencySymbol(currency, locale) }
               : undefined
           }
         />

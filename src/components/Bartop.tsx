@@ -47,12 +47,15 @@ interface Props {
    */
   onTipJar?: (() => void) | undefined;
   /**
-   * The tip jar at the end of an empty counter: silent, still, and gone with
-   * the first drink. `coin` drops the thank-you coin into it.
+   * The tip jar at the right end of the counter: silent and still, always
+   * there wherever a tip is possible. `coin` is its thank-you coin.
    */
   tipJar?:
     | {
-        coin: boolean;
+        /** Coins to draw — one per paid tip. */
+        coins: number;
+        /** The newest coin is falling in: clink, heart and thanks. */
+        dropping: boolean;
         onOpen: () => void;
         /** The currency sign on the jar's front: what makes it a money jar in any language. */
         label: string;
@@ -169,7 +172,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   // place on the counter therefore follows from his measured width and the
   // screen's: far left on a narrow phone, further right on a tablet.
   const counterPx = Math.max(1, width - BAR_INSET_PX);
-  const jarShown = glasses.length === 0 && tipJar !== undefined;
+  const jarShown = tipJar !== undefined;
   const jarRightPx = counterPx * JAR_RIGHT;
   const keeperRightPx = jarShown ? jarRightPx + JAR_BOX_PX + 2 : jarRightPx;
   const nowPx = counterPx - keeperRightPx - keeperWidth - 4 - 13.5 + NOW_INTO_KEEPER_PX;
@@ -279,8 +282,8 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
 
   // The clink belongs to the coin hitting the bottom of the jar, so it waits
   // for the drop; with reduced motion there is no drop to wait for.
-  const coinShown = isEmpty && tipJar?.coin === true;
-  // Set when the coin lands, and never reset: the coin shows once ever, so
+  const coinShown = tipJar?.dropping === true;
+  // Set when the coin lands, and never reset: the coin drops once ever, so
   // there is no second landing to reset for.
   const [landed, setLanded] = useState(false);
   useEffect(() => {
@@ -377,31 +380,31 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                 >
                   {t('bartop.tipJar')}
                 </button>
+              ) : coinShown && landed ? (
+                // Thanks in words once the coin is in, whether the bar is empty
+                // or not; until the next drink, then back to taking orders.
+                <span className="bartop__ask">{t('tip.thanks')}</span>
               ) : isEmpty ? (
-                // Thanks in words once the coin is in; until the next drink,
-                // then back to taking orders.
-                <span className="bartop__ask">
-                  {coinShown && landed ? t('tip.thanks') : t('bartop.ask')}
-                </span>
+                <span className="bartop__ask">{t('bartop.ask')}</span>
               ) : isStale ? (
                 <span className="bartop__ask">{t('bartop.another')}</span>
               ) : null}
               <Barkeeper className="bartop__keeper-figure" />
             </span>
 
-            {isEmpty && tipJar && (
+            {tipJar && (
               <button
                 type="button"
                 className="bartop__tip-jar"
                 onClick={tipJar.onOpen}
                 aria-label={t('tip.jar')}
               >
-                <TipJar className="bartop__tip-jar-figure" coin={tipJar.coin} />
+                <TipJar className="bartop__tip-jar-figure" coins={tipJar.coins} dropping={tipJar.dropping} />
                 {/* Text, not SVG: at jar size an SVG glyph scales into a blur,
                     while real text is hinted. Smaller the longer the sign, so
-                    "zł" and even "CHF" stay on the jar's front. Off while the
-                    coin is in — the jar has made its point. */}
-                {!tipJar.coin && (
+                    "zł" and even "CHF" stay on the jar's front. Off only while
+                    the coin is falling in, so the drop is not hidden. */}
+                {!tipJar.dropping && (
                   <span
                     className={clsx(
                       'bartop__tip-jar-label',
@@ -412,7 +415,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                     {tipJar.label}
                   </span>
                 )}
-                {tipJar.coin && (
+                {tipJar.dropping && (
                   <svg className="bartop__heart" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path
                       d="M12 20.5s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.8a4.3 4.3 0 0 1 7.5 2.6c0 5.5-7.5 10.1-7.5 10.1Z"
