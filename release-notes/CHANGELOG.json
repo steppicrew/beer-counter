@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.5",
+      "date": "2026-09-30",
+      "notes": {
+        "en": "New in Settings: export all your data to a file and import it on your next phone. Google's cloud backup is off — your data leaves the phone only when you take it.",
+        "de": "Neu in den Einstellungen: alle Daten in eine Datei exportieren und auf dem nächsten Handy importieren. Die Cloud-Sicherung von Google ist aus — deine Daten verlassen das Handy nur, wenn du sie mitnimmst.",
+        "fr": "Nouveau dans les réglages : exportez toutes vos données dans un fichier et importez-le sur votre prochain téléphone. La sauvegarde cloud de Google est désactivée — vos données ne quittent le téléphone que si vous les emportez.",
+        "es": "Nuevo en Ajustes: exporta todos tus datos a un archivo e impórtalo en tu próximo móvil. La copia en la nube de Google está desactivada: tus datos solo salen del móvil si tú te los llevas.",
+        "it": "Novità nelle impostazioni: esporta tutti i dati in un file e importalo sul tuo prossimo telefono. Il backup cloud di Google è disattivato: i tuoi dati lasciano il telefono solo se li porti tu.",
+        "nl": "Nieuw in de instellingen: exporteer al je gegevens naar een bestand en importeer het op je volgende telefoon. De cloudback-up van Google staat uit — je gegevens verlaten de telefoon alleen als jij ze meeneemt.",
+        "pl": "Nowość w ustawieniach: wyeksportuj wszystkie dane do pliku i zaimportuj go na następnym telefonie. Kopia Google w chmurze jest wyłączona — dane opuszczają telefon tylko wtedy, gdy je zabierzesz.",
+        "pt": "Novo nas definições: exporta todos os teus dados para um ficheiro e importa-o no próximo telemóvel. A cópia de segurança na nuvem da Google está desligada — os teus dados só saem do telemóvel se os levares.",
+        "cs": "Nově v nastavení: exportuj všechna data do souboru a importuj ho v dalším telefonu. Cloudové zálohování Googlu je vypnuté — data opustí telefon, jen když si je vezmeš.",
+        "da": "Nyt i indstillingerne: eksportér alle dine data til en fil og importér den på din næste telefon. Googles cloud-backup er slået fra — dine data forlader kun telefonen, når du selv tager dem med.",
+        "sv": "Nytt i inställningarna: exportera all din data till en fil och importera den på din nästa telefon. Googles molnsäkerhetskopia är avstängd — din data lämnar bara telefonen när du tar med den.",
+        "tr": "Ayarlarda yeni: tüm verilerini bir dosyaya aktar ve bir sonraki telefonunda içe aktar. Google bulut yedeklemesi kapalı — verilerin telefondan yalnızca sen götürdüğünde çıkar.",
+        "ru": "Новое в настройках: экспортируйте все данные в файл и импортируйте его на следующем телефоне. Облачное резервное копирование Google отключено — данные покидают телефон, только если вы их забираете.",
+        "ja": "設定に新機能：すべてのデータをファイルにエクスポートし、次のスマホでインポートできます。Googleのクラウドバックアップはオフ。データはあなたが持ち出すときだけ端末の外に出ます。",
+        "zh": "设置新增：将所有数据导出为文件，并在下一部手机上导入。Google 云备份已关闭——只有你主动带走时，数据才会离开手机。"
+      }
+    },
+    {
       "version": "1.7.4",
       "date": "2026-09-30",
       "notes": {
