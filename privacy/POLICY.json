@@ -1,6 +1,6 @@
 {
   "$comment": "Privacy policy text per language. `yarn privacy` renders these into public/privacy/. Keep the factual claims in sync with what the app actually does.",
-  "effectiveDate": "2026-08-27",
+  "effectiveDate": "2026-09-30",
   "contactEmail": "google@steppicrew.de",
   "policies": {
     "en": {
@@ -25,7 +25,11 @@
         ],
         [
           "No third parties",
-          "No data is shared with third parties, because no data is collected. The app contains no third-party SDKs."
+          "No data is shared with third parties, because no data is collected. The app contains no third-party SDKs other than Google Play's billing library in the Android app, which is used only for optional tips and talks only to the Play Store app on your device."
+        ],
+        [
+          "Tips",
+          "Tips are optional and unlock nothing. In the Android app they are paid through Google Play: Google processes the payment under its own privacy policy, and the app learns only whether the tip went through — no name, no payment details. On the website, the “Buy me a beer” link leads to an external page with its own privacy policy; nothing is sent there unless you follow the link."
         ],
         [
           "Children",
@@ -33,7 +37,7 @@
         ],
         [
           "Permissions",
-          "The Android app requests no permissions."
+          "The Android app requests a single permission, Google Play's billing permission (com.android.vending.BILLING), needed only for the optional tips. It has no internet permission."
         ],
         [
           "Changes",
@@ -67,7 +71,11 @@
         ],
         [
           "Keine Dritten",
-          "Es werden keine Daten an Dritte weitergegeben, weil keine Daten erhoben werden. Die App enthält keine Fremd-SDKs."
+          "Es werden keine Daten an Dritte weitergegeben, weil keine Daten erhoben werden. Die App enthält keine Fremd-SDKs außer der Abrechnungsbibliothek von Google Play in der Android-App. Sie dient nur dem freiwilligen Trinkgeld und spricht nur mit der Play-Store-App auf Ihrem Gerät."
+        ],
+        [
+          "Trinkgeld",
+          "Trinkgeld ist freiwillig und schaltet nichts frei. In der Android-App wird es über Google Play bezahlt: Google wickelt die Zahlung nach seiner eigenen Datenschutzerklärung ab, und die App erfährt nur, ob das Trinkgeld angekommen ist — keinen Namen, keine Zahlungsdaten. Auf der Website führt der Link „Spendier mir ein Bier“ zu einer externen Seite mit eigener Datenschutzerklärung; dorthin wird nichts übertragen, solange Sie dem Link nicht folgen."
         ],
         [
           "Kinder",
@@ -75,7 +83,7 @@
         ],
         [
           "Berechtigungen",
-          "Die Android-App fordert keine Berechtigungen an."
+          "Die Android-App fordert eine einzige Berechtigung an: die Abrechnungsberechtigung von Google Play (com.android.vending.BILLING), nur für das freiwillige Trinkgeld. Eine Internetberechtigung hat sie nicht."
         ],
         [
           "Änderungen",
@@ -109,7 +117,11 @@
         ],
         [
           "Aucun tiers",
-          "Aucune donnée n'est partagée avec des tiers, puisqu'aucune donnée n'est collectée. L'application ne contient aucun SDK tiers."
+          "Aucune donnée n'est partagée avec des tiers, puisqu'aucune donnée n'est collectée. L'application ne contient aucun SDK tiers, hormis la bibliothèque de facturation de Google Play dans l'application Android, utilisée uniquement pour les pourboires facultatifs et qui ne communique qu'avec l'application Play Store de votre appareil."
+        ],
+        [
+          "Pourboires",
+          "Les pourboires sont facultatifs et ne débloquent rien. Dans l'application Android, ils sont payés via Google Play : Google traite le paiement selon sa propre politique de confidentialité, et l'application apprend seulement si le pourboire a abouti — ni nom, ni données de paiement. Sur le site web, le lien « Offrez-moi une bière » mène à une page externe dotée de sa propre politique de confidentialité ; rien n'y est envoyé tant que vous ne suivez pas le lien."
         ],
         [
           "Enfants",
@@ -117,7 +129,7 @@
         ],
         [
           "Autorisations",
-          "L'application Android ne demande aucune autorisation."
+          "L'application Android demande une seule autorisation, celle de facturation de Google Play (com.android.vending.BILLING), nécessaire uniquement pour les pourboires facultatifs. Elle n'a pas d'autorisation d'accès à Internet."
         ],
         [
           "Modifications",
@@ -151,7 +163,11 @@
         ],
         [
           "Sin terceros",
-          "No se comparten datos con terceros, porque no se recopilan datos. La aplicación no contiene SDK de terceros."
+          "No se comparten datos con terceros, porque no se recopilan datos. La aplicación no contiene SDK de terceros, salvo la biblioteca de facturación de Google Play en la aplicación de Android, que solo se usa para las propinas opcionales y solo se comunica con la aplicación Play Store de tu dispositivo."
+        ],
+        [
+          "Propinas",
+          "Las propinas son opcionales y no desbloquean nada. En la aplicación de Android se pagan a través de Google Play: Google procesa el pago según su propia política de privacidad, y la aplicación solo sabe si la propina se completó — ni nombre ni datos de pago. En el sitio web, el enlace «Invítame a una cerveza» lleva a una página externa con su propia política de privacidad; no se envía nada allí a menos que sigas el enlace."
         ],
         [
           "Menores",
@@ -159,7 +175,7 @@
         ],
         [
           "Permisos",
-          "La aplicación de Android no solicita ningún permiso."
+          "La aplicación de Android solicita un único permiso, el de facturación de Google Play (com.android.vending.BILLING), necesario solo para las propinas opcionales. No tiene permiso de acceso a Internet."
         ],
         [
           "Cambios",
@@ -193,7 +209,11 @@
         ],
         [
           "Nessuna terza parte",
-          "Nessun dato è condiviso con terze parti, perché nessun dato viene raccolto. L'app non contiene SDK di terze parti."
+          "Nessun dato è condiviso con terze parti, perché nessun dato viene raccolto. L'app non contiene SDK di terze parti, a parte la libreria di fatturazione di Google Play nell'app Android, usata solo per le mance facoltative e che comunica solo con l'app Play Store sul tuo dispositivo."
+        ],
+        [
+          "Mance",
+          "Le mance sono facoltative e non sbloccano nulla. Nell'app Android si pagano tramite Google Play: Google elabora il pagamento secondo la propria informativa sulla privacy, e l'app sa solo se la mancia è andata a buon fine — nessun nome, nessun dato di pagamento. Sul sito web, il link «Offrimi una birra» porta a una pagina esterna con la propria informativa sulla privacy; lì non viene inviato nulla se non segui il link."
         ],
         [
           "Minori",
@@ -201,7 +221,7 @@
         ],
         [
           "Autorizzazioni",
-          "L'app Android non richiede alcuna autorizzazione."
+          "L'app Android richiede un'unica autorizzazione, quella di fatturazione di Google Play (com.android.vending.BILLING), necessaria solo per le mance facoltative. Non ha l'autorizzazione di accesso a Internet."
         ],
         [
           "Modifiche",
@@ -235,7 +255,11 @@
         ],
         [
           "Geen derden",
-          "Er worden geen gegevens gedeeld met derden, omdat er geen gegevens worden verzameld. De app bevat geen SDK's van derden."
+          "Er worden geen gegevens gedeeld met derden, omdat er geen gegevens worden verzameld. De app bevat geen SDK's van derden, behalve de factureringsbibliotheek van Google Play in de Android-app, die alleen voor de optionele fooi wordt gebruikt en alleen met de Play Store-app op je apparaat communiceert."
+        ],
+        [
+          "Fooi",
+          "Een fooi is optioneel en ontgrendelt niets. In de Android-app wordt die betaald via Google Play: Google verwerkt de betaling volgens zijn eigen privacybeleid, en de app hoort alleen of de fooi is gelukt — geen naam, geen betaalgegevens. Op de website leidt de link ‘Trakteer me op een biertje’ naar een externe pagina met een eigen privacybeleid; daar wordt niets heen gestuurd tenzij je de link volgt."
         ],
         [
           "Kinderen",
@@ -243,7 +267,7 @@
         ],
         [
           "Toestemmingen",
-          "De Android-app vraagt geen enkele toestemming."
+          "De Android-app vraagt één toestemming, de factureringstoestemming van Google Play (com.android.vending.BILLING), alleen nodig voor de optionele fooi. Hij heeft geen internettoestemming."
         ],
         [
           "Wijzigingen",
@@ -277,7 +301,11 @@
         ],
         [
           "Brak stron trzecich",
-          "Żadne dane nie są udostępniane stronom trzecim, ponieważ żadne dane nie są zbierane. Aplikacja nie zawiera zewnętrznych SDK."
+          "Żadne dane nie są udostępniane stronom trzecim, ponieważ żadne dane nie są zbierane. Aplikacja nie zawiera zewnętrznych SDK poza biblioteką płatności Google Play w aplikacji na Androida, używaną wyłącznie do dobrowolnych napiwków i komunikującą się tylko z aplikacją Sklep Play na Twoim urządzeniu."
+        ],
+        [
+          "Napiwki",
+          "Napiwki są dobrowolne i niczego nie odblokowują. W aplikacji na Androida płaci się je przez Google Play: Google przetwarza płatność zgodnie z własną polityką prywatności, a aplikacja dowiaduje się tylko, czy napiwek doszedł do skutku — bez nazwiska i danych płatniczych. Na stronie internetowej link „Postaw mi piwo” prowadzi do zewnętrznej strony z własną polityką prywatności; nic nie jest tam wysyłane, dopóki nie klikniesz linku."
         ],
         [
           "Dzieci",
@@ -285,7 +313,7 @@
         ],
         [
           "Uprawnienia",
-          "Aplikacja na Androida nie żąda żadnych uprawnień."
+          "Aplikacja na Androida żąda jednego uprawnienia — uprawnienia płatności Google Play (com.android.vending.BILLING), potrzebnego tylko do dobrowolnych napiwków. Nie ma uprawnienia do internetu."
         ],
         [
           "Zmiany",
@@ -319,7 +347,11 @@
         ],
         [
           "Sem terceiros",
-          "Não são partilhados dados com terceiros, porque não são recolhidos dados. A aplicação não contém SDK de terceiros."
+          "Não são partilhados dados com terceiros, porque não são recolhidos dados. A aplicação não contém SDK de terceiros, exceto a biblioteca de faturação do Google Play na aplicação Android, usada apenas para as gorjetas opcionais e que só comunica com a aplicação Play Store do seu dispositivo."
+        ],
+        [
+          "Gorjetas",
+          "As gorjetas são opcionais e não desbloqueiam nada. Na aplicação Android são pagas através do Google Play: a Google processa o pagamento segundo a sua própria política de privacidade, e a aplicação só fica a saber se a gorjeta foi concluída — nem nome, nem dados de pagamento. No site, a ligação «Paga-me uma cerveja» leva a uma página externa com a sua própria política de privacidade; nada é enviado para lá a menos que siga a ligação."
         ],
         [
           "Crianças",
@@ -327,7 +359,7 @@
         ],
         [
           "Permissões",
-          "A aplicação Android não pede quaisquer permissões."
+          "A aplicação Android pede uma única permissão, a de faturação do Google Play (com.android.vending.BILLING), necessária apenas para as gorjetas opcionais. Não tem permissão de acesso à Internet."
         ],
         [
           "Alterações",
@@ -361,7 +393,11 @@
         ],
         [
           "Žádné třetí strany",
-          "Žádná data nejsou sdílena s třetími stranami, protože se žádná data neshromažďují. Aplikace neobsahuje SDK třetích stran."
+          "Žádná data nejsou sdílena s třetími stranami, protože se žádná data neshromažďují. Aplikace neobsahuje SDK třetích stran kromě platební knihovny Google Play v aplikaci pro Android, která slouží jen k dobrovolnému spropitnému a komunikuje jen s aplikací Obchod Play ve vašem zařízení."
+        ],
+        [
+          "Spropitné",
+          "Spropitné je dobrovolné a nic neodemyká. V aplikaci pro Android se platí přes Google Play: Google zpracuje platbu podle svých vlastních zásad ochrany soukromí a aplikace se dozví jen to, zda spropitné prošlo — žádné jméno ani platební údaje. Na webu vede odkaz „Kup mi pivo“ na externí stránku s vlastními zásadami ochrany soukromí; nic se tam neodešle, dokud na odkaz neklepnete."
         ],
         [
           "Děti",
@@ -369,7 +405,7 @@
         ],
         [
           "Oprávnění",
-          "Aplikace pro Android nevyžaduje žádná oprávnění."
+          "Aplikace pro Android vyžaduje jediné oprávnění, platební oprávnění Google Play (com.android.vending.BILLING), potřebné jen pro dobrovolné spropitné. Oprávnění k internetu nemá."
         ],
         [
           "Změny",
@@ -403,7 +439,11 @@
         ],
         [
           "Ingen tredjeparter",
-          "Ingen data deles med tredjeparter, fordi ingen data indsamles. Appen indeholder ingen tredjeparts-SDK'er."
+          "Ingen data deles med tredjeparter, fordi ingen data indsamles. Appen indeholder ingen tredjeparts-SDK'er ud over Google Plays betalingsbibliotek i Android-appen, som kun bruges til frivillige drikkepenge og kun taler med Play Butik-appen på din enhed."
+        ],
+        [
+          "Drikkepenge",
+          "Drikkepenge er frivillige og låser ikke noget op. I Android-appen betales de via Google Play: Google behandler betalingen efter sin egen privatlivspolitik, og appen får kun at vide, om drikkepengene gik igennem — intet navn, ingen betalingsoplysninger. På hjemmesiden fører linket “Giv mig en øl” til en ekstern side med sin egen privatlivspolitik; der sendes intet dertil, medmindre du følger linket."
         ],
         [
           "Børn",
@@ -411,7 +451,7 @@
         ],
         [
           "Tilladelser",
-          "Android-appen anmoder ikke om nogen tilladelser."
+          "Android-appen anmoder om én enkelt tilladelse, Google Plays betalingstilladelse (com.android.vending.BILLING), som kun bruges til de frivillige drikkepenge. Den har ingen internettilladelse."
         ],
         [
           "Ændringer",
@@ -445,7 +485,11 @@
         ],
         [
           "Inga tredje parter",
-          "Inga uppgifter delas med tredje part, eftersom inga uppgifter samlas in. Appen innehåller inga SDK:er från tredje part."
+          "Inga uppgifter delas med tredje part, eftersom inga uppgifter samlas in. Appen innehåller inga SDK:er från tredje part utom Google Plays faktureringsbibliotek i Android-appen, som bara används för frivillig dricks och bara pratar med Play Butik-appen på din enhet."
+        ],
+        [
+          "Dricks",
+          "Dricks är frivillig och låser inte upp något. I Android-appen betalas den via Google Play: Google hanterar betalningen enligt sin egen integritetspolicy, och appen får bara veta om dricksen gick igenom — inget namn, inga betalningsuppgifter. På webbplatsen leder länken ”Bjud mig på en öl” till en extern sida med egen integritetspolicy; inget skickas dit om du inte följer länken."
         ],
         [
           "Barn",
@@ -453,7 +497,7 @@
         ],
         [
           "Behörigheter",
-          "Android-appen begär inga behörigheter."
+          "Android-appen begär en enda behörighet, Google Plays faktureringsbehörighet (com.android.vending.BILLING), som bara behövs för den frivilliga dricksen. Den har ingen internetbehörighet."
         ],
         [
           "Ändringar",
@@ -487,7 +531,11 @@
         ],
         [
           "Üçüncü taraf yok",
-          "Hiçbir veri üçüncü taraflarla paylaşılmaz, çünkü hiçbir veri toplanmaz. Uygulama üçüncü taraf SDK içermez."
+          "Hiçbir veri üçüncü taraflarla paylaşılmaz, çünkü hiçbir veri toplanmaz. Uygulama, Android uygulamasındaki Google Play faturalandırma kitaplığı dışında üçüncü taraf SDK içermez; bu kitaplık yalnızca isteğe bağlı bahşiş için kullanılır ve yalnızca cihazınızdaki Play Store uygulamasıyla iletişim kurar."
+        ],
+        [
+          "Bahşiş",
+          "Bahşiş isteğe bağlıdır ve hiçbir şeyin kilidini açmaz. Android uygulamasında Google Play üzerinden ödenir: Google ödemeyi kendi gizlilik politikasına göre işler, uygulama ise yalnızca bahşişin gerçekleşip gerçekleşmediğini öğrenir — isim yok, ödeme bilgisi yok. Web sitesinde “Bana bir bira ısmarla” bağlantısı kendi gizlilik politikası olan harici bir sayfaya gider; bağlantıyı izlemediğiniz sürece oraya hiçbir şey gönderilmez."
         ],
         [
           "Çocuklar",
@@ -495,7 +543,7 @@
         ],
         [
           "İzinler",
-          "Android uygulaması hiçbir izin talep etmez."
+          "Android uygulaması tek bir izin ister: yalnızca isteğe bağlı bahşiş için gereken Google Play faturalandırma izni (com.android.vending.BILLING). İnternet izni yoktur."
         ],
         [
           "Değişiklikler",
@@ -529,7 +577,11 @@
         ],
         [
           "Никаких третьих лиц",
-          "Данные не передаются третьим лицам, поскольку данные не собираются. Приложение не содержит сторонних SDK."
+          "Данные не передаются третьим лицам, поскольку данные не собираются. Приложение не содержит сторонних SDK, кроме платёжной библиотеки Google Play в Android-приложении: она используется только для добровольных чаевых и общается только с приложением Play Маркет на вашем устройстве."
+        ],
+        [
+          "Чаевые",
+          "Чаевые добровольны и ничего не открывают. В Android-приложении они оплачиваются через Google Play: Google обрабатывает платёж по своей политике конфиденциальности, а приложение узнаёт лишь, прошла ли оплата, — ни имени, ни платёжных данных. На сайте ссылка «Угостите меня пивом» ведёт на внешнюю страницу со своей политикой конфиденциальности; туда ничего не передаётся, пока вы не перейдёте по ссылке."
         ],
         [
           "Дети",
@@ -537,7 +589,7 @@
         ],
         [
           "Разрешения",
-          "Android-приложение не запрашивает никаких разрешений."
+          "Android-приложение запрашивает одно-единственное разрешение — платёжное разрешение Google Play (com.android.vending.BILLING), нужное только для добровольных чаевых. Разрешения на доступ к интернету у него нет."
         ],
         [
           "Изменения",
@@ -571,7 +623,11 @@
         ],
         [
           "第三者提供なし",
-          "データを収集しないため、第三者と共有するデータもありません。本アプリはサードパーティ製SDKを含みません。"
+          "データを収集しないため、第三者と共有するデータもありません。Android版に含まれるGoogle Playの課金ライブラリを除き、本アプリはサードパーティ製SDKを含みません。このライブラリは任意のチップにのみ使われ、端末上のPlayストアアプリとだけ通信します。"
+        ],
+        [
+          "チップ",
+          "チップは任意で、何かが解放されることはありません。Android版ではGoogle Playで支払われます。支払いはGoogleが自社のプライバシーポリシーに基づいて処理し、アプリが知るのはチップが完了したかどうかだけです（氏名や支払い情報は受け取りません）。ウェブ版の「ビールをおごる」リンクは独自のプライバシーポリシーを持つ外部ページへ移動します。リンクを開かない限り、そこへ何も送信されません。"
         ],
         [
           "お子様について",
@@ -579,7 +635,7 @@
         ],
         [
           "権限",
-          "Android版はいかなる権限も要求しません。"
+          "Android版が要求する権限は、任意のチップにのみ必要なGoogle Playの課金権限（com.android.vending.BILLING）の1つだけです。インターネット権限はありません。"
         ],
         [
           "変更",
@@ -613,7 +669,11 @@
         ],
         [
           "无第三方",
-          "不会与第三方共享任何数据，因为根本不收集数据。本应用不包含任何第三方 SDK。"
+          "不会与第三方共享任何数据，因为根本不收集数据。除 Android 应用中的 Google Play 结算库外，本应用不包含任何第三方 SDK；该库仅用于自愿打赏，且只与您设备上的 Play 商店应用通信。"
+        ],
+        [
+          "打赏",
+          "打赏完全自愿，不会解锁任何内容。在 Android 应用中通过 Google Play 支付：Google 依据其自身的隐私政策处理付款，应用只会得知打赏是否成功——不会获得姓名或支付信息。在网站上，“请我喝杯啤酒”链接会打开一个拥有自己隐私政策的外部页面；除非您点击该链接，否则不会向其发送任何内容。"
         ],
         [
           "儿童",
@@ -621,7 +681,7 @@
         ],
         [
           "权限",
-          "Android 应用不请求任何权限。"
+          "Android 应用仅请求一项权限，即 Google Play 结算权限（com.android.vending.BILLING），仅用于自愿打赏。它没有联网权限。"
         ],
         [
           "变更",
