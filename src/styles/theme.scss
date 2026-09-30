@@ -47,6 +47,8 @@
   --coin: #{vars.$coin};
   --coin-edge: #{vars.$coin-edge};
   --heart: #{vars.$heart};
+  --jar-label: #{vars.$jar-label};
+  --jar-label-ink: #{vars.$jar-label-ink};
   // What shows through an emptied glass: the counter behind it, so a drained
   // drink reads as clear glass rather than as a differently-coloured drink.
   --glass-drained: #{color.adjust(vars.$color-malt, $lightness: -6%)};
@@ -102,6 +104,9 @@
   --cloth-lit: #e8dcc2;
   --cloth-mid: #c9b894;
   --cloth-shade: #93826a;
+  // Paper in a dim room: toned down so the jar's band does not glare off the
+  // dark counter, the same way the cloth is.
+  --jar-label: #{color.adjust(vars.$jar-label, $lightness: -14%)};
 
   color-scheme: dark;
 }
