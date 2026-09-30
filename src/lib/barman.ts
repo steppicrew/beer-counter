@@ -13,6 +13,11 @@
  * added motion: on the slow beats (a new way of shaking, a new swing, a new
  * mood) soft springs bob the body and tilt and stretch the head, and he
  * breathes.
+ *
+ * One departure from BAR: now and then the hands come to rest, folded in
+ * front of him, for a few seconds. BAR shook without pause, which on a screen
+ * you look at for an evening rather than a title picture you look at for a
+ * moment is unnerving.
  */
 
 /** The head turns and stretches about the top of the neck: (NECK_X, HEAD_H) in head-sprite px. */
@@ -22,6 +27,18 @@ export const HEAD_H = 59;
 /** Where the hand sprite is blitted, relative to the head's top-left corner. */
 export const HAND_X = 72;
 export const HAND_Y = 38;
+
+/** The hand frame with the shaker held low at the chest: where the hands rest. */
+const REST_HAND = 6;
+/** The frame a notch above it; resting hands sway slowly between the two. */
+const REST_SWAY_HAND = 7;
+/** How long each of the two rest frames holds before the sway, in hand slots (~55 ms each): about 1.5 s. */
+const REST_SWAY = 28;
+/** One chance in this per hand slot of coming to rest: about four seconds of shaking between rests on average. */
+const REST_CHANCE = 70;
+/** How long a rest lasts, in hand slots (~55 ms each): between about 2.5 and 7.5 s, so he rests more than he shakes. */
+const REST_MIN = 45;
+const REST_SPAN = 90;
 
 /** Rows of air above the head so a bobbing head is not cut. */
 export const HEADROOM = 8;
@@ -72,6 +89,8 @@ export function makeBarman(opts: Partial<BarmanOptions> = {}): Barman {
   let mood = 1;
   let face = 0;
   let run = 0;
+  let rest = 0; // hand slots left before the hands move again
+  let restLength = 0;
 
   // the added motion: damped springs, kicked on the slow beats only
   const spring = (s: Spring, k: number, c: number, dt: number) => {
@@ -116,7 +135,24 @@ export function makeBarman(opts: Partial<BarmanOptions> = {}): Barman {
   }
 
   function stepHand() {
+    if (rest > 0) {
+      // a slow sway between the two low frames, starting and ending low
+      const elapsed = restLength - rest;
+      pose.hand = Math.floor(elapsed / REST_SWAY) % 2 === 0 ? REST_HAND : REST_SWAY_HAND;
+      rest--;
+      return;
+    }
     pose.hand = shakeGroup * 3 + shakeFrame;
+    if (random(REST_CHANCE) === 0) {
+      // the hands come to rest: he settles a little, and when they move again
+      // it is from that pose, in that way of shaking
+      rest = REST_MIN + random(REST_SPAN);
+      restLength = rest;
+      shakeGroup = Math.floor(REST_HAND / 3);
+      shakeFrame = REST_HAND % 3;
+      bob.v -= 6 * o.magic;
+      return;
+    }
     if (random(30) === 0) {
       // a new way of shaking
       shakeGroup = random(3);
