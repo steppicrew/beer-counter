@@ -31,12 +31,12 @@ export function TipJar({ className, coin = false }: Props) {
           <circle cx="12" cy="16.8" r="2.4" fill="none" stroke="var(--coin-edge)" strokeWidth="0.9" />
         </g>
       )}
-      <path d={body} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d={body} fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round" />
       {/* A highlight down one side: what makes the tint read as glass. */}
       <path d="M7.6 11.2v6.6" stroke="var(--bg)" strokeOpacity="0.8" strokeWidth="1.1" strokeLinecap="round" />
       {/* The rim: a lip wider than the neck, the one detail that says jar
           rather than bottle at bar size. */}
-      <rect x="7" y="3.4" width="10" height="2.4" rx="1" fill="currentColor" />
+      <rect x="7" y="3.6" width="10" height="2" rx="0.9" fill="currentColor" />
     </svg>
   );
 }
