@@ -6,6 +6,7 @@ import { BeverageSheet } from './components/BeverageSheet';
 import { SettingsSheet } from './components/SettingsSheet';
 import { ResetSheet } from './components/ResetSheet';
 import { ShareSheet } from './components/ShareSheet';
+import { StatsSheet } from './components/StatsSheet';
 import { useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage, Tally } from './lib/types';
@@ -30,7 +31,8 @@ type Dialog =
   | { kind: 'edit'; beverage: Beverage }
   | { kind: 'settings' }
   | { kind: 'reset' }
-  | { kind: 'share' };
+  | { kind: 'share' }
+  | { kind: 'stats' };
 
 // The page backgrounds, mirroring --bg in styles/theme.scss. Duplicated here
 // because the system bars need the value as a plain colour before any
@@ -155,6 +157,14 @@ export function App() {
               aria-label={t('share.action')}
             >
               <UiIcon name="share" />
+            </button>
+            <button
+              type="button"
+              className="app__icon-btn"
+              onClick={() => setDialog({ kind: 'stats' })}
+              aria-label={t('stats.title')}
+            >
+              <UiIcon name="stats" />
             </button>
             <button
               type="button"
@@ -289,6 +299,8 @@ export function App() {
         )}
 
         {dialog.kind === 'settings' && <SettingsSheet onClose={() => setDialog({ kind: 'none' })} />}
+
+        {dialog.kind === 'stats' && <StatsSheet onClose={() => setDialog({ kind: 'none' })} />}
 
         {dialog.kind === 'share' && <ShareSheet onClose={() => setDialog({ kind: 'none' })} />}
 

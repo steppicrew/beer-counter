@@ -1,5 +1,5 @@
 interface Props {
-  name: 'settings' | 'reset' | 'edit' | 'android' | 'share';
+  name: 'settings' | 'reset' | 'edit' | 'android' | 'share' | 'stats';
   className?: string;
 }
 
@@ -88,6 +88,20 @@ const PATHS: Record<Props['name'], React.ReactNode> = {
         strokeWidth="1.9"
         strokeLinecap="round"
       />
+    </>
+  ),
+  stats: (
+    <>
+      {/* Three bars on a baseline, stepped so it reads as a chart, not a
+          signal meter. */}
+      <path
+        d="M6.5 19.5v-6M12 19.5V5M17.5 19.5v-9.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+      />
+      <path d="M3.5 21.2h17" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
     </>
   ),
   reset: (

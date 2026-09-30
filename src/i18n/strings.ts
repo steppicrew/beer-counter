@@ -108,6 +108,18 @@ export const en = {
   'bartop.another': 'Another one?',
   'bartop.summary': '{count} glasses on the bar.',
   'bartop.toPresent': 'Back to now',
+  'stats.title': 'Statistics',
+  'stats.week': 'Week',
+  'stats.month': 'Month',
+  'stats.year': 'Year',
+  'stats.empty': 'Nothing counted yet. Every round you count shows up here.',
+  'stats.keep': 'Keep a history',
+  'stats.keepOn': 'On',
+  'stats.keepOff': 'Off',
+  'stats.keepHint': 'Rounds are saved when you reset, only on this device. Uninstalling the app deletes them.',
+  'stats.clear': 'Clear history',
+  'stats.clearTitle': 'Clear the history?',
+  'stats.clearBody': 'All past rounds are deleted. The current round stays. This cannot be undone.',
 } as const;
 
 export type MessageKey = keyof typeof en;
@@ -219,6 +231,18 @@ export const de: Messages = {
   'bartop.another': 'Noch eins?',
   'bartop.summary': '{count} Gläser auf dem Tresen.',
   'bartop.toPresent': 'Zurück zu jetzt',
+  'stats.title': 'Statistik',
+  'stats.week': 'Woche',
+  'stats.month': 'Monat',
+  'stats.year': 'Jahr',
+  'stats.empty': 'Noch nichts gezählt. Jede Runde, die du zählst, erscheint hier.',
+  'stats.keep': 'Verlauf speichern',
+  'stats.keepOn': 'An',
+  'stats.keepOff': 'Aus',
+  'stats.keepHint': 'Runden werden beim Zurücksetzen gespeichert, nur auf diesem Gerät. Beim Deinstallieren der App werden sie gelöscht.',
+  'stats.clear': 'Verlauf löschen',
+  'stats.clearTitle': 'Verlauf löschen?',
+  'stats.clearBody': 'Alle vergangenen Runden werden gelöscht. Die aktuelle Runde bleibt. Das lässt sich nicht rückgängig machen.',
 };
 
 export const fr: Messages = {
@@ -327,6 +351,18 @@ export const fr: Messages = {
   'bartop.another': 'Encore un ?',
   'bartop.summary': '{count} verres sur le comptoir.',
   'bartop.toPresent': 'Revenir à maintenant',
+  'stats.title': 'Statistiques',
+  'stats.week': 'Semaine',
+  'stats.month': 'Mois',
+  'stats.year': 'Année',
+  'stats.empty': 'Rien de compté pour l’instant. Chaque tournée comptée apparaît ici.',
+  'stats.keep': 'Garder un historique',
+  'stats.keepOn': 'Oui',
+  'stats.keepOff': 'Non',
+  'stats.keepHint': 'Les tournées sont enregistrées à la remise à zéro, uniquement sur cet appareil. Désinstaller l’app les supprime.',
+  'stats.clear': 'Effacer l’historique',
+  'stats.clearTitle': 'Effacer l’historique ?',
+  'stats.clearBody': 'Toutes les tournées passées sont supprimées. La tournée en cours est conservée. Cette action est irréversible.',
 };
 
 export const es: Messages = {
@@ -435,6 +471,18 @@ export const es: Messages = {
   'bartop.another': '¿Otra más?',
   'bartop.summary': '{count} vasos en la barra.',
   'bartop.toPresent': 'Volver al presente',
+  'stats.title': 'Estadísticas',
+  'stats.week': 'Semana',
+  'stats.month': 'Mes',
+  'stats.year': 'Año',
+  'stats.empty': 'Aún no hay nada contado. Cada ronda que cuentes aparece aquí.',
+  'stats.keep': 'Guardar un historial',
+  'stats.keepOn': 'Sí',
+  'stats.keepOff': 'No',
+  'stats.keepHint': 'Las rondas se guardan al reiniciar, solo en este dispositivo. Desinstalar la app las borra.',
+  'stats.clear': 'Borrar historial',
+  'stats.clearTitle': '¿Borrar el historial?',
+  'stats.clearBody': 'Se borran todas las rondas pasadas. La ronda actual se queda. Esto no se puede deshacer.',
 };
 
 export const it: Messages = {
@@ -543,6 +591,18 @@ export const it: Messages = {
   'bartop.another': 'Un altro?',
   'bartop.summary': '{count} bicchieri sul bancone.',
   'bartop.toPresent': 'Torna a ora',
+  'stats.title': 'Statistiche',
+  'stats.week': 'Settimana',
+  'stats.month': 'Mese',
+  'stats.year': 'Anno',
+  'stats.empty': 'Ancora niente di contato. Ogni giro che conti compare qui.',
+  'stats.keep': 'Tieni uno storico',
+  'stats.keepOn': 'Sì',
+  'stats.keepOff': 'No',
+  'stats.keepHint': 'I giri vengono salvati all’azzeramento, solo su questo dispositivo. Disinstallare l’app li cancella.',
+  'stats.clear': 'Cancella lo storico',
+  'stats.clearTitle': 'Cancellare lo storico?',
+  'stats.clearBody': 'Tutti i giri passati vengono cancellati. Il giro in corso resta. L’azione non è reversibile.',
 };
 
 export const nl: Messages = {
@@ -651,6 +711,18 @@ export const nl: Messages = {
   'bartop.another': 'Nog eentje?',
   'bartop.summary': '{count} glazen op de bar.',
   'bartop.toPresent': 'Terug naar nu',
+  'stats.title': 'Statistieken',
+  'stats.week': 'Week',
+  'stats.month': 'Maand',
+  'stats.year': 'Jaar',
+  'stats.empty': 'Nog niets geteld. Elke ronde die je telt, verschijnt hier.',
+  'stats.keep': 'Geschiedenis bewaren',
+  'stats.keepOn': 'Aan',
+  'stats.keepOff': 'Uit',
+  'stats.keepHint': 'Rondes worden bij het resetten bewaard, alleen op dit apparaat. De app verwijderen wist ze.',
+  'stats.clear': 'Geschiedenis wissen',
+  'stats.clearTitle': 'Geschiedenis wissen?',
+  'stats.clearBody': 'Alle eerdere rondes worden gewist. De huidige ronde blijft. Dit kan niet ongedaan worden gemaakt.',
 };
 
 export const pl: Messages = {
@@ -759,6 +831,18 @@ export const pl: Messages = {
   'bartop.another': 'Jeszcze jedno?',
   'bartop.summary': 'Szklanki na barze: {count}.',
   'bartop.toPresent': 'Wróć do teraz',
+  'stats.title': 'Statystyki',
+  'stats.week': 'Tydzień',
+  'stats.month': 'Miesiąc',
+  'stats.year': 'Rok',
+  'stats.empty': 'Jeszcze nic nie policzono. Każda policzona kolejka pojawi się tutaj.',
+  'stats.keep': 'Zapisuj historię',
+  'stats.keepOn': 'Wł.',
+  'stats.keepOff': 'Wył.',
+  'stats.keepHint': 'Kolejki są zapisywane przy resetowaniu, tylko na tym urządzeniu. Odinstalowanie aplikacji je usuwa.',
+  'stats.clear': 'Wyczyść historię',
+  'stats.clearTitle': 'Wyczyścić historię?',
+  'stats.clearBody': 'Wszystkie poprzednie kolejki zostaną usunięte. Bieżąca kolejka zostaje. Tego nie można cofnąć.',
 };
 
 export const pt: Messages = {
@@ -867,6 +951,18 @@ export const pt: Messages = {
   'bartop.another': 'Mais uma?',
   'bartop.summary': '{count} copos no balcão.',
   'bartop.toPresent': 'Voltar ao agora',
+  'stats.title': 'Estatísticas',
+  'stats.week': 'Semana',
+  'stats.month': 'Mês',
+  'stats.year': 'Ano',
+  'stats.empty': 'Ainda nada contado. Cada rodada que contares aparece aqui.',
+  'stats.keep': 'Guardar um histórico',
+  'stats.keepOn': 'Sim',
+  'stats.keepOff': 'Não',
+  'stats.keepHint': 'As rodadas são guardadas ao reiniciar, apenas neste dispositivo. Desinstalar a app apaga-as.',
+  'stats.clear': 'Apagar histórico',
+  'stats.clearTitle': 'Apagar o histórico?',
+  'stats.clearBody': 'Todas as rodadas anteriores são apagadas. A rodada atual fica. Isto não pode ser anulado.',
 };
 
 export const cs: Messages = {
@@ -975,6 +1071,18 @@ export const cs: Messages = {
   'bartop.another': 'Ještě jedno?',
   'bartop.summary': 'Sklenic na pultu: {count}.',
   'bartop.toPresent': 'Zpět na teď',
+  'stats.title': 'Statistiky',
+  'stats.week': 'Týden',
+  'stats.month': 'Měsíc',
+  'stats.year': 'Rok',
+  'stats.empty': 'Zatím nic nespočítáno. Každé kolo, které spočítáš, se objeví tady.',
+  'stats.keep': 'Uchovávat historii',
+  'stats.keepOn': 'Zap.',
+  'stats.keepOff': 'Vyp.',
+  'stats.keepHint': 'Kola se ukládají při vynulování, jen v tomto zařízení. Odinstalováním aplikace se smažou.',
+  'stats.clear': 'Smazat historii',
+  'stats.clearTitle': 'Smazat historii?',
+  'stats.clearBody': 'Všechna minulá kola budou smazána. Aktuální kolo zůstane. Tuto akci nelze vrátit zpět.',
 };
 
 export const da: Messages = {
@@ -1083,6 +1191,18 @@ export const da: Messages = {
   'bartop.another': 'En til?',
   'bartop.summary': '{count} glas på baren.',
   'bartop.toPresent': 'Tilbage til nu',
+  'stats.title': 'Statistik',
+  'stats.week': 'Uge',
+  'stats.month': 'Måned',
+  'stats.year': 'År',
+  'stats.empty': 'Intet talt endnu. Hver omgang, du tæller, dukker op her.',
+  'stats.keep': 'Gem en historik',
+  'stats.keepOn': 'Til',
+  'stats.keepOff': 'Fra',
+  'stats.keepHint': 'Omgange gemmes, når du nulstiller, kun på denne enhed. Afinstallerer du appen, slettes de.',
+  'stats.clear': 'Ryd historik',
+  'stats.clearTitle': 'Ryd historikken?',
+  'stats.clearBody': 'Alle tidligere omgange slettes. Den aktuelle omgang bliver. Det kan ikke fortrydes.',
 };
 
 export const sv: Messages = {
@@ -1191,6 +1311,18 @@ export const sv: Messages = {
   'bartop.another': 'En till?',
   'bartop.summary': '{count} glas på baren.',
   'bartop.toPresent': 'Tillbaka till nu',
+  'stats.title': 'Statistik',
+  'stats.week': 'Vecka',
+  'stats.month': 'Månad',
+  'stats.year': 'År',
+  'stats.empty': 'Inget räknat än. Varje runda du räknar dyker upp här.',
+  'stats.keep': 'Spara en historik',
+  'stats.keepOn': 'På',
+  'stats.keepOff': 'Av',
+  'stats.keepHint': 'Rundor sparas när du nollställer, bara på den här enheten. Avinstallerar du appen raderas de.',
+  'stats.clear': 'Rensa historik',
+  'stats.clearTitle': 'Rensa historiken?',
+  'stats.clearBody': 'Alla tidigare rundor raderas. Den pågående rundan finns kvar. Det går inte att ångra.',
 };
 
 export const tr: Messages = {
@@ -1299,6 +1431,18 @@ export const tr: Messages = {
   'bartop.another': 'Bir tane daha?',
   'bartop.summary': 'Barda {count} bardak var.',
   'bartop.toPresent': 'Şimdiye dön',
+  'stats.title': 'İstatistikler',
+  'stats.week': 'Hafta',
+  'stats.month': 'Ay',
+  'stats.year': 'Yıl',
+  'stats.empty': 'Henüz bir şey sayılmadı. Saydığın her tur burada görünür.',
+  'stats.keep': 'Geçmişi sakla',
+  'stats.keepOn': 'Açık',
+  'stats.keepOff': 'Kapalı',
+  'stats.keepHint': 'Turlar sıfırladığında yalnızca bu cihaza kaydedilir. Uygulamayı kaldırmak onları siler.',
+  'stats.clear': 'Geçmişi temizle',
+  'stats.clearTitle': 'Geçmiş temizlensin mi?',
+  'stats.clearBody': 'Geçmiş tüm turlar silinir. Mevcut tur kalır. Bu geri alınamaz.',
 };
 
 export const ru: Messages = {
@@ -1407,6 +1551,18 @@ export const ru: Messages = {
   'bartop.another': 'Ещё одну?',
   'bartop.summary': 'Стаканов на стойке: {count}.',
   'bartop.toPresent': 'Вернуться к настоящему',
+  'stats.title': 'Статистика',
+  'stats.week': 'Неделя',
+  'stats.month': 'Месяц',
+  'stats.year': 'Год',
+  'stats.empty': 'Пока ничего не посчитано. Каждый круг, который вы посчитаете, появится здесь.',
+  'stats.keep': 'Хранить историю',
+  'stats.keepOn': 'Вкл.',
+  'stats.keepOff': 'Выкл.',
+  'stats.keepHint': 'Круги сохраняются при сбросе, только на этом устройстве. Удаление приложения стирает их.',
+  'stats.clear': 'Очистить историю',
+  'stats.clearTitle': 'Очистить историю?',
+  'stats.clearBody': 'Все прошлые круги будут удалены. Текущий круг останется. Отменить это нельзя.',
 };
 
 export const ja: Messages = {
@@ -1515,6 +1671,18 @@ export const ja: Messages = {
   'bartop.another': 'もう一杯どうぞ？',
   'bartop.summary': 'カウンターにグラス {count} 杯。',
   'bartop.toPresent': '現在に戻る',
+  'stats.title': '統計',
+  'stats.week': '週',
+  'stats.month': '月',
+  'stats.year': '年',
+  'stats.empty': 'まだ何も数えていません。数えたラウンドはここに表示されます。',
+  'stats.keep': '履歴を残す',
+  'stats.keepOn': 'オン',
+  'stats.keepOff': 'オフ',
+  'stats.keepHint': 'ラウンドはリセット時にこの端末にだけ保存されます。アプリを削除すると消えます。',
+  'stats.clear': '履歴を消去',
+  'stats.clearTitle': '履歴を消去しますか？',
+  'stats.clearBody': '過去のラウンドはすべて削除されます。現在のラウンドは残ります。元に戻せません。',
 };
 
 export const zh: Messages = {
@@ -1622,6 +1790,18 @@ export const zh: Messages = {
   'bartop.another': '再来一杯？',
   'bartop.summary': '吧台上有 {count} 杯。',
   'bartop.toPresent': '回到现在',
+  'stats.title': '统计',
+  'stats.week': '周',
+  'stats.month': '月',
+  'stats.year': '年',
+  'stats.empty': '还没有计数。你数过的每一轮都会显示在这里。',
+  'stats.keep': '保留历史记录',
+  'stats.keepOn': '开',
+  'stats.keepOff': '关',
+  'stats.keepHint': '每次重置时保存轮次，仅存于本设备。卸载应用会将其删除。',
+  'stats.clear': '清除历史记录',
+  'stats.clearTitle': '清除历史记录？',
+  'stats.clearBody': '所有过去的轮次都将被删除，当前这一轮保留。此操作无法撤销。',
 };
 
 export const CATALOGUES: Record<string, Messages> = {
