@@ -8,6 +8,7 @@
  *   yarn play:publish --track internal   # upload + roll out to a track
  *   yarn play:publish --listings-only    # metadata/images, no binary
  *   yarn play:publish --track production --rollout 0.1   # staged rollout
+ *   yarn play:publish --track production --promote   # already-uploaded build
  *   yarn play:publish --force            # re-upload even if Play matches
  *
  * Listings and images that Play already holds unchanged are skipped, compared
@@ -41,6 +42,10 @@ const dryRun = flag('dry-run');
 // Re-upload everything even when Play already has an identical copy.
 const force = flag('force');
 const listingsOnly = flag('listings-only');
+// Put the versionCode Play already holds on another track, without uploading.
+// Play refuses a second upload of a versionCode, so reaching production from
+// internal testing is a promotion, never a re-upload.
+const promote = flag('promote');
 const track = value('track', 'internal');
 const rollout = Number(value('rollout', '0'));
 
@@ -147,7 +152,7 @@ if (!keyFile || !existsSync(keyFile)) {
   process.exit(1);
 }
 
-if (!listingsOnly && !existsSync(aabPath)) {
+if (!listingsOnly && !promote && !existsSync(aabPath)) {
   console.error(`Missing ${aabPath.replace(`${root}/`, '')} — run \`yarn android:build\` first.`);
   process.exit(1);
 }
@@ -208,7 +213,9 @@ try {
   let versionCode = pkg.androidVersionCode;
   let changedLanguages = 0;
 
-  if (!listingsOnly) {
+  if (promote) {
+    console.log(`Promoting versionCode ${versionCode} (no upload).`);
+  } else if (!listingsOnly) {
     console.log('Uploading bundle…');
     const { data: bundle } = await withRetry('bundle upload', () =>
       play.edits.bundles.upload({
