@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.2",
+      "date": "2026-09-30",
+      "notes": {
+        "en": "After a tip, the barkeeper now says thank you — and a small heart rises from the jar.",
+        "de": "Nach einem Trinkgeld bedankt sich jetzt der Wirt — und aus dem Glas steigt ein kleines Herz auf.",
+        "fr": "Après un pourboire, le barman dit merci — et un petit cœur s'élève du pot.",
+        "es": "Tras una propina, el camarero da las gracias y un pequeño corazón sale del bote.",
+        "it": "Dopo una mancia il barista ringrazia, e dal barattolo sale un piccolo cuore.",
+        "nl": "Na een fooi bedankt de barman je nu — en uit de pot stijgt een klein hartje op.",
+        "pl": "Po napiwku barman teraz dziękuje — a ze słoika unosi się małe serduszko.",
+        "pt": "Depois de uma gorjeta, o barman agradece — e um pequeno coração sobe do frasco.",
+        "cs": "Po spropitném barman teď poděkuje — a ze skleničky vystoupá malé srdíčko.",
+        "da": "Efter drikkepenge siger bartenderen nu tak — og et lille hjerte stiger op fra glasset.",
+        "sv": "Efter dricks tackar bartendern nu — och ett litet hjärta stiger upp ur burken.",
+        "tr": "Bahşişten sonra barmen artık teşekkür ediyor — kavanozdan küçük bir kalp yükseliyor.",
+        "ru": "После чаевых бармен теперь благодарит — а из баночки поднимается маленькое сердечко.",
+        "ja": "チップのあと、マスターがお礼を言い、チップ箱から小さなハートが浮かびます。",
+        "zh": "打赏之后，酒保会向你道谢，小费罐里还会升起一颗小小的爱心。"
+      }
+    },
+    {
       "version": "1.7.1",
       "date": "2026-09-30",
       "notes": {
