@@ -38,6 +38,10 @@ interface AppState {
 
   increment: (id: string) => void;
   decrement: (id: string) => void;
+  /** Counts one drink at an earlier time — the tap that was forgotten. */
+  incrementAt: (id: string, at: number) => void;
+  /** Moves one counted drink to another time, e.g. dragged back on the bar. */
+  moveDrink: (id: string, from: number, to: number) => void;
 
   addBeverage: (input: {
     name: string;
@@ -100,6 +104,33 @@ export const useAppStore = create<AppState>()(
                 [id]: { times: [...current.times, Date.now()] },
               },
             };
+          }),
+
+        // Times stay sorted oldest-first wherever they come from: the bar, the
+        // "last drink" label and the history all read the newest as the last.
+        // A back-dated drink is therefore filed in its place, and the minus
+        // button removes the most recent drink by time, not the last added.
+        incrementAt: (id, at) =>
+          set((state) => {
+            const current = state.tallies[id] ?? emptyTally;
+            const when = Math.min(at, Date.now());
+            return {
+              tallies: {
+                ...state.tallies,
+                [id]: { times: [...current.times, when].sort((a, b) => a - b) },
+              },
+            };
+          }),
+
+        moveDrink: (id, from, to) =>
+          set((state) => {
+            const current = state.tallies[id];
+            const index = current?.times.indexOf(from) ?? -1;
+            if (!current || index === -1) return state;
+            const times = [...current.times];
+            times[index] = Math.min(to, Date.now());
+            times.sort((a, b) => a - b);
+            return { tallies: { ...state.tallies, [id]: { times } } };
           }),
 
         decrement: (id) =>
