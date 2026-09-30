@@ -88,6 +88,13 @@ const ASSUMED_WIDTH = 360;
 const BAR_INSET_PX = 30;
 
 const HOUR_MS = 3_600_000;
+/** The barman's width until he has been measured, at $keeper-height. */
+const ASSUMED_KEEPER_PX = 139;
+/** The tip jar's box and its gap from the right end: $tap-min and `right: 7%`. */
+const JAR_BOX_PX = 48;
+const JAR_RIGHT = 0.07;
+/** How far the present reaches into his width: the newest glass at his elbow. */
+const NOW_INTO_KEEPER_PX = 40;
 const MINUTE = 60_000;
 
 export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar, tipJar }: Props) {
@@ -100,6 +107,22 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   // window: no fixed number of hours any more, so a tablet simply sees more of
   // the evening at once rather than the same hours stretched wider.
   const [width, setWidth] = useState(ASSUMED_WIDTH);
+
+  // His width sets where the present goes, and he is drawn from a lazily
+  // loaded sprite whose box is not known up front — so measured, like the
+  // stage, and re-measured if the artwork ever changes.
+  const keeperRef = useRef<HTMLSpanElement>(null);
+  const [keeperWidth, setKeeperWidth] = useState(ASSUMED_KEEPER_PX);
+  useLayoutEffect(() => {
+    const el = keeperRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const next = entry?.contentRect.width ?? 0;
+      if (next > 0) setKeeperWidth(next);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useLayoutEffect(() => {
     const el = stageRef.current;
@@ -140,9 +163,21 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
 
   const glasses = wiping ?? live;
 
+  // From the right end leftwards: the tip jar (when there is one), the
+  // barman, the present. The present is where the newest glass is poured, a
+  // little into his width so it stands at his elbow, in front of him. Its
+  // place on the counter therefore follows from his measured width and the
+  // screen's: far left on a narrow phone, further right on a tablet.
+  const counterPx = Math.max(1, width - BAR_INSET_PX);
+  const jarShown = glasses.length === 0 && tipJar !== undefined;
+  const jarRightPx = counterPx * JAR_RIGHT;
+  const keeperRightPx = jarShown ? jarRightPx + JAR_BOX_PX + 2 : jarRightPx;
+  const nowPx = counterPx - keeperRightPx - keeperWidth - 4 - 13.5 + NOW_INTO_KEEPER_PX;
+  const nowAtFraction = Math.min(0.9, Math.max(0.1, nowPx / counterPx));
+
   // Where the bar sits when left alone: the present beside the barman, the
   // round drifting away to the left of it.
-  const resting = restingWindow(now, spanMs);
+  const resting = restingWindow(now, spanMs, nowAtFraction);
   const bounds = scrollBounds(resting, glasses);
   const scroll = useBarScroll(bounds);
   const window: BarWindow = scrolledBy(resting, scroll.offset);
@@ -312,7 +347,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                 is off the end and a marker pinned to the edge would be a lie.
                 Not under the tip jar either: that stands on the same spot of
                 an empty counter, and a line poking out beneath it is noise. */}
-            {nowAt >= 0 && nowAt <= 1 && !(isEmpty && tipJar) && (
+            {nowAt >= 0 && nowAt <= 1 && (
               <span
                 className="bartop__now"
                 style={{ left: `${nowAt * 100}%` }}
@@ -325,11 +360,21 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
             {/* Always behind the counter, at its newest end — where the next
                 glass would be poured. He speaks only when there is something
                 to say: on an empty bar, and when a round is left standing. */}
-            <span className={clsx('bartop__keeper', isStale && 'bartop__keeper--waiting')}>
+            <span
+              ref={keeperRef}
+              className={clsx('bartop__keeper', isStale && 'bartop__keeper--waiting')}
+              style={{ right: `${keeperRightPx}px` }}
+            >
               {isEmpty && onTipJar ? (
                 // Only ever at the start of a round, before anything is
                 // poured: never a request made to someone mid-evening.
-                <button type="button" className="bartop__ask bartop__ask--tip" onClick={onTipJar}>
+                <button
+                  type="button"
+                  className="bartop__ask bartop__ask--tip"
+                  onClick={onTipJar}
+                  // Only as wide as the room left of him, so it stays on screen.
+                  style={{ maxWidth: `${Math.max(90, BAR_INSET_PX + counterPx - keeperRightPx - keeperWidth - 14)}px` }}
+                >
                   {t('bartop.tipJar')}
                 </button>
               ) : isEmpty ? (
