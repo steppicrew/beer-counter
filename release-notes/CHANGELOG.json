@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.1",
+      "date": "2026-09-30",
+      "notes": {
+        "en": "Regulars now find a tip jar at the end of the empty bar. It stays quiet, disappears with the first drink, and is gone for good once you've tipped — with a small thank-you.",
+        "de": "Stammgäste finden jetzt ein Trinkgeldglas am Ende des leeren Tresens. Es bleibt still, verschwindet mit dem ersten Getränk und ist nach einem Trinkgeld ganz weg — mit einem kleinen Dankeschön.",
+        "fr": "Les habitués trouvent désormais un pot à pourboires au bout du comptoir vide. Il reste discret, disparaît au premier verre et s'en va pour de bon après un pourboire — avec un petit merci.",
+        "es": "Los habituales encuentran ahora un bote de propinas al final de la barra vacía. Es discreto, desaparece con la primera bebida y se va para siempre tras una propina, con un pequeño gracias.",
+        "it": "I clienti fissi ora trovano un barattolo delle mance in fondo al bancone vuoto. Resta discreto, sparisce al primo drink e se ne va per sempre dopo una mancia, con un piccolo grazie.",
+        "nl": "Vaste gasten vinden nu een fooienpot aan het eind van de lege toog. Hij blijft stil, verdwijnt bij het eerste drankje en is na een fooi voorgoed weg — met een klein bedankje.",
+        "pl": "Stali bywalcy znajdą teraz słoik na napiwki na końcu pustego baru. Stoi cicho, znika przy pierwszym drinku i po napiwku odchodzi na dobre — z małym podziękowaniem.",
+        "pt": "Os clientes habituais encontram agora um frasco das gorjetas no fim do balcão vazio. Fica discreto, desaparece à primeira bebida e vai-se de vez depois de uma gorjeta — com um pequeno obrigado.",
+        "cs": "Štamgasti teď najdou na konci prázdného baru skleničku na spropitné. Je tichá, zmizí s prvním nápojem a po spropitném nadobro — s malým poděkováním.",
+        "da": "Stamgæster finder nu et drikkepengeglas for enden af den tomme bar. Det står stille, forsvinder med første drink og er væk for altid, når du har givet drikkepenge — med et lille tak.",
+        "sv": "Stamgäster hittar nu en dricksburk längst bort på den tomma bardisken. Den står tyst, försvinner med första drinken och är borta för gott när du gett dricks — med ett litet tack.",
+        "tr": "Müdavimler artık boş barın ucunda bir bahşiş kavanozu bulacak. Sessizce durur, ilk içkiyle kaybolur ve bahşiş verdikten sonra küçük bir teşekkürle tamamen gider.",
+        "ru": "Завсегдатаи теперь найдут баночку для чаевых в конце пустой стойки. Она стоит тихо, исчезает с первым напитком и пропадает насовсем после чаевых — с маленьким спасибо.",
+        "ja": "常連さん向けに、空のカウンターの端にチップ箱が置かれるようになりました。何も言わず、最初の一杯で消え、チップをもらうと小さなお礼とともにいなくなります。",
+        "zh": "老顾客现在会在空吧台的尽头看到一个小费罐。它安安静静，点第一杯时就会消失；打赏之后会留下一份小小的谢意，然后永远离开。"
+      }
+    },
+    {
       "version": "1.7.0",
       "date": "2026-09-30",
       "notes": {
