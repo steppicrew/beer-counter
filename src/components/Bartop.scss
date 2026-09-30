@@ -7,7 +7,7 @@ $counter-top: 11px;
 $counter-face: 15px;
 $counter-height: $counter-top + $counter-face;
 $glass-size: 27px;
-$tip-jar-size: 32px;
+$tip-jar-size: 38px;
 
 // The counter stops short of the left edge, leaving the floor beside it open.
 // Without that gap a glass has nowhere to fall — it would simply stop existing
@@ -352,37 +352,51 @@ $face-setback: 4px;
     position: absolute;
     left: 50%;
     bottom: 60%;
-    width: 13px;
-    height: 13px;
-    margin-left: -6.5px;
+    width: $tip-jar-size * 0.4;
+    height: $tip-jar-size * 0.4;
+    margin-left: $tip-jar-size * -0.2;
     pointer-events: none;
     animation: bartop-heart 1.3s ease-out 380ms both;
   }
 
   // On the jar's belly, above where a coin would lie. Positioned against the
   // 48px button, whose bottom the 27px jar stands on.
+  // A band of paper round the jar's belly, as on a real jar: the full width
+  // of the glass but short, so there is glass above and below it and the jar
+  // still reads as glass rather than as a labelled tin.
   &__tip-jar-label {
     position: absolute;
     left: 50%;
-    bottom: 10px;
+    // All in proportion to the jar, so resizing it keeps the band on the
+    // belly and the sign filling the band.
+    bottom: $tip-jar-size * 0.33;
     transform: translateX(-50%);
-    font-size: 12px;
+    width: $tip-jar-size * 0.5;
+    height: $tip-jar-size * 0.26;
+    font-size: $tip-jar-size * 0.26;
     font-weight: 800;
-    line-height: 1;
-    color: var(--text-muted);
+    line-height: $tip-jar-size * 0.26;
+    text-align: center;
+    color: var(--jar-label-ink);
+    background: var(--jar-label);
+    // A hairline top and bottom: cream on the pale glass is otherwise too
+    // close to tell where the paper ends.
+    box-shadow:
+      inset 0 0.5px 0 rgb(0 0 0 / 28%),
+      inset 0 -0.5px 0 rgb(0 0 0 / 28%);
     pointer-events: none;
 
     &--len2 {
-      font-size: 9px;
+      font-size: $tip-jar-size * 0.22;
     }
 
     &--len3 {
-      font-size: 8px;
-      letter-spacing: -0.03em;
+      font-size: $tip-jar-size * 0.18;
+      letter-spacing: -0.04em;
     }
   }
 
-  // A little larger than a glass: it stands alone at the end of an empty
+  // Larger than a glass: it stands alone at the end of an empty
   // counter and has to read as a jar with a sign on it, not as one more drink.
   &__tip-jar-figure {
     display: block;
