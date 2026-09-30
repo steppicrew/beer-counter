@@ -2,8 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+      No cloud backup: the counts and drinking history must not end up on
+      Google's servers by default. Moving phones goes through Settings → Your
+      data (an export file the user places), and on Android 12+ the direct
+      device-to-device transfer during setup still works, since allowBackup
+      only governs the cloud there.
+    -->
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.getcapacitor.BridgeActivity;
 
+import de.steppicrew.beercounter.datafile.DataFilePlugin;
 import de.steppicrew.beercounter.tips.TipsPlugin;
 
 public class MainActivity extends BridgeActivity {
@@ -12,6 +13,7 @@ public class MainActivity extends BridgeActivity {
         // Local plugins are not found by `cap sync`; they must be registered
         // before the bridge starts.
         registerPlugin(TipsPlugin.class);
+        registerPlugin(DataFilePlugin.class);
         super.onCreate(savedInstanceState);
     }
 }
