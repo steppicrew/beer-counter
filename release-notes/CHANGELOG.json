@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.4",
+      "date": "2026-09-30",
+      "notes": {
+        "en": "Settings, statistics and sharing now close with a tap outside.",
+        "de": "Einstellungen, Statistik und Teilen schließen sich jetzt mit einem Tipp daneben.",
+        "fr": "Les réglages, les statistiques et le partage se ferment désormais d'un appui à côté.",
+        "es": "Ajustes, estadísticas y compartir ahora se cierran tocando fuera.",
+        "it": "Impostazioni, statistiche e condivisione ora si chiudono toccando fuori.",
+        "nl": "Instellingen, statistieken en delen sluiten nu met een tik ernaast.",
+        "pl": "Ustawienia, statystyki i udostępnianie zamykają się teraz dotknięciem obok.",
+        "pt": "Definições, estatísticas e partilha fecham-se agora com um toque fora.",
+        "cs": "Nastavení, statistiky a sdílení se teď zavřou klepnutím mimo.",
+        "da": "Indstillinger, statistik og deling lukker nu med et tryk udenfor.",
+        "sv": "Inställningar, statistik och delning stängs nu med ett tryck utanför.",
+        "tr": "Ayarlar, istatistikler ve paylaşım artık dışına dokununca kapanıyor.",
+        "ru": "Настройки, статистика и «Поделиться» теперь закрываются касанием снаружи.",
+        "ja": "設定・統計・共有の画面は、外側をタップすると閉じるようになりました。",
+        "zh": "设置、统计和分享界面现在轻点外侧即可关闭。"
+      }
+    },
+    {
       "version": "1.7.3",
       "date": "2026-09-30",
       "notes": {
