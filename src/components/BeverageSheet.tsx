@@ -57,7 +57,7 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
   };
 
   return (
-    <Sheet title={isEdit ? t('edit.title') : t('add.title')} onClose={onClose}>
+    <Sheet title={isEdit ? t('edit.title') : t('add.title')} onClose={onClose} dismissible={false}>
       <label className="field">
         <span className="field__label">{t('add.name')}</span>
         <input
