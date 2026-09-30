@@ -56,6 +56,9 @@ export const en = {
   'edit.title': 'Edit drink',
   'delete.title': 'Delete this drink?',
   'edit.deleteConfirm': 'Its count for this round goes with it. This cannot be undone.',
+  'earlier.title': 'Count one earlier',
+  'earlier.forgot': 'Forgot one',
+  'earlier.hint': 'Missed a tap? “Forgot one” puts it halfway between the previous one and now. Or hold a glass on the bar and drag it back.',
 
   'settings.title': 'Settings',
   'settings.language': 'Language',
@@ -198,6 +201,9 @@ export const de: Messages = {
   'edit.title': 'Getränk bearbeiten',
   'delete.title': 'Getränk löschen?',
   'edit.deleteConfirm': 'Der Zählerstand dieser Runde geht mit verloren. Das lässt sich nicht rückgängig machen.',
+  'earlier.title': 'Eins nachtragen',
+  'earlier.forgot': 'Vergessen',
+  'earlier.hint': 'Einen Tipp verpasst? „Vergessen“ setzt es in die Mitte zwischen dem vorigen und jetzt. Oder halte ein Glas auf dem Tresen fest und zieh es zurück.',
 
   'settings.title': 'Einstellungen',
   'settings.language': 'Sprache',
@@ -337,6 +343,9 @@ export const fr: Messages = {
   'edit.title': 'Modifier la boisson',
   'delete.title': 'Supprimer cette boisson ?',
   'edit.deleteConfirm': 'Son compte pour cette tournée disparaît aussi. Cette action est irréversible.',
+  'earlier.title': 'Compter un verre plus tôt',
+  'earlier.forgot': 'Oublié',
+  'earlier.hint': 'Un appui oublié ? « Oublié » le place à mi-chemin entre le précédent et maintenant. Ou maintenez un verre sur le comptoir et faites-le glisser en arrière.',
 
   'settings.title': 'Paramètres',
   'settings.language': 'Langue',
@@ -476,6 +485,9 @@ export const es: Messages = {
   'edit.title': 'Editar bebida',
   'delete.title': '¿Eliminar esta bebida?',
   'edit.deleteConfirm': 'Su cuenta de esta ronda se borra también. Esto no se puede deshacer.',
+  'earlier.title': 'Contar una antes',
+  'earlier.forgot': 'Se me olvidó',
+  'earlier.hint': '¿Se te pasó tocar? «Se me olvidó» la coloca a medio camino entre la anterior y ahora. O mantén pulsado un vaso en la barra y arrástralo hacia atrás.',
 
   'settings.title': 'Ajustes',
   'settings.language': 'Idioma',
@@ -615,6 +627,9 @@ export const it: Messages = {
   'edit.title': 'Modifica bevanda',
   'delete.title': 'Eliminare questa bevanda?',
   'edit.deleteConfirm': 'Anche il suo conteggio di questo giro sparisce. L’azione non è reversibile.',
+  'earlier.title': 'Conta uno prima',
+  'earlier.forgot': 'Dimenticato',
+  'earlier.hint': 'Hai saltato un tocco? «Dimenticato» lo mette a metà tra il precedente e adesso. Oppure tieni premuto un bicchiere sul bancone e trascinalo indietro.',
 
   'settings.title': 'Impostazioni',
   'settings.language': 'Lingua',
@@ -754,6 +769,9 @@ export const nl: Messages = {
   'edit.title': 'Drankje bewerken',
   'delete.title': 'Dit drankje verwijderen?',
   'edit.deleteConfirm': 'De telling van deze ronde verdwijnt mee. Dit kan niet ongedaan worden gemaakt.',
+  'earlier.title': 'Eentje eerder tellen',
+  'earlier.forgot': 'Vergeten',
+  'earlier.hint': 'Een tik gemist? ‘Vergeten’ zet hem halverwege tussen de vorige en nu. Of houd een glas op de toog vast en sleep het terug.',
 
   'settings.title': 'Instellingen',
   'settings.language': 'Taal',
@@ -893,6 +911,9 @@ export const pl: Messages = {
   'edit.title': 'Edytuj napój',
   'delete.title': 'Usunąć ten napój?',
   'edit.deleteConfirm': 'Licznik z tej kolejki zniknie razem z nim. Tego nie można cofnąć.',
+  'earlier.title': 'Dolicz wcześniej',
+  'earlier.forgot': 'Zapomniałem',
+  'earlier.hint': 'Pominięte dotknięcie? „Zapomniałem” wstawia napój w połowie między poprzednim a teraz. Albo przytrzymaj szklankę na barze i przeciągnij ją wstecz.',
 
   'settings.title': 'Ustawienia',
   'settings.language': 'Język',
@@ -1032,6 +1053,9 @@ export const pt: Messages = {
   'edit.title': 'Editar bebida',
   'delete.title': 'Eliminar esta bebida?',
   'edit.deleteConfirm': 'A contagem desta rodada desaparece com ela. Isto não pode ser anulado.',
+  'earlier.title': 'Contar uma antes',
+  'earlier.forgot': 'Esqueci-me',
+  'earlier.hint': 'Esqueceste-te de tocar? «Esqueci-me» coloca-a a meio entre a anterior e agora. Ou mantém premido um copo no balcão e arrasta-o para trás.',
 
   'settings.title': 'Definições',
   'settings.language': 'Idioma',
@@ -1171,6 +1195,9 @@ export const cs: Messages = {
   'edit.title': 'Upravit nápoj',
   'delete.title': 'Smazat tento nápoj?',
   'edit.deleteConfirm': 'Zmizí i jeho počet v tomto kole. Tuto akci nelze vrátit zpět.',
+  'earlier.title': 'Připočítat dřív',
+  'earlier.forgot': 'Zapomněl jsem',
+  'earlier.hint': 'Zapomněl jsi klepnout? „Zapomněl jsem“ ho vloží doprostřed mezi předchozí a teď. Nebo podrž sklenici na baru a přetáhni ji zpět.',
 
   'settings.title': 'Nastavení',
   'settings.language': 'Jazyk',
@@ -1310,6 +1337,9 @@ export const da: Messages = {
   'edit.title': 'Rediger drink',
   'delete.title': 'Slet denne drink?',
   'edit.deleteConfirm': 'Tællingen for denne omgang ryger med. Det kan ikke fortrydes.',
+  'earlier.title': 'Tæl en tidligere',
+  'earlier.forgot': 'Glemt',
+  'earlier.hint': 'Glemt at trykke? “Glemt” sætter den midt mellem den forrige og nu. Eller hold et glas på baren og træk det tilbage.',
 
   'settings.title': 'Indstillinger',
   'settings.language': 'Sprog',
@@ -1449,6 +1479,9 @@ export const sv: Messages = {
   'edit.title': 'Redigera dryck',
   'delete.title': 'Ta bort den här drycken?',
   'edit.deleteConfirm': 'Räkningen för den här rundan följer med. Det går inte att ångra.',
+  'earlier.title': 'Räkna en tidigare',
+  'earlier.forgot': 'Glömde',
+  'earlier.hint': 'Missade du ett tryck? ”Glömde” lägger den mitt emellan den förra och nu. Eller håll ett glas på bardisken och dra det bakåt.',
 
   'settings.title': 'Inställningar',
   'settings.language': 'Språk',
@@ -1588,6 +1621,9 @@ export const tr: Messages = {
   'edit.title': 'İçeceği düzenle',
   'delete.title': 'Bu içecek silinsin mi?',
   'edit.deleteConfirm': 'Bu turdaki sayısı da silinir. Bu geri alınamaz.',
+  'earlier.title': 'Daha önceye say',
+  'earlier.forgot': 'Unuttum',
+  'earlier.hint': 'Dokunmayı mı unuttun? “Unuttum” onu bir öncekiyle şimdinin ortasına koyar. Ya da bardaki bir bardağı basılı tutup geriye sürükle.',
 
   'settings.title': 'Ayarlar',
   'settings.language': 'Dil',
@@ -1727,6 +1763,9 @@ export const ru: Messages = {
   'edit.title': 'Изменить напиток',
   'delete.title': 'Удалить этот напиток?',
   'edit.deleteConfirm': 'Счёт за этот круг тоже пропадёт. Отменить это нельзя.',
+  'earlier.title': 'Добавить раньше',
+  'earlier.forgot': 'Забыл',
+  'earlier.hint': 'Пропустили нажатие? «Забыл» ставит напиток посередине между предыдущим и сейчас. Или зажмите стакан на стойке и перетащите его назад.',
 
   'settings.title': 'Настройки',
   'settings.language': 'Язык',
@@ -1866,6 +1905,9 @@ export const ja: Messages = {
   'edit.title': '飲み物を編集',
   'delete.title': 'この飲み物を削除しますか？',
   'edit.deleteConfirm': 'この回の杯数も一緒に消えます。元に戻せません。',
+  'earlier.title': 'さかのぼって追加',
+  'earlier.forgot': '付け忘れ',
+  'earlier.hint': 'タップし忘れた？「付け忘れ」は前の一杯と今のちょうど中間に追加します。カウンターのグラスを長押しして後ろへドラッグすることもできます。',
 
   'settings.title': '設定',
   'settings.language': '言語',
@@ -2004,6 +2046,9 @@ export const zh: Messages = {
   'edit.title': '编辑饮品',
   'delete.title': '删除这个饮品？',
   'edit.deleteConfirm': '这一轮的计数也会一并删除，且无法撤销。',
+  'earlier.title': '补记一杯',
+  'earlier.forgot': '忘记记了',
+  'earlier.hint': '忘了点？“忘记记了”会把它放在上一杯和现在的正中间。也可以长按吧台上的杯子，把它往回拖。',
 
   'settings.title': '设置',
   'settings.language': '语言',
