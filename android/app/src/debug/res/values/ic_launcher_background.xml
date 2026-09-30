@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Debug builds install beside the Play version as de.steppicrew.beercounter.preview
+  (see applicationIdSuffix in app/build.gradle). A blue ground behind the same
+  glass tells the two apart on the home screen; the release icon is untouched.
+-->
+<resources>
+    <color name="ic_launcher_background">#1E5AA8</color>
+</resources>
