@@ -262,6 +262,61 @@ $now-at: 82%;
     filter: none;
   }
 
+  // A glass can be held and slid back to when it was really drunk (see
+  // useGlassDrag). It takes presses only for that: vertical swipes stay the
+  // browser's, so the list still scrolls when a finger starts on a glass, and
+  // no text selection or callout on a long press.
+  &__glass--movable {
+    pointer-events: auto;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  // Lifted off the counter while held: a little larger and higher, with a
+  // deeper shadow, so it reads as picked up rather than selected.
+  &__glass--held {
+    z-index: 2;
+    transform: translateX(-50%) translateY(-5px) scale(1.18);
+    filter: drop-shadow(0 6px 6px rgb(0 0 0 / 40%));
+    transition: transform 120ms vars.$ease;
+  }
+
+  // The time it would land on, well above the held glass: the finger holding
+  // it covers the glass and the space just over it, so a bubble sitting on
+  // the rim would be under the fingertip exactly when it matters. Its
+  // horizontal shift is set inline from the glass's place on the bar.
+  &__glass-time {
+    position: absolute;
+    bottom: calc(100% + 38px);
+    left: 50%;
+    // Large on purpose: it is read at a glance mid-drag, at arm's length.
+    padding: 4px vars.$space-md;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.3;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    background: var(--bg-elevated);
+    border: 1px solid var(--accent);
+    border-radius: vars.$radius-pill;
+    pointer-events: none;
+  }
+
+  // A thread from the bubble down to the glass, always at the glass's centre
+  // however far the bubble has shifted, so it still reads as this glass's.
+  &__glass-thread {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 1px;
+    height: 38px;
+    background: var(--accent);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
   // Sits above his head, so an empty counter says what it is for rather than
   // just showing a figure standing there.
   &__ask {

@@ -23,6 +23,8 @@ import { hasFallen } from '../lib/shards';
 import { useBarScroll } from '../lib/useBarScroll';
 import { usePageVisible } from '../lib/usePageVisible';
 import { playClink } from '../lib/clink';
+import { useGlassDrag } from '../lib/useGlassDrag';
+import type { GlassRange } from '../lib/useGlassDrag';
 import type { Beverage, Tally } from '../lib/types';
 import './Bartop.scss';
 
@@ -37,6 +39,8 @@ interface Props {
    * screen is spoken for.
    */
   hidden: boolean;
+  /** A glass held and slid to another time: the tap was really made then. */
+  onMoveGlass: (beverageId: string, from: number, to: number) => void;
   /**
    * When set, the barkeeper on an empty bar points at the tip jar instead of
    * asking for an order; tapping his line calls this.
@@ -84,8 +88,9 @@ const ASSUMED_WIDTH = 360;
 const BAR_INSET_PX = 30;
 
 const HOUR_MS = 3_600_000;
+const MINUTE = 60_000;
 
-export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Props) {
+export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar, tipJar }: Props) {
   const { t, locale } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
   // Animating a counter nobody can see costs battery and buys nothing.
@@ -171,6 +176,21 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
     const timer = setTimeout(() => setDropping([]), FALL_MS);
     return () => clearTimeout(timer);
   }, [dropping]);
+
+  // Sliding a glass back to when it was really drunk. It stays in order —
+  // after the glass before it, before the one after it, never in the future —
+  // and on the visible counter, so it cannot be dragged over the brink and
+  // fall while held.
+  const glassDrag = useGlassDrag(onMoveGlass);
+  const rangeOf = (glass: BarGlass): GlassRange => {
+    const index = glasses.indexOf(glass);
+    const before = glasses[index - 1];
+    const after = glasses[index + 1];
+    const min = Math.max(before ? before.at + MINUTE : -Infinity, window.start + BRINK_MS);
+    const max = Math.min(after ? after.at - MINUTE : Infinity, now);
+    return { min: Math.min(min, glass.at), max: Math.max(max, glass.at) };
+  };
+  const clockLabel = new Intl.DateTimeFormat(locale, { timeStyle: 'short' });
 
   // Named days only appear once the round has run past midnight, so an
   // ordinary evening keeps bare hours on the counter.
@@ -358,26 +378,48 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
             )}
 
             <span className="bartop__glasses">
-              {standing.map((glass) => (
-                <span
-                  key={`${glass.beverageId}-${glass.at}`}
-                  className="bartop__glass"
-                  style={{
-                    left: `${positionIn(window, glass.at) * 100}%`,
-                    ...(isWiping
-                      ? {
-                          animationDelay: `${clothReaches(positionIn(window, glass.at))}ms`,
-                        }
-                      : {}),
-                  }}
-                >
-                  <GlassIcon
-                    icon={glass.icon}
-                    className="bartop__glass-figure"
-                    fill={glassFill(glass.at, now, glass.isCurrent)}
-                  />
-                </span>
-              ))}
+              {standing.map((glass) => {
+                const key = `${glass.beverageId}-${glass.at}`;
+                const held = glassDrag.dragged?.key === key ? glassDrag.dragged : null;
+                const at = held?.at ?? glass.at;
+                return (
+                  <span
+                    key={key}
+                    className={clsx('bartop__glass', !isWiping && 'bartop__glass--movable', held && 'bartop__glass--held')}
+                    style={{
+                      left: `${positionIn(window, at) * 100}%`,
+                      ...(isWiping
+                        ? {
+                            animationDelay: `${clothReaches(positionIn(window, glass.at))}ms`,
+                          }
+                        : {}),
+                    }}
+                    {...(isWiping ? {} : glassDrag.bind(key, glass.beverageId, glass.at, rangeOf(glass)))}
+                  >
+                    {held && (
+                      <>
+                        <span className="bartop__glass-thread" />
+                        {/* Slid along its own width by where the glass
+                            stands, so near either end of the bar it opens
+                            inwards instead of running off the screen. */}
+                        <span
+                          className="bartop__glass-time"
+                          style={{
+                            transform: `translateX(-${Math.min(1, Math.max(0, positionIn(window, at))) * 100}%)`,
+                          }}
+                        >
+                          {clockLabel.format(at)}
+                        </span>
+                      </>
+                    )}
+                    <GlassIcon
+                      icon={glass.icon}
+                      className="bartop__glass-figure"
+                      fill={glassFill(glass.at, now, glass.isCurrent)}
+                    />
+                  </span>
+                );
+              })}
             </span>
           </span>
 
