@@ -209,10 +209,10 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
   const isEmpty = glasses.length === 0;
   const isWiping = wiping !== null;
 
-  // The round has been left standing long enough to notice: the newest drink
-  // has drifted past the middle of the counter, so the whole right half is
-  // empty and waiting. That is well before the bar stops travelling — keyed on
-  // the present instead, he only turned up once the last glass had reached the
+  // The round has been left standing long enough for him to ask: the newest
+  // drink has drifted past the middle of the counter, so the whole right half
+  // is empty and waiting. That is well before the bar stops travelling — keyed
+  // on the present instead, he only asked once the last glass had reached the
   // far left, by which time the counter had been bare for hours.
   //
   // Measured on the *resting* window rather than the one being looked at:
@@ -220,8 +220,8 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
   // the barkeeper has nothing to be impatient about.
   // Not while the window is still anchored to the opening drink. Early in a
   // round the evening is spread out to the right of it, so a single fresh
-  // glass also sits left of centre — and without this he turned up the moment
-  // the first drink was poured, which is the opposite of what he means. Once
+  // glass also sits left of centre — and without this he asked the moment the
+  // first drink was poured, which is the opposite of what he means. Once
   // the bar is travelling, the last drink drifting past halfway is the signal.
   const lastAt = glasses.at(-1)?.at;
   const anchored = glasses[0] !== undefined && resting.start === glasses[0].at - BRINK_MS;
@@ -263,11 +263,8 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
       <div className="bartop__stage" ref={stageRef}>
         <div className="bartop__track">
           <div className="bartop__counter" aria-hidden="true" />
-          <div className="bartop__surface" aria-hidden="true">
-            <span className="bartop__grain" />
-          </div>
+          <div className="bartop__surface" aria-hidden="true" />
           <span className="bartop__lip" aria-hidden="true" />
-          <span className="bartop__sheen" aria-hidden="true" />
 
           {/* Takes the drag. Covers the counter only: the rest of the bar's
               height is air the drink list shows through, and swallowing
@@ -311,15 +308,27 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
 
             {isWiping && <span className="bartop__cloth" aria-hidden="true" />}
 
-            {/* Waiting at the newest end of the bar for the next order, in the
-                empty stretch the last drink has drifted away from — which is
-                where the glass he is waiting to pour would go. */}
-            {isStale && (
-              <span className="bartop__keeper bartop__keeper--waiting">
+            {/* Always behind the counter, at its newest end — where the next
+                glass would be poured. He speaks only when there is something
+                to say: on an empty bar, and when a round is left standing. */}
+            <span className={clsx('bartop__keeper', isStale && 'bartop__keeper--waiting')}>
+              {isEmpty && onTipJar ? (
+                // Only ever at the start of a round, before anything is
+                // poured: never a request made to someone mid-evening.
+                <button type="button" className="bartop__ask bartop__ask--tip" onClick={onTipJar}>
+                  {t('bartop.tipJar')}
+                </button>
+              ) : isEmpty ? (
+                // Thanks in words once the coin is in; until the next drink,
+                // then back to taking orders.
+                <span className="bartop__ask">
+                  {coinShown && landed ? t('tip.thanks') : t('bartop.ask')}
+                </span>
+              ) : isStale ? (
                 <span className="bartop__ask">{t('bartop.another')}</span>
-                <Barkeeper className="bartop__keeper-figure" />
-              </span>
-            )}
+              ) : null}
+              <Barkeeper className="bartop__keeper-figure" />
+            </span>
 
             {isEmpty && tipJar && (
               <button
@@ -356,45 +365,26 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
             )}
 
             <span className="bartop__glasses">
-              {isEmpty ? (
-                <span className="bartop__keeper">
-                  {onTipJar ? (
-                    // Only ever at the start of a round, before anything is
-                    // poured: never a request made to someone mid-evening.
-                    <button type="button" className="bartop__ask bartop__ask--tip" onClick={onTipJar}>
-                      {t('bartop.tipJar')}
-                    </button>
-                  ) : (
-                    // Thanks in words once the coin is in; until the next
-                    // drink, then back to taking orders.
-                    <span className="bartop__ask">
-                      {coinShown && landed ? t('tip.thanks') : t('bartop.ask')}
-                    </span>
-                  )}
-                  <Barkeeper className="bartop__keeper-figure" />
+              {standing.map((glass) => (
+                <span
+                  key={`${glass.beverageId}-${glass.at}`}
+                  className="bartop__glass"
+                  style={{
+                    left: `${positionIn(window, glass.at) * 100}%`,
+                    ...(isWiping
+                      ? {
+                          animationDelay: `${clothReaches(positionIn(window, glass.at))}ms`,
+                        }
+                      : {}),
+                  }}
+                >
+                  <GlassIcon
+                    icon={glass.icon}
+                    className="bartop__glass-figure"
+                    fill={glassFill(glass.at, now, glass.isCurrent)}
+                  />
                 </span>
-              ) : (
-                standing.map((glass) => (
-                  <span
-                    key={`${glass.beverageId}-${glass.at}`}
-                    className="bartop__glass"
-                    style={{
-                      left: `${positionIn(window, glass.at) * 100}%`,
-                      ...(isWiping
-                        ? {
-                            animationDelay: `${clothReaches(positionIn(window, glass.at))}ms`,
-                          }
-                        : {}),
-                    }}
-                  >
-                    <GlassIcon
-                      icon={glass.icon}
-                      className="bartop__glass-figure"
-                      fill={glassFill(glass.at, now, glass.isCurrent)}
-                    />
-                  </span>
-                ))
-              )}
+              ))}
             </span>
           </span>
 
