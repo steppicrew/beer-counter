@@ -92,3 +92,20 @@ export const CURRENCIES: CurrencyCode[] = [
   'CAD',
   'AUD',
 ];
+
+/**
+ * The currency's own short sign as the locale writes it ("€", "$", "¥",
+ * "zł"), for labelling things rather than amounts. `narrowSymbol` so a
+ * dollar is "$" and not "US$" outside the US.
+ *
+ * NFKC folds full-width forms back to the ordinary sign: Japanese writes the
+ * yen as "￥" (U+FFE5), which CJK fonts set in a full-width em box and so sit
+ * visibly high next to anything else.
+ */
+export function currencySymbol(currency: CurrencyCode, locale: string): string {
+  const sign =
+    new Intl.NumberFormat(locale, { style: 'currency', currency, currencyDisplay: 'narrowSymbol' })
+      .formatToParts(0)
+      .find((part) => part.type === 'currency')?.value ?? currency;
+  return sign.normalize('NFKC');
+}

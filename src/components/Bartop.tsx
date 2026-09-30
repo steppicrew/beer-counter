@@ -46,7 +46,14 @@ interface Props {
    * The tip jar at the end of an empty counter: silent, still, and gone with
    * the first drink. `coin` drops the thank-you coin into it.
    */
-  tipJar?: { coin: boolean; onOpen: () => void } | undefined;
+  tipJar?:
+    | {
+        coin: boolean;
+        onOpen: () => void;
+        /** The currency sign on the jar's front: what makes it a money jar in any language. */
+        label: string;
+      }
+    | undefined;
 }
 
 /** Coin drop, matching `bartop-coin` in the stylesheet: the clink lands with it. */
@@ -322,6 +329,21 @@ export function Bartop({ beverages, tallies, now, hidden, onTipJar, tipJar }: Pr
                 aria-label={t('tip.jar')}
               >
                 <TipJar className="bartop__tip-jar-figure" coin={tipJar.coin} />
+                {/* Text, not SVG: at jar size an SVG glyph scales into a blur,
+                    while real text is hinted. Smaller the longer the sign, so
+                    "zł" and even "CHF" stay on the jar's front. Off while the
+                    coin is in — the jar has made its point. */}
+                {!tipJar.coin && (
+                  <span
+                    className={clsx(
+                      'bartop__tip-jar-label',
+                      `bartop__tip-jar-label--len${Math.min([...tipJar.label].length, 3)}`,
+                    )}
+                    aria-hidden="true"
+                  >
+                    {tipJar.label}
+                  </span>
+                )}
                 {tipJar.coin && (
                   <svg className="bartop__heart" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path
