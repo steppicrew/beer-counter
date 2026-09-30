@@ -68,8 +68,7 @@ $tap-min: 48px;
 // Type scale. Text uses only these sizes and weights; a new size is a design
 // decision, not a local tweak. (font-size also sizes the SVG icons, which scale
 // from 1em — those follow their artwork, not this scale.)
-$font-xs: 11px; // the barkeeper's bubble
-$font-sm: 13px; // hints, field labels, times, bar hour labels, prices, footer
+$font-sm: 13px; // hints, field labels, times, bar hour labels, the barman's bubbles, prices, footer
 $font-md: 15px; // body text, choices, lists
 $font-lg: 17px; // drink names, headings in lists, the drop-time bubble
 $font-xl: 20px; // sheet titles
