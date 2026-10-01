@@ -100,20 +100,23 @@ export function scrolledBy(window: BarWindow, offsetMs: number): BarWindow {
  *
  * The current glass then drains with age, on the app's existing sense of time:
  * an hour is where `useRelativeTime` stops counting in minutes, and by then
- * even a slow drinker has finished.
+ * even a slow drinker has finished. It drains steadily, not in steps — a
+ * glass that went from full to half in one tick read as a counter, not as
+ * a drink going down.
+ *
+ * 1 is full, 0 empty (the heel left in a finished glass).
  */
-export type GlassFill = 'full' | 'half' | 'empty';
+export type GlassFill = number;
 
-const HALF_AFTER_MS = 20 * MINUTE_MS;
+/** A fresh glass stays full this long: nobody has started on it yet. */
+const FULL_FOR_MS = 3 * MINUTE_MS;
 const EMPTY_AFTER_MS = HOUR_MS;
 
 export function glassFill(at: number, now: number, isCurrent: boolean): GlassFill {
-  if (!isCurrent) return 'empty';
+  if (!isCurrent) return 0;
 
-  const age = now - at;
-  if (age < HALF_AFTER_MS) return 'full';
-  if (age < EMPTY_AFTER_MS) return 'half';
-  return 'empty';
+  const drinking = now - at - FULL_FOR_MS;
+  return Math.min(1, Math.max(0, 1 - drinking / (EMPTY_AFTER_MS - FULL_FOR_MS)));
 }
 
 /** Flattens the per-beverage tallies into one chronological run of glasses. */
