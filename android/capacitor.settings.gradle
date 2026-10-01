@@ -2,5 +2,8 @@
 include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../.yarn/unplugged/@capacitor-android-virtual-6177aef2d1/node_modules/@capacitor/android/capacitor')
 
+include ':capacitor-app'
+project(':capacitor-app').projectDir = new File('../.yarn/unplugged/@capacitor-app-virtual-4f8c7f946c/node_modules/@capacitor/app/android')
+
 include ':capacitor-share'
 project(':capacitor-share').projectDir = new File('../.yarn/unplugged/@capacitor-share-virtual-d09a340545/node_modules/@capacitor/share/android')

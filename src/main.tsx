@@ -1,10 +1,14 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
+import { handleBackButton } from './lib/backButton';
 import './styles/global.scss';
 
 const container = document.getElementById('root');
 if (!container) throw new Error('Missing #root container');
+
+// At load, not in a component: it outlives every sheet it closes.
+handleBackButton();
 
 createRoot(container).render(
   <StrictMode>
