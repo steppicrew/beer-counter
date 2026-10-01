@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.8",
+      "date": "2026-10-01",
+      "notes": {
+        "en": "A round left standing now stays on the bar: the last glass holds at the end while the time moves on, and the next drink brings the bar back to the present. Glasses drain steadily instead of in steps, also while you drag one back in time. And the broken glass is easier to see in the light theme.",
+        "de": "Eine stehen gelassene Runde bleibt jetzt auf dem Tresen: Das letzte Glas hält am Ende, während die Zeit weiterläuft, und das nächste Getränk holt den Tresen zurück in die Gegenwart. Gläser leeren sich gleichmäßig statt in Stufen, auch beim Zurückschieben. Und die Scherben sind im hellen Design besser zu sehen.",
+        "fr": "Une tournée laissée en plan reste sur le comptoir : le dernier verre tient au bout pendant que le temps passe, et la boisson suivante ramène le comptoir au présent. Les verres se vident peu à peu au lieu de par paliers, même quand on en déplace un. Et le verre brisé se voit mieux en thème clair.",
+        "es": "Una ronda que se queda en la barra ya no desaparece: el último vaso se queda al final mientras pasa el tiempo, y la siguiente bebida devuelve la barra al presente. Los vasos se vacían poco a poco en vez de a saltos, también al arrastrarlos. Y los cristales rotos se ven mejor en el tema claro.",
+        "it": "Un giro lasciato a metà ora resta sul bancone: l'ultimo bicchiere si ferma in fondo mentre il tempo passa, e il drink successivo riporta il bancone al presente. I bicchieri si svuotano gradualmente invece che a scatti, anche mentre li trascini. E i cocci si vedono meglio nel tema chiaro.",
+        "nl": "Een blijven staande ronde blijft nu op de toog: het laatste glas blijft aan het eind staan terwijl de tijd doorloopt, en het volgende drankje brengt de toog terug naar nu. Glazen lopen geleidelijk leeg in plaats van in stappen, ook terwijl je er een versleept. En de scherven zijn beter te zien in het lichte thema.",
+        "pl": "Pozostawiona kolejka zostaje teraz na barze: ostatnia szklanka zatrzymuje się na końcu, gdy czas płynie dalej, a kolejny napój przywraca bar do teraźniejszości. Szklanki opróżniają się płynnie zamiast skokami, także podczas przeciągania. A potłuczone szkło lepiej widać w jasnym motywie.",
+        "pt": "Uma rodada deixada a meio fica agora no balcão: o último copo para no fim enquanto o tempo passa, e a bebida seguinte traz o balcão de volta ao presente. Os copos esvaziam-se aos poucos em vez de aos saltos, também ao arrastá-los. E os cacos veem-se melhor no tema claro.",
+        "cs": "Rozpitá runda teď zůstane na baru: poslední sklenice se zastaví na konci, zatímco čas běží dál, a další nápoj vrátí bar do přítomnosti. Sklenice se vyprazdňují plynule místo po skocích, i když je táhneš. A střepy jsou ve světlém motivu lépe vidět.",
+        "da": "En omgang, der bliver stående, bliver nu på baren: det sidste glas holder ved enden, mens tiden går, og den næste drink bringer baren tilbage til nu. Glassene tømmes jævnt i stedet for i trin, også mens du trækker i et. Og glasskårene ses bedre i det lyse tema.",
+        "sv": "En runda som blir stående ligger nu kvar på bardisken: det sista glaset stannar vid kanten medan tiden går, och nästa drink tar disken tillbaka till nuet. Glasen töms jämnt i stället för i steg, även medan du drar ett. Och glasskärvorna syns bättre i det ljusa temat.",
+        "tr": "Yarım bırakılan bir tur artık tezgâhta kalıyor: zaman ilerlerken son bardak uçta durur, bir sonraki içki tezgâhı şimdiye geri getirir. Bardaklar basamak basamak değil yavaş yavaş boşalıyor, sürüklerken de. Kırık camlar da açık temada daha iyi görünüyor.",
+        "ru": "Недопитый круг теперь остаётся на стойке: последний стакан задерживается у края, пока время идёт, а следующий напиток возвращает стойку в настоящее. Стаканы пустеют плавно, а не рывками, — и когда вы их перетаскиваете. А осколки лучше видны в светлой теме.",
+        "ja": "飲みかけのラウンドがカウンターに残るようになりました。時間が進んでも最後のグラスは端で止まり、次の一杯でカウンターが今に戻ります。グラスは段階ではなく少しずつ減り、ドラッグ中も同じです。ライトテーマでは割れたグラスも見やすくなりました。",
+        "zh": "没喝完的一轮现在会留在吧台上：时间往前走时，最后一杯停在吧台尽头，下一杯酒会把吧台带回当下。杯中的酒会逐渐减少而不是一格一格地降，拖动时也一样。浅色主题下的碎玻璃也更容易看到了。"
+      }
+    },
+    {
       "version": "1.7.7",
       "date": "2026-10-01",
       "notes": {
