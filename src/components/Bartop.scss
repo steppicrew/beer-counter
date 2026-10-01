@@ -432,14 +432,16 @@ $ink-line: 2px;
   }
 
   // Every bubble speaks from beside his head, to his left — towards the
-  // glasses — instead of above him.
+  // glasses — instead of above him. It tucks a little into his box: the
+  // figure's left edge is his outstretched arm, and a bubble kept clear of
+  // that hung loose from his head.
   &__keeper &__ask,
   &__keeper &__ask--tip {
     left: auto;
     right: 100%;
     bottom: 55%;
     transform: none;
-    margin: 0 6px 0 0;
+    margin: 0 -6px 0 0;
     max-width: min(60vw, 230px, var(--bubble-room, 230px));
   }
 

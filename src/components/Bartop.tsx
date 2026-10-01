@@ -466,7 +466,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                   // The room left of him, which every bubble must fit in: they
                   // speak towards the glasses, and on a phone that side is
                   // narrow — a longer phrase wraps rather than leaving the screen.
-                  '--bubble-room': `${Math.max(90, BAR_INSET_PX + counterPx - keeperRightPx - keeperWidth - 14)}px`,
+                  '--bubble-room': `${Math.max(90, BAR_INSET_PX + counterPx - keeperRightPx - keeperWidth - 2)}px`,
                 } as React.CSSProperties
               }
             >
