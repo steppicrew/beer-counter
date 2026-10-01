@@ -37,6 +37,11 @@ $liquid-head: #fffaf0; // the white foam on a poured beer
 // The coin in the tip jar. Decorative, like the liquids.
 $coin: #e7b93e;
 $coin-edge: #a87a12;
+// The notes in the tip jar: green for a beer, blue for a round, with a dark
+// print edge. Decorative like the coin, and like no real currency's colours.
+$note-large: #9cc69a;
+$note-round: #8fb6dd;
+$note-edge: #3b3a33;
 // The heart that rises from the jar after a tip. Its own warm red: not the
 // wine, not the danger colour.
 $heart: #e8566b;

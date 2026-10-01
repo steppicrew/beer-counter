@@ -682,6 +682,27 @@ $ink-line: 2px;
   animation: bartop-coin 520ms cubic-bezier(0.5, 0, 0.75, 0) both;
 }
 
+// A note slides down into the jar's mouth: no bounce, paper does not bounce.
+.tip-jar__note--dropping {
+  transform-box: fill-box;
+  animation: bartop-note 460ms cubic-bezier(0.3, 0, 0.4, 1) both;
+}
+
+@keyframes bartop-note {
+  0% {
+    transform: translateY(-90%);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @keyframes bartop-coin {
   0% {
     transform: translateY(-340%);
@@ -729,7 +750,8 @@ $ink-line: 2px;
   }
 
   // The coin is simply in the jar.
-  .tip-jar__coin--dropping {
+  .tip-jar__coin--dropping,
+  .tip-jar__note--dropping {
     animation: none;
   }
 

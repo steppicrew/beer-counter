@@ -61,7 +61,7 @@ export function TipSection({ focus = false }: { focus?: boolean }) {
                   // Someone who has tipped is never asked again, and the jar
                   // leaves the bar — after a coin, if the money arrived.
                   if (status === 'purchased' || status === 'pending') {
-                    recordTip(status === 'purchased');
+                    recordTip(status === 'purchased', offer.id);
                   }
                   setResult(status);
                   setBusy(false);

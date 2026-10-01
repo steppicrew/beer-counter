@@ -11,6 +11,7 @@ import type {
 } from '../lib/types';
 import { DEFAULT_BEVERAGES } from '../lib/defaults';
 import { archiveRound } from '../lib/stats';
+import type { TipProductId } from '../lib/tips';
 
 interface AppState {
   beverages: Beverage[];
@@ -29,8 +30,11 @@ interface AppState {
   tipped: boolean;
   /** A paid tip not yet thanked for: its coin drops when nothing covers the bar. */
   coinPending: boolean;
-  /** Tips Play confirmed as paid: one coin each in the jar. */
-  tips: number;
+  /**
+   * Tips Play confirmed as paid, oldest first, by level: what is in the jar
+   * — coins for a small beer, a note for the larger ones.
+   */
+  tipLog: TipProductId[];
 
   theme: ThemeMode;
   /** null = follow browser/system language. */
@@ -69,7 +73,7 @@ interface AppState {
    * `paid` is true only when Play confirmed the money; a pending payment or a
    * click on the web link still retires the jar, but earns no coin.
    */
-  recordTip: (paid: boolean) => void;
+  recordTip: (paid: boolean, level?: TipProductId) => void;
   clearCoin: () => void;
 
   setTheme: (theme: ThemeMode) => void;
@@ -93,7 +97,7 @@ export const useAppStore = create<AppState>()(
         tipAsked: false,
         tipped: false,
         coinPending: false,
-        tips: 0,
+        tipLog: [],
         theme: 'system',
         locale: null,
         currency: null,
@@ -210,12 +214,12 @@ export const useAppStore = create<AppState>()(
         setHistoryEnabled: (historyEnabled) => set({ historyEnabled }),
         clearHistory: () => set({ history: [] }),
         markTipAsked: () => set({ tipAsked: true }),
-        recordTip: (paid) =>
+        recordTip: (paid, level = 'tip_small') =>
           set((state) => ({
             tipAsked: true,
             tipped: true,
             coinPending: state.coinPending || paid,
-            tips: state.tips + (paid ? 1 : 0),
+            tipLog: paid ? [...state.tipLog, level] : state.tipLog,
           })),
         clearCoin: () => set({ coinPending: false }),
 
@@ -229,7 +233,7 @@ export const useAppStore = create<AppState>()(
       {
         name: 'beer-counter-state',
         storage: createJSONStorage(() => localStorage),
-        version: 3,
+        version: 4,
         /**
          * v1 stored `{ count, lastAt }`. Only the newest drink had a time, so
          * the older entries are unknowable — they are seeded to that same
@@ -237,10 +241,19 @@ export const useAppStore = create<AppState>()(
          * and only affects undo history the user never had anyway.
          */
         migrate: (persisted, version) => {
-          // v3 only added the history. persist's merge fills the missing
-          // fields from the initial state, so it starts empty and the round in
-          // progress becomes its first entry.
-          if (version >= 2) return persisted as AppState;
+          // v4 records each tip's level instead of a count. The count only
+          // ever existed in internal test builds; those tips become small ones.
+          if (version >= 2) {
+            const state = persisted as { tips?: number; tipLog?: TipProductId[] };
+            if (version < 4 && typeof state.tips === 'number' && !state.tipLog) {
+              const { tips, ...rest } = state;
+              return { ...rest, tipLog: Array<TipProductId>(Math.max(0, tips)).fill('tip_small') } as unknown as AppState;
+            }
+            // v3 only added the history. persist's merge fills the missing
+            // fields from the initial state, so it starts empty and the round in
+            // progress becomes its first entry.
+            return persisted as AppState;
+          }
           const state = persisted as { tallies?: Record<string, unknown> };
           const tallies: Record<string, Tally> = {};
           for (const [id, value] of Object.entries(state.tallies ?? {})) {
@@ -265,7 +278,7 @@ export const useAppStore = create<AppState>()(
           tipAsked: state.tipAsked,
           tipped: state.tipped,
           coinPending: state.coinPending,
-          tips: state.tips,
+          tipLog: state.tipLog,
           theme: state.theme,
           locale: state.locale,
           currency: state.currency,

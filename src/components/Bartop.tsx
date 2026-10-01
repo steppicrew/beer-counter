@@ -2,9 +2,11 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { BeverageIcon } from './BeverageIcon';
 import { Barkeeper } from './Barkeeper';
-import { TipJar } from './TipJar';
+import { COIN_STAGGER_MS, COINS_PER_SMALL_TIP, TipJar } from './TipJar';
+import type { TipProductId } from '../lib/tips';
 import { ShardPile } from './ShardPile';
 import { useI18n } from '../i18n';
+import type { MessageKey } from '../i18n';
 import {
   BRINK_MS,
   collectGlasses,
@@ -48,13 +50,13 @@ interface Props {
   onTipJar?: (() => void) | undefined;
   /**
    * The tip jar at the right end of the counter: silent and still, always
-   * there wherever a tip is possible. `coin` is its thank-you coin.
+   * there wherever a tip is possible, holding what has been tipped.
    */
   tipJar?:
     | {
-        /** Coins to draw — one per paid tip. */
-        coins: number;
-        /** The newest coin is falling in: clink, heart and thanks. */
+        /** Paid tips, oldest first, by level: coins and notes in the jar. */
+        tipLog: readonly TipProductId[];
+        /** The newest tip is going in: clinks, hearts and thanks. */
         dropping: boolean;
         onOpen: () => void;
         /** The currency sign on the jar's front: what makes it a money jar in any language. */
@@ -65,6 +67,22 @@ interface Props {
 
 /** Coin drop, matching `bartop-coin` in the stylesheet: the clink lands with it. */
 const COIN_LANDS_MS = 380;
+/** Note slide, matching `bartop-note`: the thanks follow once it is in. */
+const NOTE_LANDS_MS = 460;
+
+/**
+ * Where each heart starts, left or right of the jar's middle, in launch
+ * order. Alternating sides: launched in sequence from a steady sweep they
+ * lined up into a diagonal streak.
+ */
+const HEART_SPREAD_PX = [0, -14, 12, -6, 18, -20, 6, -12, 22, -2];
+
+/** The thanks grow with the tip: hearts, and the barman's words. */
+const THANKS: Record<TipProductId, { hearts: number; words: MessageKey }> = {
+  tip_small: { hearts: 3, words: 'tip.thanks' },
+  tip_large: { hearts: 5, words: 'tip.thanksLarge' },
+  tip_round: { hearts: 10, words: 'tip.thanksRound' },
+};
 
 /** How long the cloth takes to cross the counter, in ms. Matches the CSS. */
 const WIPE_MS = 900;
@@ -291,22 +309,27 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   // The clink belongs to the coin hitting the bottom of the jar, so it waits
   // for the drop; with reduced motion there is no drop to wait for.
   const coinShown = tipJar?.dropping === true;
-  // Set when the coin lands, and never reset: the coin drops once ever, so
-  // there is no second landing to reset for.
+  const tipping = coinShown ? tipJar.tipLog.at(-1) : undefined;
+  // Set when the tip has landed, and never reset: each tip goes in once, and
+  // this component sees one at a time.
   const [landed, setLanded] = useState(false);
   useEffect(() => {
-    if (!coinShown) return;
+    if (!tipping) return;
     // `window` in this component is the bar's time window, hence globalThis.
     const still = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const timer = globalThis.setTimeout(
-      () => {
-        playClink();
-        setLanded(true);
-      },
-      still ? 0 : COIN_LANDS_MS,
-    );
-    return () => globalThis.clearTimeout(timer);
-  }, [coinShown]);
+    const timers: number[] = [];
+    if (tipping === 'tip_small') {
+      // One clink for each coin, as each lands.
+      for (let i = 0; i < COINS_PER_SMALL_TIP; i++) {
+        timers.push(globalThis.setTimeout(playClink, still ? i * 60 : COIN_LANDS_MS + i * COIN_STAGGER_MS));
+      }
+    }
+    const settled = tipping === 'tip_small'
+      ? COIN_LANDS_MS + (COINS_PER_SMALL_TIP - 1) * COIN_STAGGER_MS
+      : NOTE_LANDS_MS;
+    timers.push(globalThis.setTimeout(() => setLanded(true), still ? 0 : settled));
+    return () => timers.forEach((timer) => globalThis.clearTimeout(timer));
+  }, [tipping]);
 
   return (
     <div
@@ -397,7 +420,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
               ) : coinShown && landed ? (
                 // Thanks in words once the coin is in, whether the bar is empty
                 // or not; until the next drink, then back to taking orders.
-                <span className="bartop__ask">{t('tip.thanks')}</span>
+                <span className="bartop__ask">{t(THANKS[tipping ?? 'tip_small'].words)}</span>
               ) : isEmpty ? (
                 <span className="bartop__ask">{t('bartop.ask')}</span>
               ) : isStale ? (
@@ -413,12 +436,13 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                 onClick={tipJar.onOpen}
                 aria-label={t('tip.jar')}
               >
-                <TipJar className="bartop__tip-jar-figure" coins={tipJar.coins} dropping={tipJar.dropping} />
+                <TipJar className="bartop__tip-jar-figure" tipLog={tipJar.tipLog} dropping={tipJar.dropping} />
                 {/* Text, not SVG: at jar size an SVG glyph scales into a blur,
                     while real text is hinted. Smaller the longer the sign, so
                     "zł" and even "CHF" stay on the jar's front. Off only while
-                    the coin is falling in, so the drop is not hidden. */}
-                {!tipJar.dropping && (
+                    a tip is falling in, so the drop is not hidden — back the
+                    moment it has landed. */}
+                {!(tipJar.dropping && !landed) && (
                   <span
                     className={clsx(
                       'bartop__tip-jar-label',
@@ -429,14 +453,27 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                     {tipJar.label}
                   </span>
                 )}
-                {tipJar.dropping && (
-                  <svg className="bartop__heart" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path
-                      d="M12 20.5s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.8a4.3 4.3 0 0 1 7.5 2.6c0 5.5-7.5 10.1-7.5 10.1Z"
-                      fill="var(--heart)"
-                    />
-                  </svg>
-                )}
+                {tipping &&
+                  Array.from({ length: THANKS[tipping].hearts }, (_, i) => (
+                    // Let go one after another from places that jump left and
+                    // right, so ten rise as a flurry rather than a line.
+                    <svg
+                      key={i}
+                      className="bartop__heart"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                      style={{
+                        translate: `${HEART_SPREAD_PX[i % HEART_SPREAD_PX.length]}px 0`,
+                        animationDelay: `${(tipping === 'tip_small' ? COIN_LANDS_MS : NOTE_LANDS_MS) + i * 110}ms`,
+                      }}
+                    >
+                      <path
+                        d="M12 20.5s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.8a4.3 4.3 0 0 1 7.5 2.6c0 5.5-7.5 10.1-7.5 10.1Z"
+                        fill="var(--heart)"
+                      />
+                    </svg>
+                  ))}
               </button>
             )}
 
