@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.10",
+      "date": "2026-10-01",
+      "notes": {
+        "en": "The barman now makes the case for a tip himself, in his own sheet and with a wink. Nothing changes either way: the app stays free, with everything in it.",
+        "de": "Der Barmann bittet jetzt selbst um Trinkgeld, in einem eigenen Fenster und mit einem Augenzwinkern. Ändern tut sich dadurch nichts: Die App bleibt kostenlos und vollständig.",
+        "fr": "Le barman plaide désormais lui-même pour un pourboire, dans sa propre fenêtre et avec un clin d’œil. Rien ne change pour autant : l’app reste gratuite et complète.",
+        "es": "Ahora es el camarero quien pide la propina, en su propia ventana y con un guiño. No cambia nada: la app sigue siendo gratis y completa.",
+        "it": "Ora è il barista stesso a chiedere una mancia, in una finestra tutta sua e con un occhiolino. Non cambia nulla: l’app resta gratuita e completa.",
+        "nl": "De barman vraagt nu zelf om een fooi, in een eigen venster en met een knipoog. Er verandert niets: de app blijft gratis en compleet.",
+        "pl": "Barman sam teraz prosi o napiwek, we własnym oknie i z przymrużeniem oka. Nic się nie zmienia: aplikacja pozostaje darmowa i kompletna.",
+        "pt": "Agora é o barman que pede a gorjeta, numa janela própria e com uma piscadela de olho. Nada muda: a app continua gratuita e completa.",
+        "cs": "Barman si teď o spropitné řekne sám, ve vlastním okně a s mrknutím. Nic se tím nemění: aplikace zůstává zdarma a kompletní.",
+        "da": "Bartenderen beder nu selv om drikkepenge, i sit eget vindue og med et glimt i øjet. Intet ændrer sig: appen forbliver gratis og komplet.",
+        "sv": "Bartendern ber nu själv om dricks, i ett eget fönster och med glimten i ögat. Inget ändras: appen förblir gratis och komplett.",
+        "tr": "Barmen artık bahşişi kendisi istiyor, kendi penceresinde ve göz kırparak. Hiçbir şey değişmiyor: uygulama ücretsiz ve eksiksiz kalıyor.",
+        "ru": "Теперь бармен сам просит чаевые — в собственном окне и с подмигиванием. Ничего не меняется: приложение остаётся бесплатным и полным.",
+        "ja": "バーテンダーが自分の画面で、ウインク交じりにチップをお願いするようになりました。もちろん何も変わりません。アプリは無料のまま、機能もすべて使えます。",
+        "zh": "现在由酒保亲自在单独的窗口里俏皮地讨小费。其他一切不变：应用始终免费且功能完整。"
+      }
+    },
+    {
       "version": "1.7.9",
       "date": "2026-10-01",
       "notes": {
