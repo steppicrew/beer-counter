@@ -6,6 +6,7 @@ import { BeverageSheet } from './components/BeverageSheet';
 import { SettingsSheet } from './components/SettingsSheet';
 import { ResetSheet } from './components/ResetSheet';
 import { ShareSheet } from './components/ShareSheet';
+import { TipSheet } from './components/TipSheet';
 import { StatsSheet } from './components/StatsSheet';
 import { useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
@@ -31,7 +32,8 @@ type Dialog =
   | { kind: 'none' }
   | { kind: 'add' }
   | { kind: 'edit'; beverage: Beverage }
-  | { kind: 'settings'; focusTip?: boolean }
+  | { kind: 'settings' }
+  | { kind: 'tip' }
   | { kind: 'reset' }
   | { kind: 'share' }
   | { kind: 'stats' };
@@ -158,7 +160,7 @@ export function App() {
   const jarTips = coinPending && !dropping ? tipLog.slice(0, -1) : tipLog;
   const openTips = () => {
     markTipAsked();
-    setDialog({ kind: 'settings', focusTip: true });
+    setDialog({ kind: 'tip' });
   };
 
   // Seen and passed over counts as asked: once the round starts, his line is
@@ -372,11 +374,10 @@ export function App() {
         )}
 
         {dialog.kind === 'settings' && (
-          <SettingsSheet
-            focusTip={dialog.focusTip ?? false}
-            onClose={() => setDialog({ kind: 'none' })}
-          />
+          <SettingsSheet onClose={() => setDialog({ kind: 'none' })} />
         )}
+
+        {dialog.kind === 'tip' && <TipSheet onClose={() => setDialog({ kind: 'none' })} />}
 
         {dialog.kind === 'stats' && <StatsSheet onClose={() => setDialog({ kind: 'none' })} />}
 
