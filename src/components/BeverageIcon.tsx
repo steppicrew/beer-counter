@@ -171,32 +171,36 @@ const SETTLED_HEAD_DEPTH = 2.6;
  * the shapes are identical, so one mask per drink type is both correct and
  * fewer nodes than one per glass.
  */
-export function BeverageIcon({ icon, className, fill = 'full' }: Props) {
+export function BeverageIcon({ icon, className, fill = 1 }: Props) {
   const shape = SHAPES[icon];
   const maskId = `glass-inside-${icon}`;
 
   // The surface line marks a full glass and `floor` the bottom of the volume,
-  // so a partial fill is just that line slid down between the two.
-  const drop = shape.floor - shape.liquidY;
-  const surfaceY =
-    fill === 'full'
-      ? shape.liquidY
-      : fill === 'half'
-        ? shape.liquidY + drop * 0.55
-        : shape.floor - 1.4;
+  // so a partial fill is just that line slid down between the two — down to
+  // the heel a finished glass keeps, rather than to nothing.
+  const empty = fill <= 0;
+  const heelY = shape.floor - 1.4;
+  const surfaceY = shape.liquidY + (heelY - shape.liquidY) * (1 - Math.min(1, Math.max(0, fill)));
 
   // A drained glass shows the counter through it rather than a pale version of
   // the drink — the drink is gone, and tinting the dregs would keep claiming
   // there is still something in it. The heel is the last smear, kept faint so
   // it reads as a used glass rather than as a dark measure still standing.
-  const liquidColor = fill === 'empty' ? 'var(--glass-drained)' : liquidVar(icon);
-  const liquidOpacity = fill === 'empty' ? 0.45 : 1;
+  const liquidColor = empty ? 'var(--glass-drained)' : liquidVar(icon);
+  const liquidOpacity = empty ? 0.45 : 1;
 
   // The head rides on the surface, so it drops with the beer. It is only worth
   // drawing while there is beer under it: on the heel left in an empty glass
   // the head would be the whole remaining volume.
-  const showHead = hasFoam(icon) && fill !== 'empty';
-  const headDepth = fill === 'full' ? (shape.headDepth ?? SETTLED_HEAD_DEPTH) : SETTLED_HEAD_DEPTH;
+  const showHead = hasFoam(icon) && !empty;
+  // A fresh head settles over the first sips rather than snapping to the
+  // settled depth, and never stands taller than the beer still under it.
+  const freshHead = shape.headDepth ?? SETTLED_HEAD_DEPTH;
+  const settling = Math.min(1, Math.max(0, (fill - 0.85) / 0.15));
+  const headDepth = Math.min(
+    SETTLED_HEAD_DEPTH + (freshHead - SETTLED_HEAD_DEPTH) * settling,
+    (shape.floor - surfaceY) * 0.6,
+  );
   const headFoot = surfaceY + headDepth;
 
   return (
@@ -241,7 +245,7 @@ export function BeverageIcon({ icon, className, fill = 'full' }: Props) {
             already the light band at the surface, and a second white line
             over it just rules a hard edge across the foam. A drained glass
             gets none either. */}
-        {fill !== 'empty' && !showHead && (
+        {!empty && !showHead && (
           <path
             d={`M0 ${surfaceY}h24`}
             fill="none"

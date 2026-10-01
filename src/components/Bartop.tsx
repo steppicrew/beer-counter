@@ -598,7 +598,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                 className="bartop__falling"
                 style={{ left: `${BAR_INSET_PX}px` }}
               >
-                <BeverageIcon icon={glass.icon} className="bartop__glass-figure" fill="empty" />
+                <BeverageIcon icon={glass.icon} className="bartop__glass-figure" fill={0} />
               </span>
             ))}
 
