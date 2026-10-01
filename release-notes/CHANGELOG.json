@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.9",
+      "date": "2026-10-01",
+      "notes": {
+        "en": "The tip jar now opens a sheet of its own instead of the settings, and it closes as soon as you pick a tip. And the barman's speech bubble sits a little closer to him.",
+        "de": "Das Trinkgeldglas öffnet jetzt ein eigenes Fenster statt der Einstellungen, und es schließt sich, sobald du ein Trinkgeld wählst. Und die Sprechblase des Barmanns sitzt etwas näher bei ihm.",
+        "fr": "Le pot à pourboires ouvre maintenant sa propre fenêtre au lieu des réglages, et elle se ferme dès que vous choisissez un pourboire. Et la bulle du barman est un peu plus près de lui.",
+        "es": "El bote de propinas abre ahora su propia ventana en lugar de los ajustes, y se cierra en cuanto eliges una propina. Y el bocadillo del camarero está un poco más cerca de él.",
+        "it": "Il barattolo delle mance ora apre una finestra tutta sua invece delle impostazioni, e si chiude appena scegli una mancia. E il fumetto del barista è un po' più vicino a lui.",
+        "nl": "De fooienpot opent nu een eigen venster in plaats van de instellingen, en dat sluit zodra je een fooi kiest. En het tekstballonnetje van de barman staat wat dichter bij hem.",
+        "pl": "Słoik na napiwki otwiera teraz własne okno zamiast ustawień, a zamyka się, gdy tylko wybierzesz napiwek. A dymek barmana jest trochę bliżej niego.",
+        "pt": "O frasco das gorjetas abre agora uma janela própria em vez das definições, e fecha-se assim que escolhe uma gorjeta. E o balão de fala do barman fica um pouco mais perto dele.",
+        "cs": "Sklenička na spropitné teď otevírá vlastní okno místo nastavení a zavře se, jakmile spropitné vybereš. A bublina barmana je o kousek blíž k němu.",
+        "da": "Drikkepengeglasset åbner nu sit eget vindue i stedet for indstillingerne, og det lukker, så snart du vælger drikkepenge. Og bartenderens taleboble sidder lidt tættere på ham.",
+        "sv": "Dricksburken öppnar nu ett eget fönster i stället för inställningarna, och det stängs så fort du väljer dricks. Och bartenderns pratbubbla sitter lite närmare honom.",
+        "tr": "Bahşiş kavanozu artık ayarlar yerine kendi penceresini açıyor ve bir bahşiş seçer seçmez kapanıyor. Barmenin konuşma balonu da ona biraz daha yakın duruyor.",
+        "ru": "Баночка для чаевых теперь открывает своё окно вместо настроек, и оно закрывается, как только вы выберете чаевые. А облачко бармена стоит чуть ближе к нему.",
+        "ja": "チップ箱は設定ではなく専用の画面を開くようになり、チップを選ぶとすぐに閉じます。バーテンダーの吹き出しも少し彼の近くに寄りました。",
+        "zh": "小费罐现在会打开单独的窗口，而不是设置页，选好小费后窗口立即关闭。酒保的对话气泡也离他更近了一点。"
+      }
+    },
+    {
       "version": "1.7.8",
       "date": "2026-10-01",
       "notes": {
