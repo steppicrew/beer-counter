@@ -8,8 +8,14 @@
   align-items: center;
   gap: vars.$space-md;
 
-  &__text {
+  // Beside the barman the text takes the row's width. Only there: in
+  // settings the hint sits in the field's column, where a 10em basis is a
+  // height and opened a gap above the button.
+  > .tip-intro__text {
     flex: 1 1 10em;
+  }
+
+  &__text {
     display: flex;
     flex-direction: column;
     gap: vars.$space-sm;
