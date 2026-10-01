@@ -1,5 +1,32 @@
 @use '../styles/vars' as vars;
 
+.tip-intro {
+  display: flex;
+  // Wraps rather than squeezing the text into a sliver beside him in the
+  // longer languages on a narrow phone.
+  flex-wrap: wrap;
+  align-items: center;
+  gap: vars.$space-md;
+
+  &__text {
+    flex: 1 1 10em;
+    display: flex;
+    flex-direction: column;
+    gap: vars.$space-sm;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__figure {
+    flex: none;
+    height: 96px;
+    width: auto;
+    color: var(--bar-ink);
+  }
+}
+
 .tip-offers {
   display: grid;
   // Three across on any phone; the label sits above the price so "Kleines
@@ -45,4 +72,12 @@
   &__icon {
     font-size: 22px;
   }
+}
+
+// In the tip sheet the offers are the whole content, between the barman's
+// pitch and the Close bar: the same air on both sides of them, matching the
+// panel gap plus the action bar's own inset below.
+.tip-intro ~ .tip-offers,
+.tip-intro ~ .tip-link {
+  margin-top: vars.$space-lg;
 }

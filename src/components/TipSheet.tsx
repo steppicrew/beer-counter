@@ -1,3 +1,4 @@
+import { Barkeeper } from './Barkeeper';
 import { Sheet } from './Sheet';
 import { TipSection } from './TipSection';
 import { useI18n } from '../i18n';
@@ -15,7 +16,11 @@ export function TipSheet({ onClose }: { onClose: () => void }) {
       {/* Gone as soon as a tip is chosen: Play's own payment sheet or the
           browser tab takes over, and the thanks come from the barman as the
           coin drops into the jar. */}
-      <TipSection titled={false} onChosen={onClose} />
+      <TipSection
+        titled={false}
+        onChosen={onClose}
+        figure={<Barkeeper className="tip-intro__figure" />}
+      />
 
       <div className="sheet-actions">
         <span className="sheet-actions__spacer" />
