@@ -74,10 +74,11 @@
   }
 }
 
-// In the tip sheet the offers are the whole content, between the barman's
-// pitch and the Close bar: the same air on both sides of them, matching the
-// panel gap plus the action bar's own inset below.
+// In the tip sheet the offers end the panel, which has no action bar to carry
+// its bottom padding: the same air below them as between them and the pitch,
+// plus the gesture bar's inset.
 .tip-intro ~ .tip-offers,
 .tip-intro ~ .tip-link {
   margin-top: vars.$space-lg;
+  margin-bottom: calc(#{vars.$space-lg} + #{vars.$space-xs} + env(safe-area-inset-bottom));
 }
