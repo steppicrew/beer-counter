@@ -66,15 +66,24 @@ export interface BarWindow {
  * The window at rest, before any scrolling back: the present at `NOW_AT`,
  * the past to its left, and the little that is right of it still to come.
  *
- * The bar follows the clock without exception. A round left standing drifts
- * to the far end and goes over it glass by glass, and once the last one has
- * fallen the counter is bare but for the pile on the floor — which is the
- * honest picture, and the pile is what says the round happened. Dragging back
- * (see `scrollBounds`) still reaches all the way to the opening drink.
+ * The bar follows the clock until the newest glass reaches the far end, and
+ * there it holds: a floor, not a freeze. Older glasses go over the edge as
+ * they drift, but the last one stays standing, so a round left overnight is
+ * still on the bar in the morning; the present walks on to the right instead,
+ * past the barman, and off the counter. The next drink brings the bar back to
+ * the present (Bartop animates that), and whatever is too old then falls.
+ * Dragging back (see `scrollBounds`) still reaches the opening drink.
  */
-export function restingWindow(now: number, spanMs: number, nowAt = NOW_AT): BarWindow {
-  const end = now + (1 - nowAt) * spanMs;
-  return { start: end - spanMs, end };
+export function restingWindow(
+  now: number,
+  spanMs: number,
+  nowAt = NOW_AT,
+  lastAt?: number,
+): BarWindow {
+  const following = now - nowAt * spanMs;
+  // A minute inside the brink, so the held glass is standing, not teetering.
+  const start = lastAt === undefined ? following : Math.min(following, lastAt - BRINK_MS - MINUTE_MS);
+  return { start, end: start + spanMs };
 }
 
 /** Slides a window further into the past by `offsetMs`. */
