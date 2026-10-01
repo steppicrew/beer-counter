@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.12",
+      "date": "2026-10-01",
+      "notes": {
+        "en": "The back button now closes the open window instead of leaving the app.",
+        "de": "Die Zurück-Taste schließt jetzt das offene Fenster, statt die App zu verlassen.",
+        "fr": "Le bouton Retour ferme maintenant la fenêtre ouverte au lieu de quitter l’app.",
+        "es": "El botón Atrás ahora cierra la ventana abierta en lugar de salir de la app.",
+        "it": "Il tasto Indietro ora chiude la finestra aperta invece di uscire dall’app.",
+        "nl": "De terugknop sluit nu het open venster in plaats van de app te verlaten.",
+        "pl": "Przycisk Wstecz zamyka teraz otwarte okno zamiast wychodzić z aplikacji.",
+        "pt": "O botão Voltar fecha agora a janela aberta em vez de sair da app.",
+        "cs": "Tlačítko Zpět teď zavře otevřené okno, místo aby opustilo aplikaci.",
+        "da": "Tilbage-knappen lukker nu det åbne vindue i stedet for at forlade appen.",
+        "sv": "Bakåtknappen stänger nu det öppna fönstret i stället för att lämna appen.",
+        "tr": "Geri tuşu artık uygulamadan çıkmak yerine açık pencereyi kapatıyor.",
+        "ru": "Кнопка «Назад» теперь закрывает открытое окно, а не выходит из приложения.",
+        "ja": "戻るボタンでアプリを離れず、開いている画面が閉じるようになりました。",
+        "zh": "返回键现在会关闭打开的窗口，而不是离开应用。"
+      }
+    },
+    {
       "version": "1.7.11",
       "date": "2026-10-01",
       "notes": {
