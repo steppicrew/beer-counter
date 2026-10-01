@@ -7,6 +7,9 @@ import { useI18n } from '../i18n';
  * What the tip jar opens: the tip on its own, rather than settings scrolled
  * down to it — someone who tapped the jar came to tip, not to change the
  * currency. Settings still carries the same section for those who look there.
+ *
+ * No Close button: there is nothing to save or cancel, and the back button,
+ * Esc or a tap outside all close it.
  */
 export function TipSheet({ onClose }: { onClose: () => void }) {
   const { t } = useI18n();
@@ -21,13 +24,6 @@ export function TipSheet({ onClose }: { onClose: () => void }) {
         onChosen={onClose}
         figure={<Barkeeper className="tip-intro__figure" />}
       />
-
-      <div className="sheet-actions">
-        <span className="sheet-actions__spacer" />
-        <button type="button" className="btn btn--primary" onClick={onClose}>
-          {t('action.close')}
-        </button>
-      </div>
     </Sheet>
   );
 }
