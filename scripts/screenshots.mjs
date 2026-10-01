@@ -72,6 +72,65 @@ function stagedNow() {
   return d.getTime();
 }
 
+/**
+ * Bar prices per language, in minor units of the currency the app picks for
+ * it (see `defaultCurrencyFor`): beer, small beer, wine, schnapps. One set of
+ * numbers for all made a beer cost 4,50 ₽ in the Russian shots.
+ */
+const PRICES = {
+  en: [450, 350, 600, 300],
+  pl: [1800, 1200, 2200, 1000],
+  cs: [6500, 4500, 9000, 5000],
+  da: [5500, 4000, 7000, 4000],
+  sv: [7900, 5500, 9500, 5500],
+  tr: [25000, 17500, 30000, 20000],
+  ru: [35000, 25000, 45000, 25000],
+  ja: [700, 500, 800, 500],
+  zh: [3500, 2500, 4500, 3000],
+};
+/** The euro languages share the English numbers. */
+const pricesFor = (code) => PRICES[code] ?? PRICES.en;
+
+/** The default drinks with prices on them: the header then shows the bill. */
+const priced = (code) => {
+  const [beer, small, wine, schnapps] = pricesFor(code);
+  return [
+    { id: 'beer', nameKey: 'drink.beer', icon: 'beer-large', scope: 'default', priceCents: beer },
+    { id: 'beer-small', nameKey: 'drink.beerSmall', icon: 'beer-small', scope: 'default', priceCents: small },
+    { id: 'wine', nameKey: 'drink.wine', icon: 'wine', scope: 'default', priceCents: wine },
+    { id: 'schnapps', nameKey: 'drink.schnapps', icon: 'schnapps', scope: 'default', priceCents: schnapps },
+  ];
+};
+
+/**
+ * A few weeks of finished rounds for the statistics: Friday and Saturday
+ * nights, some heavier than others, so the weeks differ and the bars mean
+ * something.
+ */
+function pastRounds(t, code) {
+  const plan = [
+    // [days ago, beers, small beers, wines, schnapps]
+    [6, 5, 1, 0, 2],
+    [7, 3, 0, 2, 0],
+    [13, 6, 2, 1, 1],
+    [21, 4, 0, 1, 0],
+    [22, 2, 1, 2, 1],
+    [28, 7, 1, 0, 3],
+  ];
+  return plan.map(([daysAgo, ...counts]) => {
+    const start = t - daysAgo * 86_400_000 - 4 * 3_600_000;
+    let minute = 0;
+    const drinks = priced(code).map((b, i) => ({
+      nameKey: b.nameKey,
+      icon: b.icon,
+      priceCents: b.priceCents,
+      times: Array.from({ length: counts[i] }, () => start + (minute += 23) * 60_000),
+    })).filter((d) => d.times.length > 0);
+    const times = drinks.flatMap((d) => d.times);
+    return { startedAt: Math.min(...times), endedAt: Math.max(...times), drinks };
+  });
+}
+
 const SCENES = [
   {
     file: '01-counting',
@@ -93,24 +152,51 @@ const SCENES = [
   {
     file: '02-light',
     theme: 'light',
-    state: (t) => ({
-      beverages: [
-        { id: 'beer', nameKey: 'drink.beer', icon: 'beer-large', scope: 'default' },
-        { id: 'beer-small', nameKey: 'drink.beerSmall', icon: 'beer-small', scope: 'default' },
-        { id: 'wine', nameKey: 'drink.wine', icon: 'wine', scope: 'default' },
-        { id: 'schnapps', nameKey: 'drink.schnapps', icon: 'schnapps', scope: 'default' },
-        { id: 'session-shot', name: 'Aperol', icon: 'cocktail', scope: 'session' },
-      ],
+    state: (t, code) => ({
+      beverages: priced(code),
+      // At least twenty minutes apart: closer than that, glasses overlap on
+      // a phone-width counter and the bar reads as clutter.
       tallies: {
-        beer: at(t, 205, 166, 128, 84, 39, 0.7),
-        'beer-small': at(t, 143, 12),
-        wine: at(t, 71),
-        'session-shot': at(t, 96, 55, 5),
+        beer: at(t, 205, 160, 118, 84, 39, 0.7),
+        'beer-small': at(t, 140, 12),
+        wine: at(t, 64),
       },
     }),
   },
   {
-    file: '03-add-drink',
+    file: '03-stats',
+    theme: 'dark',
+    state: (t, code) => ({
+      beverages: priced(code),
+      tallies: {
+        beer: at(t, 131, 87, 30),
+        wine: at(t, 64),
+      },
+      history: pastRounds(t, code),
+      historyEnabled: true,
+    }),
+    async after(page) {
+      // Share, statistics, settings, reset: the header's order.
+      await page.locator('.app__icon-btn').nth(1).click();
+      await page.waitForSelector('.stats__period');
+      await page.waitForTimeout(400);
+    },
+  },
+  {
+    file: '04-share',
+    theme: 'light',
+    state: (t, code) => ({
+      beverages: priced(code),
+      tallies: { beer: at(t, 58, 14), 'beer-small': at(t, 33) },
+    }),
+    async after(page) {
+      await page.locator('.app__icon-btn').nth(0).click();
+      await page.waitForSelector('.share-qr__code');
+      await page.waitForTimeout(400);
+    },
+  },
+  {
+    file: '05-add-drink',
     theme: 'dark',
     state: (t) => ({
       beverages: [
@@ -122,28 +208,6 @@ const SCENES = [
     }),
     async after(page) {
       await page.locator('.app__add').click();
-      await page.waitForSelector('.sheet__panel');
-      await page.waitForTimeout(400);
-    },
-  },
-  {
-    file: '04-settings',
-    theme: 'light',
-    state: (t) => ({
-      beverages: [
-        { id: 'beer', nameKey: 'drink.beer', icon: 'beer-large', scope: 'default' },
-        { id: 'beer-small', nameKey: 'drink.beerSmall', icon: 'beer-small', scope: 'default' },
-        { id: 'wine', nameKey: 'drink.wine', icon: 'wine', scope: 'default' },
-        { id: 'schnapps', nameKey: 'drink.schnapps', icon: 'schnapps', scope: 'default' },
-      ],
-      tallies: {
-        beer: at(t, 178, 132, 88, 41, 2),
-        'beer-small': at(t, 154, 33),
-        schnapps: at(t, 7),
-      },
-    }),
-    async after(page) {
-      await page.locator('.app__icon-btn').first().click();
       await page.waitForSelector('.sheet__panel');
       await page.waitForTimeout(400);
     },
@@ -244,11 +308,11 @@ for (const locale of targets) {
             'beer-counter-state',
             JSON.stringify({
               state: { ...state, sessionStartedAt: Date.now(), theme, locale: code },
-              version: 1,
+              version: 4,
             }),
           );
         },
-        { state: scene.state(stagedNow()), theme: scene.theme, code: locale.code },
+        { state: scene.state(stagedNow(), locale.code), theme: scene.theme, code: locale.code },
       );
 
       await page.goto(BASE, { waitUntil: 'networkidle' });
