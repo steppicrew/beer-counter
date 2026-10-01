@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { BeverageIcon } from './BeverageIcon';
 import { useI18n } from '../i18n';
 import type { MessageKey } from '../i18n';
@@ -20,11 +20,20 @@ const RESULT: Partial<Record<TipStatus, MessageKey>> = {
   error: 'tip.failed',
 };
 
-/** Settings section; renders nothing when there is no way to tip here. */
-export function TipSection({ focus = false }: { focus?: boolean }) {
+interface Props {
+  /** Off where the sheet's own title already says it. */
+  titled?: boolean;
+  /** A tip was chosen. The purchase carries on without the section. */
+  onChosen?: () => void;
+}
+
+/**
+ * The tip offers, in settings and in the tip sheet; renders nothing when there
+ * is no way to tip here.
+ */
+export function TipSection({ titled = true, onChosen }: Props) {
   const { t } = useI18n();
   const recordTip = useAppStore((s) => s.recordTip);
-  const ref = useRef<HTMLDivElement>(null);
   const native = isNativeApp();
   const offers = useTipOffers();
   const [busy, setBusy] = useState(false);
@@ -32,19 +41,13 @@ export function TipSection({ focus = false }: { focus?: boolean }) {
 
   const shown = native ? offers.length > 0 : TIP_URL !== null;
 
-  // In the app the offers arrive from Play a moment after the sheet opens, so
-  // this waits for the section to exist rather than running once on mount.
-  useEffect(() => {
-    if (focus && shown) ref.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
-  }, [focus, shown]);
-
   if (!shown) return null;
 
   const message = result ? RESULT[result] : undefined;
 
   return (
-    <div className="field" ref={ref}>
-      <span className="field__label">{t('tip.title')}</span>
+    <div className="field">
+      {titled && <span className="field__label">{t('tip.title')}</span>}
       <span className="field__hint">{t('tip.hint')}</span>
       {native ? (
         <div className="tip-offers">
@@ -66,6 +69,7 @@ export function TipSection({ focus = false }: { focus?: boolean }) {
                   setResult(status);
                   setBusy(false);
                 });
+                onChosen?.();
               }}
             >
               <span>{t(LABELS[offer.id])}</span>
@@ -79,7 +83,10 @@ export function TipSection({ focus = false }: { focus?: boolean }) {
           rel="noopener"
           // Nothing on the web can tell whether they paid; the click is the
           // closest thing to a tip it will ever see.
-          onClick={() => recordTip(false)}
+          onClick={() => {
+            recordTip(false);
+            onChosen?.();
+          }}
         >
           <BeverageIcon icon="beer-large" className="tip-link__icon" />
           {t('tip.title')}
