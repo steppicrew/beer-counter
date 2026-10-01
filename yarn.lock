@@ -1166,6 +1166,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@capacitor/app@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "@capacitor/app@npm:7.1.2"
+  peerDependencies:
+    "@capacitor/core": ">=7.0.0"
+  checksum: 10c0/f021839167ff2ada3cf7e7ce1a2c3f9c6314648dd2635385bdb12e34bd7bdb177601eb66eaedf0a71ef7276567774640382bb65fa6da588293886ecaeb1ced0e
+  languageName: node
+  linkType: hard
+
 "@capacitor/cli@npm:^7.4.3":
   version: 7.6.8
   resolution: "@capacitor/cli@npm:7.6.8"
@@ -2647,6 +2656,7 @@ __metadata:
   resolution: "beer-counter@workspace:."
   dependencies:
     "@capacitor/android": "npm:^7.4.3"
+    "@capacitor/app": "npm:^7.1.2"
     "@capacitor/cli": "npm:^7.4.3"
     "@capacitor/core": "npm:^7.4.3"
     "@capacitor/share": "npm:^7.0.4"
