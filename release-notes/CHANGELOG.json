@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.11",
+      "date": "2026-10-01",
+      "notes": {
+        "en": "In the settings the tip text is short again, without the gap under it. The barman's pitch stays in the tip jar.",
+        "de": "In den Einstellungen ist der Trinkgeld-Text wieder kurz, ohne die Lücke darunter. Die Bitte des Barmanns bleibt beim Trinkgeldglas.",
+        "fr": "Dans les réglages, le texte sur le pourboire est de nouveau court, sans l’espace vide en dessous. Le plaidoyer du barman reste dans le pot à pourboires.",
+        "es": "En los ajustes, el texto de la propina vuelve a ser corto, sin el hueco de debajo. La petición del camarero sigue en el bote de propinas.",
+        "it": "Nelle impostazioni il testo sulla mancia è di nuovo breve, senza lo spazio vuoto sotto. L’appello del barista resta nel barattolo delle mance.",
+        "nl": "In de instellingen is de fooitekst weer kort, zonder het gat eronder. Het pleidooi van de barman blijft bij de fooienpot.",
+        "pl": "W ustawieniach tekst o napiwku znów jest krótki, bez pustego miejsca pod nim. Prośba barmana zostaje przy słoiku na napiwki.",
+        "pt": "Nas definições, o texto da gorjeta voltou a ser curto, sem o espaço vazio por baixo. O pedido do barman continua no frasco das gorjetas.",
+        "cs": "V nastavení je text o spropitném zase krátký, bez mezery pod ním. Barmanova prosba zůstává u skleničky na spropitné.",
+        "da": "I indstillingerne er teksten om drikkepenge kort igen, uden hullet nedenunder. Bartenderens opfordring bliver ved drikkepengeglasset.",
+        "sv": "I inställningarna är dricks-texten kort igen, utan glappet under. Bartenderns vädjan finns kvar vid dricksburken.",
+        "tr": "Ayarlarda bahşiş metni yine kısa, altındaki boşluk da gitti. Barmenin ricası bahşiş kavanozunda kalıyor.",
+        "ru": "В настройках текст о чаевых снова короткий и без пустого места под ним. Просьба бармена осталась у баночки для чаевых.",
+        "ja": "設定画面のチップの説明が短くなり、下の余白もなくなりました。バーテンダーのお願いはチップ箱のほうに残ります。",
+        "zh": "设置里的小费说明又变短了，下方的空白也没有了。酒保的请求仍留在小费罐里。"
+      }
+    },
+    {
       "version": "1.7.10",
       "date": "2026-10-01",
       "notes": {
