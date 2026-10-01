@@ -578,7 +578,9 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                     <BeverageIcon
                       icon={glass.icon}
                       className="bartop__glass-figure"
-                      fill={glassFill(glass.at, now, glass.isCurrent)}
+                      // From where it is being held, so dragging a full glass
+                      // back drains it as it goes, not only once it is set down.
+                      fill={glassFill(at, now, glass.isCurrent)}
                     />
                   </span>
                 );
