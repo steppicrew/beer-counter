@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { ReactNode } from 'react';
 import { BeverageIcon } from './BeverageIcon';
 import { useI18n } from '../i18n';
 import type { MessageKey } from '../i18n';
@@ -25,13 +26,15 @@ interface Props {
   titled?: boolean;
   /** A tip was chosen. The purchase carries on without the section. */
   onChosen?: () => void;
+  /** Drawn beside the hint: the barman, in the tip sheet. */
+  figure?: ReactNode;
 }
 
 /**
  * The tip offers, in settings and in the tip sheet; renders nothing when there
  * is no way to tip here.
  */
-export function TipSection({ titled = true, onChosen }: Props) {
+export function TipSection({ titled = true, onChosen, figure }: Props) {
   const { t } = useI18n();
   const recordTip = useAppStore((s) => s.recordTip);
   const native = isNativeApp();
@@ -45,10 +48,27 @@ export function TipSection({ titled = true, onChosen }: Props) {
 
   const message = result ? RESULT[result] : undefined;
 
+  // Two paragraphs, split where the catalogue breaks the line: the pitch,
+  // then the promise that nothing depends on it.
+  const hint = (
+    <div className="field__hint tip-intro__text">
+      {t('tip.hint').split('\n').map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
+      ))}
+    </div>
+  );
+
   return (
     <div className="field">
       {titled && <span className="field__label">{t('tip.title')}</span>}
-      <span className="field__hint">{t('tip.hint')}</span>
+      {figure ? (
+        <div className="tip-intro">
+          {figure}
+          {hint}
+        </div>
+      ) : (
+        hint
+      )}
       {native ? (
         <div className="tip-offers">
           {offers.map((offer) => (
