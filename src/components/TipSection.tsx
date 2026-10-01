@@ -48,11 +48,12 @@ export function TipSection({ titled = true, onChosen, figure }: Props) {
 
   const message = result ? RESULT[result] : undefined;
 
-  // Two paragraphs, split where the catalogue breaks the line: the pitch,
-  // then the promise that nothing depends on it.
+  // Beside the barman he makes the pitch, in two paragraphs split where the
+  // catalogue breaks the line: the joke, then the promise that nothing
+  // depends on it. Settings keeps the plain one-liner.
   const hint = (
     <div className="field__hint tip-intro__text">
-      {t('tip.hint').split('\n').map((paragraph) => (
+      {t(figure ? 'tip.pitch' : 'tip.hint').split('\n').map((paragraph) => (
         <p key={paragraph}>{paragraph}</p>
       ))}
     </div>
