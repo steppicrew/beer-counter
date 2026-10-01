@@ -60,7 +60,7 @@ export function App() {
   const tipAsked = useAppStore((s) => s.tipAsked);
   const markTipAsked = useAppStore((s) => s.markTipAsked);
   const tipped = useAppStore((s) => s.tipped);
-  const tips = useAppStore((s) => s.tips);
+  const tipLog = useAppStore((s) => s.tipLog);
   const coinPending = useAppStore((s) => s.coinPending);
   const clearCoin = useAppStore((s) => s.clearCoin);
 
@@ -154,8 +154,8 @@ export function App() {
   // sheet covers it, so the drop is actually seen; from then on it lies there.
   const showJar = canTip;
   const dropping = coinPending && dialog.kind === 'none';
-  // The pending coin is only drawn once it can be seen falling in.
-  const coins = coinPending && !dropping ? tips - 1 : tips;
+  // The pending tip is only drawn once it can be seen going in.
+  const jarTips = coinPending && !dropping ? tipLog.slice(0, -1) : tipLog;
   const openTips = () => {
     markTipAsked();
     setDialog({ kind: 'settings', focusTip: true });
@@ -274,7 +274,7 @@ export function App() {
           onTipJar={tipJarAsk ? openTips : undefined}
           tipJar={
             showJar
-              ? { coins, dropping, onOpen: openTips, label: currencySymbol(currency, locale) }
+              ? { tipLog: jarTips, dropping, onOpen: openTips, label: currencySymbol(currency, locale) }
               : undefined
           }
         />
