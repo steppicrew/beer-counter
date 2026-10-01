@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.7",
+      "date": "2026-10-01",
+      "notes": {
+        "en": "The tip jar now shows what went in: coins for a small beer, a folded note for a beer or a round — with more hearts and warmer thanks from the barman for bigger tips. And the currency label on the jar no longer goes missing after a tip.",
+        "de": "Das Trinkgeldglas zeigt jetzt, was hineinkam: Münzen für ein kleines Bier, einen gefalteten Schein für ein Bier oder eine Runde — mit mehr Herzen und herzlicherem Dank vom Wirt bei größerem Trinkgeld. Und das Währungsetikett verschwindet nach einem Trinkgeld nicht mehr.",
+        "fr": "Le pot à pourboires montre ce qu'on y a mis : des pièces pour un demi, un billet plié pour une bière ou une tournée — avec plus de cœurs et un merci plus chaleureux du barman pour les plus gros pourboires. Et l'étiquette de devise ne disparaît plus après un pourboire.",
+        "es": "El bote de propinas muestra lo que entró: monedas por una caña, un billete doblado por una cerveza o una ronda, con más corazones y un gracias más cálido del camarero en las propinas grandes. Y la etiqueta de moneda ya no desaparece tras una propina.",
+        "it": "Il barattolo delle mance mostra cosa c'è dentro: monete per una birra piccola, una banconota piegata per una birra o un giro, con più cuori e un grazie più caloroso del barista per le mance più grandi. E l'etichetta della valuta non sparisce più dopo una mancia.",
+        "nl": "De fooienpot laat nu zien wat erin ging: munten voor een klein biertje, een gevouwen biljet voor een bier of een rondje — met meer hartjes en een warmer bedankje van de barman bij een grotere fooi. En het valuta-etiket verdwijnt niet meer na een fooi.",
+        "pl": "Słoik na napiwki pokazuje, co do niego trafiło: monety za małe piwo, złożony banknot za piwo lub kolejkę — z większą liczbą serduszek i serdeczniejszym podziękowaniem barmana przy większym napiwku. A etykieta waluty nie znika już po napiwku.",
+        "pt": "O frasco das gorjetas mostra o que lá entrou: moedas por uma imperial, uma nota dobrada por uma cerveja ou uma rodada — com mais corações e um obrigado mais caloroso do barman nas gorjetas maiores. E a etiqueta da moeda já não desaparece depois de uma gorjeta.",
+        "cs": "Sklenička na spropitné teď ukazuje, co do ní přišlo: mince za malé pivo, přeloženou bankovku za pivo nebo rundu — s více srdíčky a vřelejším díkem od barmana za větší spropitné. A štítek s měnou už po spropitném nezmizí.",
+        "da": "Drikkepengeglasset viser nu, hvad der kom i: mønter for en lille øl, en foldet seddel for en øl eller en omgang — med flere hjerter og et varmere tak fra bartenderen ved større drikkepenge. Og valutaetiketten forsvinder ikke længere efter drikkepenge.",
+        "sv": "Dricksburken visar nu vad som lagts i: mynt för en liten öl, en vikt sedel för en öl eller en runda — med fler hjärtan och ett varmare tack från bartendern vid större dricks. Och valutaetiketten försvinner inte längre efter dricks.",
+        "tr": "Bahşiş kavanozu artık içine ne konduğunu gösteriyor: küçük bira için bozuk paralar, bira ya da tur için katlanmış bir banknot — büyük bahşişte daha çok kalp ve barmenden daha sıcak bir teşekkür. Kavanozdaki para birimi etiketi de bahşişten sonra artık kaybolmuyor.",
+        "ru": "Баночка для чаевых теперь показывает, что в неё положили: монеты за маленькое пиво, сложенную купюру за пиво или круг — с большим числом сердечек и более тёплым спасибо бармена за крупные чаевые. А этикетка с валютой больше не пропадает после чаевых.",
+        "ja": "チップ箱に入れたものが見えるようになりました。スモールビールならコイン、ビールやみんなに一杯なら折りたたんだお札。大きなチップほどハートが増え、マスターのお礼も熱くなります。チップのあとに通貨ラベルが消えることもなくなりました。",
+        "zh": "小费罐现在会显示放进去的东西：小杯啤酒是硬币，啤酒或请大家一轮是一张折好的纸币——打赏越多，爱心越多，酒保的谢意也越热情。打赏之后罐上的货币标签也不会再消失了。"
+      }
+    },
+    {
       "version": "1.7.6",
       "date": "2026-10-01",
       "notes": {
