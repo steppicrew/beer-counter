@@ -47,10 +47,11 @@
   // What shows through an emptied glass: the counter behind it, so a drained
   // drink reads as clear glass rather than as a differently-coloured drink.
   --glass-drained: var(--bar-paper);
-  // Broken glass on the floor. Cool and pale against the warm wood, so the
-  // pile reads as glass rather than as more of the bar.
-  --shard: rgb(226 240 244 / 78%);
-  --shard-edge: rgb(255 255 255 / 85%);
+  // Broken glass on the floor. Cool against the warm page, so the pile reads
+  // as glass rather than as more of the bar — and toned enough to be seen at
+  // all: near-white chips with white edges vanished on the light page.
+  --shard: rgb(150 186 202 / 72%);
+  --shard-edge: rgb(78 112 128 / 90%);
   // The barkeeper's rag. Linen rather than any status colour.
   --cloth-lit: #fbf3e2;
   --cloth-mid: #e2d4b4;
