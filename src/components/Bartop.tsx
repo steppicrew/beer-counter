@@ -124,6 +124,60 @@ const KEEPER_OVER_JAR_PX = 26;
 const NOW_INTO_KEEPER_PX = 40;
 const MINUTE = 60_000;
 
+/** How long the bar takes to run forward to the present. */
+const SWEEP_MS = 1100;
+/** Shorter jumps than this are the clock's own steps, not a held bar catching up. */
+const SWEEP_FROM_MS = 10 * 60_000;
+
+/**
+ * The window's start while the bar runs forward after a drink was added to
+ * a held bar, or null when it is simply at rest. Started only by a new
+ * glass: the clock's ticks and a reset move the resting window too, and
+ * neither should send the bar racing.
+ */
+function useSweep(restingStart: number, glassCount: number): number | null {
+  const [sweep, setSweep] = useState<{ from: number; to: number } | null>(null);
+  const [current, setCurrent] = useState<number | null>(null);
+  const [seen, setSeen] = useState({ start: restingStart, count: glassCount });
+
+  // Detected while rendering, not in an effect: the render that brings the
+  // new glass already draws the bar where it was, so it never flashes at the
+  // present for a frame and lets the old glasses fall a step early.
+  if (seen.start !== restingStart || seen.count !== glassCount) {
+    if (
+      glassCount > seen.count &&
+      restingStart - seen.start >= SWEEP_FROM_MS &&
+      !globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      setSweep({ from: seen.start, to: restingStart });
+      setCurrent(seen.start);
+    }
+    setSeen({ start: restingStart, count: glassCount });
+  }
+
+  useEffect(() => {
+    if (!sweep) return;
+    const began = performance.now();
+    let frame = 0;
+    const step = (t: number) => {
+      const k = Math.min(1, (t - began) / SWEEP_MS);
+      // Eased both ends: it sets off, runs, and settles at the present.
+      const eased = k < 0.5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2;
+      if (k < 1) {
+        setCurrent(sweep.from + (sweep.to - sweep.from) * eased);
+        frame = requestAnimationFrame(step);
+      } else {
+        setCurrent(null);
+        setSweep(null);
+      }
+    };
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [sweep]);
+
+  return sweep ? current : null;
+}
+
 export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar, tipJar }: Props) {
   const { t, locale } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
@@ -203,11 +257,20 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   const nowAtFraction = Math.min(0.9, Math.max(0.1, nowPx / counterPx));
 
   // Where the bar sits when left alone: the present beside the barman, the
-  // round drifting away to the left of it.
-  const resting = restingWindow(now, spanMs, nowAtFraction);
+  // round drifting away to the left of it — held once the newest glass
+  // reaches the far end, so a round left standing stays on the bar.
+  const resting = restingWindow(now, spanMs, nowAtFraction, glasses.at(-1)?.at);
   const bounds = scrollBounds(resting, glasses);
   const scroll = useBarScroll(bounds);
-  const window: BarWindow = scrolledBy(resting, scroll.offset);
+
+  // A drink counted on a held bar brings it back to the present. Not in one
+  // jump: the bar runs forward for a moment, the old glasses sliding off the
+  // far end one after another, until the new one stands at his elbow.
+  const sweepStart = useSweep(resting.start, live.length);
+  const window: BarWindow =
+    sweepStart === null
+      ? scrolledBy(resting, scroll.offset)
+      : { start: sweepStart, end: sweepStart + spanMs };
 
   // Everything to the left of the brink has gone over the edge. Counted rather
   // than filtered per-glass at draw time, since the pile only needs the total
