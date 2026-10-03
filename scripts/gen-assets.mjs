@@ -73,14 +73,14 @@ render(resolve(root, 'public/icons/icon-512.png'), 512, [], svgFile.transparent)
 // the safe zone — render at 80% and pad back out to full size.
 console.log('Maskable icon');
 render(resolve(root, 'public/icons/icon-512-maskable.png'), 410, [
-  '-background', '#12100e',
+  '-background', MAT,
   '-gravity', 'center',
   '-extent', '512x512',
 ]);
 
 console.log('Play Store icon (512, no alpha)');
 render(resolve(root, 'assets/play/icon-512.png'), 512, [
-  '-background', '#12100e',
+  '-background', MAT,
   '-alpha', 'remove',
   '-alpha', 'off',
 ]);

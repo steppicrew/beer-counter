@@ -1,9 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2a2320"/>
-      <stop offset="100%" stop-color="#12100e"/>
-    </linearGradient>
     <linearGradient id="beer" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#ffd257"/>
       <stop offset="55%" stop-color="#f0a500"/>
@@ -15,10 +11,11 @@
     </clipPath>
   </defs>
 
-  <!-- id="backdrop": only the Play icon and the maskable PWA icon keep it.
-       Everything else is rendered without, so the beer mat stands on the
-       home screen or the browser tab by itself. -->
-  <rect id="backdrop" width="512" height="512" fill="url(#bg)"/>
+  <!-- id="backdrop": the mat filling the whole square, for the icons that
+       must be opaque — the Play icon and the maskable PWA icon, whose corners
+       Play and Android round themselves. Everything else is rendered without
+       it, so the round mat stands on its own. -->
+  <rect id="backdrop" width="512" height="512" fill="#f4ece0"/>
 
   <!-- The Bierdeckel: a round beer mat with a printed ring. On Android the
        mat is the adaptive icon's background layer instead (gen-assets.mjs),
