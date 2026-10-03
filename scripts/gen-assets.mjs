@@ -104,14 +104,15 @@ for (const [res, source] of [[androidRes, transparent], [androidDebugRes, previe
   }
 }
 
-// The adaptive icon's background layer: transparent, so the crimped mat
-// stands on the wallpaper rather than in a dark disc.
+// The adaptive icon's background layer: a warm white the cream mat still
+// shows against. Not transparent: the recent-apps view draws a transparent
+// layer as black, which left dark corners around the icon.
 mkdirSync(resolve(androidRes, 'values'), { recursive: true });
 writeFileSync(
   resolve(androidRes, 'values/ic_launcher_background.xml'),
   `<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#00000000</color>
+    <color name="ic_launcher_background">#FFFDF8</color>
 </resources>
 `,
 );
