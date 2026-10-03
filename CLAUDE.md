@@ -95,25 +95,13 @@ Anything needing the network will fail silently there.
 Don't trust that something rendered — assert it. Use
 `node ~/.claude/skills/browser-automation/browser.mjs <url> --script <file>`.
 
-**On the phone**, use the preview app — never replace the Play install (Play
-re-signs it, so a local build cannot, and uninstalling it loses the owner's
-data). `yarn android:build` is the release; the preview is
-`./scripts/build-android.sh debug`: `de.steppicrew.beercounter.preview`, its
-own storage, a blue beer mat and the name "[P] Beer Counter", demo tips.
-`adb install` is refused (`INSTALL_FAILED_USER_RESTRICTED`, and "Install via
-USB" cannot be enabled), so install from device storage — and leave nothing
-behind, least of all in `/sdcard/Download`:
-
-```bash
-adb push build-output/beer-counter-debug-<ver>.apk /data/local/tmp/preview.apk
-adb shell pm install -r /data/local/tmp/preview.apk
-adb shell rm /data/local/tmp/preview.apk
-```
-
-Touch input over adb is blocked too. To watch events, forward the WebView
-(`adb forward tcp:9224 localabstract:webview_devtools_remote_$(adb shell pidof
-de.steppicrew.beercounter.preview)`), inject listeners via CDP
-`Runtime.evaluate` (Node 22 for the built-in WebSocket) and let the owner tap.
+**On the phone**, follow the global `android-device-testing` skill (install
+via `pm install` from `/data/local/tmp`, never `/sdcard/Download`; WebView
+over CDP; screenshots). Here the preview build is
+`./scripts/build-android.sh debug` → `build-output/beer-counter-debug-<ver>.apk`,
+package `de.steppicrew.beercounter.preview`: own storage, a blue beer-mat icon,
+the name "[P] Beer Counter" and demo tips. Its state lives in localStorage key
+`beer-counter-state`. Never replace the Play install.
 
 For a PWA update test, the two builds must genuinely differ: a comment-only
 change is stripped by minification and produces an identical chunk hash, so the
