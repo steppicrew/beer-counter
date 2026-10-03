@@ -36,29 +36,38 @@ function render(out, size, extra = [], source = master) {
   console.log(`  ${out.replace(`${root}/`, '')}  ${size}x${size}`);
 }
 
-// The master without its backdrop: the beer mat alone, on transparency. And
-// the preview build's variant of it, a blue mat, so the debug app is told
-// apart on the home screen now that no background colour shows behind it.
+// The master without its backdrop: the beer mat alone, on transparency, for
+// the web icons and the pre-adaptive launcher PNGs. For the adaptive icon the
+// mat itself is the background layer, so the foreground drops it too and
+// keeps only what is printed on it. The preview build gets a blue mat and
+// ring, so the debug app is told apart on the home screen.
 // Written beside the master so relative references in the SVG still resolve.
+const MAT = '#F4ECE0';
+const PREVIEW_MAT = '#D6E4F5';
 const svgSource = readFileSync(master, 'utf8');
-const transparent = resolve(dirname(master), '.transparent.svg');
-const preview = resolve(dirname(master), '.preview.svg');
 const bare = svgSource.replace(/<rect id="backdrop"[^>]*\/>/, '');
-writeFileSync(transparent, bare);
-writeFileSync(
-  preview,
-  bare
-    .replace(/(id="mat"[^>]*fill=")[^"]*/, '$1#d6e4f5')
-    .replace(/(id="ring"[^>]*stroke=")[^"]*/, '$1#1e5aa8'),
-);
+const blue = (svg) =>
+  svg
+    .replace(/(id="mat"[^>]*fill=")[^"]*/, `$1${PREVIEW_MAT}`)
+    .replace(/(id="ring"[^>]*stroke=")[^"]*/, '$1#1e5aa8');
+const noMat = (svg) => svg.replace(/<circle id="mat"[^>]*\/>/, '');
+const variants = {
+  transparent: bare,
+  preview: blue(bare),
+  foreground: noMat(bare),
+  previewForeground: noMat(blue(bare)),
+};
+const svgFile = {};
+for (const [name, content] of Object.entries(variants)) {
+  svgFile[name] = resolve(dirname(master), `.${name}.svg`);
+  writeFileSync(svgFile[name], content);
+}
 process.on('exit', () => {
-  rmSync(transparent, { force: true });
-  rmSync(preview, { force: true });
+  for (const file of Object.values(svgFile)) rmSync(file, { force: true });
 });
-
 console.log('PWA icons');
-render(resolve(root, 'public/icons/icon-192.png'), 192, [], transparent);
-render(resolve(root, 'public/icons/icon-512.png'), 512, [], transparent);
+render(resolve(root, 'public/icons/icon-192.png'), 192, [], svgFile.transparent);
+render(resolve(root, 'public/icons/icon-512.png'), 512, [], svgFile.transparent);
 
 // Maskable: Android crops to a circle/squircle, so the glyph must sit inside
 // the safe zone — render at 80% and pad back out to full size.
@@ -90,29 +99,33 @@ const androidRes = resolve(root, 'android/app/src/main/res');
 const androidDebugRes = resolve(root, 'android/app/src/debug/res');
 
 console.log('Android launcher icons');
-for (const [res, source] of [[androidRes, transparent], [androidDebugRes, preview]]) {
+for (const [res, legacy, foreground] of [
+  [androidRes, svgFile.transparent, svgFile.foreground],
+  [androidDebugRes, svgFile.preview, svgFile.previewForeground],
+]) {
   for (const [density, size] of DENSITIES) {
-    render(resolve(res, `mipmap-${density}/ic_launcher.png`), size, [], source);
-    render(resolve(res, `mipmap-${density}/ic_launcher_round.png`), size, [], source);
-    // Adaptive-icon foreground: the mat sized so its edge meets the
-    // launcher's 66dp safe circle, on a transparent background layer.
-    render(resolve(res, `mipmap-${density}/ic_launcher_foreground.png`), Math.round(size * 0.75), [
+    render(resolve(res, `mipmap-${density}/ic_launcher.png`), size, [], legacy);
+    render(resolve(res, `mipmap-${density}/ic_launcher_round.png`), size, [], legacy);
+    // Adaptive-icon foreground: the ring, mug and tally, sized so the ring
+    // sits inside the launcher's 66dp safe circle.
+    render(resolve(res, `mipmap-${density}/ic_launcher_foreground.png`), Math.round(size * 0.73), [
       '-background', 'none',
       '-gravity', 'center',
       '-extent', `${size}x${size}`,
-    ], source);
+    ], foreground);
   }
 }
 
-// The adaptive icon's background layer: a warm white the cream mat still
-// shows against. Not transparent: the recent-apps view draws a transparent
-// layer as black, which left dark corners around the icon.
+// The adaptive icon's background layer is the mat: solid, so the launcher's
+// mask cuts it round on the home screen (a rounded square in recent apps,
+// like some mats are) and nothing transparent is left for a launcher to fill
+// black. The preview build's layer is blue; its file is tracked.
 mkdirSync(resolve(androidRes, 'values'), { recursive: true });
 writeFileSync(
   resolve(androidRes, 'values/ic_launcher_background.xml'),
   `<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#FFFDF8</color>
+    <color name="ic_launcher_background">${MAT}</color>
 </resources>
 `,
 );
@@ -162,6 +175,6 @@ for (const locale of LOCALES) {
 }
 
 console.log('favicon');
-copyFileSync(transparent, resolve(root, 'public/favicon.svg'));
+copyFileSync(svgFile.transparent, resolve(root, 'public/favicon.svg'));
 
 console.log('\nDone.');
