@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Debug builds install beside the Play version as de.steppicrew.beercounter.preview
-  (see applicationIdSuffix in app/build.gradle). The launcher icons have no
-  background layer of their own any more, so the preview is told apart by a
-  blue beer mat instead (debug/res/mipmap-*, from gen-assets.mjs) and by its
-  "[P]" name (debug/AndroidManifest.xml).
+  (see applicationIdSuffix in app/build.gradle), told apart by a blue beer mat
+  (debug/res/mipmap-*, from gen-assets.mjs) and its "[P]" name
+  (debug/AndroidManifest.xml). The background layer matches the release's.
 -->
 <resources>
-    <color name="ic_launcher_background">#00000000</color>
+    <color name="ic_launcher_background">#FFFDF8</color>
 </resources>
