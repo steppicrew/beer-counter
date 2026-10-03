@@ -2,9 +2,10 @@
 <!--
   Debug builds install beside the Play version as de.steppicrew.beercounter.preview
   (see applicationIdSuffix in app/build.gradle), told apart by a blue beer mat
-  (debug/res/mipmap-*, from gen-assets.mjs) and its "[P]" name
-  (debug/AndroidManifest.xml). The background layer matches the release's.
+  — this colour, the adaptive icon's background layer — and its "[P]" name
+  (debug/AndroidManifest.xml). Keep it in step with PREVIEW_MAT in
+  scripts/gen-assets.mjs.
 -->
 <resources>
-    <color name="ic_launcher_background">#FFFDF8</color>
+    <color name="ic_launcher_background">#D6E4F5</color>
 </resources>
