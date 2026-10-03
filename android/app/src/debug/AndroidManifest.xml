@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The preview build's home-screen name. A marker in front, so it is told apart
+  from the Play app at a glance even where a launcher themes the icons. Set
+  here rather than as a string resource: the per-language app names in
+  values-<lang>/ would win over a debug values/ entry on any non-English phone.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application
+        android:label="[P] Beer Counter"
+        tools:replace="android:label">
+        <activity
+            android:name=".MainActivity"
+            android:label="[P] Beer Counter"
+            tools:replace="android:label" />
+    </application>
+</manifest>
