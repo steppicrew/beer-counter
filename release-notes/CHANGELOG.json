@@ -2,6 +2,27 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.13",
+      "date": "2026-10-03",
+      "notes": {
+        "en": "A new icon: the beer mug on a beer mat, with the waiter's pencil tally across it.",
+        "de": "Neues Symbol: der Bierkrug auf einem Bierdeckel, mit den Bleistiftstrichen des Kellners darauf.",
+        "fr": "Nouvelle icône : la chope sur un sous-bock, avec les traits au crayon du serveur.",
+        "es": "Nuevo icono: la jarra sobre un posavasos, con las rayitas a lápiz del camarero.",
+        "it": "Nuova icona: il boccale su un sottobicchiere, con le tacche a matita del cameriere.",
+        "nl": "Nieuw pictogram: de bierpul op een bierviltje, met de streepjes van de ober erop.",
+        "pl": "Nowa ikona: kufel na podstawce, z kreskami kelnera zapisanymi ołówkiem.",
+        "pt": "Novo ícone: a caneca sobre uma base de copo, com os risquinhos a lápis do empregado.",
+        "cs": "Nová ikona: půllitr na pivním tácku s čárkami, které tam tužkou dělá číšník.",
+        "da": "Nyt ikon: ølkruset på en ølbrik med tjenerens blyantstreger.",
+        "sv": "Ny ikon: ölsejdeln på ett ölunderlägg med servitörens blyertsstreck.",
+        "tr": "Yeni simge: bardak altlığının üzerinde bira kupası ve garsonun kurşun kalemle çektiği çentikler.",
+        "ru": "Новый значок: пивная кружка на подставке с карандашными чёрточками официанта.",
+        "ja": "新しいアイコン：コースターの上のビールジョッキと、店員が鉛筆でつけた数え線。",
+        "zh": "新图标：杯垫上的啤酒杯，旁边是服务员用铅笔画的计数线。"
+      }
+    },
+    {
       "version": "1.7.12",
       "date": "2026-10-01",
       "notes": {
