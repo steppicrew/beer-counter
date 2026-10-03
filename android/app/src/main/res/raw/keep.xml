@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Resources the code finds by name at runtime, which the resource shrinker
+  cannot see referenced: Capacitor's Cordova bridge loads xml/config through
+  getIdentifier(), and the FileProvider paths come in through the manifest.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@xml/config,@xml/file_paths" />
