@@ -35,6 +35,12 @@ interface AppState {
    * — coins for a small beer, a note for the larger ones.
    */
   tipLog: TipProductId[];
+  /**
+   * Taps per drink id, across every round: which drinks the launcher's
+   * long-press menu offers. Only the "+" counts — a back-dated drink or one
+   * moved on the bar is a correction, not a habit.
+   */
+  usage: Record<string, number>;
 
   theme: ThemeMode;
   /** null = follow browser/system language. */
@@ -98,6 +104,7 @@ export const useAppStore = create<AppState>()(
         tipped: false,
         coinPending: false,
         tipLog: [],
+        usage: {},
         theme: 'system',
         locale: null,
         currency: null,
@@ -110,6 +117,7 @@ export const useAppStore = create<AppState>()(
                 ...state.tallies,
                 [id]: { times: [...current.times, Date.now()] },
               },
+              usage: { ...state.usage, [id]: (state.usage[id] ?? 0) + 1 },
             };
           }),
 
@@ -279,6 +287,7 @@ export const useAppStore = create<AppState>()(
           tipped: state.tipped,
           coinPending: state.coinPending,
           tipLog: state.tipLog,
+          usage: state.usage,
           theme: state.theme,
           locale: state.locale,
           currency: state.currency,

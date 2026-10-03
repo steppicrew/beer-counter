@@ -3,7 +3,12 @@
 
 // Theme tokens. `[data-theme]` is set explicitly by the app; the media query
 // covers the "system" setting where no attribute is written.
-:root {
+//
+// `.tokens-light` carries the light values whatever the page's theme: the
+// launcher-shortcut icons are drawn from the app's own icons onto a cream mat,
+// and the dark theme's pale ink would vanish on it (lib/shortcutIcons.ts).
+:root,
+.tokens-light {
   --bg: #{vars.$color-foam};
   --bg-elevated: #ffffff;
   --bg-sunken: #{color.adjust(vars.$color-foam, $lightness: -4%)};

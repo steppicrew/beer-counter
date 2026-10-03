@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BeverageRow } from './components/BeverageRow';
 import { Bartop } from './components/Bartop';
 import { UiIcon } from './components/UiIcon';
@@ -19,6 +19,7 @@ import { REGULAR_AFTER_ROUNDS, TIP_URL, useTipOffers } from './lib/tips';
 import { useInstallPrompt } from './lib/useInstallPrompt';
 import { useSystemDark } from './lib/useSystemDark';
 import { useViewportInset } from './lib/useViewportInset';
+import { useLauncherShortcuts } from './lib/useLauncherShortcuts';
 import { useBarClock } from './lib/useBarClock';
 import { formatMoney, defaultCurrencyFor, currencySymbol } from './lib/money';
 import './App.scss';
@@ -86,6 +87,10 @@ export function App() {
 
   const locale = storedLocale ?? resolveLocale(navigator.languages ?? [navigator.language]);
   const t = useMemo(() => createTranslator(locale), [locale]);
+
+  // "+1" for the favourite drinks in the launcher's long-press menu.
+  const askReset = useCallback(() => setDialog({ kind: 'reset' }), []);
+  useLauncherShortcuts({ locale, onReset: askReset });
 
   // Reflect theme on <html> so the CSS tokens follow the explicit choice.
   //
