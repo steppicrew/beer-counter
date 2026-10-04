@@ -476,6 +476,51 @@ $ink-line: 2px;
     height: $counter-height + $keeper-height + 62px;
   }
 
+  // The question about the tip: a line or two and a row of answers, asked
+  // mid-round as readily as on an empty bar.
+  &--asking &__track {
+    height: $counter-height + $keeper-height + 84px;
+  }
+
+  // Asked, not announced: the one bubble with buttons in it. Rounded like
+  // the tip-jar line rather than a pill, so the answers fit inside.
+  &__ask--question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: vars.$space-xs;
+    padding: vars.$space-xs vars.$space-sm vars.$space-sm;
+    border-radius: vars.$radius-md;
+    border-color: var(--accent);
+    pointer-events: auto;
+  }
+
+  &__ask-actions {
+    display: flex;
+    // Wraps rather than overflowing in the languages with longer answers.
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: vars.$space-xs;
+  }
+
+  &__ask-btn {
+    min-height: 32px;
+    padding: 0 vars.$space-md;
+    border: 1px solid var(--bar-ink);
+    border-radius: vars.$radius-pill;
+    background: none;
+    color: var(--bar-ink);
+    font: inherit;
+    cursor: pointer;
+
+    &--yes {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: vars.$weight-semibold;
+    }
+  }
+
   // A glass going over the left end. It is drawn for the length of the fall
   // only — `hasFallen` has already stopped counting it as standing — so this
   // is the one moment the drop is visible rather than inferred from a glass

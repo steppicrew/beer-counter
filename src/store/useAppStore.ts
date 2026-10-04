@@ -36,6 +36,13 @@ interface AppState {
    */
   tipLog: TipProductId[];
   /**
+   * When the web tip link was clicked, while the barman has not yet asked
+   * whether a tip actually went in; otherwise null. The web cannot see the
+   * payment page, so he asks when they come back — after this moment, so
+   * never while they are still here. Kept, so a later visit still asks.
+   */
+  tipAckSince: number | null;
+  /**
    * Taps per drink id, across every round: which drinks the launcher's
    * long-press menu offers. Only the "+" counts — a back-dated drink or one
    * moved on the bar is a correction, not a habit.
@@ -81,6 +88,10 @@ interface AppState {
    */
   recordTip: (paid: boolean, level?: TipProductId) => void;
   clearCoin: () => void;
+  /** The web tip link was followed: ask about it on return. */
+  awaitTipAck: () => void;
+  /** Their answer. Yes is taken at their word and drops a coin like a paid tip. */
+  ackTip: (tipped: boolean) => void;
 
   setTheme: (theme: ThemeMode) => void;
   setLocale: (locale: string | null) => void;
@@ -104,6 +115,7 @@ export const useAppStore = create<AppState>()(
         tipped: false,
         coinPending: false,
         tipLog: [],
+        tipAckSince: null,
         usage: {},
         theme: 'system',
         locale: null,
@@ -230,6 +242,20 @@ export const useAppStore = create<AppState>()(
             tipLog: paid ? [...state.tipLog, level] : state.tipLog,
           })),
         clearCoin: () => set({ coinPending: false }),
+        awaitTipAck: () => set({ tipAckSince: Date.now() }),
+        ackTip: (tipped) =>
+          set((state) =>
+            tipped
+              ? {
+                  tipAckSince: null,
+                  tipAsked: true,
+                  tipped: true,
+                  coinPending: true,
+                  // The web only knows "a tip", not its size: a small one.
+                  tipLog: [...state.tipLog, 'tip_small' as const],
+                }
+              : { tipAckSince: null },
+          ),
 
         setTheme: (theme) => set({ theme }),
         setLocale: (locale) => set({ locale }),
@@ -287,6 +313,7 @@ export const useAppStore = create<AppState>()(
           tipped: state.tipped,
           coinPending: state.coinPending,
           tipLog: state.tipLog,
+          tipAckSince: state.tipAckSince,
           usage: state.usage,
           theme: state.theme,
           locale: state.locale,
