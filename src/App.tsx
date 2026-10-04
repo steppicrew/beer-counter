@@ -65,6 +65,8 @@ export function App() {
   const tipped = useAppStore((s) => s.tipped);
   const tipLog = useAppStore((s) => s.tipLog);
   const coinPending = useAppStore((s) => s.coinPending);
+  const tipAckSince = useAppStore((s) => s.tipAckSince);
+  const ackTip = useAppStore((s) => s.ackTip);
   const clearCoin = useAppStore((s) => s.clearCoin);
 
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
@@ -167,6 +169,28 @@ export function App() {
     markTipAsked();
     setDialog({ kind: 'tip' });
   };
+
+  // After the web tip link the barman asks, on their return, whether a tip
+  // went in. "Return" is the page coming back after the click — into view
+  // from another tab or the browser, or into focus from another window — or
+  // a later visit while the question is still open (the page loaded after
+  // the click). Never the moment of the click itself, while they are here.
+  const [backAt, setBackAt] = useState(() => Date.now());
+  useEffect(() => {
+    const onBack = () => {
+      if (document.visibilityState === 'visible') setBackAt(Date.now());
+    };
+    document.addEventListener('visibilitychange', onBack);
+    window.addEventListener('focus', onBack);
+    return () => {
+      document.removeEventListener('visibilitychange', onBack);
+      window.removeEventListener('focus', onBack);
+    };
+  }, []);
+  const tipQuestion =
+    tipAckSince !== null && backAt > tipAckSince && dialog.kind === 'none'
+      ? { onYes: () => ackTip(true), onNo: () => ackTip(false) }
+      : undefined;
 
   // Seen and passed over counts as asked: once the round starts, his line is
   // gone and must not come back next time.
@@ -279,6 +303,7 @@ export function App() {
           hidden={keyboardUp}
           onMoveGlass={moveDrink}
           onTipJar={tipJarAsk ? openTips : undefined}
+          tipQuestion={tipQuestion}
           tipJar={
             showJar
               ? { tipLog: jarTips, dropping, onOpen: openTips, label: currencySymbol(currency, locale) }

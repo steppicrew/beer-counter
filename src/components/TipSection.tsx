@@ -37,6 +37,7 @@ interface Props {
 export function TipSection({ titled = true, onChosen, figure }: Props) {
   const { t } = useI18n();
   const recordTip = useAppStore((s) => s.recordTip);
+  const awaitTipAck = useAppStore((s) => s.awaitTipAck);
   const native = isNativeApp();
   const offers = useTipOffers();
   const [busy, setBusy] = useState(false);
@@ -102,10 +103,12 @@ export function TipSection({ titled = true, onChosen, figure }: Props) {
         <a className="btn btn--ghost tip-link" href={TIP_URL ?? undefined}
           target="_blank"
           rel="noopener"
-          // Nothing on the web can tell whether they paid; the click is the
-          // closest thing to a tip it will ever see.
+          // Nothing on the web can tell whether they paid: the click retires
+          // the barman's mention of the jar, and on their return he asks
+          // whether a tip went in — a yes drops the coin.
           onClick={() => {
             recordTip(false);
+            awaitTipAck();
             onChosen?.();
           }}
         >

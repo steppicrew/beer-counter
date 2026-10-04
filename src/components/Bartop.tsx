@@ -49,6 +49,11 @@ interface Props {
    */
   onTipJar?: (() => void) | undefined;
   /**
+   * Web only: they followed the tip link, and now they are back. The barman
+   * asks whether a tip went in — the web cannot see the payment page.
+   */
+  tipQuestion?: { onYes: () => void; onNo: () => void } | undefined;
+  /**
    * The tip jar at the right end of the counter: silent and still, always
    * there wherever a tip is possible, holding what has been tipped.
    */
@@ -178,7 +183,7 @@ function useSweep(restingStart: number, glassCount: number): number | null {
   return sweep ? current : null;
 }
 
-export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar, tipJar }: Props) {
+export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar, tipQuestion, tipJar }: Props) {
   const { t, locale } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
   // Animating a counter nobody can see costs battery and buys nothing.
@@ -400,6 +405,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
         'bartop',
         isEmpty && 'bartop--empty',
         isEmpty && onTipJar && 'bartop--tip',
+        tipQuestion && 'bartop--asking',
         isWiping && 'bartop--wiping',
         scroll.travelling && 'bartop--travelling',
         !visible && 'bartop--asleep',
@@ -470,7 +476,25 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                 } as React.CSSProperties
               }
             >
-              {isEmpty && onTipJar ? (
+              {tipQuestion ? (
+                // Before anything else he has to say: the answer decides
+                // whether a coin goes into the jar beside him.
+                <span className="bartop__ask bartop__ask--question" role="group">
+                  {t('tip.ackQuestion')}
+                  <span className="bartop__ask-actions">
+                    <button
+                      type="button"
+                      className="bartop__ask-btn bartop__ask-btn--yes"
+                      onClick={tipQuestion.onYes}
+                    >
+                      {t('tip.ackYes')}
+                    </button>
+                    <button type="button" className="bartop__ask-btn" onClick={tipQuestion.onNo}>
+                      {t('tip.ackNo')}
+                    </button>
+                  </span>
+                </span>
+              ) : isEmpty && onTipJar ? (
                 // Only ever at the start of a round, before anything is
                 // poured: never a request made to someone mid-evening.
                 <button
