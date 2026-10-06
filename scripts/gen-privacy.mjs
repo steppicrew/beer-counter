@@ -235,9 +235,11 @@ writeFileSync(
     `<script>
 (function(){
   var supported = ${supported};
+  var aliases = { no: 'nb', nn: 'nb' };
   var langs = navigator.languages || [navigator.language || 'en'];
   for (var i = 0; i < langs.length; i++) {
     var primary = String(langs[i]).toLowerCase().split('-')[0];
+    primary = aliases[primary] || primary;
     if (primary !== 'en' && supported.indexOf(primary) !== -1) {
       location.replace('./' + primary + '.html');
       return;
