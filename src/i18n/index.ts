@@ -7,13 +7,20 @@ export type { MessageKey, Messages };
 export { LOCALES, DEFAULT_LOCALE } from './locales';
 
 /**
+ * Norwegian reaches us as "nb", the macrolanguage "no", or Nynorsk "nn";
+ * the catalogue is Bokmål, which Nynorsk readers read without trouble.
+ */
+const ALIASES: Record<string, string> = { no: 'nb', nn: 'nb' };
+
+/**
  * Picks the best supported locale for a list of browser/system preferences.
  * `navigator.languages` entries are region-tagged ("de-AT"), so match on the
  * primary subtag.
  */
 export function resolveLocale(preferred: readonly string[]): string {
   for (const tag of preferred) {
-    const primary = tag.toLowerCase().split('-')[0];
+    const subtag = tag.toLowerCase().split('-')[0];
+    const primary = subtag && (ALIASES[subtag] ?? subtag);
     if (primary && LOCALE_CODES.includes(primary)) return primary;
   }
   return DEFAULT_LOCALE;

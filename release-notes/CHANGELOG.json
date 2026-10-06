@@ -2,6 +2,36 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.17",
+      "date": "2026-10-06",
+      "notes": {
+        "en": "Now in 24 languages: Slovak, Norwegian, Finnish, Hungarian, Romanian, Croatian, Bulgarian, Greek and Ukrainian join the list.",
+        "de": "Jetzt in 24 Sprachen: Neu sind Slowakisch, Norwegisch, Finnisch, Ungarisch, Rumänisch, Kroatisch, Bulgarisch, Griechisch und Ukrainisch.",
+        "fr": "Désormais en 24 langues : slovaque, norvégien, finnois, hongrois, roumain, croate, bulgare, grec et ukrainien rejoignent la liste.",
+        "es": "Ahora en 24 idiomas: se suman eslovaco, noruego, finés, húngaro, rumano, croata, búlgaro, griego y ucraniano.",
+        "it": "Ora in 24 lingue: si aggiungono slovacco, norvegese, finlandese, ungherese, rumeno, croato, bulgaro, greco e ucraino.",
+        "nl": "Nu in 24 talen: Slowaaks, Noors, Fins, Hongaars, Roemeens, Kroatisch, Bulgaars, Grieks en Oekraïens zijn erbij gekomen.",
+        "pl": "Teraz w 24 językach: dochodzą słowacki, norweski, fiński, węgierski, rumuński, chorwacki, bułgarski, grecki i ukraiński.",
+        "pt": "Agora em 24 idiomas: juntam-se eslovaco, norueguês, finlandês, húngaro, romeno, croata, búlgaro, grego e ucraniano.",
+        "cs": "Nově ve 24 jazycích: přibyla slovenština, norština, finština, maďarština, rumunština, chorvatština, bulharština, řečtina a ukrajinština.",
+        "sk": "Teraz v 24 jazykoch: pribudla slovenčina, nórčina, fínčina, maďarčina, rumunčina, chorvátčina, bulharčina, gréčtina a ukrajinčina.",
+        "da": "Nu på 24 sprog: slovakisk, norsk, finsk, ungarsk, rumænsk, kroatisk, bulgarsk, græsk og ukrainsk er kommet med.",
+        "sv": "Nu på 24 språk: slovakiska, norska, finska, ungerska, rumänska, kroatiska, bulgariska, grekiska och ukrainska har tillkommit.",
+        "nb": "Nå på 24 språk: slovakisk, norsk, finsk, ungarsk, rumensk, kroatisk, bulgarsk, gresk og ukrainsk er med.",
+        "fi": "Nyt 24 kielellä: mukaan tulevat slovakki, norja, suomi, unkari, romania, kroatia, bulgaria, kreikka ja ukraina.",
+        "hu": "Már 24 nyelven: bekerült a szlovák, a norvég, a finn, a magyar, a román, a horvát, a bolgár, a görög és az ukrán.",
+        "ro": "Acum în 24 de limbi: se adaugă slovaca, norvegiana, finlandeza, maghiara, româna, croata, bulgara, greaca și ucraineana.",
+        "hr": "Sada na 24 jezika: pridružuju se slovački, norveški, finski, mađarski, rumunjski, hrvatski, bugarski, grčki i ukrajinski.",
+        "bg": "Вече на 24 езика: добавени са словашки, норвежки, фински, унгарски, румънски, хърватски, български, гръцки и украински.",
+        "el": "Τώρα σε 24 γλώσσες: προστίθενται σλοβακικά, νορβηγικά, φινλανδικά, ουγγρικά, ρουμανικά, κροατικά, βουλγαρικά, ελληνικά και ουκρανικά.",
+        "uk": "Тепер 24 мовами: додано словацьку, норвезьку, фінську, угорську, румунську, хорватську, болгарську, грецьку та українську.",
+        "tr": "Artık 24 dilde: Slovakça, Norveççe, Fince, Macarca, Rumence, Hırvatça, Bulgarca, Yunanca ve Ukraynaca eklendi.",
+        "ru": "Теперь на 24 языках: добавлены словацкий, норвежский, финский, венгерский, румынский, хорватский, болгарский, греческий и украинский.",
+        "ja": "24言語に対応しました。スロバキア語、ノルウェー語、フィンランド語、ハンガリー語、ルーマニア語、クロアチア語、ブルガリア語、ギリシャ語、ウクライナ語が加わりました。",
+        "zh": "现已支持 24 种语言：新增斯洛伐克语、挪威语、芬兰语、匈牙利语、罗马尼亚语、克罗地亚语、保加利亚语、希腊语和乌克兰语。"
+      }
+    },
+    {
       "version": "1.7.14",
       "date": "2026-10-03",
       "notes": {
