@@ -27,7 +27,7 @@ blank rather than failing loudly.
 ```
 src/components/   UI; BeverageRow is the counting tile
 src/store/        Zustand, persisted to localStorage
-src/i18n/         locale table + 15 message catalogues
+src/i18n/         locale table + 24 message catalogues
 src/lib/          types, money, totals, long-press, update + install hooks
 src/generated/    storeQr.ts, barman.ts — generated, committed
 scripts/          build, assets, screenshots, deploy, Play publishing
@@ -58,7 +58,7 @@ Gradle reads them, so web and native cannot drift. `versionCode` only ever
 increments — Play rejects anything not strictly greater. Use
 `yarn version:bump`, never edit by hand.
 
-**i18n.** All 15 catalogues must carry identical keys — `Messages` is derived
+**i18n.** All 24 catalogues must carry identical keys — `Messages` is derived
 from the English one, so a gap is a type error. Adding a locale means touching
 `src/i18n/locales.ts` *and* `scripts/locales.mjs` (duplicated on purpose: the
 scripts can't import TS), plus a listing and a note per release.
