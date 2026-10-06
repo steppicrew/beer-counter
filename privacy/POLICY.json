@@ -417,6 +417,52 @@
         ]
       ]
     },
+    "sk": {
+      "title": "Zásady ochrany osobných údajov",
+      "intro": "Steppiho počítadlo piva je navrhnuté tak, aby nezbieralo nič. Tieto zásady vysvetľujú, čo to znamená v praxi.",
+      "sections": [
+        [
+          "Nezbierajú sa žiadne údaje",
+          "Aplikácia nezbiera, neprenáša ani neukladá žiadne osobné údaje na žiadny server. Nemá žiadnu analytiku, žiadne hlásenie pádov, žiadne reklamné SDK ani žiadne sledovanie akéhokoľvek druhu."
+        ],
+        [
+          "Žiadny účet",
+          "Aplikácia nevyžaduje účet, registráciu, e-mailovú adresu ani prihlásenie. Nikdy sa nepýta, kto ste."
+        ],
+        [
+          "Kde sú vaše údaje",
+          "Nápoje, ktoré pridáte, vaše počty, história kôl, ceny a nastavenia sa ukladajú iba v miestnom úložisku vášho zariadenia. Aplikácia pre Android je vylúčená z cloudovej zálohy Google, takže zariadenie samy nikdy neopustia. Môžete ich sami exportovať do súboru (Nastavenia → Vaše údaje) a tento súbor importovať v inom zariadení; súbor ide len tam, kam ho uložíte alebo pošlete. V systéme Android 12 a novšom ich môže skopírovať aj priamy prenos z telefónu do telefónu pri nastavovaní nového telefónu — zo zariadenia do zariadenia, nie cez server. Odinštalovanie aplikácie alebo vymazanie jej úložiska ich natrvalo odstráni; bez exportu ich nikto, ani vývojár, nedokáže obnoviť."
+        ],
+        [
+          "Žiadny prístup k sieti",
+          "Aplikácia pre Android je zostavená bez oprávnenia INTERNET, takže technicky nedokáže nič nikam odoslať. Webová verzia sa načíta raz a potom beží úplne offline zo svojej vyrovnávacej pamäte."
+        ],
+        [
+          "Žiadne tretie strany",
+          "S tretími stranami sa nezdieľajú žiadne údaje, pretože sa žiadne nezbierajú. Aplikácia neobsahuje žiadne SDK tretích strán okrem fakturačnej knižnice Google Play v aplikácii pre Android, ktorá slúži iba na dobrovoľné prepitné a komunikuje iba s aplikáciou Obchod Play vo vašom zariadení."
+        ],
+        [
+          "Prepitné",
+          "Prepitné je dobrovoľné a nič neodomyká. V aplikácii pre Android sa platí cez Google Play: Google spracúva platbu podľa vlastných zásad ochrany osobných údajov a aplikácia sa dozvie iba to, či prepitné prešlo — žiadne meno, žiadne platobné údaje. Na webe vedie odkaz „Kúp mi pivo“ na externú stránku s vlastnými zásadami ochrany osobných údajov; nič sa tam neodošle, pokiaľ na odkaz neklepnete."
+        ],
+        [
+          "Deti",
+          "Aplikácia nezbiera údaje od nikoho, ani od detí mladších ako 13 rokov."
+        ],
+        [
+          "Oprávnenia",
+          "Aplikácia pre Android žiada jediné oprávnenie, fakturačné oprávnenie Google Play (com.android.vending.BILLING), potrebné iba na dobrovoľné prepitné. Nemá oprávnenie na internet."
+        ],
+        [
+          "Zmeny",
+          "Ak sa tieto zásady niekedy zmenia, aktualizovaná verzia bude zverejnená na tejto adrese s novým dátumom účinnosti."
+        ],
+        [
+          "Kontakt",
+          "Otázky k týmto zásadám môžete poslať na adresu nižšie."
+        ]
+      ]
+    },
     "da": {
       "title": "Privatlivspolitik",
       "intro": "Steppis Øltæller er bygget til ikke at indsamle noget. Denne politik forklarer, hvad det betyder i praksis.",
@@ -506,6 +552,374 @@
         [
           "Kontakt",
           "Frågor om denna policy kan skickas till adressen nedan."
+        ]
+      ]
+    },
+    "nb": {
+      "title": "Personvernerklæring",
+      "intro": "Steppis ølteller er laget for å ikke samle inn noe som helst. Denne erklæringen forklarer hva det betyr i praksis.",
+      "sections": [
+        [
+          "Ingen data samles inn",
+          "Appen samler ikke inn, overfører eller lagrer personopplysninger på noen server. Det finnes ingen analyse, ingen krasjrapportering, ingen reklame-SDK og ingen sporing av noe slag."
+        ],
+        [
+          "Ingen konto",
+          "Appen krever ingen konto, ingen registrering, ingen e-postadresse og ingen innlogging. Den spør aldri hvem du er."
+        ],
+        [
+          "Hvor dataene dine ligger",
+          "Drikkene du legger til, tellingene, rundehistorikken, prisene og innstillingene lagres bare i den lokale lagringen på din egen enhet. Android-appen er unntatt fra Googles skysikkerhetskopi, så de forlater aldri enheten av seg selv. Du kan selv eksportere dem til en fil (Innstillinger → Dine data) og importere filen på en annen enhet; filen havner bare der du lagrer eller sender den. På Android 12 og nyere kan også den direkte overføringen fra telefon til telefon ved oppsett av en ny telefon kopiere dem — fra enhet til enhet, ikke via en server. Avinstallerer du appen eller tømmer lagringen, slettes de permanent; uten eksport kan ingen, heller ikke utvikleren, gjenopprette dem."
+        ],
+        [
+          "Ingen nettverkstilgang",
+          "Android-appen er bygget uten INTERNET-tillatelsen, så den er teknisk ute av stand til å sende noe noe sted. Nettversjonen lastes én gang og kjører deretter helt frakoblet fra hurtigbufferen."
+        ],
+        [
+          "Ingen tredjeparter",
+          "Ingen data deles med tredjeparter, fordi ingen data samles inn. Appen inneholder ingen tredjeparts-SDK-er bortsett fra Google Plays faktureringsbibliotek i Android-appen, som bare brukes til frivillige tips og bare snakker med Play Butikk-appen på enheten din."
+        ],
+        [
+          "Tips",
+          "Tips er frivillige og låser ikke opp noe. I Android-appen betales de via Google Play: Google behandler betalingen under sin egen personvernerklæring, og appen får bare vite om tipset gikk gjennom — ikke navn, ikke betalingsopplysninger. På nettstedet fører lenken «Spander en øl på meg» til en ekstern side med egen personvernerklæring; ingenting sendes dit med mindre du følger lenken."
+        ],
+        [
+          "Barn",
+          "Appen samler ikke inn data fra noen, heller ikke fra barn under 13 år."
+        ],
+        [
+          "Tillatelser",
+          "Android-appen ber om én eneste tillatelse, Google Plays faktureringstillatelse (com.android.vending.BILLING), som bare trengs for de frivillige tipsene. Den har ingen internettillatelse."
+        ],
+        [
+          "Endringer",
+          "Hvis denne erklæringen noen gang endres, publiseres den oppdaterte versjonen på denne adressen med en ny ikrafttredelsesdato."
+        ],
+        [
+          "Kontakt",
+          "Spørsmål om denne erklæringen kan sendes til adressen nedenfor."
+        ]
+      ]
+    },
+    "fi": {
+      "title": "Tietosuojakäytäntö",
+      "intro": "Steppin olutlaskuri on suunniteltu keräämään ei mitään. Tämä käytäntö kertoo, mitä se tarkoittaa käytännössä.",
+      "sections": [
+        [
+          "Tietoja ei kerätä",
+          "Sovellus ei kerää, siirrä eikä tallenna henkilötietoja millekään palvelimelle. Siinä ei ole analytiikkaa, kaatumisraportointia, mainos-SDK:ta eikä minkäänlaista seurantaa."
+        ],
+        [
+          "Ei tiliä",
+          "Sovellus ei vaadi tiliä, rekisteröitymistä, sähköpostiosoitetta eikä kirjautumista. Se ei koskaan kysy, kuka olet."
+        ],
+        [
+          "Missä tietosi ovat",
+          "Lisäämäsi juomat, laskurit, kierroshistoria, hinnat ja asetukset tallennetaan vain oman laitteesi paikalliseen tallennustilaan. Android-sovellus on suljettu pois Googlen pilvivarmuuskopiosta, joten ne eivät koskaan poistu laitteelta itsestään. Voit itse viedä ne tiedostoon (Asetukset → Tietosi) ja tuoda tiedoston toiseen laitteeseen; tiedosto menee vain sinne, minne tallennat tai lähetät sen. Android 12:ssa ja uudemmissa myös suora puhelimesta puhelimeen -siirto uutta puhelinta käyttöönotettaessa voi kopioida ne — laitteelta laitteelle, ei palvelimen kautta. Sovelluksen poistaminen tai sen tallennustilan tyhjentäminen poistaa ne pysyvästi; ilman vientiä kukaan, ei edes kehittäjä, voi palauttaa niitä."
+        ],
+        [
+          "Ei verkkoyhteyttä",
+          "Android-sovellus on rakennettu ilman INTERNET-käyttöoikeutta, joten se ei teknisesti pysty lähettämään mitään minnekään. Verkkoversio latautuu kerran ja toimii sen jälkeen täysin offline-tilassa välimuististaan."
+        ],
+        [
+          "Ei kolmansia osapuolia",
+          "Tietoja ei jaeta kolmansille osapuolille, koska tietoja ei kerätä. Sovelluksessa ei ole kolmansien osapuolten SDK:ita lukuun ottamatta Android-sovelluksen Google Playn laskutuskirjastoa, jota käytetään vain vapaaehtoisiin tippeihin ja joka keskustelee vain laitteesi Play Kauppa -sovelluksen kanssa."
+        ],
+        [
+          "Tipit",
+          "Tipit ovat vapaaehtoisia eivätkä avaa mitään. Android-sovelluksessa ne maksetaan Google Playn kautta: Google käsittelee maksun oman tietosuojakäytäntönsä mukaisesti, ja sovellus saa tietää vain, menikö tippi läpi — ei nimeä, ei maksutietoja. Verkkosivustolla linkki ”Tarjoa minulle olut” vie ulkoiselle sivulle, jolla on oma tietosuojakäytäntönsä; sinne ei lähetetä mitään, ellet seuraa linkkiä."
+        ],
+        [
+          "Lapset",
+          "Sovellus ei kerää tietoja keneltäkään, ei myöskään alle 13-vuotiailta lapsilta."
+        ],
+        [
+          "Käyttöoikeudet",
+          "Android-sovellus pyytää yhden ainoan käyttöoikeuden, Google Playn laskutusoikeuden (com.android.vending.BILLING), jota tarvitaan vain vapaaehtoisiin tippeihin. Sillä ei ole internet-käyttöoikeutta."
+        ],
+        [
+          "Muutokset",
+          "Jos tämä käytäntö joskus muuttuu, päivitetty versio julkaistaan tässä osoitteessa uudella voimaantulopäivällä."
+        ],
+        [
+          "Yhteystiedot",
+          "Tätä käytäntöä koskevat kysymykset voi lähettää alla olevaan osoitteeseen."
+        ]
+      ]
+    },
+    "hu": {
+      "title": "Adatvédelmi irányelvek",
+      "intro": "Steppi sörszámlálója úgy készült, hogy semmit ne gyűjtsön. Ez az irányelv elmagyarázza, mit jelent ez a gyakorlatban.",
+      "sections": [
+        [
+          "Nem gyűjtünk adatot",
+          "Az alkalmazás nem gyűjt, nem továbbít és nem tárol személyes adatot semmilyen szerveren. Nincs analitika, nincs hibajelentés, nincs hirdetési SDK, és semmilyen követés sincs."
+        ],
+        [
+          "Nincs fiók",
+          "Az alkalmazás nem kér fiókot, regisztrációt, e-mail-címet vagy bejelentkezést. Soha nem kérdezi meg, ki vagy."
+        ],
+        [
+          "Hol vannak az adataid",
+          "A hozzáadott italok, a számlálók, a körök előzményei, az árak és a beállítások csak a saját eszközöd helyi tárhelyén vannak. Az Android-alkalmazás ki van zárva a Google felhőalapú biztonsági mentéséből, így magától soha nem hagyják el az eszközt. Saját magad exportálhatod őket fájlba (Beállítások → Adataid), és importálhatod a fájlt egy másik eszközön; a fájl csak oda kerül, ahová mented vagy elküldöd. Android 12-n és újabbon az új telefon beállításakor használt közvetlen telefonról telefonra átvitel is átmásolhatja őket — eszközről eszközre, nem szerveren keresztül. Az alkalmazás eltávolítása vagy a tárhelyének törlése véglegesen törli őket; exportálás nélkül senki, a fejlesztő sem tudja visszaállítani őket."
+        ],
+        [
+          "Nincs hálózati hozzáférés",
+          "Az Android-alkalmazás INTERNET engedély nélkül készül, így technikailag képtelen bármit bárhová elküldeni. A webes változat egyszer betöltődik, utána teljesen offline fut a gyorsítótárából."
+        ],
+        [
+          "Nincsenek harmadik felek",
+          "Harmadik felekkel nem osztunk meg adatot, mert nem gyűjtünk adatot. Az alkalmazás nem tartalmaz harmadik féltől származó SDK-t, kivéve az Android-alkalmazásban a Google Play számlázási könyvtárát, amely csak az önkéntes borravalóhoz kell, és csak az eszközödön lévő Play Áruház alkalmazással kommunikál."
+        ],
+        [
+          "Borravaló",
+          "A borravaló önkéntes, és semmit nem nyit meg. Az Android-alkalmazásban a Google Playen keresztül fizethető: a Google a saját adatvédelmi irányelvei szerint kezeli a fizetést, az alkalmazás pedig csak azt tudja meg, hogy a borravaló sikeres volt-e — se nevet, se fizetési adatot. A weboldalon a „Fizess egy sört” hivatkozás egy külső oldalra visz, amelynek saját adatvédelmi irányelvei vannak; oda semmi nem kerül, hacsak nem követed a hivatkozást."
+        ],
+        [
+          "Gyermekek",
+          "Az alkalmazás senkitől nem gyűjt adatot, a 13 évnél fiatalabb gyermekektől sem."
+        ],
+        [
+          "Engedélyek",
+          "Az Android-alkalmazás egyetlen engedélyt kér, a Google Play számlázási engedélyét (com.android.vending.BILLING), amely csak az önkéntes borravalóhoz kell. Internetengedélye nincs."
+        ],
+        [
+          "Változások",
+          "Ha ez az irányelv valaha megváltozik, a frissített változat ezen a címen jelenik meg, új hatálybalépési dátummal."
+        ],
+        [
+          "Kapcsolat",
+          "Az irányelvvel kapcsolatos kérdéseket az alábbi címre küldheted."
+        ]
+      ]
+    },
+    "ro": {
+      "title": "Politica de confidențialitate",
+      "intro": "Numărătorul de bere Steppi este gândit să nu colecteze nimic. Această politică explică ce înseamnă asta în practică.",
+      "sections": [
+        [
+          "Nu se colectează date",
+          "Aplicația nu colectează, nu transmite și nu stochează date personale pe niciun server. Nu există analiză, raportare a erorilor, SDK publicitar sau urmărire de niciun fel."
+        ],
+        [
+          "Fără cont",
+          "Aplicația nu cere cont, înregistrare, adresă de e-mail sau autentificare. Nu te întreabă niciodată cine ești."
+        ],
+        [
+          "Unde stau datele tale",
+          "Băuturile adăugate, numărătorile, istoricul rundelor, prețurile și setările sunt stocate doar în spațiul de stocare local al propriului dispozitiv. Aplicația Android este exclusă din backupul în cloud Google, așa că nu părăsesc niciodată dispozitivul de la sine. Le poți exporta singur într-un fișier (Setări → Datele tale) și importa fișierul pe alt dispozitiv; fișierul ajunge doar unde îl salvezi sau îl trimiți. Pe Android 12 și versiunile ulterioare, transferul direct de pe telefon pe telefon la configurarea unui telefon nou le poate copia și el — de pe un dispozitiv pe altul, nu printr-un server. Dezinstalarea aplicației sau ștergerea datelor ei le șterge definitiv; fără export, nimeni, nici dezvoltatorul, nu le poate recupera."
+        ],
+        [
+          "Fără acces la rețea",
+          "Aplicația Android este construită fără permisiunea INTERNET, deci este tehnic incapabilă să trimită ceva oriunde. Versiunea web se încarcă o dată și apoi rulează complet offline din memoria cache."
+        ],
+        [
+          "Fără terți",
+          "Nu se partajează date cu terți, pentru că nu se colectează date. Aplicația nu conține SDK-uri terțe, cu excepția bibliotecii de facturare Google Play din aplicația Android, folosită doar pentru bacșișuri opționale și care comunică doar cu aplicația Magazin Play de pe dispozitivul tău."
+        ],
+        [
+          "Bacșișuri",
+          "Bacșișurile sunt opționale și nu deblochează nimic. În aplicația Android se plătesc prin Google Play: Google procesează plata conform propriei politici de confidențialitate, iar aplicația află doar dacă bacșișul a trecut — fără nume, fără date de plată. Pe site, linkul „Fă-mi cinste cu o bere” duce la o pagină externă cu propria politică de confidențialitate; nu se trimite nimic acolo decât dacă urmezi linkul."
+        ],
+        [
+          "Copii",
+          "Aplicația nu colectează date de la nimeni, inclusiv de la copiii sub 13 ani."
+        ],
+        [
+          "Permisiuni",
+          "Aplicația Android cere o singură permisiune, permisiunea de facturare Google Play (com.android.vending.BILLING), necesară doar pentru bacșișurile opționale. Nu are permisiune de internet."
+        ],
+        [
+          "Modificări",
+          "Dacă această politică se schimbă vreodată, versiunea actualizată va fi publicată la această adresă cu o nouă dată de intrare în vigoare."
+        ],
+        [
+          "Contact",
+          "Întrebările despre această politică pot fi trimise la adresa de mai jos."
+        ]
+      ]
+    },
+    "hr": {
+      "title": "Pravila o privatnosti",
+      "intro": "Steppijev brojač piva osmišljen je tako da ne prikuplja ništa. Ova pravila objašnjavaju što to znači u praksi.",
+      "sections": [
+        [
+          "Ne prikupljaju se podaci",
+          "Aplikacija ne prikuplja, ne prenosi i ne pohranjuje nikakve osobne podatke ni na jednom poslužitelju. Nema analitike, nema izvješćivanja o rušenjima, nema oglašivačkog SDK-a i nema praćenja bilo koje vrste."
+        ],
+        [
+          "Bez računa",
+          "Aplikacija ne traži račun, registraciju, adresu e-pošte ni prijavu. Nikada ne pita tko ste."
+        ],
+        [
+          "Gdje su vaši podaci",
+          "Pića koja dodate, vaši brojevi, povijest rundi, cijene i postavke pohranjuju se samo u lokalnoj pohrani vašeg uređaja. Aplikacija za Android isključena je iz Googleove sigurnosne kopije u oblaku, pa nikada sami ne napuštaju uređaj. Možete ih sami izvesti u datoteku (Postavke → Vaši podaci) i uvesti tu datoteku na drugom uređaju; datoteka ide samo onamo kamo je spremite ili pošaljete. Na Androidu 12 i novijem može ih kopirati i izravan prijenos s telefona na telefon pri postavljanju novog telefona — s uređaja na uređaj, ne preko poslužitelja. Deinstaliranje aplikacije ili brisanje njezine pohrane trajno ih briše; bez izvoza nitko, pa ni razvojni programer, ne može ih vratiti."
+        ],
+        [
+          "Bez pristupa mreži",
+          "Aplikacija za Android izrađena je bez dopuštenja INTERNET, pa tehnički ne može ništa nikamo poslati. Web-verzija se učita jednom, a zatim radi potpuno izvanmrežno iz svoje predmemorije."
+        ],
+        [
+          "Bez trećih strana",
+          "Podaci se ne dijele s trećim stranama jer se podaci ne prikupljaju. Aplikacija ne sadrži SDK-ove trećih strana osim Google Playeve biblioteke za naplatu u aplikaciji za Android, koja se koristi samo za dobrovoljne napojnice i komunicira samo s aplikacijom Trgovina Play na vašem uređaju."
+        ],
+        [
+          "Napojnice",
+          "Napojnice su dobrovoljne i ništa ne otključavaju. U aplikaciji za Android plaćaju se putem Google Playa: Google obrađuje plaćanje prema vlastitim pravilima o privatnosti, a aplikacija saznaje samo je li napojnica prošla — bez imena, bez podataka o plaćanju. Na web-stranici poveznica „Časti me pivom” vodi na vanjsku stranicu s vlastitim pravilima o privatnosti; onamo se ništa ne šalje osim ako ne slijedite poveznicu."
+        ],
+        [
+          "Djeca",
+          "Aplikacija ne prikuplja podatke ni od koga, pa ni od djece mlađe od 13 godina."
+        ],
+        [
+          "Dopuštenja",
+          "Aplikacija za Android traži jedno jedino dopuštenje, Google Playevo dopuštenje za naplatu (com.android.vending.BILLING), potrebno samo za dobrovoljne napojnice. Nema dopuštenje za internet."
+        ],
+        [
+          "Promjene",
+          "Ako se ova pravila ikada promijene, ažurirana verzija bit će objavljena na ovoj adresi s novim datumom stupanja na snagu."
+        ],
+        [
+          "Kontakt",
+          "Pitanja o ovim pravilima možete poslati na adresu u nastavku."
+        ]
+      ]
+    },
+    "bg": {
+      "title": "Политика за поверителност",
+      "intro": "Броячът за бира на Steppi е създаден така, че да не събира нищо. Тази политика обяснява какво означава това на практика.",
+      "sections": [
+        [
+          "Не се събират данни",
+          "Приложението не събира, не предава и не съхранява лични данни на никакъв сървър. Няма анализи, няма отчети за сривове, няма рекламен SDK и няма никакво проследяване."
+        ],
+        [
+          "Без акаунт",
+          "Приложението не изисква акаунт, регистрация, имейл адрес или вход. Никога не пита кой сте."
+        ],
+        [
+          "Къде са вашите данни",
+          "Добавените напитки, броенето, историята на рундовете, цените и настройките се съхраняват само в локалното хранилище на собственото ви устройство. Приложението за Android е изключено от облачното резервно копие на Google, така че те никога не напускат устройството сами. Можете сами да ги експортирате във файл (Настройки → Вашите данни) и да импортирате файла на друго устройство; файлът отива само там, където го запазите или изпратите. На Android 12 и по-нови прякото прехвърляне от телефон на телефон при настройване на нов телефон също може да ги копира — от устройство на устройство, не през сървър. Деинсталирането на приложението или изчистването на хранилището му ги изтрива завинаги; без експорт никой, включително разработчикът, не може да ги възстанови."
+        ],
+        [
+          "Без достъп до мрежата",
+          "Приложението за Android е изградено без разрешението INTERNET, така че технически не може да изпрати нищо никъде. Уеб версията се зарежда веднъж и после работи изцяло офлайн от кеша си."
+        ],
+        [
+          "Без трети страни",
+          "Не се споделят данни с трети страни, защото не се събират данни. Приложението не съдържа SDK на трети страни освен библиотеката за таксуване на Google Play в приложението за Android, която се използва само за доброволни бакшиши и комуникира само с приложението Google Play Магазин на устройството ви."
+        ],
+        [
+          "Бакшиши",
+          "Бакшишите са доброволни и не отключват нищо. В приложението за Android се плащат чрез Google Play: Google обработва плащането според собствената си политика за поверителност, а приложението научава само дали бакшишът е минал — без име, без данни за плащане. На уебсайта връзката „Почерпи ме една бира“ води към външна страница със собствена политика за поверителност; нищо не се изпраща там, освен ако не последвате връзката."
+        ],
+        [
+          "Деца",
+          "Приложението не събира данни от никого, включително от деца под 13 години."
+        ],
+        [
+          "Разрешения",
+          "Приложението за Android иска едно-единствено разрешение — разрешението за таксуване на Google Play (com.android.vending.BILLING), нужно само за доброволните бакшиши. То няма разрешение за интернет."
+        ],
+        [
+          "Промени",
+          "Ако тази политика някога се промени, актуализираната версия ще бъде публикувана на този адрес с нова дата на влизане в сила."
+        ],
+        [
+          "Контакт",
+          "Въпроси относно тази политика могат да се изпращат на адреса по-долу."
+        ]
+      ]
+    },
+    "el": {
+      "title": "Πολιτική απορρήτου",
+      "intro": "Ο μετρητής μπίρας του Steppi είναι σχεδιασμένος να μη συλλέγει τίποτα. Αυτή η πολιτική εξηγεί τι σημαίνει αυτό στην πράξη.",
+      "sections": [
+        [
+          "Δεν συλλέγονται δεδομένα",
+          "Η εφαρμογή δεν συλλέγει, δεν μεταδίδει και δεν αποθηκεύει προσωπικά δεδομένα σε κανέναν διακομιστή. Δεν υπάρχουν αναλύσεις, αναφορές σφαλμάτων, διαφημιστικό SDK ή παρακολούθηση οποιουδήποτε είδους."
+        ],
+        [
+          "Χωρίς λογαριασμό",
+          "Η εφαρμογή δεν απαιτεί λογαριασμό, εγγραφή, διεύθυνση email ή σύνδεση. Δεν ρωτά ποτέ ποιος είστε."
+        ],
+        [
+          "Πού βρίσκονται τα δεδομένα σας",
+          "Τα ποτά που προσθέτετε, οι μετρήσεις, το ιστορικό των γύρων, οι τιμές και οι ρυθμίσεις αποθηκεύονται μόνο στον τοπικό χώρο αποθήκευσης της δικής σας συσκευής. Η εφαρμογή Android εξαιρείται από το αντίγραφο ασφαλείας της Google στο cloud, οπότε δεν φεύγουν ποτέ μόνα τους από τη συσκευή. Μπορείτε να τα εξαγάγετε εσείς σε αρχείο (Ρυθμίσεις → Τα δεδομένα σας) και να εισαγάγετε το αρχείο σε άλλη συσκευή· το αρχείο πηγαίνει μόνο όπου το αποθηκεύσετε ή το στείλετε. Σε Android 12 και νεότερα, η άμεση μεταφορά από τηλέφωνο σε τηλέφωνο κατά τη ρύθμιση νέου τηλεφώνου μπορεί επίσης να τα αντιγράψει — από συσκευή σε συσκευή, όχι μέσω διακομιστή. Η απεγκατάσταση της εφαρμογής ή η εκκαθάριση του χώρου αποθήκευσής της τα διαγράφει οριστικά· χωρίς εξαγωγή, κανείς, ούτε ο προγραμματιστής, δεν μπορεί να τα ανακτήσει."
+        ],
+        [
+          "Χωρίς πρόσβαση στο δίκτυο",
+          "Η εφαρμογή Android κατασκευάζεται χωρίς την άδεια INTERNET, οπότε είναι τεχνικά ανίκανη να στείλει οτιδήποτε οπουδήποτε. Η έκδοση web φορτώνεται μία φορά και μετά λειτουργεί εντελώς εκτός σύνδεσης από την προσωρινή μνήμη της."
+        ],
+        [
+          "Χωρίς τρίτους",
+          "Δεν κοινοποιούνται δεδομένα σε τρίτους, επειδή δεν συλλέγονται δεδομένα. Η εφαρμογή δεν περιέχει SDK τρίτων εκτός από τη βιβλιοθήκη χρέωσης του Google Play στην εφαρμογή Android, η οποία χρησιμοποιείται μόνο για προαιρετικά φιλοδωρήματα και επικοινωνεί μόνο με την εφαρμογή Play Store στη συσκευή σας."
+        ],
+        [
+          "Φιλοδωρήματα",
+          "Τα φιλοδωρήματα είναι προαιρετικά και δεν ξεκλειδώνουν τίποτα. Στην εφαρμογή Android πληρώνονται μέσω Google Play: η Google επεξεργάζεται την πληρωμή σύμφωνα με τη δική της πολιτική απορρήτου και η εφαρμογή μαθαίνει μόνο αν το φιλοδώρημα πέρασε — χωρίς όνομα, χωρίς στοιχεία πληρωμής. Στον ιστότοπο, ο σύνδεσμος «Κέρασέ με μια μπίρα» οδηγεί σε εξωτερική σελίδα με δική της πολιτική απορρήτου· τίποτα δεν στέλνεται εκεί αν δεν ακολουθήσετε τον σύνδεσμο."
+        ],
+        [
+          "Παιδιά",
+          "Η εφαρμογή δεν συλλέγει δεδομένα από κανέναν, ούτε από παιδιά κάτω των 13 ετών."
+        ],
+        [
+          "Άδειες",
+          "Η εφαρμογή Android ζητά μία μόνο άδεια, την άδεια χρέωσης του Google Play (com.android.vending.BILLING), που χρειάζεται μόνο για τα προαιρετικά φιλοδωρήματα. Δεν έχει άδεια πρόσβασης στο διαδίκτυο."
+        ],
+        [
+          "Αλλαγές",
+          "Αν αυτή η πολιτική αλλάξει ποτέ, η ενημερωμένη έκδοση θα δημοσιευτεί σε αυτή τη διεύθυνση με νέα ημερομηνία ισχύος."
+        ],
+        [
+          "Επικοινωνία",
+          "Ερωτήσεις σχετικά με αυτή την πολιτική μπορούν να σταλούν στη διεύθυνση παρακάτω."
+        ]
+      ]
+    },
+    "uk": {
+      "title": "Політика конфіденційності",
+      "intro": "Пивний лічильник Steppi створено так, щоб він нічого не збирав. Ця політика пояснює, що це означає на практиці.",
+      "sections": [
+        [
+          "Дані не збираються",
+          "Застосунок не збирає, не передає і не зберігає жодних персональних даних на жодному сервері. Немає аналітики, звітів про збої, рекламного SDK і жодного стеження."
+        ],
+        [
+          "Без облікового запису",
+          "Застосунок не потребує облікового запису, реєстрації, електронної адреси чи входу. Він ніколи не питає, хто ви."
+        ],
+        [
+          "Де зберігаються ваші дані",
+          "Додані напої, лічильники, історія кіл, ціни й налаштування зберігаються лише в локальному сховищі вашого пристрою. Застосунок для Android виключено з хмарного резервного копіювання Google, тож вони ніколи не залишають пристрій самі. Ви можете самі експортувати їх у файл (Налаштування → Ваші дані) й імпортувати цей файл на іншому пристрої; файл потрапляє лише туди, куди ви його збережете чи надішлете. На Android 12 і новіших пряме перенесення з телефона на телефон під час налаштування нового телефона також може їх скопіювати — з пристрою на пристрій, не через сервер. Видалення застосунку або очищення його сховища стирає їх назавжди; без експорту ніхто, зокрема й розробник, не зможе їх відновити."
+        ],
+        [
+          "Без доступу до мережі",
+          "Застосунок для Android зібрано без дозволу INTERNET, тож він технічно не здатен нікуди нічого надіслати. Вебверсія завантажується один раз, а потім працює повністю офлайн зі свого кешу."
+        ],
+        [
+          "Без третіх сторін",
+          "Дані не передаються третім сторонам, бо дані не збираються. Застосунок не містить SDK третіх сторін, окрім бібліотеки оплати Google Play у застосунку для Android, яка використовується лише для добровільних чайових і спілкується лише із застосунком Play Маркет на вашому пристрої."
+        ],
+        [
+          "Чайові",
+          "Чайові добровільні й нічого не відкривають. У застосунку для Android їх сплачують через Google Play: Google обробляє платіж згідно з власною політикою конфіденційності, а застосунок дізнається лише, чи пройшли чайові, — без імені, без платіжних даних. На сайті посилання «Пригости мене пивом» веде на зовнішню сторінку з власною політикою конфіденційності; туди нічого не надсилається, якщо ви не перейдете за посиланням."
+        ],
+        [
+          "Діти",
+          "Застосунок ні від кого не збирає даних, зокрема від дітей до 13 років."
+        ],
+        [
+          "Дозволи",
+          "Застосунок для Android запитує єдиний дозвіл — дозвіл оплати Google Play (com.android.vending.BILLING), потрібний лише для добровільних чайових. Дозволу на інтернет у нього немає."
+        ],
+        [
+          "Зміни",
+          "Якщо ця політика колись зміниться, оновлену версію буде опубліковано за цією адресою з новою датою набрання чинності."
+        ],
+        [
+          "Контакти",
+          "Запитання щодо цієї політики можна надсилати на адресу нижче."
         ]
       ]
     },
