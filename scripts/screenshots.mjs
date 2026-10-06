@@ -91,6 +91,11 @@ const PRICES = {
   ru: [35000, 25000, 45000, 25000],
   ja: [700, 500, 800, 500],
   zh: [3500, 2500, 4500, 3000],
+  nb: [9500, 7000, 12000, 7000],
+  // Forints have no minor unit in Intl: these are whole forints.
+  hu: [1200, 900, 1500, 800],
+  ro: [1500, 1100, 2000, 1000],
+  uk: [8000, 6000, 12000, 6000],
 };
 /** The euro languages share the English numbers. */
 const pricesFor = (code) => PRICES[code] ?? PRICES.en;
