@@ -2,7 +2,7 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
-      "version": "1.7.17",
+      "version": "1.7.18",
       "date": "2026-10-06",
       "notes": {
         "en": "The app now speaks 24 languages — nine more from across Europe.",
