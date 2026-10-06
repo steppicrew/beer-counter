@@ -18,9 +18,10 @@ const { listings } = JSON.parse(
 );
 const iconSvg = readFileSync(resolve(root, 'assets/icon/icon.svg'), 'utf8');
 
-// Strip the outer background rect: the graphic paints its own gradient.
+// Strip the icon's opaque backdrop (the square behind the mat, for the Play
+// and maskable icons): the graphic paints its own gradient around the mat.
 const glyph = iconSvg
-  .replace(/<rect width="512" height="512" fill="url\(#bg\)"\/>/, '')
+  .replace(/<rect id="backdrop"[^>]*\/>/, '')
   .replace(/^<\?xml[^>]*\?>\s*/, '');
 
 const escapeXml = (s) =>
@@ -60,6 +61,9 @@ const SAFE_RIGHT = 1024 - CROP_INSET - SAFE_MARGIN;
 // The mug ends at x=419; start the column just clear of it so the lost width
 // on the right is bought back from the gap rather than from the type size.
 const TEXT_X = 455;
+/** Where the mat's centre sits, and its scale from the icon's 512 frame. */
+const MAT_X = 265;
+const MAT_SCALE = 0.62;
 const MAX_TEXT_WIDTH = SAFE_RIGHT - TEXT_X;
 
 
@@ -92,7 +96,7 @@ function fitSize(text, start, min, bold = false, fonts = fontsFor('en')) {
  * Greedy wrap for CJK: break after the ideographic comma/full stop rather
  * than mid-word, keeping the punctuation at the end of the line.
  */
-function wrapCjk(text, fontSize, maxLines, fonts) {
+function wrapCjk(text, fontSize, fonts) {
   const chunks = text.split(/(?<=[、，。；！？])/).filter(Boolean);
   const lines = [];
   let current = '';
@@ -102,17 +106,16 @@ function wrapCjk(text, fontSize, maxLines, fonts) {
     if (current && measure(candidate, fontSize, false, fonts) > MAX_TEXT_WIDTH) {
       lines.push(current);
       current = chunk;
-      if (lines.length === maxLines) break;
     } else {
       current = candidate;
     }
   }
-  if (current && lines.length < maxLines) lines.push(current);
+  if (current) lines.push(current);
   return lines;
 }
 
-/** Greedy word wrap to at most `maxLines` lines that each fit the column. */
-function wrap(text, fontSize, maxLines, fonts = fontsFor('en')) {
+/** Greedy word wrap into lines that each fit the column; the caller picks the size. */
+function wrap(text, fontSize, fonts = fontsFor('en')) {
   const words = text.split(/\s+/);
   const lines = [];
   let current = '';
@@ -122,16 +125,21 @@ function wrap(text, fontSize, maxLines, fonts = fontsFor('en')) {
     if (current && measure(candidate, fontSize, false, fonts) > MAX_TEXT_WIDTH) {
       lines.push(current);
       current = word;
-      if (lines.length === maxLines) break;
     } else {
       current = candidate;
     }
   }
-  if (current && lines.length < maxLines) lines.push(current);
+  if (current) lines.push(current);
   return lines;
 }
 
+// `--lang de,fr` renders a subset; the rest stay as they are on disk.
+const argLang = process.argv.indexOf('--lang');
+const only =
+  argLang !== -1 ? new Set(process.argv[argLang + 1].split(',').map((s) => s.trim())) : null;
+
 for (const locale of LOCALES) {
+  if (only && !only.has(locale.code)) continue;
   const entry = listings[locale.code];
   if (!entry) continue;
 
@@ -145,10 +153,16 @@ for (const locale of LOCALES) {
   const titleSize = fitSize(entry.title, 62, 30, true, fonts);
   // CJK has no spaces, but it does break after its punctuation — split there
   // so the tagline wraps instead of shrinking into illegibility.
-  const taglineSize = cjk ? 32 : 34;
-  const taglineLines = cjk
-    ? wrapCjk(entry.short, taglineSize, 3, fonts)
-    : wrap(entry.short, taglineSize, 3, fonts);
+  // Three lines at the largest size that fits them. The wrappers used to stop
+  // at three lines and drop the rest without a word — the Greek tagline lost
+  // "no account". Shrink first; a fourth line only if even 26px will not do.
+  const wrapAt = (size) => (cjk ? wrapCjk(entry.short, size, fonts) : wrap(entry.short, size, fonts));
+  let taglineSize = cjk ? 32 : 34;
+  let taglineLines = wrapAt(taglineSize);
+  while (taglineLines.length > 3 && taglineSize > 26) {
+    taglineSize -= 2;
+    taglineLines = wrapAt(taglineSize);
+  }
 
   const title = escapeXml(entry.title);
   const taglineTspans = taglineLines
@@ -183,10 +197,12 @@ for (const locale of LOCALES) {
 
   <rect width="1024" height="500" fill="url(#page)"/>
 
-  <!-- soft amber glow behind the mug -->
-  <circle cx="250" cy="250" r="190" fill="#f0a500" opacity="0.10"/>
+  <!-- soft amber glow behind the mat, centred on it -->
+  <circle cx="${MAT_X}" cy="250" r="175" fill="#f0a500" opacity="0.10"/>
 
-  <g transform="translate(122, 66) scale(0.72)">
+  <!-- The icon's 512 frame, scaled so the mat (r 226) clears the text by a
+       good margin and stays inside Play's 16:9 crop on the left. -->
+  <g transform="translate(${MAT_X - 256 * MAT_SCALE}, ${250 - 256 * MAT_SCALE}) scale(${MAT_SCALE})">
     ${glyph.replace(/<svg[^>]*>/, '').replace(/<\/svg>/, '').replace(/<defs>[\s\S]*?<\/defs>/, '')}
   </g>
 
@@ -245,4 +261,4 @@ for (const locale of LOCALES) {
   console.log(`  ${locale.playStore}/feature-graphic.png`);
 }
 
-console.log(`\n${LOCALES.length} feature graphics in assets/play/<lang>/.`);
+console.log(`\n${only ? only.size : LOCALES.length} feature graphics in assets/play/<lang>/.`);
