@@ -89,6 +89,9 @@ const THANKS: Record<TipProductId, { hearts: number; words: MessageKey }> = {
   tip_round: { hearts: 10, words: 'tip.thanksRound' },
 };
 
+/** How long his tip-jar line stays up after a tap on him: time to read three lines. */
+const PITCH_MS = 8000;
+
 /** How long the cloth takes to cross the counter, in ms. Matches the CSS. */
 const WIPE_MS = 900;
 
@@ -120,8 +123,8 @@ const ASSUMED_KEEPER_PX = 139;
 const JAR_BOX_PX = 48;
 const JAR_RIGHT_PX = 6;
 /**
- * How far he stands over the jar: his right side may pass behind it — he is
- * no tap target, and the jar is drawn in front — which gives the present and
+ * How far he stands over the jar: his right side may pass behind it — the
+ * jar is drawn in front, and takes the taps there — which gives the present and
  * the evening to its left that much more of the counter.
  */
 const KEEPER_OVER_JAR_PX = 26;
@@ -399,12 +402,25 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
     return () => timers.forEach((timer) => globalThis.clearTimeout(timer));
   }, [tipping]);
 
+  // Tapped, he says his tip-jar line: asked for, so it may come mid-round,
+  // where he would never bring it up himself. Only where there is a jar to
+  // point at, and gone again on its own — a second tap takes it back sooner.
+  const [pitched, setPitched] = useState(false);
+  useEffect(() => {
+    if (!pitched) return;
+    const timer = globalThis.setTimeout(() => setPitched(false), PITCH_MS);
+    return () => globalThis.clearTimeout(timer);
+  }, [pitched]);
+  const pitching = pitched && tipJar !== undefined && !tipQuestion;
+  // His line on his own initiative, or because he was tapped: the same bubble.
+  const openTipJar = pitching ? tipJar.onOpen : isEmpty ? onTipJar : undefined;
+
   return (
     <div
       className={clsx(
         'bartop',
         isEmpty && 'bartop--empty',
-        isEmpty && onTipJar && 'bartop--tip',
+        openTipJar && 'bartop--tip',
         tipQuestion && 'bartop--asking',
         isWiping && 'bartop--wiping',
         scroll.travelling && 'bartop--travelling',
@@ -494,15 +510,19 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                     </button>
                   </span>
                 </span>
-              ) : isEmpty && onTipJar ? (
-                // Only ever at the start of a round, before anything is
+              ) : openTipJar ? (
+                // Unprompted only at the start of a round, before anything is
                 // poured: never a request made to someone mid-evening.
                 <button
                   type="button"
                   className="bartop__ask bartop__ask--tip"
-                  onClick={onTipJar}
+                  onClick={() => {
+                    setPitched(false);
+                    openTipJar();
+                  }}
                 >
-                  {t('bartop.tipJar')}
+                  {/* Tapped mid-evening he skips the welcome: they never left. */}
+                  {t(pitching ? 'bartop.tipPitch' : 'bartop.tipJar')}
                 </button>
               ) : coinShown && landed ? (
                 // Thanks in words once the coin is in, whether the bar is empty
@@ -514,6 +534,15 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
                 <span className="bartop__ask">{t('bartop.another')}</span>
               ) : null}
               <Barkeeper className="bartop__keeper-figure" />
+              {/* Not a button: the jar beside him is the labelled way to the
+                  same sheet, and he is decoration to a screen reader. */}
+              {tipJar && !tipQuestion && (
+                <span
+                  className="bartop__keeper-tap"
+                  aria-hidden="true"
+                  onClick={() => setPitched((was) => !was)}
+                />
+              )}
             </span>
 
             {tipJar && (
