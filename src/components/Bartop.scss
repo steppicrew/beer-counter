@@ -349,6 +349,17 @@ $ink-line: 2px;
     color: var(--bar-ink);
   }
 
+  // Where a tap on him lands. Not his whole box: its top reaches into the
+  // stretch pulled up over the drink list (see the margin on .bartop), and a
+  // tap there belongs to the row behind his head; its left third is the air
+  // under his outstretched arm, where the newest glasses stand.
+  &__keeper-tap {
+    position: absolute;
+    inset: $glass-size + 4px 0 0 30%;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
   // At the far end of the counter, where a real bar keeps its jar. A
   // button for the tap and the screen reader, dressed as an object: no
   // background, no border, and above all no motion — it waits, it does not ask.
