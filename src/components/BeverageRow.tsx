@@ -18,9 +18,11 @@ interface Props {
   onIncrement: () => void;
   onDecrement: () => void;
   onEdit: () => void;
+  /** A long-press: a round, or a drink counted earlier. */
+  onOrder: () => void;
 }
 
-export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit }: Props) {
+export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit, onOrder }: Props) {
   const { t, locale } = useI18n();
   const count = tallyCount(tally);
   const elapsed = useElapsed(tallyLastAt(tally));
@@ -34,9 +36,10 @@ export function BeverageRow({ beverage, tally, onIncrement, onDecrement, onEdit 
   const currency = storedCurrency ?? defaultCurrencyFor(locale);
   const money = lineTotal(beverage, tally);
 
-  // Long-pressing the tile opens the same editor as the pencil — the quickest
-  // route to a price once you know what the round actually cost.
-  const pressHandlers = useLongPress({ onLongPress: onEdit, onClick: onIncrement });
+  // Long-pressing the tile counts it some other way — a round, or the tap
+  // forgotten earlier. The drink itself is edited with the pencil; both in
+  // one sheet was too much to take in mid-evening.
+  const pressHandlers = useLongPress({ onLongPress: onOrder, onClick: onIncrement });
 
   return (
     <li className={clsx('row', count > 0 && 'row--active')}>

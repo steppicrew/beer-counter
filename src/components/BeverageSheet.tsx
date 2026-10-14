@@ -3,8 +3,6 @@ import clsx from 'clsx';
 import { Sheet } from './Sheet';
 import { ConfirmSheet } from './ConfirmSheet';
 import { BeverageIcon } from './BeverageIcon';
-import { EarlierRow } from './EarlierRow';
-import { RoundRow } from './RoundRow';
 import { useI18n } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
 import { formatMoney, parseMoney, defaultCurrencyFor } from '../lib/money';
@@ -34,7 +32,6 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
     : '';
 
   const storedCurrency = useAppStore((s) => s.currency);
-  const atTable = useAppStore((s) => s.table.length > 1);
   const currency = storedCurrency ?? defaultCurrencyFor(locale);
 
   const [name, setName] = useState(initialName);
@@ -61,12 +58,6 @@ export function BeverageSheet({ existing, onSave, onDelete, onClose }: Props) {
 
   return (
     <Sheet title={isEdit ? t('edit.title') : t('add.title')} onClose={onClose} dismissible={false}>
-      {/* First, because it is what a long-press on a drink is now mostly
-          for: the tap that was forgotten earlier in the evening. */}
-      {/* At a table, the round comes first: the tray arrives far more often
-          than a forgotten tap gets corrected. */}
-      {existing && atTable && <RoundRow beverageId={existing.id} onPoured={onClose} />}
-      {existing && <EarlierRow beverageId={existing.id} onCounted={onClose} />}
 
       <label className="field">
         <span className="field__label">{t('add.name')}</span>

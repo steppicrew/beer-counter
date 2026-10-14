@@ -4,6 +4,7 @@ import { BeverageRow } from './components/BeverageRow';
 import { Bartop } from './components/Bartop';
 import { UiIcon } from './components/UiIcon';
 import { BeverageSheet } from './components/BeverageSheet';
+import { OrderSheet } from './components/OrderSheet';
 import { SettingsSheet } from './components/SettingsSheet';
 import { ResetSheet } from './components/ResetSheet';
 import { ShareSheet } from './components/ShareSheet';
@@ -39,6 +40,7 @@ type Dialog =
   | { kind: 'none' }
   | { kind: 'add' }
   | { kind: 'edit'; beverage: Beverage }
+  | { kind: 'order'; beverage: Beverage }
   | { kind: 'settings' }
   | { kind: 'tip' }
   | { kind: 'reset' }
@@ -354,6 +356,7 @@ export function App() {
                 onIncrement={() => increment(beverage.id)}
                 onDecrement={() => decrement(beverage.id)}
                 onEdit={() => setDialog({ kind: 'edit', beverage })}
+                onOrder={() => setDialog({ kind: 'order', beverage })}
               />
             ))}
           </ul>
@@ -487,6 +490,10 @@ export function App() {
             onDelete={() => removeBeverage(dialog.beverage.id)}
             onClose={() => setDialog({ kind: 'none' })}
           />
+        )}
+
+        {dialog.kind === 'order' && (
+          <OrderSheet beverage={dialog.beverage} onClose={() => setDialog({ kind: 'none' })} />
         )}
 
         {dialog.kind === 'settings' && (
