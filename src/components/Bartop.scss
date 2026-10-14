@@ -266,6 +266,26 @@ $ink-line: 2px;
     transform: translateX(-50%);
   }
 
+  // A round stands like a tray put down rather than a block (see
+  // roundPlaces): every other glass a step further back on the counter top —
+  // a little higher and smaller — and some turned the other way. On the
+  // figure, so the coaster and the drag bubble stay as they are.
+  &__glass--back {
+    bottom: $counter-height + 3px;
+  }
+
+  &__glass--back &__glass-figure {
+    scale: 0.92;
+  }
+
+  &__glass--flip &__glass-figure {
+    scale: -1 1;
+  }
+
+  &__glass--back#{&}__glass--flip &__glass-figure {
+    scale: -0.92 0.92;
+  }
+
   // A glass can be held and slid back to when it was really drunk (see
   // useGlassDrag). It takes presses only for that: vertical swipes stay the
   // browser's, so the list still scrolls when a finger starts on a glass, and
