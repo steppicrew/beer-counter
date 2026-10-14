@@ -152,6 +152,13 @@
     font-size: vars.$font-md;
   }
 
+  &__hint {
+    flex: 1 0 100%;
+    margin: 0;
+    font-size: vars.$font-sm;
+    color: var(--text-muted);
+  }
+
   // Swiping sideways switches person; only up and down is the browser's.
   &__main--table {
     touch-action: pan-y;

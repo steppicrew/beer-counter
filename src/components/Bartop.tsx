@@ -39,6 +39,8 @@ interface Props {
   tallies: Record<string, Record<string, Tally>>;
   /** Who is at the table, in seat order. */
   seats: readonly string[];
+  /** More than one at the table: now and then he offers a round. */
+  atTable?: boolean;
   /**
    * Each person's colour, when there is more than one of them: then every
    * glass stands on a coaster in its drinker's colour. Absent for one alone.
@@ -201,6 +203,7 @@ export function Bartop({
   beverages,
   tallies,
   seats,
+  atTable = false,
   colours,
   now,
   hidden,
@@ -358,6 +361,11 @@ export function Bartop({
     return { min: Math.min(min, glass.at), max: Math.max(max, glass.at) };
   };
   const clockLabel = new Intl.DateTimeFormat(locale, { timeStyle: 'short' });
+
+  // At a table he offers a round from time to time, instead of his usual
+  // line: on a fresh table, then every other time he speaks up. Keyed on the
+  // number of glasses, so it holds still while he says it.
+  const offersRound = atTable && glasses.length % 2 === 0;
 
   // Named days only appear once the round has run past midnight, so an
   // ordinary evening keeps bare hours on the counter.
@@ -563,9 +571,9 @@ export function Bartop({
                 // or not; until the next drink, then back to taking orders.
                 <span className="bartop__ask">{t(THANKS[tipping ?? 'tip_small'].words)}</span>
               ) : isEmpty ? (
-                <span className="bartop__ask">{t('bartop.ask')}</span>
+                <span className="bartop__ask">{t(offersRound ? 'bartop.round' : 'bartop.ask')}</span>
               ) : isStale ? (
-                <span className="bartop__ask">{t('bartop.another')}</span>
+                <span className="bartop__ask">{t(offersRound ? 'bartop.round' : 'bartop.another')}</span>
               ) : null}
               <Barkeeper className="bartop__keeper-figure" />
               {/* Not a button: the jar beside him is the labelled way to the
