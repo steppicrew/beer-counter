@@ -1,6 +1,47 @@
 @use '../styles/vars' as vars;
 
 .stats {
+  // Whose numbers these are. Wraps: a table of six names is several lines
+  // at 320px, and a sideways-scrolling row would hide who is selectable.
+  &__who {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$space-xs;
+  }
+
+  &__chip {
+    display: flex;
+    align-items: center;
+    gap: vars.$space-xs;
+    min-height: 40px;
+    padding: 0 vars.$space-md;
+    border-radius: vars.$radius-pill;
+    background: var(--bg-sunken);
+    border: 2px solid var(--border);
+    font-size: vars.$font-md;
+    font-weight: vars.$weight-semibold;
+    color: var(--text-muted);
+
+    // The same dot and ring as their tab at the table.
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: vars.$radius-pill;
+      background: var(--person);
+    }
+
+    &--everyone::before {
+      display: none;
+    }
+
+    &--selected {
+      background: var(--bg-elevated);
+      border-color: var(--person, var(--accent));
+      color: var(--text);
+    }
+  }
+
   &__period {
     display: flex;
     flex-direction: column;

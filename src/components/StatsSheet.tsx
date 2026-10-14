@@ -6,8 +6,11 @@ import { BeverageIcon } from './BeverageIcon';
 import { useI18n } from '../i18n';
 import type { MessageKey } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
-import { archiveRound, computeStats, firstDayOfWeek } from '../lib/stats';
-import type { PeriodStats, StatsName, StatsPeriod } from '../lib/stats';
+import { archiveRound, computeStats, firstDayOfWeek, othersIn } from '../lib/stats';
+import type { PeriodStats, StatsName, StatsPeriod, StatsWho } from '../lib/stats';
+import { personColourVar, personName } from '../lib/people';
+import type { CSSProperties } from 'react';
+import { ME } from '../lib/types';
 import { formatMoney, defaultCurrencyFor } from '../lib/money';
 import { liquidVar } from '../lib/liquids';
 import './StatsSheet.scss';
@@ -43,6 +46,7 @@ export function StatsSheet({ onClose }: { onClose: () => void }) {
   const beverages = useAppStore((s) => s.beverages);
   const tallies = useAppStore((s) => s.tallies);
   const people = useAppStore((s) => s.people);
+  const activePerson = useAppStore((s) => s.activePerson);
   const history = useAppStore((s) => s.history);
   const historyEnabled = useAppStore((s) => s.historyEnabled);
   const setHistoryEnabled = useAppStore((s) => s.setHistoryEnabled);
@@ -50,6 +54,8 @@ export function StatsSheet({ onClose }: { onClose: () => void }) {
   const storedCurrency = useAppStore((s) => s.currency);
 
   const [period, setPeriod] = useState<StatsPeriod>('week');
+  // Opens on whoever the list was counting for: from Hans's tab, his evening.
+  const [who, setWho] = useState<StatsWho>(activePerson);
   const [confirmClear, setConfirmClear] = useState(false);
 
   const currency = storedCurrency ?? defaultCurrencyFor(locale);
@@ -58,7 +64,16 @@ export function StatsSheet({ onClose }: { onClose: () => void }) {
   // The round in progress counts too — otherwise tonight would be missing
   // from this week until the next reset.
   const current = archiveRound(beverages, tallies, people);
-  const stats = computeStats(current ? [...history, current] : history, period, weekStart);
+  const rounds = current ? [...history, current] : history;
+
+  // A choice of whose stats only once anyone else has ever been counted.
+  // Those still known by name each get a chip; a guest from a past night is
+  // in "Everyone" only, or the row would grow with every evening out.
+  const counted = othersIn(rounds);
+  const choices = counted.size > 0 ? people.filter((p) => p.id === ME || counted.has(p.id)) : [];
+  // Someone with nothing counted yet has no stats to open on.
+  const shown: StatsWho = who === 'table' || choices.some((p) => p.id === who) ? who : ME;
+  const stats = computeStats(rounds, period, weekStart, shown);
 
   const nameOf = (n: StatsName) => (n.nameKey ? t(n.nameKey as MessageKey) : (n.name ?? ''));
 
@@ -77,6 +92,31 @@ export function StatsSheet({ onClose }: { onClose: () => void }) {
           </button>
         ))}
       </div>
+
+      {choices.length > 0 && (
+        <div className="stats__who" role="group" aria-label={t('people.tabs')}>
+          {choices.map((person) => (
+            <button
+              key={person.id}
+              type="button"
+              className={clsx('stats__chip', shown === person.id && 'stats__chip--selected')}
+              style={{ '--person': personColourVar(person.colour) } as CSSProperties}
+              onClick={() => setWho(person.id)}
+              aria-pressed={shown === person.id}
+            >
+              {personName(person, t)}
+            </button>
+          ))}
+          <button
+            type="button"
+            className={clsx('stats__chip', 'stats__chip--everyone', shown === 'table' && 'stats__chip--selected')}
+            onClick={() => setWho('table')}
+            aria-pressed={shown === 'table'}
+          >
+            {t('stats.everyone')}
+          </button>
+        </div>
+      )}
 
       {stats.length === 0 && <p className="field__hint">{t('stats.empty')}</p>}
 
