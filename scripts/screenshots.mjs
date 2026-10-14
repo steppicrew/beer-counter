@@ -140,6 +140,63 @@ function pastRounds(t, code) {
   });
 }
 
+/**
+ * Two friends at the table per language, under names that sound like a
+ * Friday night there rather than like a translated "Tom and Anna".
+ */
+const FRIENDS = {
+  en: ['Jack', 'Emily'],
+  de: ['Jonas', 'Lena'],
+  fr: ['Lucas', 'Camille'],
+  es: ['Pablo', 'Lucía'],
+  it: ['Marco', 'Giulia'],
+  nl: ['Daan', 'Sanne'],
+  pl: ['Kuba', 'Ola'],
+  pt: ['João', 'Inês'],
+  cs: ['Honza', 'Tereza'],
+  sk: ['Miro', 'Zuzka'],
+  da: ['Mads', 'Freja'],
+  sv: ['Erik', 'Elsa'],
+  nb: ['Ola', 'Ingrid'],
+  fi: ['Mikko', 'Aino'],
+  hu: ['Bence', 'Réka'],
+  ro: ['Andrei', 'Ioana'],
+  hr: ['Ivan', 'Ana'],
+  bg: ['Георги', 'Мария'],
+  el: ['Νίκος', 'Ελένη'],
+  uk: ['Тарас', 'Олена'],
+  tr: ['Emre', 'Elif'],
+  ru: ['Дима', 'Аня'],
+  ja: ['健太', '結衣'],
+  zh: ['小明', '小丽'],
+};
+
+/**
+ * A table of three — Me and two friends — on the evening's second round:
+ * the round just arrived stands on the bar side by side, all at one moment.
+ * `active` is whose drinks the list shows.
+ */
+function tableOfThree(t, code, active) {
+  const [a, b] = FRIENDS[code] ?? FRIENDS.en;
+  return {
+    beverages: priced(code),
+    people: [
+      { id: 'me', scope: 'default', colour: 0 },
+      { id: 'default-a', name: a, scope: 'default', colour: 1 },
+      { id: 'default-b', name: b, scope: 'default', colour: 2 },
+    ],
+    table: ['me', 'default-a', 'default-b'],
+    activePerson: active,
+    // Nobody needs telling about the long-press in a store picture.
+    roundHintSeen: true,
+    tallies: {
+      me: { beer: at(t, 132, 3), schnapps: at(t, 61) },
+      'default-a': { beer: at(t, 132, 3), wine: at(t, 84) },
+      'default-b': { 'beer-small': at(t, 118), wine: at(t, 52), beer: at(t, 3) },
+    },
+  };
+}
+
 const SCENES = [
   {
     file: '01-counting',
@@ -218,6 +275,43 @@ const SCENES = [
     async after(page) {
       await page.locator('.app__add').click();
       await page.waitForSelector('.sheet__panel');
+      await page.waitForTimeout(400);
+    },
+  },
+  {
+    // A friend's tab: their colour on the header and counts, the round of
+    // three on the bar.
+    file: '06-table',
+    theme: 'light',
+    state: (t, code) => tableOfThree(t, code, 'default-a'),
+  },
+  {
+    // Long-press on the beer: one each for the whole table.
+    file: '07-round',
+    theme: 'dark',
+    state: (t, code) => tableOfThree(t, code, 'me'),
+    async after(page) {
+      const tile = page.locator('.row__add').first();
+      const box = await tile.boundingBox();
+      await page.mouse.move(box.x + box.width / 3, box.y + box.height / 2);
+      await page.mouse.down();
+      await page.waitForTimeout(800);
+      await page.mouse.up();
+      await page.waitForSelector('.round__pour');
+      await page.waitForTimeout(400);
+    },
+  },
+  {
+    // The Table tab: who had what, and what each one owes.
+    file: '08-bill',
+    theme: 'light',
+    state: (t, code) => tableOfThree(t, code, 'me'),
+    async after(page) {
+      await page.locator('.people-tabs__tab--table').click();
+      await page.waitForSelector('.table-sum');
+      // The table's total is the point of the picture; at the bottom of the
+      // list it stood under the bar's fade. Scrolled up clear of it.
+      await page.locator('.app__main').evaluate((el) => (el.scrollTop = el.scrollHeight));
       await page.waitForTimeout(400);
     },
   },
@@ -311,17 +405,20 @@ for (const locale of targets) {
       }, stagedNow());
 
       // Seed state before the app's first paint so nothing flashes empty.
+      // Store v5 counts per person; a scene without people is all Me's.
+      const seeded = scene.state(stagedNow(), locale.code);
+      if (!seeded.people) seeded.tallies = { me: seeded.tallies };
       await page.addInitScript(
         ({ state, theme, code }) => {
           localStorage.setItem(
             'beer-counter-state',
             JSON.stringify({
               state: { ...state, sessionStartedAt: Date.now(), theme, locale: code },
-              version: 4,
+              version: 5,
             }),
           );
         },
-        { state: scene.state(stagedNow(), locale.code), theme: scene.theme, code: locale.code },
+        { state: seeded, theme: scene.theme, code: locale.code },
       );
 
       await page.goto(BASE, { waitUntil: 'networkidle' });
