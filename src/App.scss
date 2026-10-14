@@ -18,7 +18,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    // The table's tabs, when there are any, take a second row.
+    flex-wrap: wrap;
     gap: vars.$space-md;
+    row-gap: vars.$space-sm;
     padding: calc(#{vars.$space-md} + env(safe-area-inset-top)) vars.$space-md vars.$space-md;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
@@ -38,10 +41,21 @@
     // Without this the block refuses to shrink below its content and wraps
     // nothing, no matter how narrow the screen.
     min-width: 0;
+    // Shrinks from a zero basis: the header wraps too, for the table's tabs,
+    // and a long name ("FRIEDERIKE 3") must wrap its price, not push the
+    // buttons onto the tabs' row.
+    flex: 1 1 0;
     row-gap: 2px;
   }
 
   &__total-label {
+    // In table mode this is a name, and the header has ~80px left for it at
+    // 320px; a long one is cut rather than wrapping the count away from it.
+    // The tab below names them in full.
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: vars.$font-md;
     line-height: 1;
     text-transform: uppercase;
@@ -138,6 +152,11 @@
     font-size: vars.$font-md;
   }
 
+  // Swiping sideways switches person; only up and down is the browser's.
+  &__main--table {
+    touch-action: pan-y;
+  }
+
   &__list {
     list-style: none;
     margin: 0;
@@ -145,6 +164,21 @@
     display: flex;
     flex-direction: column;
     gap: vars.$space-sm;
+
+    // Short and small: enough to say "the next person along", not a page turn.
+    &--from-right {
+      animation: app-list-in 180ms vars.$ease both;
+      --list-from: 24px;
+    }
+
+    &--from-left {
+      animation: app-list-in 180ms vars.$ease both;
+      --list-from: -24px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   // Web only: hidden in the packaged app and once already installed.
@@ -229,8 +263,14 @@
     background: linear-gradient(to top, var(--bg) 62%, transparent);
   }
 
+  &__footer-actions {
+    display: flex;
+    gap: vars.$space-sm;
+  }
+
   &__add {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
   }
 
   // Web only — the packaged app hides this (see isNativeApp).
@@ -268,5 +308,12 @@
     svg {
       font-size: 14px;
     }
+  }
+}
+
+@keyframes app-list-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--list-from));
   }
 }

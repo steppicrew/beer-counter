@@ -1,0 +1,71 @@
+@use '../styles/vars' as vars;
+
+.people-tabs {
+  // A row of its own under the totals, inside the sticky header, so whose
+  // list this is stays in view however far it is scrolled.
+  flex: 1 0 100%;
+  display: flex;
+  align-items: center;
+  gap: vars.$space-sm;
+  min-width: 0;
+
+  &__list {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    gap: vars.$space-xs;
+    // Six names do not fit 320px in any language; the strip scrolls rather
+    // than wrapping, so the header keeps its height whoever is here.
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  &__tab {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: vars.$space-xs;
+    min-height: 40px;
+    max-width: 10em;
+    padding: 0 vars.$space-md;
+    border-radius: vars.$radius-pill;
+    background: var(--bg-sunken);
+    border: 2px solid var(--border);
+    font-size: vars.$font-md;
+    font-weight: vars.$weight-semibold;
+    color: var(--text-muted);
+
+    // Their colour, as on the coasters under their glasses.
+    &::before {
+      content: '';
+      flex: none;
+      width: 10px;
+      height: 10px;
+      border-radius: vars.$radius-pill;
+      background: var(--person);
+    }
+
+    // Ringed in their colour: whose list this is has to be unmistakable — a
+    // drink counted on the wrong tab is the one mistake this mode invites. A
+    // ring rather than a fill, which no single text colour reads well on
+    // across all eight.
+    &--active {
+      background: var(--bg-elevated);
+      border-color: var(--person);
+      color: var(--text);
+    }
+  }
+
+  &__name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__count {
+    font-variant-numeric: tabular-nums;
+    font-weight: vars.$weight-heavy;
+  }
+}
