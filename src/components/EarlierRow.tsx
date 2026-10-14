@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import clsx from 'clsx';
 import { useI18n } from '../i18n';
 import { talliesOf, useAppStore } from '../store/useAppStore';
 
@@ -24,8 +25,19 @@ export function forgottenAt(own: number[], all: number[], now: number): number {
 const agoFromNow = (minutes: number) => Date.now() - minutes * MINUTE;
 const forgottenFromNow = (own: number[], all: number[]) => forgottenAt(own, all, Date.now());
 
-/** "Count one earlier" in the drink's edit sheet: one tap counts and closes. */
-export function EarlierRow({ beverageId, onCounted }: { beverageId: string; onCounted: () => void }) {
+/**
+ * "Count one earlier" in a drink's order sheet: one tap counts and closes.
+ * `plain` under the round at a table, so only the round's button is orange.
+ */
+export function EarlierRow({
+  beverageId,
+  onCounted,
+  plain = false,
+}: {
+  beverageId: string;
+  onCounted: () => void;
+  plain?: boolean;
+}) {
   const { t, locale } = useI18n();
   // Whose evening the gap is guessed from: the person the list counts for.
   const tallies = useAppStore((s) => talliesOf(s, s.activePerson));
@@ -52,7 +64,11 @@ export function EarlierRow({ beverageId, onCounted }: { beverageId: string; onCo
     <div className="field">
       <span className="field__label">{t('earlier.title')}</span>
       <div className="earlier">
-        <button type="button" className="btn btn--primary earlier__forgot" onClick={countForgotten}>
+        <button
+          type="button"
+          className={clsx('btn', plain ? 'btn--ghost' : 'btn--primary', 'earlier__forgot')}
+          onClick={countForgotten}
+        >
           {t('earlier.forgot')}
           <span className="earlier__time">{time.format(forgot)}</span>
         </button>
