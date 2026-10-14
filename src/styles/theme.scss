@@ -8,9 +8,46 @@
 // `.tokens-light` carries the light values whatever the page's theme: the
 // launcher-shortcut icons are drawn from the app's own icons onto a cream mat,
 // and the dark theme's pale ink would vanish on it (lib/shortcutIcons.ts).
+// At a table the header takes on a little of the selected person's colour and
+// the drink counts take all of it, so whose drinks the list counts shows from
+// across the table (see App.tsx, which sets `--tint` and `data-tint`). Only
+// the header: a wash over the whole page fought the drinks' own colours.
+// Registered so a switch fades instead of jumping; untinted the share is 0%,
+// which gives the plain header exactly.
+@property --tint {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #000;
+}
+
+@property --tint-amount {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 0%;
+}
+
+:root {
+  transition:
+    --tint 260ms vars.$ease,
+    --tint-amount 260ms vars.$ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+:root[data-tint] {
+  --tint-amount: var(--tint-strength);
+  // Their colour for the counts; the accent everywhere else, and alone.
+  --person-ink: var(--tint);
+}
+
 :root,
 .tokens-light {
   --bg: #{vars.$color-foam};
+  // A wash, not a colour: enough to tell people apart at a glance, little
+  // enough that the header's text keeps its contrast.
+  --tint-strength: 14%;
   --bg-elevated: #ffffff;
   --bg-sunken: #{color.adjust(vars.$color-foam, $lightness: -4%)};
   --border: #{color.adjust(vars.$color-foam, $lightness: -12%)};
@@ -73,6 +110,8 @@
 
 @mixin dark-tokens {
   --bg: #12100e;
+  // The dark page swallows a wash; a little more of it reads the same.
+  --tint-strength: 18%;
   --bg-elevated: #1e1b17;
   --bg-sunken: #0b0a09;
   --border: #{vars.$color-umber};

@@ -23,7 +23,7 @@
     gap: vars.$space-md;
     row-gap: vars.$space-sm;
     padding: calc(#{vars.$space-md} + env(safe-area-inset-top)) vars.$space-md vars.$space-md;
-    background: var(--bg);
+    background: color-mix(in srgb, var(--tint) var(--tint-amount), var(--bg));
     border-bottom: 1px solid var(--border);
   }
 
@@ -76,7 +76,7 @@
     line-height: 1;
     font-weight: vars.$weight-heavy;
     font-variant-numeric: tabular-nums;
-    color: var(--accent);
+    color: var(--person-ink, var(--accent));
   }
 
   &__header-actions {
