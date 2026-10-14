@@ -2,6 +2,36 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.20",
+      "date": "2026-10-14",
+      "notes": {
+        "en": "Count for the whole table: seat your friends, switch with a tap or a swipe, order a round in one go and see what everyone owes.",
+        "de": "Zähle für den ganzen Tisch: Freunde dazusetzen, per Tippen oder Wischen wechseln, eine Runde auf einmal bestellen und sehen, was jeder zahlt.",
+        "fr": "Comptez pour toute la table : installez vos amis, changez d’un geste, commandez une tournée d’un coup et voyez ce que chacun doit.",
+        "es": "Cuenta para toda la mesa: sienta a tus amigos, cambia con un toque o deslizando, pide una ronda de una vez y mira lo que debe cada uno.",
+        "it": "Conta per tutto il tavolo: fai sedere gli amici, passa dall’uno all’altro con un tocco, ordina un giro in un colpo e vedi quanto deve ciascuno.",
+        "nl": "Tel voor de hele tafel: zet je vrienden erbij, wissel met een tik of veeg, bestel in één keer een rondje en zie wat iedereen moet betalen.",
+        "pl": "Licz dla całego stołu: dodaj znajomych, przełączaj stuknięciem lub przesunięciem, zamów kolejkę naraz i zobacz, ile kto płaci.",
+        "pt": "Conte para a mesa toda: sente os amigos, troque com um toque ou deslize, peça uma rodada de uma vez e veja quanto cada um deve.",
+        "cs": "Počítej za celý stůl: přisaď kamarády, přepínej klepnutím nebo přejetím, objednej rundu najednou a uvidíš, kdo kolik platí.",
+        "sk": "Počítaj za celý stôl: prisaď kamarátov, prepínaj ťuknutím alebo potiahnutím, objednaj rundu naraz a uvidíš, kto koľko platí.",
+        "da": "Tæl for hele bordet: sæt vennerne ved bordet, skift med et tryk eller stryg, bestil en omgang på én gang og se, hvad hver skylder.",
+        "sv": "Räkna för hela bordet: lägg till vännerna, byt med ett tryck eller svep, beställ en runda på en gång och se vad var och en ska betala.",
+        "nb": "Tell for hele bordet: sett vennene til bords, bytt med et trykk eller sveip, bestill en runde på én gang og se hva hver skylder.",
+        "fi": "Laske koko pöydälle: lisää kaverit, vaihda napautuksella tai pyyhkäisyllä, tilaa kierros kerralla ja näe, mitä kukin on velkaa.",
+        "hu": "Számolj az egész asztalnak: ültesd le a barátaidat, válts koppintással vagy húzással, rendelj egyszerre egy kört, és lásd, ki mennyivel tartozik.",
+        "ro": "Numără pentru toată masa: adaugă-ți prietenii, schimbă cu o atingere sau o glisare, comandă un rând dintr-odată și vezi cât datorează fiecare.",
+        "hr": "Broji za cijeli stol: posjedni prijatelje, mijenjaj dodirom ili povlačenjem, naruči rundu odjednom i vidi koliko tko duguje.",
+        "bg": "Брой за цялата маса: добави приятелите си, сменяй с докосване или плъзгане, поръчай рундче наведнъж и виж кой колко дължи.",
+        "el": "Μέτρα για όλο το τραπέζι: βάλε τους φίλους σου, άλλαξε με ένα πάτημα ή σύρσιμο, παράγγειλε γύρο με μια κίνηση και δες τι χρωστά ο καθένας.",
+        "uk": "Рахуйте за весь стіл: додайте друзів, перемикайтеся дотиком або свайпом, замовте раунд за раз і бачте, хто скільки винен.",
+        "tr": "Bütün masa için say: arkadaşlarını ekle, dokunarak ya da kaydırarak geç, tek seferde bir tur söyle ve kimin ne kadar ödeyeceğini gör.",
+        "ru": "Считайте за весь стол: добавьте друзей, переключайтесь касанием или свайпом, заказывайте раунд за раз и смотрите, кто сколько должен.",
+        "ja": "テーブル全員の分を数えられます。友だちを追加し、タップやスワイプで切り替え、まとめて一杯ずつ注文、誰がいくら払うかもひと目で。",
+        "zh": "为整桌计数：添加朋友，点按或滑动切换，一次点一轮，还能看到每人该付多少。"
+      }
+    },
+    {
       "version": "1.7.18",
       "date": "2026-10-06",
       "notes": {
