@@ -34,6 +34,11 @@ interface AppState {
   table: string[];
   /** Whose drinks the list counts. */
   activePerson: string;
+  /**
+   * Set once a drink has been long-pressed: from then on the table's hint
+   * about rounds is no longer needed. Nobody discovers a long-press alone.
+   */
+  roundHintSeen: boolean;
   sessionStartedAt: number;
   /** Finished rounds, oldest first. Only ever written by resetSession. */
   history: Round[];
@@ -98,6 +103,7 @@ interface AppState {
    */
   setSeated: (id: string, seated: boolean) => void;
   setActivePerson: (id: string) => void;
+  markRoundHintSeen: () => void;
 
   addBeverage: (input: {
     name: string;
@@ -215,6 +221,7 @@ export const useAppStore = create<AppState>()(
         people: [ME_PERSON],
         table: [ME],
         activePerson: ME,
+        roundHintSeen: false,
         sessionStartedAt: Date.now(),
         history: [],
         historyEnabled: true,
@@ -338,6 +345,8 @@ export const useAppStore = create<AppState>()(
             };
           }),
 
+        markRoundHintSeen: () => set({ roundHintSeen: true }),
+
         setActivePerson: (id) =>
           set((state) => (state.table.includes(id) ? { activePerson: id } : state)),
 
@@ -454,6 +463,7 @@ export const useAppStore = create<AppState>()(
           people: state.people,
           table: state.table,
           activePerson: state.activePerson,
+          roundHintSeen: state.roundHintSeen,
           sessionStartedAt: state.sessionStartedAt,
           history: state.history,
           historyEnabled: state.historyEnabled,

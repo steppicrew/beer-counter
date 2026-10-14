@@ -64,6 +64,8 @@ export function App() {
   const activePerson = useAppStore((s) => s.activePerson);
   const setActivePerson = useAppStore((s) => s.setActivePerson);
   const tableTotal = useAppStore((s) => s.totalDrinks());
+  const roundHintSeen = useAppStore((s) => s.roundHintSeen);
+  const markRoundHintSeen = useAppStore((s) => s.markRoundHintSeen);
   const theme = useAppStore((s) => s.theme);
   const storedLocale = useAppStore((s) => s.locale);
   const storedCurrency = useAppStore((s) => s.currency);
@@ -328,6 +330,9 @@ export function App() {
             </button>
           </div>
           {tableMode && <PeopleTabs current={current} onSelect={switchTo} />}
+          {/* Until the first long-press: the round is why one counts for a
+              table, and nothing on screen would otherwise reveal it. */}
+          {tableMode && !roundHintSeen && <p className="app__hint">{t('people.roundHint')}</p>}
         </header>
 
         <main className={clsx('app__main', tableMode && 'app__main--table')} {...swipe}>
@@ -356,7 +361,10 @@ export function App() {
                 onIncrement={() => increment(beverage.id)}
                 onDecrement={() => decrement(beverage.id)}
                 onEdit={() => setDialog({ kind: 'edit', beverage })}
-                onOrder={() => setDialog({ kind: 'order', beverage })}
+                onOrder={() => {
+                  markRoundHintSeen();
+                  setDialog({ kind: 'order', beverage });
+                }}
               />
             ))}
           </ul>
@@ -371,6 +379,7 @@ export function App() {
           beverages={beverages}
           tallies={tableTallies}
           seats={table}
+          atTable={tableMode}
           colours={
             table.length > 1
               ? Object.fromEntries(people.map((p) => [p.id, p.colour]))
