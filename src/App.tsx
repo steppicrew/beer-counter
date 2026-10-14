@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import clsx from 'clsx';
 import { BeverageRow } from './components/BeverageRow';
 import { Bartop } from './components/Bartop';
 import { UiIcon } from './components/UiIcon';
@@ -8,6 +9,8 @@ import { ResetSheet } from './components/ResetSheet';
 import { ShareSheet } from './components/ShareSheet';
 import { TipSheet } from './components/TipSheet';
 import { StatsSheet } from './components/StatsSheet';
+import { PeopleSheet } from './components/PeopleSheet';
+import { PeopleTabs } from './components/PeopleTabs';
 import { talliesOf, useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage, Tally } from './lib/types';
@@ -21,6 +24,8 @@ import { useSystemDark } from './lib/useSystemDark';
 import { useViewportInset } from './lib/useViewportInset';
 import { useLauncherShortcuts } from './lib/useLauncherShortcuts';
 import { useBarClock } from './lib/useBarClock';
+import { useSwipe } from './lib/useSwipe';
+import { personName } from './lib/people';
 import { formatMoney, defaultCurrencyFor, currencySymbol } from './lib/money';
 import './App.scss';
 
@@ -37,7 +42,8 @@ type Dialog =
   | { kind: 'tip' }
   | { kind: 'reset' }
   | { kind: 'share' }
-  | { kind: 'stats' };
+  | { kind: 'stats' }
+  | { kind: 'people' };
 
 // The page backgrounds, mirroring --bg in styles/theme.scss. Duplicated here
 // because the system bars need the value as a plain colour before any
@@ -52,6 +58,9 @@ export function App() {
   const tableTallies = useAppStore((s) => s.tallies);
   const table = useAppStore((s) => s.table);
   const people = useAppStore((s) => s.people);
+  const activePerson = useAppStore((s) => s.activePerson);
+  const setActivePerson = useAppStore((s) => s.setActivePerson);
+  const tableTotal = useAppStore((s) => s.totalDrinks());
   const theme = useAppStore((s) => s.theme);
   const storedLocale = useAppStore((s) => s.locale);
   const storedCurrency = useAppStore((s) => s.currency);
@@ -152,6 +161,24 @@ export function App() {
 
   const totals = computeTotals(beverages, tallies);
   const total = totals.drinks;
+
+  // More than one at the table: tabs, a swipe between them, and the header
+  // naming whose total it shows. Alone it is the counter it always was.
+  const tableMode = table.length > 1;
+  const active = people.find((p) => p.id === activePerson);
+  // Which way the list came in, so a swipe reads as moving along the table.
+  const [enteredFrom, setEnteredFrom] = useState<-1 | 1 | 0>(0);
+  const switchTo = (id: string) => {
+    const from = table.indexOf(activePerson);
+    const to = table.indexOf(id);
+    if (to === -1 || to === from) return;
+    setEnteredFrom(to > from ? 1 : -1);
+    setActivePerson(id);
+  };
+  const swipe = useSwipe((direction) => {
+    const next = table[table.indexOf(activePerson) - direction];
+    if (next !== undefined) switchTo(next);
+  }, tableMode);
   const currency = storedCurrency ?? defaultCurrencyFor(locale);
 
   // The barkeeper mentions the tip jar once, to a regular, on an empty bar —
@@ -159,7 +186,7 @@ export function App() {
   // web. Never tied to how much has been drunk.
   const tipOffers = useTipOffers();
   const canTip = isNativeApp() ? tipOffers.length > 0 : TIP_URL !== null;
-  const regular = canTip && rounds >= REGULAR_AFTER_ROUNDS && total === 0;
+  const regular = canTip && rounds >= REGULAR_AFTER_ROUNDS && tableTotal === 0;
   const tipJarAsk = regular && !tipAsked && !tipped;
 
   // The jar itself is always on the bar wherever a tip is possible — silent,
@@ -208,19 +235,21 @@ export function App() {
   // after that the coin simply lies in the jar.
   const totalAtDrop = useRef<number | null>(null);
   useEffect(() => {
-    if (dropping && totalAtDrop.current === null) totalAtDrop.current = total;
-    else if (totalAtDrop.current !== null && total !== totalAtDrop.current) {
+    if (dropping && totalAtDrop.current === null) totalAtDrop.current = tableTotal;
+    else if (totalAtDrop.current !== null && tableTotal !== totalAtDrop.current) {
       totalAtDrop.current = null;
       clearCoin();
     }
-  }, [dropping, total, clearCoin]);
+  }, [dropping, tableTotal, clearCoin]);
 
   return (
     <I18nContext.Provider value={{ locale, t }}>
       <div className="app">
         <header className="app__header">
           <div className="app__totals">
-            <span className="app__total-label">{t('total.label')}</span>
+            <span className="app__total-label">
+              {tableMode && active ? personName(active, t) : t('total.label')}
+            </span>
             <span className="app__total-value">{total}</span>
             {totals.anyPriced && (
               <span
@@ -267,14 +296,20 @@ export function App() {
               className="app__icon-btn app__icon-btn--reset"
               onClick={() => setDialog({ kind: 'reset' })}
               aria-label={t('action.reset')}
-              disabled={total === 0 && beverages.every((b) => b.scope === 'default')}
+              disabled={
+                tableTotal === 0 &&
+                beverages.every((b) => b.scope === 'default') &&
+                people.every((p) => p.scope === 'default') &&
+                !tableMode
+              }
             >
               <UiIcon name="reset" />
             </button>
           </div>
+          {tableMode && <PeopleTabs onSelect={switchTo} />}
         </header>
 
-        <main className="app__main">
+        <main className={clsx('app__main', tableMode && 'app__main--table')} {...swipe}>
           {total === 0 && (
             <div className="app__empty">
               <p className="app__empty-title">{t('empty.title')}</p>
@@ -282,7 +317,15 @@ export function App() {
             </div>
           )}
 
-          <ul className="app__list">
+          <ul
+            // Keyed by person, so the list slides in afresh for each of them.
+            key={activePerson}
+            className={clsx(
+              'app__list',
+              enteredFrom === 1 && 'app__list--from-right',
+              enteredFrom === -1 && 'app__list--from-left',
+            )}
+          >
             {beverages.map((beverage) => (
               <BeverageRow
                 key={beverage.id}
@@ -361,13 +404,25 @@ export function App() {
         )}
 
         <footer className="app__footer">
-          <button
-            type="button"
-            className="btn btn--ghost app__add"
-            onClick={() => setDialog({ kind: 'add' })}
-          >
-            ＋ {t('action.addDrink')}
-          </button>
+          <div className="app__footer-actions">
+            <button
+              type="button"
+              className="btn btn--ghost app__add"
+              onClick={() => setDialog({ kind: 'add' })}
+            >
+              ＋ {t('action.addDrink')}
+            </button>
+            {/* The way into counting for the whole table. Down here rather
+                than in the header, which has no room left at 320px. */}
+            <button
+              type="button"
+              className="app__icon-btn"
+              onClick={() => setDialog({ kind: 'people' })}
+              aria-label={t('people.open')}
+            >
+              <UiIcon name="people" />
+            </button>
+          </div>
 
           {showLegal && (
             <nav className="app__legal">
@@ -422,6 +477,8 @@ export function App() {
         {dialog.kind === 'stats' && <StatsSheet onClose={() => setDialog({ kind: 'none' })} />}
 
         {dialog.kind === 'share' && <ShareSheet onClose={() => setDialog({ kind: 'none' })} />}
+
+        {dialog.kind === 'people' && <PeopleSheet onClose={() => setDialog({ kind: 'none' })} />}
 
         {dialog.kind === 'reset' && (
           <ResetSheet onConfirm={resetSession} onClose={() => setDialog({ kind: 'none' })} />

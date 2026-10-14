@@ -1,5 +1,5 @@
 interface Props {
-  name: 'settings' | 'reset' | 'edit' | 'android' | 'share' | 'stats';
+  name: 'settings' | 'reset' | 'edit' | 'android' | 'share' | 'stats' | 'people';
   className?: string;
 }
 
@@ -86,6 +86,27 @@ const PATHS: Record<Props['name'], React.ReactNode> = {
         fill="none"
         stroke="currentColor"
         strokeWidth="1.9"
+        strokeLinecap="round"
+      />
+    </>
+  ),
+  people: (
+    <>
+      {/* Two at a table: one in front, a second half behind, so it reads as
+          company rather than as a single profile. */}
+      <circle cx="9" cy="8.2" r="3.3" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path
+        d="M2.8 20a6.2 6.2 0 0 1 12.4 0"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M15.2 5.2a3.3 3.3 0 0 1 0 6.1M17.6 14.2a6.2 6.2 0 0 1 3.6 5.8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
         strokeLinecap="round"
       />
     </>

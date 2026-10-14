@@ -1,0 +1,120 @@
+@use '../styles/vars' as vars;
+
+.people {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-sm;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    // The rename row carries a field and two buttons, which do not share one
+    // line at 320px in German; the field takes a line of its own then.
+    flex-wrap: wrap;
+    gap: vars.$space-sm;
+  }
+
+  &__seat {
+    flex: 1;
+    min-width: 0;
+    min-height: vars.$tap-min;
+    display: flex;
+    align-items: center;
+    gap: vars.$space-sm;
+    padding: vars.$space-xs vars.$space-md;
+    text-align: start;
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+    // Their colour down the leading edge: the same colour as their tab and
+    // the coasters under their glasses.
+    border-inline-start: 6px solid var(--person);
+    border-radius: vars.$radius-sm;
+
+    // Me, a guest, or someone with drinks tonight: here until the reset. Not
+    // greyed out like a broken button — they are simply at the table.
+    &:disabled {
+      opacity: 1;
+    }
+  }
+
+  &__check {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    border-radius: vars.$radius-pill;
+    border: 2px solid var(--person);
+    font-size: vars.$font-sm;
+    font-weight: vars.$weight-heavy;
+    color: var(--bg-elevated);
+  }
+
+  &__seat--seated &__check {
+    background: var(--person);
+  }
+
+  &__name {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: vars.$space-xs;
+    font-size: vars.$font-lg;
+    font-weight: vars.$weight-semibold;
+    overflow-wrap: anywhere;
+  }
+
+  &__scope,
+  &__locked {
+    font-size: vars.$font-sm;
+    font-weight: vars.$weight-regular;
+    color: var(--text-muted);
+  }
+
+  &__locked {
+    flex-basis: 100%;
+  }
+
+  &__count {
+    flex: none;
+    font-size: vars.$font-lg;
+    font-weight: vars.$weight-heavy;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__rename {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  &__small {
+    flex: 1;
+    min-width: 0;
+    padding: 0 vars.$space-md;
+  }
+
+  // Its own block, set off from the list above it like a new field.
+  &__new {
+    margin-top: vars.$space-sm;
+  }
+
+  // The field's own gap is sized for a label and a hint; buttons under an
+  // input need the same air as between the rows of buttons in the sheets.
+  &__add {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$space-sm;
+    margin: vars.$space-xs 0;
+
+    .btn {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 0 vars.$space-md;
+    }
+  }
+}
