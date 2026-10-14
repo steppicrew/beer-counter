@@ -18,7 +18,7 @@ import {
   positionIn,
   PX_PER_HOUR,
   restingWindow,
-  roundOffsets,
+  roundPlaces,
   scrolledBy,
   scrollBounds,
 } from '../lib/bartop';
@@ -308,8 +308,14 @@ export function Bartop({
   const standing = glasses.filter((glass) => !hasFallen(glass, window));
 
   // A round poured at once stands side by side instead of as one glass.
-  const offsets = roundOffsets(glasses);
-  const offsetOf = new Map(glasses.map((g, i) => [g.key, offsets[i] ?? 0]));
+  const places = roundPlaces(glasses);
+  const placeOf = new Map(glasses.map((g, i) => [g.key, places[i]]));
+  // The back row drawn first, so the front of a round stands before it.
+  // Stacking by order rather than z-index, which would also have to clear
+  // the barman and the wood.
+  const drawn = [...standing].sort(
+    (a, b) => Number(placeOf.get(b.key)?.back ?? false) - Number(placeOf.get(a.key)?.back ?? false),
+  );
   const fallen = glasses.length - standing.length;
 
   // The glasses that went over the edge since the last render, kept just long
@@ -622,13 +628,14 @@ export function Bartop({
             )}
 
             <span className="bartop__glasses">
-              {standing.map((glass) => {
+              {drawn.map((glass) => {
                 const key = glass.key;
                 const held = glassDrag.dragged?.key === key ? glassDrag.dragged : null;
                 const at = held?.at ?? glass.at;
                 // Held, it leaves the round and stands on its own time, which
                 // the bubble above it names.
-                const nudge = held ? 0 : (offsetOf.get(key) ?? 0);
+                const place = held ? undefined : placeOf.get(key);
+                const nudge = place?.dx ?? 0;
                 const colour = colours?.[glass.person];
                 return (
                   <span
@@ -637,6 +644,8 @@ export function Bartop({
                       'bartop__glass',
                       !isWiping && 'bartop__glass--movable',
                       held && 'bartop__glass--held',
+                      place?.back && 'bartop__glass--back',
+                      place?.flip && 'bartop__glass--flip',
                       colour !== undefined && 'bartop__glass--coaster',
                     )}
                     style={{

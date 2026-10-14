@@ -169,21 +169,62 @@ export const ROUND_MS = 2 * MINUTE_MS;
  */
 export const ROUND_STEP_PX = 15;
 
+/** How much the gaps in a round vary, either way, in px. */
+const ROUND_JITTER_PX = 4;
+
+/** Where one glass of a round stands, relative to its own time. */
+export interface RoundPlace {
+  /** Sideways, px. */
+  dx: number;
+  /** Set back on the counter: raised a little, smaller, behind the front. */
+  back: boolean;
+  /** Turned the other way — a mug's handle on the left. */
+  flip: boolean;
+}
+
+const ALONE: RoundPlace = { dx: 0, back: false, flip: false };
+
 /**
- * Sideways nudge for each glass, in px, so a round stands side by side,
- * centred on its time. `glasses` must be in bar order; a glass alone gets 0.
+ * A small stable hash of a glass, so its place in a round is irregular but
+ * the same on every render: a glass that shuffled each tick would jitter.
  */
-export function roundOffsets(glasses: readonly BarGlass[]): number[] {
-  const offsets = glasses.map(() => 0);
+function hash(key: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < key.length; i++) h = Math.imul(h ^ key.charCodeAt(i), 16777619);
+  return h >>> 0;
+}
+
+/**
+ * Places for a round's glasses, so it stands like a tray put down, not a
+ * block: side by side around its time, the gaps uneven, every other glass a
+ * step further back, about half of them turned. `glasses` must be in bar
+ * order; a glass on its own stands exactly on its time.
+ */
+export function roundPlaces(glasses: readonly BarGlass[]): RoundPlace[] {
+  const places = glasses.map(() => ALONE);
   let first = 0;
   while (first < glasses.length) {
     let next = first + 1;
     while (next < glasses.length && glasses[next]!.at - glasses[first]!.at <= ROUND_MS) next++;
     const size = next - first;
-    for (let i = 0; i < size; i++) offsets[first + i] = (i - (size - 1) / 2) * ROUND_STEP_PX;
+    if (size > 1) {
+      let x = 0;
+      const xs: number[] = [];
+      for (let i = 0; i < size; i++) {
+        const h = hash(glasses[first + i]!.key);
+        if (i > 0) x += ROUND_STEP_PX + ((h % 1000) / 1000 - 0.5) * 2 * ROUND_JITTER_PX;
+        xs.push(x);
+      }
+      // Centred on the round's time, whatever the gaps came to.
+      const mid = x / 2;
+      for (let i = 0; i < size; i++) {
+        const h = hash(glasses[first + i]!.key);
+        places[first + i] = { dx: xs[i]! - mid, back: i % 2 === 1, flip: (h >>> 10) % 2 === 1 };
+      }
+    }
     first = next;
   }
-  return offsets;
+  return places;
 }
 
 /**
