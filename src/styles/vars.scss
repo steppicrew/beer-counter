@@ -49,6 +49,21 @@ $heart: #e8566b;
 $jar-label: #fbf3df;
 $jar-label-ink: #5a3f1c;
 
+// Who drank what, when several people count on one phone: the tab, the
+// coaster under each glass. Eight hues spaced round the wheel and none of
+// them a status colour, so a coaster never reads as a warning. Me is the
+// first, the app's own amber.
+$person-colours: (
+  #e09400,
+  #2f7fd0,
+  #c8417a,
+  #3c9a6c,
+  #8a5cc8,
+  #d0603a,
+  #2a9cab,
+  #8c8a2e
+);
+
 // Semantic (status) colours — never reused for decoration.
 $color-danger: #d7443e;
 $color-success: #3f9d5a;

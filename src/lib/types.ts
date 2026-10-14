@@ -49,6 +49,25 @@ export function tallyLastAt(tally: Tally): number | null {
   return tally.times.at(-1) ?? null;
 }
 
+/** The phone's owner. Always at the table, never renamed or deleted. */
+export const ME = 'me';
+
+/** How many colours a person can be told apart by; see `--person-*` in the theme. */
+export const PERSON_COLOURS = 8;
+
+/**
+ * Someone at the table. Regulars are kept like built-in drinks; a guest is
+ * for tonight only and leaves with the reset, as session drinks do.
+ */
+export interface Person {
+  id: string;
+  /** Absent only for {@link ME}, whose name follows the language. */
+  name?: string;
+  scope: 'default' | 'session';
+  /** Index into the person colours, fixed at creation so nobody changes colour. */
+  colour: number;
+}
+
 export type ThemeMode = 'system' | 'light' | 'dark';
 
 /** ISO 4217 code used to format every price; chosen once in settings. */
@@ -67,6 +86,13 @@ export interface ArchivedDrink {
   icon: IconKey;
   priceCents?: number;
   times: number[];
+  /**
+   * Who drank it. Absent means the phone's owner: that is every drink from
+   * before the table existed, so old history needs no migration.
+   */
+  person?: string;
+  /** The name as it stood, for a guest who is gone after the reset. */
+  personName?: string;
 }
 
 /** One finished round, written to the history when it is reset. */

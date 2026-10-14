@@ -1,5 +1,5 @@
-import type { ArchivedDrink, Beverage, IconKey, Round, Tally } from './types';
-import { ICON_KEYS } from './types';
+import type { ArchivedDrink, Beverage, IconKey, Person, Round, Tally } from './types';
+import { ICON_KEYS, ME } from './types';
 
 export type StatsPeriod = 'week' | 'month' | 'year';
 
@@ -33,19 +33,30 @@ export interface PeriodStats {
   lines: StatsLine[];
 }
 
-/** The round as it stands, or null when nothing was counted. */
-export function archiveRound(beverages: Beverage[], tallies: Record<string, Tally>): Round | null {
+/**
+ * The round as it stands, or null when nothing was counted. Each person's
+ * drinks are filed separately; mine carry no person, as before the table.
+ */
+export function archiveRound(
+  beverages: Beverage[],
+  tallies: Record<string, Record<string, Tally>>,
+  people: Person[],
+): Round | null {
   const drinks: ArchivedDrink[] = [];
-  for (const b of beverages) {
-    const times = tallies[b.id]?.times ?? [];
-    if (times.length === 0) continue;
-    drinks.push({
-      ...(b.nameKey === undefined ? {} : { nameKey: b.nameKey }),
-      ...(b.name === undefined ? {} : { name: b.name }),
-      icon: b.icon,
-      ...(b.priceCents === undefined ? {} : { priceCents: b.priceCents }),
-      times,
-    });
+  for (const person of people) {
+    const own = tallies[person.id] ?? {};
+    for (const b of beverages) {
+      const times = own[b.id]?.times ?? [];
+      if (times.length === 0) continue;
+      drinks.push({
+        ...(b.nameKey === undefined ? {} : { nameKey: b.nameKey }),
+        ...(b.name === undefined ? {} : { name: b.name }),
+        icon: b.icon,
+        ...(b.priceCents === undefined ? {} : { priceCents: b.priceCents }),
+        times,
+        ...(person.id === ME ? {} : { person: person.id, personName: person.name ?? '' }),
+      });
+    }
   }
   if (drinks.length === 0) return null;
   const all = drinks.flatMap((d) => d.times);
@@ -106,6 +117,23 @@ function nameId(d: { nameKey?: string; name?: string }): string {
   return d.nameKey !== undefined ? `k:${d.nameKey}` : `n:${(d.name ?? '').trim().toLowerCase()}`;
 }
 
+/** Who a stats view is about: one person by id, or the whole table. */
+export type StatsWho = string | 'table';
+
+/** The drinks of a round that belong to `who`. */
+function drinksOf(round: Round, who: StatsWho): ArchivedDrink[] {
+  return who === 'table' ? round.drinks : round.drinks.filter((d) => (d.person ?? ME) === who);
+}
+
+/** Everyone other than Me who has drunk in these rounds, by id, newest name. */
+export function othersIn(rounds: readonly Round[]): Map<string, string> {
+  const names = new Map<string, string>();
+  for (const round of rounds) {
+    for (const d of round.drinks) if (d.person !== undefined) names.set(d.person, d.personName ?? '');
+  }
+  return names;
+}
+
 /**
  * Buckets rounds into periods, newest first. A round is filed whole under the
  * period its first drink falls in: a Saturday night that runs past midnight
@@ -115,10 +143,14 @@ export function computeStats(
   rounds: readonly Round[],
   period: StatsPeriod,
   weekStart: number,
+  who: StatsWho = ME,
 ): PeriodStats[] {
   const buckets = new Map<number, PeriodStats>();
 
   for (const round of rounds) {
+    // A night someone was not at the table is not one of their rounds.
+    const drinks = drinksOf(round, who);
+    if (drinks.length === 0) continue;
     const { start, end } = periodBounds(round.startedAt, period, weekStart);
     let bucket = buckets.get(start);
     if (!bucket) {
@@ -127,7 +159,7 @@ export function computeStats(
     }
     bucket.rounds += 1;
 
-    for (const drink of round.drinks) {
+    for (const drink of drinks) {
       const count = drink.times.length;
       if (count === 0) continue;
       bucket.drinks += count;

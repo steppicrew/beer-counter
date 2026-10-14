@@ -1,5 +1,6 @@
 @use 'vars' as vars;
 @use 'sass:color';
+@use 'sass:list';
 
 // Theme tokens. `[data-theme]` is set explicitly by the app; the media query
 // covers the "system" setting where no attribute is written.
@@ -62,6 +63,11 @@
   --cloth-mid: #e2d4b4;
   --cloth-shade: #b9a888;
 
+  // One per person at the table — see lib/people.ts.
+  @for $i from 1 through list.length(vars.$person-colours) {
+    --person-#{$i - 1}: #{list.nth(vars.$person-colours, $i)};
+  }
+
   color-scheme: light;
 }
 
@@ -102,6 +108,11 @@
   // Paper in a dim room: toned down so the jar's band does not glare off the
   // dark counter, the same way the cloth is.
   --jar-label: #{color.adjust(vars.$jar-label, $lightness: -14%)};
+
+  // A step lighter, or the deep ones sink into the dark page.
+  @for $i from 1 through list.length(vars.$person-colours) {
+    --person-#{$i - 1}: #{color.adjust(list.nth(vars.$person-colours, $i), $lightness: 10%)};
+  }
 
   color-scheme: dark;
 }

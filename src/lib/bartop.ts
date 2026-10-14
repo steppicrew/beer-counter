@@ -7,9 +7,13 @@ export interface BarGlass {
   icon: IconKey;
   /** Beverage id, so a glass can point back at its row. */
   beverageId: string;
+  /** Whose it is; the whole table drinks at one bar. */
+  person: string;
+  /** Unique on the bar: person, drink and moment. */
+  key: string;
   /**
-   * The newest glass of this beverage — the only one that can still hold
-   * anything, since ordering the next one finishes the last.
+   * This person's newest glass of this beverage — the only one that can still
+   * hold anything, since ordering the next one finishes the last.
    */
   isCurrent: boolean;
 }
@@ -119,28 +123,67 @@ export function glassFill(at: number, now: number, isCurrent: boolean): GlassFil
   return Math.min(1, Math.max(0, 1 - drinking / (EMPTY_AFTER_MS - FULL_FOR_MS)));
 }
 
-/** Flattens the per-beverage tallies into one chronological run of glasses. */
-export function collectGlasses(beverages: Beverage[], tallies: Record<string, Tally>): BarGlass[] {
+/**
+ * Flattens everyone's per-beverage tallies into one chronological run of
+ * glasses. `seats` orders the people, so the glasses of a round that were
+ * tapped in the same millisecond still stand in a fixed order.
+ */
+export function collectGlasses(
+  beverages: Beverage[],
+  tallies: Record<string, Record<string, Tally>>,
+  seats: readonly string[],
+): BarGlass[] {
   const glasses: BarGlass[] = [];
 
-  for (const beverage of beverages) {
-    const times = tallies[beverage.id]?.times;
-    if (!times) continue;
-    // `times` is already oldest-first, so the last entry is the drink of this
-    // kind still in hand.
-    const currentAt = times.at(-1);
-    for (const at of times) {
-      glasses.push({
-        at,
-        icon: beverage.icon,
-        beverageId: beverage.id,
-        isCurrent: at === currentAt,
-      });
+  for (const person of seats) {
+    for (const beverage of beverages) {
+      const times = tallies[person]?.[beverage.id]?.times;
+      if (!times) continue;
+      // `times` is already oldest-first, so the last entry is the drink of
+      // this kind still in hand.
+      const currentAt = times.at(-1);
+      for (const at of times) {
+        glasses.push({
+          at,
+          icon: beverage.icon,
+          beverageId: beverage.id,
+          person,
+          key: `${person}|${beverage.id}|${at}`,
+          isCurrent: at === currentAt,
+        });
+      }
     }
   }
 
   // Each beverage's own times are already ordered; interleaving them is not.
+  // The sort is stable, so equal times keep the seat order.
   return glasses.sort((a, b) => a.at - b.at);
+}
+
+/** Glasses ordered within this span of the first are one round. */
+export const ROUND_MS = 2 * MINUTE_MS;
+/**
+ * How far apart the glasses of a round stand, in px. Less than a glass is
+ * wide: they overlap like a tray full, but every one of them is seen. Seated
+ * exactly on their own time they would stack into what looks like one glass.
+ */
+export const ROUND_STEP_PX = 15;
+
+/**
+ * Sideways nudge for each glass, in px, so a round stands side by side,
+ * centred on its time. `glasses` must be in bar order; a glass alone gets 0.
+ */
+export function roundOffsets(glasses: readonly BarGlass[]): number[] {
+  const offsets = glasses.map(() => 0);
+  let first = 0;
+  while (first < glasses.length) {
+    let next = first + 1;
+    while (next < glasses.length && glasses[next]!.at - glasses[first]!.at <= ROUND_MS) next++;
+    const size = next - first;
+    for (let i = 0; i < size; i++) offsets[first + i] = (i - (size - 1) / 2) * ROUND_STEP_PX;
+    first = next;
+  }
+  return offsets;
 }
 
 /**
