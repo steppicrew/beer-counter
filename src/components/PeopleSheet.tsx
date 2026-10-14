@@ -8,7 +8,7 @@ import { useI18n } from '../i18n';
 import { countOf, talliesOf, useAppStore } from '../store/useAppStore';
 import { personColourVar, personName } from '../lib/people';
 import type { Person } from '../lib/types';
-import { ME } from '../lib/types';
+import { ME, PERSON_COLOURS } from '../lib/types';
 import './PeopleSheet.scss';
 
 /**
@@ -25,9 +25,10 @@ export function PeopleSheet({ onClose }: { onClose: () => void }) {
   const renamePerson = useAppStore((s) => s.renamePerson);
   const removePerson = useAppStore((s) => s.removePerson);
   const setSeated = useAppStore((s) => s.setSeated);
+  const setPersonColour = useAppStore((s) => s.setPersonColour);
 
   const [name, setName] = useState('');
-  const [editing, setEditing] = useState<{ id: string; name: string } | null>(null);
+  const [editing, setEditing] = useState<{ id: string; name: string; colour: number } | null>(null);
   const [forgetting, setForgetting] = useState<Person | null>(null);
 
   const trimmed = name.trim();
@@ -40,7 +41,8 @@ export function PeopleSheet({ onClose }: { onClose: () => void }) {
   const saveRename = () => {
     if (!editing) return;
     const next = editing.name.trim();
-    if (next) renamePerson(editing.id, next);
+    if (next && editing.id !== ME) renamePerson(editing.id, next);
+    setPersonColour(editing.id, editing.colour);
     setEditing(null);
   };
 
@@ -60,34 +62,62 @@ export function PeopleSheet({ onClose }: { onClose: () => void }) {
           const style = { '--person': personColourVar(person.colour) } as CSSProperties;
 
           if (editing?.id === person.id) {
+            // Colours worn by someone else at the table tonight are not on
+            // offer: two coasters of one colour would say nothing.
+            const taken = new Set(
+              people.filter((p) => p.id !== person.id && table.includes(p.id)).map((p) => p.colour),
+            );
             return (
               <li key={person.id} className="people__row" style={style}>
-                <input
-                  className="field__input people__rename"
-                  value={editing.name}
-                  onChange={(e) => setEditing({ id: person.id, name: e.target.value })}
-                  onKeyDown={(e) => e.key === 'Enter' && saveRename()}
-                  aria-label={t('people.namePlaceholder')}
-                  maxLength={24}
-                  autoFocus
-                />
+                {!isMe && (
+                  <input
+                    className="field__input people__rename"
+                    value={editing.name}
+                    onChange={(e) => setEditing({ ...editing, name: e.target.value })}
+                    onKeyDown={(e) => e.key === 'Enter' && saveRename()}
+                    aria-label={t('people.namePlaceholder')}
+                    maxLength={24}
+                    autoFocus
+                  />
+                )}
+                <div className="people__colours" role="radiogroup" aria-label={t('people.colour')}>
+                  {Array.from({ length: PERSON_COLOURS }, (_, colour) => (
+                    <button
+                      key={colour}
+                      type="button"
+                      role="radio"
+                      aria-checked={editing.colour === colour}
+                      aria-label={`${t('people.colour')} ${colour + 1}`}
+                      className={clsx('people__swatch', editing.colour === colour && 'people__swatch--on')}
+                      style={{ '--swatch': personColourVar(colour) } as CSSProperties}
+                      disabled={taken.has(colour)}
+                      onClick={() => setEditing({ ...editing, colour })}
+                    />
+                  ))}
+                </div>
                 <button type="button" className="btn btn--primary people__small" onClick={saveRename}>
                   {t('action.save')}
                 </button>
                 {/* A regular is asked about — they have a history. A guest
                     without a drink was never really here. */}
-                <button
-                  type="button"
-                  className="btn btn--ghost people__small"
-                  onClick={() => {
-                    setEditing(null);
-                    if (guest) removePerson(person.id);
-                    else setForgetting(person);
-                  }}
-                  disabled={count > 0}
-                >
-                  {t('action.delete')}
-                </button>
+                {isMe ? (
+                  <button type="button" className="btn btn--ghost people__small" onClick={() => setEditing(null)}>
+                    {t('action.cancel')}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn--ghost people__small"
+                    onClick={() => {
+                      setEditing(null);
+                      if (guest) removePerson(person.id);
+                      else setForgetting(person);
+                    }}
+                    disabled={count > 0}
+                  >
+                    {t('action.delete')}
+                  </button>
+                )}
               </li>
             );
           }
@@ -113,16 +143,14 @@ export function PeopleSheet({ onClose }: { onClose: () => void }) {
                 </span>
                 {count > 0 && <span className="people__count">{count}</span>}
               </button>
-              {!isMe && (
-                <button
-                  type="button"
-                  className="app__icon-btn"
-                  onClick={() => setEditing({ id: person.id, name: person.name ?? '' })}
-                  aria-label={t('action.edit')}
-                >
-                  <UiIcon name="edit" />
-                </button>
-              )}
+              <button
+                type="button"
+                className="app__icon-btn"
+                onClick={() => setEditing({ id: person.id, name: person.name ?? '', colour: person.colour })}
+                aria-label={t('action.edit')}
+              >
+                <UiIcon name="edit" />
+              </button>
             </li>
           );
         })}

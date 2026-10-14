@@ -94,6 +94,8 @@ interface AppState {
   /** Adds someone and seats them: they are added because they are here. */
   addPerson: (input: { name: string; scope: Person['scope'] }) => void;
   renamePerson: (id: string, name: string) => void;
+  /** Ignored when someone else at the table already wears that colour. */
+  setPersonColour: (id: string, colour: number) => void;
   /** Forgets a regular for good. Their past rounds stay in the history. */
   removePerson: (id: string) => void;
   /**
@@ -322,6 +324,15 @@ export const useAppStore = create<AppState>()(
             people: state.people.map((p) => (p.id === id && id !== ME ? { ...p, name } : p)),
           })),
 
+        setPersonColour: (id, colour) =>
+          set((state) => {
+            const taken = state.people.some(
+              (p) => p.id !== id && p.colour === colour && state.table.includes(p.id),
+            );
+            if (taken) return state;
+            return { people: state.people.map((p) => (p.id === id ? { ...p, colour } : p)) };
+          }),
+
         removePerson: (id) =>
           set((state) => {
             if (id === ME) return state;
@@ -337,7 +348,23 @@ export const useAppStore = create<AppState>()(
         setSeated: (id, seated) =>
           set((state) => {
             if (id === ME || seated === state.table.includes(id)) return state;
-            if (seated) return { table: [...state.table, id] };
+            if (seated) {
+              // A regular may share a colour with someone not here tonight;
+              // two at one table may not, or their coasters would be one.
+              const others = state.people.filter((p) => p.id !== id && state.table.includes(p.id));
+              const person = state.people.find((p) => p.id === id);
+              const clash = person && others.some((p) => p.colour === person.colour);
+              return {
+                table: [...state.table, id],
+                ...(clash
+                  ? {
+                      people: state.people.map((p) =>
+                        p.id === id ? { ...p, colour: freeColour(others) } : p,
+                      ),
+                    }
+                  : {}),
+              };
+            }
             if (countOf(talliesOf(state, id)) > 0) return state;
             return {
               table: state.table.filter((p) => p !== id),

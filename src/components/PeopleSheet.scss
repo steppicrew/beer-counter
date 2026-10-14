@@ -92,6 +92,35 @@
     min-width: 0;
   }
 
+  // Eight to choose from, on a line of their own under the name.
+  &__colours {
+    flex: 1 1 100%;
+    display: flex;
+    gap: vars.$space-xs;
+  }
+
+  // Sharing the row evenly: eight at 36px do not fit 320px, and a lone pair
+  // wrapped onto a second line looked like a different set.
+  &__swatch {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 36px;
+    aspect-ratio: 1;
+    border-radius: vars.$radius-pill;
+    background: var(--swatch);
+    border: 3px solid var(--bg-elevated);
+    box-shadow: 0 0 0 1px var(--border);
+
+    &--on {
+      box-shadow: 0 0 0 3px var(--text);
+    }
+
+    // Worn by someone else at the table tonight.
+    &:disabled {
+      opacity: 0.25;
+    }
+  }
+
   &__small {
     flex: 1;
     min-width: 0;
