@@ -3,20 +3,27 @@ import type { CSSProperties } from 'react';
 import clsx from 'clsx';
 import { useI18n } from '../i18n';
 import { countOf, talliesOf, useAppStore } from '../store/useAppStore';
-import { personColourVar, personName } from '../lib/people';
+import { personColourVar, personName, TABLE_VIEW } from '../lib/people';
 import './PeopleTabs.scss';
 
 /**
  * Whose drinks the list counts, when more than one person is at the table.
  * Each tab says how many that person has had, so a glance across the strip
- * is also the table's tally. Who sits here is changed from the footer.
+ * is also the table's tally. The last tab is the table itself: everyone's
+ * totals. Who sits here is changed from the footer.
  */
-export function PeopleTabs({ onSelect }: { onSelect: (id: string) => void }) {
+export function PeopleTabs({
+  current,
+  onSelect,
+}: {
+  /** A person's id, or {@link TABLE_VIEW}. */
+  current: string;
+  onSelect: (id: string) => void;
+}) {
   const { t } = useI18n();
   const people = useAppStore((s) => s.people);
   const table = useAppStore((s) => s.table);
   const tallies = useAppStore((s) => s.tallies);
-  const active = useAppStore((s) => s.activePerson);
 
   // A swipe can land on someone scrolled out of the strip; bring them in.
   // By hand: scrollIntoView also scrolls every ancestor, and moved the drink
@@ -32,7 +39,7 @@ export function PeopleTabs({ onSelect }: { onSelect: (id: string) => void }) {
     else if (right > list.scrollLeft + list.clientWidth) {
       list.scrollTo({ left: right - list.clientWidth, behavior: 'smooth' });
     }
-  }, [active]);
+  }, [current]);
 
   const seated = table.flatMap((id) => people.find((p) => p.id === id) ?? []);
 
@@ -44,8 +51,8 @@ export function PeopleTabs({ onSelect }: { onSelect: (id: string) => void }) {
             key={person.id}
             type="button"
             role="tab"
-            aria-selected={person.id === active}
-            className={clsx('people-tabs__tab', person.id === active && 'people-tabs__tab--active')}
+            aria-selected={person.id === current}
+            className={clsx('people-tabs__tab', person.id === current && 'people-tabs__tab--active')}
             style={{ '--person': personColourVar(person.colour) } as CSSProperties}
             onClick={() => onSelect(person.id)}
           >
@@ -53,6 +60,22 @@ export function PeopleTabs({ onSelect }: { onSelect: (id: string) => void }) {
             <span className="people-tabs__count">{countOf(talliesOf({ tallies }, person.id))}</span>
           </button>
         ))}
+        <button
+          type="button"
+          role="tab"
+          aria-selected={current === TABLE_VIEW}
+          className={clsx(
+            'people-tabs__tab',
+            'people-tabs__tab--table',
+            current === TABLE_VIEW && 'people-tabs__tab--active',
+          )}
+          onClick={() => onSelect(TABLE_VIEW)}
+        >
+          <span className="people-tabs__name">{t('table.tab')}</span>
+          <span className="people-tabs__count">
+            {seated.reduce((sum, p) => sum + countOf(talliesOf({ tallies }, p.id)), 0)}
+          </span>
+        </button>
       </div>
     </div>
   );

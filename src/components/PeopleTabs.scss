@@ -50,6 +50,15 @@
     // drink counted on the wrong tab is the one mistake this mode invites. A
     // ring rather than a fill, which no single text colour reads well on
     // across all eight.
+    // Everyone's: no one colour, so no dot, and the accent for its ring.
+    &--table {
+      --person: var(--accent);
+
+      &::before {
+        display: none;
+      }
+    }
+
     &--active {
       background: var(--bg-elevated);
       border-color: var(--person);

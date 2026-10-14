@@ -14,3 +14,9 @@ export function personColourVar(colour: number): string {
 export function personName(person: Pick<Person, 'id' | 'name'>, t: Translate): string {
   return person.id === ME ? t('people.me') : (person.name ?? '');
 }
+
+/**
+ * The last tab at a table: everyone's totals instead of one person's drinks.
+ * Never a person's id — those are "me" or carry a scope prefix.
+ */
+export const TABLE_VIEW = 'table';

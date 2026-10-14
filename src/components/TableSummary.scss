@@ -1,0 +1,90 @@
+@use '../styles/vars' as vars;
+
+.table-sum {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-sm;
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: vars.$space-sm;
+  }
+
+  // A tile like a drink's, edged in its person's colour.
+  &__row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: vars.$space-md;
+    padding: vars.$space-sm vars.$space-md;
+    text-align: start;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-inline-start: 6px solid var(--person);
+    border-radius: vars.$radius-md;
+    box-shadow: var(--shadow);
+  }
+
+  &__who {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__name {
+    font-size: vars.$font-lg;
+    font-weight: vars.$weight-semibold;
+    overflow-wrap: anywhere;
+  }
+
+  // "2 Bier · 1 Wein" wraps rather than cutting off what was drunk.
+  &__drinks {
+    font-size: vars.$font-sm;
+    color: var(--text-muted);
+  }
+
+  &__figures {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &__count {
+    font-size: vars.$font-display;
+    line-height: 1.1;
+    font-weight: vars.$weight-heavy;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+  }
+
+  &__money {
+    font-size: vars.$font-sm;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  // Set off by a rule, not a tile: it is the sum of the tiles above.
+  &__total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: vars.$space-md;
+    padding: vars.$space-sm vars.$space-md;
+    border-top: 2px solid var(--border);
+  }
+
+  &__total-label {
+    font-size: vars.$font-md;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+}

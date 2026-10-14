@@ -76,6 +76,11 @@ interface AppState {
   /** `person` defaults to the active one; the launcher always counts for Me. */
   increment: (id: string, person?: string) => void;
   decrement: (id: string) => void;
+  /**
+   * One of this drink for each of `people`, all at the same moment: the
+   * waiter's tray, so it stands on the bar as one round.
+   */
+  pourRound: (id: string, people: readonly string[]) => void;
   /** Counts one drink at an earlier time — the tap that was forgotten. */
   incrementAt: (id: string, at: number) => void;
   /** Moves one counted drink to another time, e.g. dragged back on the bar. */
@@ -232,6 +237,21 @@ export const useAppStore = create<AppState>()(
               // The launcher's menu offers *my* habits; Hans's beers must not
               // push my coffee off it.
               ...(who === ME ? { usage: { ...state.usage, [id]: (state.usage[id] ?? 0) + 1 } } : {}),
+            };
+          }),
+
+        pourRound: (id, people) =>
+          set((state) => {
+            const at = Date.now();
+            let tallies = state.tallies;
+            for (const who of people) {
+              if (!state.table.includes(who)) continue;
+              const current = talliesOf({ tallies }, who)[id] ?? emptyTally;
+              tallies = withTally(tallies, who, id, { times: [...current.times, at] });
+            }
+            return {
+              tallies,
+              ...(people.includes(ME) ? { usage: { ...state.usage, [id]: (state.usage[id] ?? 0) + 1 } } : {}),
             };
           }),
 

@@ -267,3 +267,48 @@
     opacity: 0.4;
   }
 }
+
+// "A round of these": whoever is ticked gets one, in their colour.
+.round {
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$space-xs;
+
+  &__who {
+    display: flex;
+    align-items: center;
+    gap: vars.$space-xs;
+    min-height: 40px;
+    padding: 0 vars.$space-md;
+    border-radius: vars.$radius-pill;
+    background: var(--bg-sunken);
+    border: 2px solid var(--border);
+    font-size: vars.$font-md;
+    font-weight: vars.$weight-semibold;
+    color: var(--text-muted);
+
+    // A ring for the dot when unticked, filled once ticked: the same mark as
+    // the check in the table sheet.
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: vars.$radius-pill;
+      border: 2px solid var(--person);
+    }
+
+    &--on {
+      background: var(--bg-elevated);
+      border-color: var(--person);
+      color: var(--text);
+
+      &::before {
+        background: var(--person);
+      }
+    }
+  }
+
+  &__pour {
+    margin-top: vars.$space-xs;
+  }
+}
