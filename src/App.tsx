@@ -14,7 +14,7 @@ import { PeopleTabs } from './components/PeopleTabs';
 import { talliesOf, useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage, Tally } from './lib/types';
-import { computeTotals } from './lib/totals';
+import { computeTotals, sumTotals } from './lib/totals';
 import { useAppUpdate } from './lib/useAppUpdate';
 import { isNativeApp } from './lib/platform';
 import { setSystemBars } from './lib/systemBars';
@@ -25,7 +25,8 @@ import { useViewportInset } from './lib/useViewportInset';
 import { useLauncherShortcuts } from './lib/useLauncherShortcuts';
 import { useBarClock } from './lib/useBarClock';
 import { useSwipe } from './lib/useSwipe';
-import { personName } from './lib/people';
+import { personName, TABLE_VIEW } from './lib/people';
+import { TableSummary } from './components/TableSummary';
 import { formatMoney, defaultCurrencyFor, currencySymbol } from './lib/money';
 import './App.scss';
 
@@ -166,19 +167,33 @@ export function App() {
   // naming whose total it shows. Alone it is the counter it always was.
   const tableMode = table.length > 1;
   const active = people.find((p) => p.id === activePerson);
+  // The table's own tab, after everyone's. Not persisted: the app reopens on
+  // someone's drinks, which is what it is opened for.
+  const [tableShown, setTableShown] = useState(false);
+  const showingTable = tableMode && tableShown;
+  const current = showingTable ? TABLE_VIEW : activePerson;
+  const tabs = [...table, TABLE_VIEW];
   // Which way the list came in, so a swipe reads as moving along the table.
   const [enteredFrom, setEnteredFrom] = useState<-1 | 1 | 0>(0);
   const switchTo = (id: string) => {
-    const from = table.indexOf(activePerson);
-    const to = table.indexOf(id);
+    const from = tabs.indexOf(current);
+    const to = tabs.indexOf(id);
     if (to === -1 || to === from) return;
     setEnteredFrom(to > from ? 1 : -1);
-    setActivePerson(id);
+    setTableShown(id === TABLE_VIEW);
+    if (id !== TABLE_VIEW) setActivePerson(id);
   };
+  const entered =
+    enteredFrom === 1 ? 'app__list--from-right' : enteredFrom === -1 ? 'app__list--from-left' : undefined;
   const swipe = useSwipe((direction) => {
-    const next = table[table.indexOf(activePerson) - direction];
+    const next = tabs[tabs.indexOf(current) - direction];
     if (next !== undefined) switchTo(next);
   }, tableMode);
+
+  // On the table's tab the header is the table's bill.
+  const shownTotals = showingTable
+    ? sumTotals(table.map((id) => computeTotals(beverages, tableTallies[id] ?? {})))
+    : totals;
   const currency = storedCurrency ?? defaultCurrencyFor(locale);
 
   // The barkeeper mentions the tip jar once, to a regular, on an empty bar —
@@ -248,20 +263,24 @@ export function App() {
         <header className="app__header">
           <div className="app__totals">
             <span className="app__total-label">
-              {tableMode && active ? personName(active, t) : t('total.label')}
+              {showingTable
+                ? t('table.tab')
+                : tableMode && active
+                  ? personName(active, t)
+                  : t('total.label')}
             </span>
-            <span className="app__total-value">{total}</span>
-            {totals.anyPriced && (
+            <span className="app__total-value">{shownTotals.drinks}</span>
+            {shownTotals.anyPriced && (
               <span
                 className="app__total-money"
                 // An incomplete sum is a floor, not the bill — say so rather
                 // than showing a confident number that is quietly too low.
-                title={totals.complete ? undefined : t('total.partialHint')}
+                title={shownTotals.complete ? undefined : t('total.partialHint')}
               >
-                {totals.complete
-                  ? formatMoney(totals.cents, currency, locale)
+                {shownTotals.complete
+                  ? formatMoney(shownTotals.cents, currency, locale)
                   : t('total.partial', {
-                      price: formatMoney(totals.cents, currency, locale),
+                      price: formatMoney(shownTotals.cents, currency, locale),
                     })}
               </span>
             )}
@@ -306,25 +325,26 @@ export function App() {
               <UiIcon name="reset" />
             </button>
           </div>
-          {tableMode && <PeopleTabs onSelect={switchTo} />}
+          {tableMode && <PeopleTabs current={current} onSelect={switchTo} />}
         </header>
 
         <main className={clsx('app__main', tableMode && 'app__main--table')} {...swipe}>
-          {total === 0 && (
+          {!showingTable && total === 0 && (
             <div className="app__empty">
               <p className="app__empty-title">{t('empty.title')}</p>
               <p className="app__empty-body">{t('empty.body')}</p>
             </div>
           )}
 
+          {showingTable ? (
+            <div key={TABLE_VIEW} className={clsx('app__list', entered)}>
+              <TableSummary onOpen={switchTo} />
+            </div>
+          ) : (
           <ul
             // Keyed by person, so the list slides in afresh for each of them.
             key={activePerson}
-            className={clsx(
-              'app__list',
-              enteredFrom === 1 && 'app__list--from-right',
-              enteredFrom === -1 && 'app__list--from-left',
-            )}
+            className={clsx('app__list', entered)}
           >
             {beverages.map((beverage) => (
               <BeverageRow
@@ -337,6 +357,7 @@ export function App() {
               />
             ))}
           </ul>
+          )}
         </main>
 
         {/* Docked above the add button and always on screen: the drink list

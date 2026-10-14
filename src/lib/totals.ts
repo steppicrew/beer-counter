@@ -49,3 +49,19 @@ export function lineTotal(beverage: Beverage, tally: Tally): number | null {
   if (beverage.priceCents === undefined) return null;
   return beverage.priceCents * tally.times.length;
 }
+
+/**
+ * Several people's totals summed: the table's bill. A drink nobody priced
+ * marks the whole sum provisional, just as it does one person's.
+ */
+export function sumTotals(all: readonly Totals[]): Totals {
+  return all.reduce<Totals>(
+    (sum, t) => ({
+      drinks: sum.drinks + t.drinks,
+      cents: sum.cents + t.cents,
+      complete: sum.complete && t.complete,
+      anyPriced: sum.anyPriced || t.anyPriced,
+    }),
+    { drinks: 0, cents: 0, complete: true, anyPriced: false },
+  );
+}
