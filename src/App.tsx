@@ -26,7 +26,7 @@ import { useViewportInset } from './lib/useViewportInset';
 import { useLauncherShortcuts } from './lib/useLauncherShortcuts';
 import { useBarClock } from './lib/useBarClock';
 import { useSwipe } from './lib/useSwipe';
-import { personName, TABLE_VIEW } from './lib/people';
+import { personColourVar, personName, TABLE_VIEW } from './lib/people';
 import { TableSummary } from './components/TableSummary';
 import { formatMoney, defaultCurrencyFor, currencySymbol } from './lib/money';
 import './App.scss';
@@ -193,6 +193,20 @@ export function App() {
     const next = tabs[tabs.indexOf(current) - direction];
     if (next !== undefined) switchTo(next);
   }, tableMode);
+
+  // At a table the header and the counts take on whoever's drinks they show;
+  // the Table tab and a lone counter keep the plain look. `--tint` stays
+  // set when it ends, so the colour fades out rather than snapping to black.
+  const tint = tableMode && !showingTable ? active?.colour : undefined;
+  useEffect(() => {
+    const root = document.documentElement;
+    if (tint === undefined) {
+      root.removeAttribute('data-tint');
+      return;
+    }
+    root.style.setProperty('--tint', personColourVar(tint));
+    root.setAttribute('data-tint', '');
+  }, [tint]);
 
   // On the table's tab the header is the table's bill.
   const shownTotals = showingTable

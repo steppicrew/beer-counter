@@ -11,8 +11,9 @@
   box-shadow: var(--shadow);
   transition: border-color 160ms vars.$ease;
 
+  // In the selected person's colour at a table (see theme.scss).
   &--active {
-    border-color: var(--accent);
+    border-color: var(--person-ink, var(--accent));
   }
 
   // The primary target: the entire tile counts one drink.
@@ -60,7 +61,7 @@
 
     // The "you just tapped this" warning state.
     &--fresh {
-      color: var(--accent);
+      color: var(--person-ink, var(--accent));
       font-weight: vars.$weight-semibold;
     }
   }
@@ -80,7 +81,7 @@
     font-weight: vars.$weight-heavy;
     text-align: right;
     font-variant-numeric: tabular-nums;
-    color: var(--accent);
+    color: var(--person-ink, var(--accent));
   }
 
   &__money {
