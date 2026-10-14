@@ -136,16 +136,15 @@ export function checkImport(text: string): ImportCheck {
     return { ok: false, reason: 'invalid' };
   }
 
+  // v1 stored a count and a time instead of a list of times; v5 nests the
+  // tallies one level deeper, by person.
+  const isTally = (t: unknown) => isObject(t) && (isTimes(t.times) || typeof t.count === 'number');
+  const isTallies = (v: unknown) => isObject(v) && Object.values(v).every(isTally);
   const tallies = state.tallies;
   if (
     tallies !== undefined &&
-    !(
-      isObject(tallies) &&
-      // v1 stored a count and a time instead of a list of times.
-      Object.values(tallies).every(
-        (t) => isObject(t) && (isTimes(t.times) || typeof t.count === 'number'),
-      )
-    )
+    !(isObject(tallies) &&
+      (file.version >= 5 ? Object.values(tallies).every(isTallies) : isTallies(tallies)))
   ) {
     return { ok: false, reason: 'invalid' };
   }
@@ -168,6 +167,14 @@ export function checkImport(text: string): ImportCheck {
           ),
       )
     )
+  ) {
+    return { ok: false, reason: 'invalid' };
+  }
+
+  const people = state.people;
+  if (
+    people !== undefined &&
+    !(Array.isArray(people) && people.every((p) => isObject(p) && typeof p.id === 'string'))
   ) {
     return { ok: false, reason: 'invalid' };
   }

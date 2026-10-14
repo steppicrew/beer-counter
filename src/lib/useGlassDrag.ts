@@ -20,6 +20,7 @@ interface Press {
   x: number;
   y: number;
   key: string;
+  person: string;
   beverageId: string;
   from: number;
   range: GlassRange;
@@ -55,7 +56,9 @@ function place(from: number, dx: number, range: GlassRange): number {
  * (`touch-action: pan-y` on the glass), which cancels the press and scrolls
  * the list as before; only a horizontal drag after the lift moves the glass.
  */
-export function useGlassDrag(onMove: (beverageId: string, from: number, to: number) => void) {
+export function useGlassDrag(
+  onMove: (person: string, beverageId: string, from: number, to: number) => void,
+) {
   const press = useRef<Press | null>(null);
   const [dragged, setDragged] = useState<DraggedGlass | null>(null);
 
@@ -68,7 +71,7 @@ export function useGlassDrag(onMove: (beverageId: string, from: number, to: numb
   useEffect(() => cancel, [cancel]);
 
   const bind = useCallback(
-    (key: string, beverageId: string, from: number, range: GlassRange) => ({
+    (key: string, person: string, beverageId: string, from: number, range: GlassRange) => ({
       onPointerDown: (event: React.PointerEvent<HTMLElement>) => {
         if (press.current) return;
         const target = event.currentTarget;
@@ -87,6 +90,7 @@ export function useGlassDrag(onMove: (beverageId: string, from: number, to: numb
           x: event.clientX,
           y: event.clientY,
           key,
+          person,
           beverageId,
           from,
           range,
@@ -109,7 +113,7 @@ export function useGlassDrag(onMove: (beverageId: string, from: number, to: numb
         if (!state || state.pointer !== event.pointerId) return;
         if (state.lifted) {
           const to = place(state.from, event.clientX - state.x, state.range);
-          if (to !== state.from) onMove(state.beverageId, state.from, to);
+          if (to !== state.from) onMove(state.person, state.beverageId, state.from, to);
         }
         cancel();
       },

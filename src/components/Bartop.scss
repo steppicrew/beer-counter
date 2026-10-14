@@ -250,6 +250,22 @@ $ink-line: 2px;
     z-index: -1;
   }
 
+  // Whose glass it is, when more than one person counts here: a beer mat in
+  // their colour, flat on the wood under the foot. Under the glass, not on
+  // it, so a drink still looks like that drink.
+  &__glass--coaster::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    z-index: -1;
+    width: 30px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--coaster);
+    transform: translateX(-50%);
+  }
+
   // A glass can be held and slid back to when it was really drunk (see
   // useGlassDrag). It takes presses only for that: vertical swipes stay the
   // browser's, so the list still scrolls when a finger starts on a glass, and

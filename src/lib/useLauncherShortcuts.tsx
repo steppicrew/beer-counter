@@ -8,6 +8,7 @@ import type { MessageKey } from '../i18n';
 import { isNativeApp } from './platform';
 import { shortcutIcon } from './shortcutIcons';
 import type { Beverage } from './types';
+import { ME } from './types';
 import { useAppStore } from '../store/useAppStore';
 
 interface ShortcutItem {
@@ -114,7 +115,8 @@ export function useLauncherShortcuts({
         const id = decodeURIComponent(link.pathname.slice(1));
         // A pinned shortcut can outlive its drink; then it just opens the app.
         if (!state.beverages.some((b) => b.id === id)) return;
-        state.increment(id);
+        // The launcher is the owner's: never whoever the list was left on.
+        state.increment(id, ME);
         void Shortcuts.reportUsed({ id: `count-${id}` }).catch(() => {});
       } else if (link.host === 'reset') {
         const anything = state.totalDrinks() > 0 || state.beverages.some((b) => b.scope === 'session');

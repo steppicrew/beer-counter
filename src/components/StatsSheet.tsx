@@ -42,6 +42,7 @@ export function StatsSheet({ onClose }: { onClose: () => void }) {
   const { t, locale } = useI18n();
   const beverages = useAppStore((s) => s.beverages);
   const tallies = useAppStore((s) => s.tallies);
+  const people = useAppStore((s) => s.people);
   const history = useAppStore((s) => s.history);
   const historyEnabled = useAppStore((s) => s.historyEnabled);
   const setHistoryEnabled = useAppStore((s) => s.setHistoryEnabled);
@@ -56,7 +57,7 @@ export function StatsSheet({ onClose }: { onClose: () => void }) {
 
   // The round in progress counts too — otherwise tonight would be missing
   // from this week until the next reset.
-  const current = archiveRound(beverages, tallies);
+  const current = archiveRound(beverages, tallies, people);
   const stats = computeStats(current ? [...history, current] : history, period, weekStart);
 
   const nameOf = (n: StatsName) => (n.nameKey ? t(n.nameKey as MessageKey) : (n.name ?? ''));

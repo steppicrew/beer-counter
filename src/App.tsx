@@ -8,7 +8,7 @@ import { ResetSheet } from './components/ResetSheet';
 import { ShareSheet } from './components/ShareSheet';
 import { TipSheet } from './components/TipSheet';
 import { StatsSheet } from './components/StatsSheet';
-import { useAppStore } from './store/useAppStore';
+import { talliesOf, useAppStore } from './store/useAppStore';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage, Tally } from './lib/types';
 import { computeTotals } from './lib/totals';
@@ -47,7 +47,11 @@ const DARK_BG = '#12100e';
 
 export function App() {
   const beverages = useAppStore((s) => s.beverages);
-  const tallies = useAppStore((s) => s.tallies);
+  // The list counts for one person at a time; the bar shows the whole table.
+  const tallies = useAppStore((s) => talliesOf(s, s.activePerson));
+  const tableTallies = useAppStore((s) => s.tallies);
+  const table = useAppStore((s) => s.table);
+  const people = useAppStore((s) => s.people);
   const theme = useAppStore((s) => s.theme);
   const storedLocale = useAppStore((s) => s.locale);
   const storedCurrency = useAppStore((s) => s.currency);
@@ -298,7 +302,13 @@ export function App() {
             it and an editing sheet cannot share the bottom of the screen. */}
         <Bartop
           beverages={beverages}
-          tallies={tallies}
+          tallies={tableTallies}
+          seats={table}
+          colours={
+            table.length > 1
+              ? Object.fromEntries(people.map((p) => [p.id, p.colour]))
+              : undefined
+          }
           now={now}
           hidden={keyboardUp}
           onMoveGlass={moveDrink}

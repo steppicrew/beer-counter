@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useI18n } from '../i18n';
-import { useAppStore } from '../store/useAppStore';
+import { talliesOf, useAppStore } from '../store/useAppStore';
 
 const MINUTE = 60_000;
 
@@ -27,7 +27,8 @@ const forgottenFromNow = (own: number[], all: number[]) => forgottenAt(own, all,
 /** "Count one earlier" in the drink's edit sheet: one tap counts and closes. */
 export function EarlierRow({ beverageId, onCounted }: { beverageId: string; onCounted: () => void }) {
   const { t, locale } = useI18n();
-  const tallies = useAppStore((s) => s.tallies);
+  // Whose evening the gap is guessed from: the person the list counts for.
+  const tallies = useAppStore((s) => talliesOf(s, s.activePerson));
   const incrementAt = useAppStore((s) => s.incrementAt);
 
   // The time the sheet opened, for the label only.

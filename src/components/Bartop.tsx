@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import clsx from 'clsx';
 import { BeverageIcon } from './BeverageIcon';
 import { Barkeeper } from './Barkeeper';
@@ -17,6 +18,7 @@ import {
   positionIn,
   PX_PER_HOUR,
   restingWindow,
+  roundOffsets,
   scrolledBy,
   scrollBounds,
 } from '../lib/bartop';
@@ -28,11 +30,20 @@ import { playClink } from '../lib/clink';
 import { useGlassDrag } from '../lib/useGlassDrag';
 import type { GlassRange } from '../lib/useGlassDrag';
 import type { Beverage, Tally } from '../lib/types';
+import { personColourVar } from '../lib/people';
 import './Bartop.scss';
 
 interface Props {
   beverages: Beverage[];
-  tallies: Record<string, Tally>;
+  /** Everyone's counts, by person: the whole table drinks at one bar. */
+  tallies: Record<string, Record<string, Tally>>;
+  /** Who is at the table, in seat order. */
+  seats: readonly string[];
+  /**
+   * Each person's colour, when there is more than one of them: then every
+   * glass stands on a coaster in its drinker's colour. Absent for one alone.
+   */
+  colours?: Record<string, number> | undefined;
   /** Re-rendered on a timer by the caller, so the "now" mark keeps up. */
   now: number;
   /**
@@ -42,7 +53,7 @@ interface Props {
    */
   hidden: boolean;
   /** A glass held and slid to another time: the tap was really made then. */
-  onMoveGlass: (beverageId: string, from: number, to: number) => void;
+  onMoveGlass: (person: string, beverageId: string, from: number, to: number) => void;
   /**
    * When set, the barkeeper on an empty bar points at the tip jar instead of
    * asking for an order; tapping his line calls this.
@@ -186,7 +197,18 @@ function useSweep(restingStart: number, glassCount: number): number | null {
   return sweep ? current : null;
 }
 
-export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar, tipQuestion, tipJar }: Props) {
+export function Bartop({
+  beverages,
+  tallies,
+  seats,
+  colours,
+  now,
+  hidden,
+  onMoveGlass,
+  onTipJar,
+  tipQuestion,
+  tipJar,
+}: Props) {
   const { t, locale } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
   // Animating a counter nobody can see costs battery and buys nothing.
@@ -228,7 +250,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   // and it is the counter that carries the time axis.
   const spanMs = (Math.max(0, width - BAR_INSET_PX) / PX_PER_HOUR) * HOUR_MS;
 
-  const live = collectGlasses(beverages, tallies);
+  const live = collectGlasses(beverages, tallies, seats);
 
   // A reset empties the store outright, so by the time this renders the
   // glasses are already gone and there is nothing left to wipe away. Holding
@@ -284,6 +306,10 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   // than filtered per-glass at draw time, since the pile only needs the total
   // and the standing glasses are the ones that survive the same test.
   const standing = glasses.filter((glass) => !hasFallen(glass, window));
+
+  // A round poured at once stands side by side instead of as one glass.
+  const offsets = roundOffsets(glasses);
+  const offsetOf = new Map(glasses.map((g, i) => [g.key, offsets[i] ?? 0]));
   const fallen = glasses.length - standing.length;
 
   // The glasses that went over the edge since the last render, kept just long
@@ -294,11 +320,11 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   const [wasStanding, setWasStanding] = useState<BarGlass[]>(standing);
 
   if (wasStanding.length !== standing.length || wasStanding[0]?.at !== standing[0]?.at) {
-    const now2 = new Set(standing.map((g) => `${g.beverageId}-${g.at}`));
+    const now2 = new Set(standing.map((g) => g.key));
     // Only glasses that left by going over the left end — a reset removes them
     // all at once and the cloth is already telling that story.
     const gone = wasStanding.filter(
-      (g) => !now2.has(`${g.beverageId}-${g.at}`) && g.at < window.start + BRINK_MS,
+      (g) => !now2.has(g.key) && g.at < window.start + BRINK_MS,
     );
     if (gone.length > 0) setDropping(gone);
     setWasStanding(standing);
@@ -311,14 +337,16 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
   }, [dropping]);
 
   // Sliding a glass back to when it was really drunk. It stays in order —
-  // after the glass before it, before the one after it, never in the future —
-  // and on the visible counter, so it cannot be dragged over the brink and
-  // fall while held.
+  // after its drinker's glass before it, before their one after it, never in
+  // the future — and on the visible counter, so it cannot be dragged over the
+  // brink and fall while held. Only the drinker's own glasses bound it: in a
+  // round, everyone else's stand at the very same minute.
   const glassDrag = useGlassDrag(onMoveGlass);
   const rangeOf = (glass: BarGlass): GlassRange => {
-    const index = glasses.indexOf(glass);
-    const before = glasses[index - 1];
-    const after = glasses[index + 1];
+    const own = glasses.filter((g) => g.person === glass.person);
+    const index = own.indexOf(glass);
+    const before = own[index - 1];
+    const after = own[index + 1];
     const min = Math.max(before ? before.at + MINUTE : -Infinity, window.start + BRINK_MS);
     const max = Math.min(after ? after.at - MINUTE : Infinity, now);
     return { min: Math.min(min, glass.at), max: Math.max(max, glass.at) };
@@ -595,22 +623,32 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
 
             <span className="bartop__glasses">
               {standing.map((glass) => {
-                const key = `${glass.beverageId}-${glass.at}`;
+                const key = glass.key;
                 const held = glassDrag.dragged?.key === key ? glassDrag.dragged : null;
                 const at = held?.at ?? glass.at;
+                // Held, it leaves the round and stands on its own time, which
+                // the bubble above it names.
+                const nudge = held ? 0 : (offsetOf.get(key) ?? 0);
+                const colour = colours?.[glass.person];
                 return (
                   <span
                     key={key}
-                    className={clsx('bartop__glass', !isWiping && 'bartop__glass--movable', held && 'bartop__glass--held')}
+                    className={clsx(
+                      'bartop__glass',
+                      !isWiping && 'bartop__glass--movable',
+                      held && 'bartop__glass--held',
+                      colour !== undefined && 'bartop__glass--coaster',
+                    )}
                     style={{
-                      left: `${positionIn(window, at) * 100}%`,
+                      left: `calc(${positionIn(window, at) * 100}% + ${nudge}px)`,
+                      ...(colour !== undefined ? ({ '--coaster': personColourVar(colour) } as CSSProperties) : {}),
                       ...(isWiping
                         ? {
                             animationDelay: `${clothReaches(positionIn(window, glass.at))}ms`,
                           }
                         : {}),
                     }}
-                    {...(isWiping ? {} : glassDrag.bind(key, glass.beverageId, glass.at, rangeOf(glass)))}
+                    {...(isWiping ? {} : glassDrag.bind(key, glass.person, glass.beverageId, glass.at, rangeOf(glass)))}
                   >
                     {held && (
                       <>
@@ -647,7 +685,7 @@ export function Bartop({ beverages, tallies, now, hidden, onMoveGlass, onTipJar,
           {!isWiping &&
             dropping.map((glass) => (
               <span
-                key={`fall-${glass.beverageId}-${glass.at}`}
+                key={`fall-${glass.key}`}
                 className="bartop__falling"
                 style={{ left: `${BAR_INSET_PX}px` }}
               >
