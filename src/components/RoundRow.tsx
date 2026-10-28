@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useI18n } from '../i18n';
 import { useAppStore } from '../store/useAppStore';
 import { personColourVar, personName } from '../lib/people';
+import { countOrAsk } from '../lib/newNight';
 
 /**
  * "A round of these" in a drink's sheet, at a table of more than one: one
@@ -46,7 +47,7 @@ export function RoundRow({ beverageId, onPoured }: { beverageId: string; onPoure
         className="btn btn--primary round__pour"
         disabled={ticked.length === 0}
         onClick={() => {
-          pourRound(beverageId, ticked);
+          countOrAsk(beverageId, Date.now(), () => pourRound(beverageId, ticked));
           onPoured();
         }}
       >

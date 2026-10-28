@@ -2,6 +2,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { useI18n } from '../i18n';
 import { talliesOf, useAppStore } from '../store/useAppStore';
+import { countOrAsk } from '../lib/newNight';
 
 const MINUTE = 60_000;
 
@@ -54,7 +55,7 @@ export function EarlierRow({
   const hourAgo = new Intl.NumberFormat(locale, { style: 'unit', unit: 'hour', unitDisplay: 'short' });
 
   const count = (at: number) => {
-    incrementAt(beverageId, at);
+    countOrAsk(beverageId, at, () => incrementAt(beverageId, at));
     onCounted();
   };
   const countForgotten = () => count(forgottenFromNow(own, all));
