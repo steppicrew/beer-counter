@@ -78,14 +78,12 @@
     column-gap: vars.$space-sm;
   }
 
+  // Date, then the hours, then the sum, each on its own line: run together,
+  // "9:09 PM–10:50 PM · Total 4 · $19.50" broke mid-way on a phone.
   &__title {
     display: flex;
-    // Long month names and "at least 123,50 €" do not share 320px in every
-    // language; the sum drops below the label instead of overflowing.
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: center;
-    column-gap: vars.$space-md;
+    flex-direction: column;
+    align-items: center;
     row-gap: 2px;
     min-width: 0;
     text-align: center;
@@ -171,17 +169,22 @@
     flex-direction: column;
   }
 
+  // One grid for all rows, so times and names line up although "10:16 PM"
+  // is wider than "9:09 PM" and a wine glass narrower than a mug.
   &__drinks {
-    gap: vars.$space-xs;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    column-gap: vars.$space-sm;
+    row-gap: vars.$space-xs;
     padding-top: vars.$space-sm;
     border-top: 1px solid var(--border);
   }
 
   &__drink {
+    grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: subgrid;
     align-items: center;
-    column-gap: vars.$space-sm;
     font-size: vars.$font-md;
   }
 
@@ -192,6 +195,7 @@
   }
 
   &__drink-icon {
+    justify-self: center;
     font-size: 20px;
   }
 
