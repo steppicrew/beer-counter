@@ -2,6 +2,36 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.22",
+      "date": "2026-10-28",
+      "notes": {
+        "en": "Statistics: a night’s drinks line up neatly, and the hours sit on their own line.",
+        "de": "Statistik: Die Getränke eines Abends stehen sauber untereinander, die Uhrzeiten in einer eigenen Zeile.",
+        "fr": "Statistiques : les boissons d’une soirée s’alignent proprement, et les heures ont leur propre ligne.",
+        "es": "Estadísticas: las bebidas de una noche quedan bien alineadas y el horario va en su propia línea.",
+        "it": "Statistiche: i drink di una serata sono ben allineati e gli orari hanno una riga tutta loro.",
+        "nl": "Statistieken: de drankjes van een avond staan netjes onder elkaar, de tijden op een eigen regel.",
+        "pl": "Statystyki: napoje z wieczoru są równo wyrównane, a godziny mają własny wiersz.",
+        "pt": "Estatísticas: as bebidas de uma noite ficam bem alinhadas e o horário tem a sua própria linha.",
+        "cs": "Statistiky: nápoje z večera jsou úhledně zarovnané a časy mají vlastní řádek.",
+        "sk": "Štatistiky: nápoje z večera sú úhľadne zarovnané a časy majú vlastný riadok.",
+        "da": "Statistik: en aftens drinks står pænt på linje, og tidspunkterne har deres egen linje.",
+        "sv": "Statistik: en kvälls drinkar står prydligt i linje, och tiderna har en egen rad.",
+        "nb": "Statistikk: en kvelds drinker står pent på linje, og klokkeslettene har sin egen linje.",
+        "fi": "Tilastot: illan juomat ovat siististi rivissä, ja kellonajat omalla rivillään.",
+        "hu": "Statisztika: egy este italai szépen egymás alatt állnak, az időpontok külön sorban.",
+        "ro": "Statistici: băuturile unei seri sunt aliniate frumos, iar orele au propriul rând.",
+        "hr": "Statistika: pića jedne večeri uredno su poravnata, a vremena su u vlastitom retku.",
+        "bg": "Статистика: напитките от една вечер са подредени прегледно, а часовете са на отделен ред.",
+        "el": "Στατιστικά: τα ποτά μιας βραδιάς ευθυγραμμίζονται σωστά και οι ώρες έχουν δική τους γραμμή.",
+        "uk": "Статистика: напої за вечір вирівняні акуратно, а години мають окремий рядок.",
+        "tr": "İstatistikler: bir gecenin içecekleri düzgünce hizalanır, saatler kendi satırında durur.",
+        "ru": "Статистика: напитки за вечер аккуратно выровнены, а время стоит на отдельной строке.",
+        "ja": "統計：一晩の飲み物がきれいに揃い、時刻は独立した行に表示されます。",
+        "zh": "统计：一晚的饮品排列整齐，时间单独占一行。"
+      }
+    },
+    {
       "version": "1.7.21",
       "date": "2026-10-28",
       "notes": {
