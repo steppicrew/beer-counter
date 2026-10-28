@@ -240,12 +240,17 @@ export function StatsSheet({ onClose }: { onClose: () => void }) {
             </button>
             <div className="stats__title">
               <h3 className="stats__label">{labelOf(focus.level, bucket.start)}</h3>
-              <span className="stats__sum">
-                {focus.level === 'night' && bucket.nights[0] && `${hoursOf(bucket.nights[0])} · `}
-                {focus.level === 'all' &&
-                  `${t('stats.since', {
+              {focus.level === 'night' && bucket.nights[0] && (
+                <span className="stats__sum">{hoursOf(bucket.nights[0])}</span>
+              )}
+              {focus.level === 'all' && (
+                <span className="stats__sum">
+                  {t('stats.since', {
                     date: new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(bucket.start),
-                  })} · `}
+                  })}
+                </span>
+              )}
+              <span className="stats__sum">
                 {/* "Total 5" rather than "5 drinks": the catalogues carry only
                     one/other plurals, which reads wrong in ru, pl and cs. */}
                 {t('total.label')} {summary.drinks}
