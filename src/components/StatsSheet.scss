@@ -43,6 +43,9 @@
   }
 
   &__period {
+    // Sideways drags are the swipe to the next night; left to the browser,
+    // it claims them as a pan and cancels the touch before it ends.
+    touch-action: pan-y;
     display: flex;
     flex-direction: column;
     gap: vars.$space-sm;
@@ -50,15 +53,59 @@
     border-top: 1px solid var(--border);
   }
 
+  // Up a level: each broader period the one shown sits in.
+  &__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$space-xs;
+  }
+
+  &__crumb {
+    min-height: 32px;
+    padding: 0 vars.$space-md;
+    border-radius: vars.$radius-pill;
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+    font-size: vars.$font-sm;
+    font-weight: vars.$weight-semibold;
+    color: var(--text-muted);
+  }
+
   &__head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: vars.$space-sm;
+  }
+
+  &__title {
     display: flex;
     // Long month names and "at least 123,50 €" do not share 320px in every
     // language; the sum drops below the label instead of overflowing.
     flex-wrap: wrap;
     align-items: baseline;
-    justify-content: space-between;
+    justify-content: center;
     column-gap: vars.$space-md;
     row-gap: 2px;
+    min-width: 0;
+    text-align: center;
+  }
+
+  &__step {
+    width: vars.$tap-min;
+    height: vars.$tap-min;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    line-height: 0;
+    border-radius: vars.$radius-pill;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+
+    &:disabled {
+      opacity: 0.35;
+    }
   }
 
   &__label {
@@ -113,5 +160,88 @@
     // Schnapps is near-colourless; the outline keeps its bar visible on the
     // pale theme.
     box-shadow: inset 0 0 0 1px var(--border);
+  }
+
+  &__drinks,
+  &__children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__drinks {
+    gap: vars.$space-xs;
+    padding-top: vars.$space-sm;
+    border-top: 1px solid var(--border);
+  }
+
+  &__drink {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    column-gap: vars.$space-sm;
+    font-size: vars.$font-md;
+  }
+
+  &__time {
+    font-size: vars.$font-sm;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__drink-icon {
+    font-size: 20px;
+  }
+
+  // Under the drink rather than beside it, so a long name and a long guest
+  // name do not have to share a 320px row.
+  &__drinker {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    gap: vars.$space-xs;
+    font-size: vars.$font-sm;
+    color: var(--text-muted);
+
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: vars.$radius-pill;
+      background: var(--person, var(--border));
+    }
+  }
+
+  &__child {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    column-gap: vars.$space-sm;
+    min-height: vars.$tap-min;
+    padding: vars.$space-xs 0;
+    border-top: 1px solid var(--border);
+    background: none;
+    color: var(--text);
+    text-align: start;
+    font-size: vars.$font-md;
+  }
+
+  &__child-label {
+    font-weight: vars.$weight-semibold;
+  }
+
+  // The hours go under the date, so the count keeps its column.
+  &__child-hours {
+    grid-row: 2;
+    font-size: vars.$font-sm;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__child-go {
+    color: var(--text-muted);
   }
 }
