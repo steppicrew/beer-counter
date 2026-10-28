@@ -8,6 +8,7 @@
  *
  *   node scripts/screenshots.mjs                 # all languages
  *   node scripts/screenshots.mjs --lang de,en    # a subset
+ *   node scripts/screenshots.mjs --scene 03-stats  # only these shots
  *   node scripts/screenshots.mjs --keep          # leave the preview server up
  *
  * Output: assets/screenshots/<play-tag>/01-counting.png …
@@ -33,6 +34,12 @@ const argLang = process.argv.indexOf('--lang');
 const only =
   argLang !== -1 ? new Set(process.argv[argLang + 1].split(',').map((s) => s.trim())) : null;
 const targets = only ? LOCALES.filter((l) => only.has(l.code)) : LOCALES;
+
+// Rewriting a shot gives it a new hash even when nothing in it changed, and
+// Play then re-uploads it: after a change to one screen, redo only that one.
+const argScene = process.argv.indexOf('--scene');
+const onlyScenes =
+  argScene !== -1 ? new Set(process.argv[argScene + 1].split(',').map((s) => s.trim())) : null;
 
 /**
  * Each scene seeds localStorage directly, so a screenshot never depends on
@@ -354,7 +361,9 @@ let count = 0;
 
 for (const locale of targets) {
   const outDir = resolve(root, 'assets/screenshots', locale.playStore);
-  rmSync(outDir, { recursive: true, force: true });
+  // A full run starts clean, so a dropped scene leaves no stale file behind;
+  // a partial one keeps the shots it is not redoing.
+  if (!onlyScenes) rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
 
   for (const profile of DEVICE_PROFILES) {
@@ -369,6 +378,7 @@ for (const locale of targets) {
     });
 
     for (const scene of SCENES) {
+      if (onlyScenes && !onlyScenes.has(scene.file)) continue;
       const page = await context.newPage();
 
       // These images represent the packaged Android app, which never draws
@@ -436,7 +446,8 @@ for (const locale of targets) {
     await context.close();
   }
 
-  console.log(`  ${locale.playStore}  ${SCENES.length * DEVICE_PROFILES.length} shots`);
+  const scenes = onlyScenes ? SCENES.filter((s) => onlyScenes.has(s.file)).length : SCENES.length;
+  console.log(`  ${locale.playStore}  ${scenes * DEVICE_PROFILES.length} shots`);
 }
 
 await browser.close();
