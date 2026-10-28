@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import { BeverageRow } from './components/BeverageRow';
 import { Bartop } from './components/Bartop';
 import { UiIcon } from './components/UiIcon';
+import { NewNightSheet } from './components/NewNightSheet';
+import { countOrAsk } from './lib/newNight';
 import { BeverageSheet } from './components/BeverageSheet';
 import { OrderSheet } from './components/OrderSheet';
 import { SettingsSheet } from './components/SettingsSheet';
@@ -372,7 +374,7 @@ export function App() {
                 key={beverage.id}
                 beverage={beverage}
                 tally={tallies[beverage.id] ?? EMPTY_TALLY}
-                onIncrement={() => increment(beverage.id)}
+                onIncrement={() => countOrAsk(beverage.id, Date.now(), () => increment(beverage.id))}
                 onDecrement={() => decrement(beverage.id)}
                 onEdit={() => setDialog({ kind: 'edit', beverage })}
                 onOrder={() => {
@@ -534,6 +536,9 @@ export function App() {
         {dialog.kind === 'reset' && (
           <ResetSheet onConfirm={resetSession} onClose={() => setDialog({ kind: 'none' })} />
         )}
+
+        {/* Last, so it stacks above a sheet that counted the drink. */}
+        <NewNightSheet />
       </div>
     </I18nContext.Provider>
   );

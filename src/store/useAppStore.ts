@@ -123,8 +123,11 @@ interface AppState {
    * Archives the round into the history, then zeroes every count and drops
    * session-only drinks and guests. Defaults and regulars survive; the table
    * is just Me again.
+   *
+   * `keep` spares one session drink: the one just tapped to open the new
+   * night, which is plainly still on the menu.
    */
-  resetSession: () => void;
+  resetSession: (keep?: string) => void;
   setHistoryEnabled: (enabled: boolean) => void;
   clearHistory: () => void;
   markTipAsked: () => void;
@@ -422,13 +425,13 @@ export const useAppStore = create<AppState>()(
             ),
           })),
 
-        resetSession: () =>
+        resetSession: (keep) =>
           set((state) => {
             const round = state.historyEnabled
               ? archiveRound(state.beverages, state.tallies, state.people)
               : null;
             return {
-              beverages: state.beverages.filter((b) => b.scope === 'default'),
+              beverages: state.beverages.filter((b) => b.scope === 'default' || b.id === keep),
               tallies: {},
               people: state.people.filter((p) => p.scope === 'default'),
               table: [ME],

@@ -43,6 +43,12 @@ export const en = {
   'reset.body':
     'This clears all counts and removes drinks you added just for this session. Your default drinks stay.',
   'reset.confirm': 'Reset everything',
+  'night.title': 'A new night?',
+  'night.body': 'Last drink: {when}. Start a new round before counting this one?',
+  'night.bodyNoHistory':
+    'Last drink: {when}. Start a new round before counting this one? The history is off, so the current round will not be kept.',
+  'night.keep': 'Keep counting',
+  'night.reset': 'New round',
 
   'add.title': 'New drink',
   'add.name': 'Name',
@@ -217,6 +223,12 @@ export const de: Messages = {
   'reset.body':
     'Das löscht alle Zähler und entfernt Getränke, die du nur für diese Runde angelegt hast. Deine Standardgetränke bleiben.',
   'reset.confirm': 'Alles zurücksetzen',
+  'night.title': 'Ein neuer Abend?',
+  'night.body': 'Letztes Getränk: {when}. Vor diesem eine neue Runde starten?',
+  'night.bodyNoHistory':
+    'Letztes Getränk: {when}. Vor diesem eine neue Runde starten? Der Verlauf ist aus, die aktuelle Runde wird also nicht gespeichert.',
+  'night.keep': 'Weiterzählen',
+  'night.reset': 'Neue Runde',
 
   'add.title': 'Neues Getränk',
   'add.name': 'Name',
@@ -388,6 +400,12 @@ export const fr: Messages = {
   'reset.body':
     'Cela remet tous les compteurs à zéro et supprime les boissons ajoutées pour cette tournée. Vos boissons par défaut restent.',
   'reset.confirm': 'Tout réinitialiser',
+  'night.title': 'Une nouvelle soirée ?',
+  'night.body': 'Dernière boisson : {when}. Commencer une nouvelle tournée avant de compter celle-ci ?',
+  'night.bodyNoHistory':
+    'Dernière boisson : {when}. Commencer une nouvelle tournée avant de compter celle-ci ? L’historique est désactivé : la tournée en cours ne sera pas conservée.',
+  'night.keep': 'Continuer',
+  'night.reset': 'Nouvelle tournée',
 
   'add.title': 'Nouvelle boisson',
   'add.name': 'Nom',
@@ -559,6 +577,12 @@ export const es: Messages = {
   'reset.body':
     'Esto pone todos los contadores a cero y elimina las bebidas añadidas solo para esta ronda. Tus bebidas predeterminadas se mantienen.',
   'reset.confirm': 'Reiniciar todo',
+  'night.title': '¿Una nueva noche?',
+  'night.body': 'Última bebida: {when}. ¿Empezar una nueva ronda antes de contar esta?',
+  'night.bodyNoHistory':
+    'Última bebida: {when}. ¿Empezar una nueva ronda antes de contar esta? El historial está desactivado, así que la ronda actual no se guardará.',
+  'night.keep': 'Seguir contando',
+  'night.reset': 'Nueva ronda',
 
   'add.title': 'Nueva bebida',
   'add.name': 'Nombre',
@@ -730,6 +754,12 @@ export const it: Messages = {
   'reset.body':
     'Azzera tutti i contatori e rimuove le bevande aggiunte solo per questo giro. Le bevande predefinite restano.',
   'reset.confirm': 'Azzera tutto',
+  'night.title': 'Una nuova serata?',
+  'night.body': 'Ultimo drink: {when}. Iniziare un nuovo giro prima di contare questo?',
+  'night.bodyNoHistory':
+    'Ultimo drink: {when}. Iniziare un nuovo giro prima di contare questo? La cronologia è disattivata, quindi il giro attuale non verrà salvato.',
+  'night.keep': 'Continua a contare',
+  'night.reset': 'Nuovo giro',
 
   'add.title': 'Nuova bevanda',
   'add.name': 'Nome',
@@ -901,6 +931,12 @@ export const nl: Messages = {
   'reset.body':
     'Dit zet alle tellers op nul en verwijdert drankjes die je alleen voor deze ronde toevoegde. Je standaarddrankjes blijven.',
   'reset.confirm': 'Alles resetten',
+  'night.title': 'Een nieuwe avond?',
+  'night.body': 'Laatste drankje: {when}. Eerst een nieuwe ronde starten?',
+  'night.bodyNoHistory':
+    'Laatste drankje: {when}. Eerst een nieuwe ronde starten? De geschiedenis staat uit, dus de huidige ronde wordt niet bewaard.',
+  'night.keep': 'Doortellen',
+  'night.reset': 'Nieuwe ronde',
 
   'add.title': 'Nieuw drankje',
   'add.name': 'Naam',
@@ -1072,6 +1108,12 @@ export const pl: Messages = {
   'reset.body':
     'Wyzeruje wszystkie liczniki i usunie napoje dodane tylko na tę kolejkę. Twoje domyślne napoje zostaną.',
   'reset.confirm': 'Zresetuj wszystko',
+  'night.title': 'Nowy wieczór?',
+  'night.body': 'Ostatni napój: {when}. Zacząć nową rundę przed policzeniem tego?',
+  'night.bodyNoHistory':
+    'Ostatni napój: {when}. Zacząć nową rundę przed policzeniem tego? Historia jest wyłączona, więc bieżąca runda nie zostanie zapisana.',
+  'night.keep': 'Licz dalej',
+  'night.reset': 'Nowa runda',
 
   'add.title': 'Nowy napój',
   'add.name': 'Nazwa',
@@ -1243,6 +1285,12 @@ export const pt: Messages = {
   'reset.body':
     'Isto zera todos os contadores e remove bebidas adicionadas só para esta rodada. As suas bebidas predefinidas ficam.',
   'reset.confirm': 'Reiniciar tudo',
+  'night.title': 'Uma nova noite?',
+  'night.body': 'Última bebida: {when}. Começar uma nova ronda antes de contar esta?',
+  'night.bodyNoHistory':
+    'Última bebida: {when}. Começar uma nova ronda antes de contar esta? O histórico está desligado, por isso a ronda atual não será guardada.',
+  'night.keep': 'Continuar a contar',
+  'night.reset': 'Nova ronda',
 
   'add.title': 'Nova bebida',
   'add.name': 'Nome',
@@ -1414,6 +1462,12 @@ export const cs: Messages = {
   'reset.body':
     'Vynuluje všechna počítadla a odstraní nápoje přidané jen pro toto kolo. Výchozí nápoje zůstanou.',
   'reset.confirm': 'Vynulovat vše',
+  'night.title': 'Nový večer?',
+  'night.body': 'Poslední nápoj: {when}. Začít před tímto novou rundu?',
+  'night.bodyNoHistory':
+    'Poslední nápoj: {when}. Začít před tímto novou rundu? Historie je vypnutá, takže aktuální runda se neuloží.',
+  'night.keep': 'Počítat dál',
+  'night.reset': 'Nová runda',
 
   'add.title': 'Nový nápoj',
   'add.name': 'Název',
@@ -1585,6 +1639,12 @@ export const da: Messages = {
   'reset.body':
     'Det nulstiller alle tællere og fjerner drinks, du kun tilføjede til denne omgang. Dine standarddrinks bliver.',
   'reset.confirm': 'Nulstil alt',
+  'night.title': 'En ny aften?',
+  'night.body': 'Sidste drink: {when}. Start en ny omgang, før denne tælles?',
+  'night.bodyNoHistory':
+    'Sidste drink: {when}. Start en ny omgang, før denne tælles? Historikken er slået fra, så den aktuelle omgang gemmes ikke.',
+  'night.keep': 'Tæl videre',
+  'night.reset': 'Ny omgang',
 
   'add.title': 'Ny drink',
   'add.name': 'Navn',
@@ -1756,6 +1816,12 @@ export const sv: Messages = {
   'reset.body':
     'Det nollställer alla räknare och tar bort drycker du lade till bara för den här rundan. Dina standarddrycker blir kvar.',
   'reset.confirm': 'Nollställ allt',
+  'night.title': 'En ny kväll?',
+  'night.body': 'Senaste drinken: {when}. Starta en ny runda innan den här räknas?',
+  'night.bodyNoHistory':
+    'Senaste drinken: {when}. Starta en ny runda innan den här räknas? Historiken är avstängd, så den aktuella rundan sparas inte.',
+  'night.keep': 'Fortsätt räkna',
+  'night.reset': 'Ny runda',
 
   'add.title': 'Ny dryck',
   'add.name': 'Namn',
@@ -1927,6 +1993,12 @@ export const tr: Messages = {
   'reset.body':
     'Tüm sayaçları sıfırlar ve yalnızca bu tur için eklediğin içecekleri kaldırır. Varsayılan içeceklerin kalır.',
   'reset.confirm': 'Hepsini sıfırla',
+  'night.title': 'Yeni bir gece mi?',
+  'night.body': 'Son içecek: {when}. Bunu saymadan önce yeni bir tur başlatılsın mı?',
+  'night.bodyNoHistory':
+    'Son içecek: {when}. Bunu saymadan önce yeni bir tur başlatılsın mı? Geçmiş kapalı, bu yüzden mevcut tur kaydedilmeyecek.',
+  'night.keep': 'Saymaya devam',
+  'night.reset': 'Yeni tur',
 
   'add.title': 'Yeni içecek',
   'add.name': 'Ad',
@@ -2098,6 +2170,12 @@ export const ru: Messages = {
   'reset.body':
     'Все счётчики обнулятся, а напитки, добавленные только для этого круга, будут удалены. Напитки по умолчанию останутся.',
   'reset.confirm': 'Сбросить всё',
+  'night.title': 'Новый вечер?',
+  'night.body': 'Последний напиток: {when}. Начать новый раунд перед этим?',
+  'night.bodyNoHistory':
+    'Последний напиток: {when}. Начать новый раунд перед этим? История выключена, поэтому текущий раунд не сохранится.',
+  'night.keep': 'Считать дальше',
+  'night.reset': 'Новый раунд',
 
   'add.title': 'Новый напиток',
   'add.name': 'Название',
@@ -2269,6 +2347,12 @@ export const sk: Messages = {
   'reset.body':
     'Vymažú sa všetky počty a odstránia nápoje pridané len na toto kolo. Vaše predvolené nápoje zostanú.',
   'reset.confirm': 'Vynulovať všetko',
+  'night.title': 'Nový večer?',
+  'night.body': 'Posledný nápoj: {when}. Začať pred týmto novú rundu?',
+  'night.bodyNoHistory':
+    'Posledný nápoj: {when}. Začať pred týmto novú rundu? História je vypnutá, takže aktuálna runda sa neuloží.',
+  'night.keep': 'Počítať ďalej',
+  'night.reset': 'Nová runda',
 
   'add.title': 'Nový nápoj',
   'add.name': 'Názov',
@@ -2440,6 +2524,12 @@ export const nb: Messages = {
   'reset.body':
     'Dette nullstiller alle tellinger og fjerner drikker du la til bare for denne runden. Standarddrikkene dine blir værende.',
   'reset.confirm': 'Nullstill alt',
+  'night.title': 'En ny kveld?',
+  'night.body': 'Siste drink: {when}. Starte en ny runde før denne telles?',
+  'night.bodyNoHistory':
+    'Siste drink: {when}. Starte en ny runde før denne telles? Historikken er slått av, så den gjeldende runden lagres ikke.',
+  'night.keep': 'Tell videre',
+  'night.reset': 'Ny runde',
 
   'add.title': 'Ny drikke',
   'add.name': 'Navn',
@@ -2611,6 +2701,12 @@ export const fi: Messages = {
   'reset.body':
     'Kaikki laskurit nollataan ja vain tälle kierrokselle lisätyt juomat poistetaan. Oletusjuomasi säilyvät.',
   'reset.confirm': 'Nollaa kaikki',
+  'night.title': 'Uusi ilta?',
+  'night.body': 'Viimeisin juoma: {when}. Aloitetaanko uusi kierros ennen tämän laskemista?',
+  'night.bodyNoHistory':
+    'Viimeisin juoma: {when}. Aloitetaanko uusi kierros ennen tämän laskemista? Historia on pois päältä, joten nykyistä kierrosta ei tallenneta.',
+  'night.keep': 'Jatka laskemista',
+  'night.reset': 'Uusi kierros',
 
   'add.title': 'Uusi juoma',
   'add.name': 'Nimi',
@@ -2782,6 +2878,12 @@ export const hu: Messages = {
   'reset.body':
     'Ez minden számlálót töröl, és eltávolítja a csak erre a körre hozzáadott italokat. Az alapitalaid maradnak.',
   'reset.confirm': 'Minden nullázása',
+  'night.title': 'Új este?',
+  'night.body': 'Utolsó ital: {when}. Új kört kezdesz, mielőtt ezt számolod?',
+  'night.bodyNoHistory':
+    'Utolsó ital: {when}. Új kört kezdesz, mielőtt ezt számolod? Az előzmények ki vannak kapcsolva, így a mostani kör nem marad meg.',
+  'night.keep': 'Számolás tovább',
+  'night.reset': 'Új kör',
 
   'add.title': 'Új ital',
   'add.name': 'Név',
@@ -2953,6 +3055,12 @@ export const ro: Messages = {
   'reset.body':
     'Se șterg toate numărătorile și băuturile adăugate doar pentru această rundă. Băuturile tale implicite rămân.',
   'reset.confirm': 'Resetează tot',
+  'night.title': 'O seară nouă?',
+  'night.body': 'Ultima băutură: {when}. Începi o rundă nouă înainte de a o număra pe aceasta?',
+  'night.bodyNoHistory':
+    'Ultima băutură: {when}. Începi o rundă nouă înainte de a o număra pe aceasta? Istoricul este oprit, așa că runda curentă nu va fi păstrată.',
+  'night.keep': 'Numără în continuare',
+  'night.reset': 'Rundă nouă',
 
   'add.title': 'Băutură nouă',
   'add.name': 'Nume',
@@ -3124,6 +3232,12 @@ export const hr: Messages = {
   'reset.body':
     'Time se brišu svi brojevi i uklanjaju pića dodana samo za ovu rundu. Vaša zadana pića ostaju.',
   'reset.confirm': 'Resetiraj sve',
+  'night.title': 'Nova večer?',
+  'night.body': 'Zadnje piće: {when}. Započeti novu rundu prije ovoga?',
+  'night.bodyNoHistory':
+    'Zadnje piće: {when}. Započeti novu rundu prije ovoga? Povijest je isključena, pa se trenutna runda neće spremiti.',
+  'night.keep': 'Broji dalje',
+  'night.reset': 'Nova runda',
 
   'add.title': 'Novo piće',
   'add.name': 'Naziv',
@@ -3295,6 +3409,12 @@ export const bg: Messages = {
   'reset.body':
     'Всички бройки се изчистват, а напитките, добавени само за този рунд, се премахват. Напитките по подразбиране остават.',
   'reset.confirm': 'Нулирай всичко',
+  'night.title': 'Нова вечер?',
+  'night.body': 'Последна напитка: {when}. Да започне ли нов рунд преди тази?',
+  'night.bodyNoHistory':
+    'Последна напитка: {when}. Да започне ли нов рунд преди тази? Историята е изключена, така че текущият рунд няма да се запази.',
+  'night.keep': 'Продължи броенето',
+  'night.reset': 'Нов рунд',
 
   'add.title': 'Нова напитка',
   'add.name': 'Име',
@@ -3466,6 +3586,12 @@ export const el: Messages = {
   'reset.body':
     'Μηδενίζονται όλες οι μετρήσεις και αφαιρούνται τα ποτά που προσθέσατε μόνο για αυτόν τον γύρο. Τα προεπιλεγμένα ποτά σας μένουν.',
   'reset.confirm': 'Μηδενισμός όλων',
+  'night.title': 'Νέα βραδιά;',
+  'night.body': 'Τελευταίο ποτό: {when}. Να ξεκινήσει νέος γύρος πριν μετρηθεί αυτό;',
+  'night.bodyNoHistory':
+    'Τελευταίο ποτό: {when}. Να ξεκινήσει νέος γύρος πριν μετρηθεί αυτό; Το ιστορικό είναι απενεργοποιημένο, οπότε ο τρέχων γύρος δεν θα αποθηκευτεί.',
+  'night.keep': 'Συνέχεια μέτρησης',
+  'night.reset': 'Νέος γύρος',
 
   'add.title': 'Νέο ποτό',
   'add.name': 'Όνομα',
@@ -3637,6 +3763,12 @@ export const uk: Messages = {
   'reset.body':
     'Усі лічильники обнуляться, а напої, додані лише для цього кола, буде видалено. Напої за замовчуванням залишаться.',
   'reset.confirm': 'Скинути все',
+  'night.title': 'Новий вечір?',
+  'night.body': 'Останній напій: {when}. Почати новий раунд перед цим?',
+  'night.bodyNoHistory':
+    'Останній напій: {when}. Почати новий раунд перед цим? Історію вимкнено, тож поточний раунд не збережеться.',
+  'night.keep': 'Рахувати далі',
+  'night.reset': 'Новий раунд',
 
   'add.title': 'Новий напій',
   'add.name': 'Назва',
@@ -3808,6 +3940,12 @@ export const ja: Messages = {
   'reset.body':
     'すべてのカウントを0に戻し、このラウンド用に追加した飲み物を削除します。デフォルトの飲み物は残ります。',
   'reset.confirm': 'すべてリセット',
+  'night.title': '新しい夜ですか？',
+  'night.body': '最後の一杯: {when}。これを数える前に新しいラウンドを始めますか？',
+  'night.bodyNoHistory':
+    '最後の一杯: {when}。これを数える前に新しいラウンドを始めますか？履歴がオフなので、現在のラウンドは保存されません。',
+  'night.keep': 'このまま数える',
+  'night.reset': '新しいラウンド',
 
   'add.title': '新しい飲み物',
   'add.name': '名前',
@@ -3978,6 +4116,12 @@ export const zh: Messages = {
   'reset.title': '开始新的一轮？',
   'reset.body': '这会清零所有计数，并移除仅为本轮添加的饮品。默认饮品会保留。',
   'reset.confirm': '全部重置',
+  'night.title': '新的一晚？',
+  'night.body': '上一杯：{when}。在记录这一杯之前开始新一轮吗？',
+  'night.bodyNoHistory':
+    '上一杯：{when}。在记录这一杯之前开始新一轮吗？历史记录已关闭，当前这一轮不会被保存。',
+  'night.keep': '继续计数',
+  'night.reset': '新一轮',
 
   'add.title': '新饮品',
   'add.name': '名称',
