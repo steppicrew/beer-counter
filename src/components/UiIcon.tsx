@@ -1,5 +1,5 @@
 interface Props {
-  name: 'settings' | 'reset' | 'edit' | 'android' | 'share' | 'stats' | 'people';
+  name: 'settings' | 'reset' | 'edit' | 'android' | 'share' | 'stats' | 'people' | 'earlier' | 'later';
   className?: string;
 }
 
@@ -143,6 +143,28 @@ const PATHS: Record<Props['name'], React.ReactNode> = {
         strokeLinejoin="round"
       />
     </>
+  ),
+  // Stepping through the stats: a plain chevron, drawn rather than typed —
+  // ‹ and › sit on the text baseline and look low in a round button.
+  earlier: (
+    <path
+      d="M14.5 5.5 8 12l6.5 6.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
+  later: (
+    <path
+      d="M9.5 5.5 16 12l-6.5 6.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   ),
 };
 

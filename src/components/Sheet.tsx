@@ -10,11 +10,16 @@ interface Props {
    * the edge would throw away what was typed.
    */
   dismissible?: boolean;
+  /**
+   * Esc and Android's back button go back within the sheet first; return
+   * true when that was handled, false to close the sheet as usual.
+   */
+  onBack?: () => boolean;
 }
 
 /** Bottom sheet built on <dialog> so Esc, focus trapping and the top layer
  *  come from the platform rather than hand-rolled key handling. */
-export function Sheet({ title, onClose, children, dismissible = true }: Props) {
+export function Sheet({ title, onClose, children, dismissible = true, onBack }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
   // Where the press began. A click that starts inside the panel and ends on
   // the backdrop — a text selection or a scroll drag that overshoots — is
@@ -35,11 +40,22 @@ export function Sheet({ title, onClose, children, dismissible = true }: Props) {
     onClose();
   };
 
+  const cancel = (event: React.SyntheticEvent<HTMLDialogElement>) => {
+    if (event.target === ref.current && onBack?.()) {
+      // Keeps a real Esc from closing the dialog; the back button's
+      // synthetic cancel would not have closed it anyway.
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+    handle(event);
+  };
+
   return (
     <dialog
       ref={ref}
       className="sheet"
-      onCancel={handle}
+      onCancel={cancel}
       onClose={handle}
       // The panel fills the dialog's own box, so an event whose target is the
       // dialog itself landed on the ::backdrop. A nested sheet has its own
