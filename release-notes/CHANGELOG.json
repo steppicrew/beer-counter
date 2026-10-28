@@ -2,6 +2,36 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.21",
+      "date": "2026-10-28",
+      "notes": {
+        "en": "Statistics open on last night, with the time of every drink — step back night by night or zoom out to month, year and all time. After a long break, the next drink asks whether a new evening has begun.",
+        "de": "Die Statistik öffnet mit dem letzten Abend, mit der Uhrzeit jedes Getränks — Abend für Abend zurück oder hinaus auf Monat, Jahr und alles. Nach einer langen Pause fragt das nächste Getränk, ob ein neuer Abend begonnen hat.",
+        "fr": "Les statistiques s’ouvrent sur la dernière soirée, avec l’heure de chaque boisson — remontez soirée par soirée ou élargissez au mois, à l’année et à tout. Après une longue pause, la boisson suivante demande si une nouvelle soirée a commencé.",
+        "es": "Las estadísticas se abren en la última noche, con la hora de cada bebida: retrocede noche a noche o amplía a mes, año y todo. Tras una pausa larga, la siguiente bebida pregunta si ha empezado una nueva noche.",
+        "it": "Le statistiche si aprono sull’ultima serata, con l’ora di ogni drink: torna indietro serata per serata o allarga a mese, anno e tutto. Dopo una lunga pausa, il drink successivo chiede se è iniziata una nuova serata.",
+        "nl": "Statistieken openen op de laatste avond, met de tijd van elk drankje — blader avond voor avond terug of zoom uit naar maand, jaar en alles. Na een lange pauze vraagt het volgende drankje of er een nieuwe avond is begonnen.",
+        "pl": "Statystyki otwierają się na ostatnim wieczorze, z godziną każdego napoju — cofaj się wieczór po wieczorze albo oddal do miesiąca, roku i całości. Po długiej przerwie następny napój pyta, czy zaczął się nowy wieczór.",
+        "pt": "As estatísticas abrem na última noite, com a hora de cada bebida — recue noite a noite ou alargue a mês, ano e tudo. Depois de uma longa pausa, a bebida seguinte pergunta se começou uma nova noite.",
+        "cs": "Statistiky se otevřou na posledním večeru s časem každého nápoje — zpět večer po večeru, nebo oddálit na měsíc, rok a vše. Po dlouhé pauze se další nápoj zeptá, zda začal nový večer.",
+        "sk": "Štatistiky sa otvoria na poslednom večere s časom každého nápoja — späť večer po večeri, alebo oddialiť na mesiac, rok a všetko. Po dlhej prestávke sa ďalší nápoj opýta, či sa začal nový večer.",
+        "da": "Statistikken åbner på sidste aften med tidspunktet for hver drink — gå tilbage aften for aften, eller zoom ud til måned, år og alt. Efter en lang pause spørger den næste drink, om en ny aften er begyndt.",
+        "sv": "Statistiken öppnar på senaste kvällen med tiden för varje drink — bläddra bakåt kväll för kväll eller zooma ut till månad, år och allt. Efter en lång paus frågar nästa drink om en ny kväll har börjat.",
+        "nb": "Statistikken åpner på siste kveld med klokkeslettet for hver drink — bla bakover kveld for kveld eller zoom ut til måned, år og alt. Etter en lang pause spør neste drink om en ny kveld har begynt.",
+        "fi": "Tilastot avautuvat edelliseen iltaan jokaisen juoman kellonajan kera — selaa taaksepäin ilta kerrallaan tai loitonna kuukauteen, vuoteen ja kaikkeen. Pitkän tauon jälkeen seuraava juoma kysyy, onko uusi ilta alkanut.",
+        "hu": "A statisztika a legutóbbi estével nyílik, minden ital időpontjával — lapozz vissza estéről estére, vagy nagyíts ki hónapra, évre és mindenre. Hosszú szünet után a következő ital megkérdezi, új este kezdődött-e.",
+        "ro": "Statisticile se deschid pe ultima seară, cu ora fiecărei băuturi — mergi înapoi seară cu seară sau mărește la lună, an și tot. După o pauză lungă, următoarea băutură întreabă dacă a început o seară nouă.",
+        "hr": "Statistika se otvara na zadnjoj večeri, s vremenom svakog pića — unatrag večer po večer ili odmaknite na mjesec, godinu i sve. Nakon duge stanke sljedeće piće pita je li počela nova večer.",
+        "bg": "Статистиката се отваря на последната вечер, с часа на всяка напитка — назад вечер по вечер или отдалечете към месец, година и всичко. След дълга пауза следващата напитка пита дали е започнала нова вечер.",
+        "el": "Τα στατιστικά ανοίγουν στην τελευταία βραδιά, με την ώρα κάθε ποτού — πίσω βραδιά-βραδιά ή απομάκρυνση σε μήνα, έτος και όλα. Μετά από μεγάλο διάλειμμα, το επόμενο ποτό ρωτά αν ξεκίνησε νέα βραδιά.",
+        "uk": "Статистика відкривається на останньому вечорі з часом кожного напою — назад вечір за вечором або віддаліться до місяця, року й усього. Після довгої перерви наступний напій запитає, чи почався новий вечір.",
+        "tr": "İstatistikler son gecede, her içeceğin saatiyle açılır — gece gece geriye git ya da aya, yıla ve tümüne uzaklaş. Uzun bir aradan sonra sonraki içecek, yeni bir akşamın başlayıp başlamadığını sorar.",
+        "ru": "Статистика открывается на последнем вечере со временем каждого напитка — назад вечер за вечером или отдалитесь до месяца, года и всего. После долгого перерыва следующий напиток спросит, не начался ли новый вечер.",
+        "ja": "統計は最後の夜から、一杯ごとの時刻つきで表示 — 一晩ずつさかのぼるか、月・年・全期間へ広げられます。長い休憩のあとは、次の一杯で新しい夜が始まったかを確認します。",
+        "zh": "统计打开即是昨晚，每一杯都有时间 —— 可一晚一晚往回翻，或放大到月、年和全部。长时间没喝之后，下一杯会问你是否开始了新的一晚。"
+      }
+    },
+    {
       "version": "1.7.20",
       "date": "2026-10-14",
       "notes": {

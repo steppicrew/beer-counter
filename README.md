@@ -19,9 +19,22 @@ installable straight from the browser.
 - **Optional prices.** Give a drink a price and the app totals the round.
   A total that includes unpriced drinks reports as "at least X" rather than
   pretending to be the bill.
-- **15 languages**, picked up from the browser/system or chosen by hand.
+- **Forgot to tap?** Count a drink at the time you really had it.
+- **The whole table.** Count for friends too — regulars who are kept, or
+  guests just for tonight. Switch with a tap or a swipe, order a round for
+  everyone at once, and the Table tab shows what each person owes.
+- **The bar.** The evening drawn as a bar top with the hours marked: every
+  glass stands where it was drunk, drains as the night goes on, and can be
+  dragged back to when it was really had.
+- **Statistics.** Every finished round is kept on the device. The sheet opens
+  on last night with the time of each drink; step back night by night, or zoom
+  out to the month, the year and everything since the first drink. Nights are
+  split at a six-hour break, whether or not anyone reset in between.
+- **Export and import** everything as a file, for the next phone.
+- **24 languages**, picked up from the browser/system or chosen by hand.
 - **Light, dark or system theme.**
-- **Reset** to start the next round.
+- **Reset** to start the next round. The first drink after a six-hour break
+  asks whether a new evening has begun, so a forgotten reset is caught.
 
 ## Requirements
 
@@ -30,8 +43,8 @@ installable straight from the browser.
 | Node | 20+ (22 recommended) | everything |
 | Yarn | 4 (via corepack) | everything |
 | ImageMagick | 7 (`magick`) | icons, feature graphics |
-| JDK | 17 or 21 (**not** 25 — AGP 8.7 rejects it) | Android build |
-| Android SDK | platform 35, build-tools 35 | Android build |
+| JDK | 17 or 21 (**not** 25 — AGP 8.13 rejects it) | Android build |
+| Android SDK | platform 37 (installed as `android-37.0`) | Android build |
 | rsync + ssh | any | deploying the PWA |
 
 Noto Sans CJK must be installed for the Japanese and Chinese feature graphics;
@@ -121,7 +134,7 @@ yarn play:publish --track production --rollout 0.1
 yarn play:publish --force                    # re-upload even if Play matches
 ```
 
-One command uploads the bundle, all 15 listings, icons, feature graphics,
+One command uploads the bundle, all 24 listings, icons, feature graphics,
 screenshots and release notes. Everything happens inside a single Play "edit"
 that is committed only at the end — a failure part-way abandons the edit and
 leaves the live listing untouched.
@@ -159,7 +172,8 @@ src/
   components/     UI; BeverageRow is the counting tile
   store/          Zustand store, persisted to localStorage
   i18n/           locale table + message catalogues
-  lib/            types, money, totals, long-press, update hook
+  lib/            types, money, totals, stats, long-press, update hook
+  generated/      store QR code and barman drawing (generated, committed)
 scripts/          build, assets, screenshots, deploy, Play publishing
 store-listing/    LISTINGS.json (source) + exported per-language files
 release-notes/    CHANGELOG.json (source of the rolling notes)
