@@ -11,15 +11,20 @@ import { isNativeApp } from '../lib/platform';
  * deletes a database it finds damaged, and says nothing. Either way one bad
  * start used to cost the whole history, tips and all.
  *
- * So, in the app, every save also goes to a file outside the WebView, and an
- * empty or unreadable local storage is refilled from it. And nothing is
- * saved before a load has succeeded: state that could not be read is left
- * alone rather than replaced.
+ * So, in the app, every save also goes to a file outside the WebView, beside
+ * daily snapshots, and an empty or unreadable local storage is refilled from
+ * the newest copy that reads. And nothing is saved before a load has
+ * succeeded: state that could not be read is left alone rather than
+ * replaced, and copies that exist but could not be read fail the load too.
+ *
+ * On the web there is no file to keep. The browser is asked instead not to
+ * evict the site's storage when space runs low.
  */
 
 interface StateMirrorPlugin {
   write(options: { content: string }): Promise<void>;
-  read(): Promise<{ content?: string }>;
+  /** Newest first. Rejects when copies exist but none could be read. */
+  read(): Promise<{ copies?: string[] }>;
   note(options: { message: string }): Promise<void>;
 }
 
@@ -34,6 +39,10 @@ function note(message: string) {
 function mirror(content: string) {
   if (native) void StateMirror.write({ content }).catch(() => {});
 }
+
+// Unasked, a browser may clear local storage under storage pressure; Safari
+// does after a week without a visit. Granted silently for installed PWAs.
+if (!native) void navigator.storage?.persist?.().catch(() => false);
 
 /** JSON with a state object in it, as persist writes it. */
 function readable(raw: string | null | undefined): raw is string {
@@ -83,16 +92,26 @@ export const guardedStorage: StateStorage = {
     if (!native) return null;
 
     return StateMirror.read().then(
-      ({ content }) => {
-        if (!readable(content)) {
+      ({ copies = [] }) => {
+        const content = copies.find(readable);
+        if (content === undefined) {
+          // No copy at all is a new install. Copies that all fail to parse
+          // are not: the load fails, and nothing overwrites them.
+          if (copies.length > 0) throw new Error(`${copies.length} copies, none readable`);
           note(`local storage ${lost}, no mirror: starting fresh`);
           return null;
         }
         localStorage.setItem(name, content);
-        note(`local storage ${lost}, restored ${content.length} bytes from the mirror`);
+        const index = copies.indexOf(content);
+        const source = index === 0 ? 'the newest copy' : `copy ${index + 1} of ${copies.length}`;
+        note(`local storage ${lost}, restored ${content.length} bytes from ${source}`);
         return content;
       },
-      () => null,
+      (error: unknown) => {
+        // Rethrown so the load fails: a read that failed is not an empty one.
+        note(`local storage ${lost}, mirror unreadable: ${String(error)}`);
+        throw error;
+      },
     );
   },
 
