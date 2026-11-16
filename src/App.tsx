@@ -15,6 +15,7 @@ import { StatsSheet } from './components/StatsSheet';
 import { PeopleSheet } from './components/PeopleSheet';
 import { PeopleTabs } from './components/PeopleTabs';
 import { talliesOf, useAppStore } from './store/useAppStore';
+import { useSavingOff } from './store/storage';
 import { I18nContext, createTranslator, resolveLocale } from './i18n';
 import type { Beverage, Tally } from './lib/types';
 import { computeTotals, sumTotals } from './lib/totals';
@@ -90,6 +91,7 @@ export function App() {
   const clearCoin = useAppStore((s) => s.clearCoin);
 
   const [dialog, setDialog] = useState<Dialog>({ kind: 'none' });
+  const savingOff = useSavingOff((s) => s.off);
   const systemDark = useSystemDark();
 
   // Keeps sheets clear of the on-screen keyboard, and tells the bartop when
@@ -436,6 +438,24 @@ export function App() {
                 </button>
               )}
             </span>
+          </div>
+        )}
+
+        {/* The stored data could not be read, so nothing is saved: counting
+            on would look fine and be gone on the next start. */}
+        {savingOff && (
+          <div className="app__saving-off" role="alert">
+            <span>
+              {t('storage.notSaving')}{' '}
+              {isNativeApp() ? t('storage.notSavingApp') : t('storage.notSavingWeb')}
+            </span>
+            <button
+              type="button"
+              className="app__update-btn"
+              onClick={() => setDialog({ kind: 'settings' })}
+            >
+              {t('action.settings')}
+            </button>
           </div>
         )}
 

@@ -183,6 +183,19 @@ export function checkImport(text: string): ImportCheck {
 }
 
 /**
+ * Checks a state as the store itself saved it — a snapshot — the way an
+ * import is checked, so a broken one is never offered.
+ */
+export function checkStored(raw: string): ImportCheck {
+  try {
+    const stored = JSON.parse(raw) as { state?: unknown; version?: unknown } | null;
+    return checkImport(JSON.stringify({ app: APP_MARK, ...stored }));
+  } catch {
+    return { ok: false, reason: 'invalid' };
+  }
+}
+
+/**
  * Replaces everything with a checked import. A reload rather than an in-place
  * rehydrate: persist would merge the file over the current state, so a field
  * the file lacks — history in a file from before it existed — would survive
@@ -191,4 +204,31 @@ export function checkImport(text: string): ImportCheck {
 export function applyImport(stored: string): void {
   localStorage.setItem(storeKey(), stored);
   location.reload();
+}
+
+/**
+ * What a stored state holds, enough to tell earlier days apart: how many
+ * drinks it counted and when the last one was. Read from every `times` list
+ * in it, so it holds for any store version.
+ */
+export function summarizeStored(raw: string): { drinks: number; lastAt: number | null } {
+  let drinks = 0;
+  let lastAt: number | null = null;
+  const walk = (value: unknown) => {
+    if (Array.isArray(value)) {
+      value.forEach(walk);
+    } else if (isObject(value)) {
+      for (const [key, inner] of Object.entries(value)) {
+        if (key === 'times' && isTimes(inner)) {
+          const times = inner as number[];
+          drinks += times.length;
+          for (const at of times) if (lastAt === null || at > lastAt) lastAt = at;
+        } else {
+          walk(inner);
+        }
+      }
+    }
+  };
+  walk((JSON.parse(raw) as { state?: unknown }).state);
+  return { drinks, lastAt };
 }

@@ -1,4 +1,5 @@
 import { registerPlugin } from '@capacitor/core';
+import { create } from 'zustand';
 import type { StateStorage } from 'zustand/middleware';
 import { isNativeApp } from '../lib/platform';
 
@@ -25,7 +26,17 @@ interface StateMirrorPlugin {
   write(options: { content: string }): Promise<void>;
   /** Newest first. Rejects when copies exist but none could be read. */
   read(): Promise<{ copies?: string[] }>;
+  list(): Promise<{ snapshots?: StoredSnapshot[] }>;
+  /** Keeps the current mirror as a snapshot first; rejects if it cannot. */
+  restore(options: { content: string }): Promise<void>;
   note(options: { message: string }): Promise<void>;
+}
+
+/** A daily snapshot as the app keeps it: when, and the stored state. */
+export interface StoredSnapshot {
+  name: string;
+  keptAt: number;
+  content: string;
 }
 
 const StateMirror = registerPlugin<StateMirrorPlugin>('StateMirror');
@@ -65,6 +76,9 @@ export const storeSettled = new Promise<void>((resolve) => {
   settle = resolve;
 });
 
+/** True while saves are off because the load failed: the app says so. */
+export const useSavingOff = create<{ off: boolean }>(() => ({ off: false }));
+
 /** The store's load is over; `error` is persist's, if it failed. */
 export function storeLoaded(error: unknown) {
   if (error === undefined) {
@@ -73,6 +87,7 @@ export function storeLoaded(error: unknown) {
     // Running on in memory loses this session at worst; saving would lose
     // everything before it.
     note(`not loaded, saving off for this session: ${String(error)}`);
+    useSavingOff.setState({ off: true });
   }
   settle();
 }
@@ -130,3 +145,18 @@ export const guardedStorage: StateStorage = {
     localStorage.removeItem(name);
   },
 };
+
+/** Earlier days to go back to, newest first. Only the app keeps them. */
+export async function listSnapshots(): Promise<StoredSnapshot[]> {
+  if (!native) return [];
+  return (await StateMirror.list()).snapshots ?? [];
+}
+
+/**
+ * Makes `stored` the mirror, after keeping what was there as a snapshot of
+ * its own, so this can be undone. The caller then applies it like an import.
+ */
+export async function restoreSnapshot(name: string, stored: string): Promise<void> {
+  await StateMirror.restore({ content: stored });
+  note(`restoring ${name}`);
+}

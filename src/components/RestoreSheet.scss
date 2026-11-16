@@ -1,0 +1,31 @@
+@use '../styles/vars' as vars;
+
+.restore-days {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-sm;
+  margin: vars.$space-md 0 0;
+  padding: 0;
+  list-style: none;
+
+  &__day {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$space-xs;
+    width: 100%;
+    padding: vars.$space-sm vars.$space-md;
+    text-align: start;
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+    border-radius: vars.$radius-md;
+  }
+
+  &__kept {
+    font-weight: vars.$weight-semibold;
+  }
+
+  &__detail {
+    font-size: vars.$font-sm;
+    color: var(--text-muted);
+  }
+}

@@ -177,6 +177,19 @@ export const en = {
   'data.importTitle': 'Replace all data?',
   'data.importBody': 'Everything on this device — drinks, counts, history and settings — is replaced by the file. This cannot be undone.',
   'data.importConfirm': 'Replace',
+  'data.restore': 'Earlier days',
+  'data.restoreTitle': 'Back to an earlier day',
+  'data.restoreHint': 'The app keeps a copy of your data from each of the last 14 days you used it. Restoring one replaces what is on this device — that is kept as a copy too, so you can come back to it.',
+  'data.restoreNone': 'No earlier copies yet. The app keeps one for each day you use it.',
+  'data.restoreKept': 'Kept {when}',
+  'data.restoreLast': 'Last drink {when}',
+  'data.restoreCount': 'Drinks counted: {count}',
+  'data.restoreConfirmTitle': 'Restore this copy?',
+  'data.restoreConfirmBody': 'Everything on this device — drinks, counts, history and settings — is replaced by this copy. What is here now is kept as a copy, so you can go back to it.',
+  'data.restoreConfirm': 'Restore',
+  'storage.notSaving': 'Your stored data could not be read. To keep it safe, nothing is saved until the app starts again.',
+  'storage.notSavingApp': 'You can go back to an earlier day in the settings.',
+  'storage.notSavingWeb': 'You can import an export in the settings.',
 } as const;
 
 export type MessageKey = keyof typeof en;
@@ -357,6 +370,19 @@ export const de: Messages = {
   'data.importTitle': 'Alle Daten ersetzen?',
   'data.importBody': 'Alles auf diesem Gerät — Getränke, Zählerstände, Verlauf und Einstellungen — wird durch die Datei ersetzt. Das lässt sich nicht rückgängig machen.',
   'data.importConfirm': 'Ersetzen',
+  'data.restore': 'Frühere Tage',
+  'data.restoreTitle': 'Zurück zu einem früheren Tag',
+  'data.restoreHint': 'Die App hebt von jedem der letzten 14 Tage, an denen du sie benutzt hast, eine Kopie deiner Daten auf. Beim Wiederherstellen wird ersetzt, was auf diesem Gerät ist — das wird ebenfalls als Kopie aufgehoben, du kannst also zurück.',
+  'data.restoreNone': 'Noch keine früheren Kopien. Die App hebt für jeden Tag, an dem du sie benutzt, eine auf.',
+  'data.restoreKept': 'Aufgehoben {when}',
+  'data.restoreLast': 'Letztes Getränk {when}',
+  'data.restoreCount': 'Gezählte Getränke: {count}',
+  'data.restoreConfirmTitle': 'Diese Kopie wiederherstellen?',
+  'data.restoreConfirmBody': 'Alles auf diesem Gerät — Getränke, Zählerstände, Verlauf und Einstellungen — wird durch diese Kopie ersetzt. Der jetzige Stand wird als Kopie aufgehoben, du kannst also zu ihm zurück.',
+  'data.restoreConfirm': 'Wiederherstellen',
+  'storage.notSaving': 'Deine gespeicherten Daten konnten nicht gelesen werden. Damit sie erhalten bleiben, wird bis zum nächsten Start der App nichts gespeichert.',
+  'storage.notSavingApp': 'In den Einstellungen kannst du zu einem früheren Tag zurück.',
+  'storage.notSavingWeb': 'In den Einstellungen kannst du einen Export importieren.',
 };
 
 export const fr: Messages = {
@@ -534,6 +560,19 @@ export const fr: Messages = {
   'data.importTitle': 'Remplacer toutes les données ?',
   'data.importBody': 'Tout ce qui se trouve sur cet appareil — boissons, comptes, historique et réglages — est remplacé par le fichier. Cette action est irréversible.',
   'data.importConfirm': 'Remplacer',
+  'data.restore': 'Jours précédents',
+  'data.restoreTitle': 'Revenir à un jour précédent',
+  'data.restoreHint': 'L’app garde une copie de vos données pour chacun des 14 derniers jours où vous l’avez utilisée. En restaurer une remplace ce qui se trouve sur cet appareil — qui est lui aussi gardé en copie, vous pouvez donc y revenir.',
+  'data.restoreNone': 'Pas encore de copie. L’app en garde une pour chaque jour où vous l’utilisez.',
+  'data.restoreKept': 'Gardée le {when}',
+  'data.restoreLast': 'Dernière boisson le {when}',
+  'data.restoreCount': 'Boissons comptées : {count}',
+  'data.restoreConfirmTitle': 'Restaurer cette copie ?',
+  'data.restoreConfirmBody': 'Tout ce qui se trouve sur cet appareil — boissons, comptes, historique et réglages — est remplacé par cette copie. L’état actuel est gardé en copie, vous pouvez donc y revenir.',
+  'data.restoreConfirm': 'Restaurer',
+  'storage.notSaving': 'Vos données enregistrées n’ont pas pu être lues. Pour les protéger, rien n’est enregistré jusqu’au prochain démarrage de l’app.',
+  'storage.notSavingApp': 'Vous pouvez revenir à un jour précédent dans les paramètres.',
+  'storage.notSavingWeb': 'Vous pouvez importer un export dans les paramètres.',
 };
 
 export const es: Messages = {
@@ -711,6 +750,19 @@ export const es: Messages = {
   'data.importTitle': '¿Sustituir todos los datos?',
   'data.importBody': 'Todo lo que hay en este dispositivo —bebidas, cuentas, historial y ajustes— se sustituye por el archivo. Esto no se puede deshacer.',
   'data.importConfirm': 'Sustituir',
+  'data.restore': 'Días anteriores',
+  'data.restoreTitle': 'Volver a un día anterior',
+  'data.restoreHint': 'La app guarda una copia de tus datos de cada uno de los últimos 14 días en que la usaste. Al restaurar una se reemplaza lo que hay en este dispositivo, que también se guarda como copia, así que puedes volver a ello.',
+  'data.restoreNone': 'Aún no hay copias anteriores. La app guarda una por cada día que la usas.',
+  'data.restoreKept': 'Guardada el {when}',
+  'data.restoreLast': 'Última bebida el {when}',
+  'data.restoreCount': 'Bebidas contadas: {count}',
+  'data.restoreConfirmTitle': '¿Restaurar esta copia?',
+  'data.restoreConfirmBody': 'Todo lo que hay en este dispositivo —bebidas, cuentas, historial y ajustes— se reemplaza por esta copia. Lo que hay ahora se guarda como copia, así que puedes volver a ello.',
+  'data.restoreConfirm': 'Restaurar',
+  'storage.notSaving': 'No se pudieron leer tus datos guardados. Para protegerlos, no se guarda nada hasta que la app vuelva a iniciarse.',
+  'storage.notSavingApp': 'Puedes volver a un día anterior en los ajustes.',
+  'storage.notSavingWeb': 'Puedes importar una exportación en los ajustes.',
 };
 
 export const it: Messages = {
@@ -888,6 +940,19 @@ export const it: Messages = {
   'data.importTitle': 'Sostituire tutti i dati?',
   'data.importBody': 'Tutto ciò che c’è su questo dispositivo — bevande, conteggi, storico e impostazioni — viene sostituito dal file. L’azione non è reversibile.',
   'data.importConfirm': 'Sostituisci',
+  'data.restore': 'Giorni precedenti',
+  'data.restoreTitle': 'Torna a un giorno precedente',
+  'data.restoreHint': 'L’app conserva una copia dei tuoi dati per ciascuno degli ultimi 14 giorni in cui l’hai usata. Ripristinarne una sostituisce ciò che c’è su questo dispositivo, che viene conservato anch’esso come copia: puoi quindi tornarci.',
+  'data.restoreNone': 'Ancora nessuna copia precedente. L’app ne conserva una per ogni giorno in cui la usi.',
+  'data.restoreKept': 'Conservata il {when}',
+  'data.restoreLast': 'Ultimo drink il {when}',
+  'data.restoreCount': 'Drink contati: {count}',
+  'data.restoreConfirmTitle': 'Ripristinare questa copia?',
+  'data.restoreConfirmBody': 'Tutto ciò che c’è su questo dispositivo — drink, conteggi, cronologia e impostazioni — viene sostituito da questa copia. Lo stato attuale viene conservato come copia, quindi puoi tornarci.',
+  'data.restoreConfirm': 'Ripristina',
+  'storage.notSaving': 'Non è stato possibile leggere i tuoi dati salvati. Per proteggerli, non viene salvato nulla fino al prossimo avvio dell’app.',
+  'storage.notSavingApp': 'Puoi tornare a un giorno precedente nelle impostazioni.',
+  'storage.notSavingWeb': 'Puoi importare un’esportazione nelle impostazioni.',
 };
 
 export const nl: Messages = {
@@ -1065,6 +1130,19 @@ export const nl: Messages = {
   'data.importTitle': 'Alle gegevens vervangen?',
   'data.importBody': 'Alles op dit apparaat — drankjes, tellingen, geschiedenis en instellingen — wordt door het bestand vervangen. Dit kan niet ongedaan worden gemaakt.',
   'data.importConfirm': 'Vervangen',
+  'data.restore': 'Eerdere dagen',
+  'data.restoreTitle': 'Terug naar een eerdere dag',
+  'data.restoreHint': 'De app bewaart een kopie van je gegevens van elk van de laatste 14 dagen waarop je hem gebruikte. Terugzetten vervangt wat er op dit apparaat staat — dat wordt ook als kopie bewaard, dus je kunt ernaar terug.',
+  'data.restoreNone': 'Nog geen eerdere kopieën. De app bewaart er een voor elke dag dat je hem gebruikt.',
+  'data.restoreKept': 'Bewaard {when}',
+  'data.restoreLast': 'Laatste drankje {when}',
+  'data.restoreCount': 'Getelde drankjes: {count}',
+  'data.restoreConfirmTitle': 'Deze kopie terugzetten?',
+  'data.restoreConfirmBody': 'Alles op dit apparaat — drankjes, tellingen, geschiedenis en instellingen — wordt vervangen door deze kopie. Wat er nu staat wordt als kopie bewaard, dus je kunt ernaar terug.',
+  'data.restoreConfirm': 'Terugzetten',
+  'storage.notSaving': 'Je opgeslagen gegevens konden niet worden gelezen. Om ze te beschermen wordt er niets opgeslagen tot de app opnieuw start.',
+  'storage.notSavingApp': 'In de instellingen kun je terug naar een eerdere dag.',
+  'storage.notSavingWeb': 'In de instellingen kun je een export importeren.',
 };
 
 export const pl: Messages = {
@@ -1242,6 +1320,19 @@ export const pl: Messages = {
   'data.importTitle': 'Zastąpić wszystkie dane?',
   'data.importBody': 'Wszystko na tym urządzeniu — napoje, liczniki, historia i ustawienia — zostanie zastąpione plikiem. Tego nie można cofnąć.',
   'data.importConfirm': 'Zastąp',
+  'data.restore': 'Wcześniejsze dni',
+  'data.restoreTitle': 'Powrót do wcześniejszego dnia',
+  'data.restoreHint': 'Aplikacja przechowuje kopię Twoich danych z każdego z ostatnich 14 dni, w których była używana. Przywrócenie kopii zastępuje to, co jest na tym urządzeniu — to również zostaje zachowane jako kopia, więc możesz do tego wrócić.',
+  'data.restoreNone': 'Brak jeszcze wcześniejszych kopii. Aplikacja zachowuje jedną na każdy dzień, w którym z niej korzystasz.',
+  'data.restoreKept': 'Zachowana {when}',
+  'data.restoreLast': 'Ostatni napój {when}',
+  'data.restoreCount': 'Policzone napoje: {count}',
+  'data.restoreConfirmTitle': 'Przywrócić tę kopię?',
+  'data.restoreConfirmBody': 'Wszystko na tym urządzeniu — napoje, liczniki, historia i ustawienia — zostanie zastąpione tą kopią. Obecny stan zostanie zachowany jako kopia, więc możesz do niego wrócić.',
+  'data.restoreConfirm': 'Przywróć',
+  'storage.notSaving': 'Nie udało się odczytać zapisanych danych. Aby je chronić, nic nie jest zapisywane do ponownego uruchomienia aplikacji.',
+  'storage.notSavingApp': 'W ustawieniach możesz wrócić do wcześniejszego dnia.',
+  'storage.notSavingWeb': 'W ustawieniach możesz zaimportować eksport.',
 };
 
 export const pt: Messages = {
@@ -1419,6 +1510,19 @@ export const pt: Messages = {
   'data.importTitle': 'Substituir todos os dados?',
   'data.importBody': 'Tudo o que está neste dispositivo — bebidas, contagens, histórico e definições — é substituído pelo ficheiro. Isto não pode ser anulado.',
   'data.importConfirm': 'Substituir',
+  'data.restore': 'Dias anteriores',
+  'data.restoreTitle': 'Voltar a um dia anterior',
+  'data.restoreHint': 'A app guarda uma cópia dos teus dados de cada um dos últimos 14 dias em que foi usada. Restaurar uma substitui o que está neste dispositivo — que também é guardado como cópia, por isso podes voltar a ele.',
+  'data.restoreNone': 'Ainda não há cópias anteriores. A app guarda uma por cada dia em que a usas.',
+  'data.restoreKept': 'Guardada a {when}',
+  'data.restoreLast': 'Última bebida a {when}',
+  'data.restoreCount': 'Bebidas contadas: {count}',
+  'data.restoreConfirmTitle': 'Restaurar esta cópia?',
+  'data.restoreConfirmBody': 'Tudo o que está neste dispositivo — bebidas, contagens, histórico e definições — é substituído por esta cópia. O estado atual é guardado como cópia, por isso podes voltar a ele.',
+  'data.restoreConfirm': 'Restaurar',
+  'storage.notSaving': 'Não foi possível ler os teus dados guardados. Para os proteger, nada é guardado até a app voltar a iniciar.',
+  'storage.notSavingApp': 'Podes voltar a um dia anterior nas definições.',
+  'storage.notSavingWeb': 'Podes importar uma exportação nas definições.',
 };
 
 export const cs: Messages = {
@@ -1596,6 +1700,19 @@ export const cs: Messages = {
   'data.importTitle': 'Nahradit všechna data?',
   'data.importBody': 'Vše v tomto zařízení — nápoje, počty, historie a nastavení — bude nahrazeno souborem. Tuto akci nelze vrátit zpět.',
   'data.importConfirm': 'Nahradit',
+  'data.restore': 'Dřívější dny',
+  'data.restoreTitle': 'Zpět k dřívějšímu dni',
+  'data.restoreHint': 'Aplikace uchovává kopii tvých dat z každého z posledních 14 dnů, kdy byla použita. Obnovení nahradí to, co je v tomto zařízení — to se také uchová jako kopie, takže se k tomu můžeš vrátit.',
+  'data.restoreNone': 'Zatím žádné dřívější kopie. Aplikace uchová jednu za každý den, kdy ji používáš.',
+  'data.restoreKept': 'Uchováno {when}',
+  'data.restoreLast': 'Poslední nápoj {when}',
+  'data.restoreCount': 'Započítané nápoje: {count}',
+  'data.restoreConfirmTitle': 'Obnovit tuto kopii?',
+  'data.restoreConfirmBody': 'Vše v tomto zařízení — nápoje, počty, historie a nastavení — bude nahrazeno touto kopií. Současný stav se uchová jako kopie, takže se k němu můžeš vrátit.',
+  'data.restoreConfirm': 'Obnovit',
+  'storage.notSaving': 'Uložená data se nepodařilo načíst. Aby zůstala zachována, nic se neukládá až do dalšího spuštění aplikace.',
+  'storage.notSavingApp': 'V nastavení se můžeš vrátit k dřívějšímu dni.',
+  'storage.notSavingWeb': 'V nastavení můžeš importovat export.',
 };
 
 export const da: Messages = {
@@ -1773,6 +1890,19 @@ export const da: Messages = {
   'data.importTitle': 'Erstat alle data?',
   'data.importBody': 'Alt på denne enhed — drikke, tællinger, historik og indstillinger — erstattes af filen. Det kan ikke fortrydes.',
   'data.importConfirm': 'Erstat',
+  'data.restore': 'Tidligere dage',
+  'data.restoreTitle': 'Tilbage til en tidligere dag',
+  'data.restoreHint': 'Appen gemmer en kopi af dine data fra hver af de seneste 14 dage, du har brugt den. Gendannelse erstatter det, der er på denne enhed — det gemmes også som kopi, så du kan vende tilbage til det.',
+  'data.restoreNone': 'Ingen tidligere kopier endnu. Appen gemmer én for hver dag, du bruger den.',
+  'data.restoreKept': 'Gemt {when}',
+  'data.restoreLast': 'Sidste drink {when}',
+  'data.restoreCount': 'Talte drinks: {count}',
+  'data.restoreConfirmTitle': 'Gendan denne kopi?',
+  'data.restoreConfirmBody': 'Alt på denne enhed — drinks, optællinger, historik og indstillinger — erstattes af denne kopi. Det, der er her nu, gemmes som kopi, så du kan vende tilbage til det.',
+  'data.restoreConfirm': 'Gendan',
+  'storage.notSaving': 'Dine gemte data kunne ikke læses. For at beskytte dem gemmes intet, før appen starter igen.',
+  'storage.notSavingApp': 'Du kan gå tilbage til en tidligere dag i indstillingerne.',
+  'storage.notSavingWeb': 'Du kan importere en eksport i indstillingerne.',
 };
 
 export const sv: Messages = {
@@ -1950,6 +2080,19 @@ export const sv: Messages = {
   'data.importTitle': 'Ersätta all data?',
   'data.importBody': 'Allt på den här enheten — drycker, räkningar, historik och inställningar — ersätts av filen. Det går inte att ångra.',
   'data.importConfirm': 'Ersätt',
+  'data.restore': 'Tidigare dagar',
+  'data.restoreTitle': 'Tillbaka till en tidigare dag',
+  'data.restoreHint': 'Appen sparar en kopia av dina data från var och en av de senaste 14 dagarna du använde den. Att återställa en ersätter det som finns på den här enheten — det sparas också som kopia, så du kan gå tillbaka till det.',
+  'data.restoreNone': 'Inga tidigare kopior än. Appen sparar en för varje dag du använder den.',
+  'data.restoreKept': 'Sparad {when}',
+  'data.restoreLast': 'Senaste drink {when}',
+  'data.restoreCount': 'Räknade drinkar: {count}',
+  'data.restoreConfirmTitle': 'Återställa den här kopian?',
+  'data.restoreConfirmBody': 'Allt på den här enheten — drinkar, räkningar, historik och inställningar — ersätts av den här kopian. Det som finns här nu sparas som kopia, så du kan gå tillbaka till det.',
+  'data.restoreConfirm': 'Återställ',
+  'storage.notSaving': 'Dina sparade data kunde inte läsas. För att skydda dem sparas ingenting förrän appen startar igen.',
+  'storage.notSavingApp': 'Du kan gå tillbaka till en tidigare dag i inställningarna.',
+  'storage.notSavingWeb': 'Du kan importera en export i inställningarna.',
 };
 
 export const tr: Messages = {
@@ -2127,6 +2270,19 @@ export const tr: Messages = {
   'data.importTitle': 'Tüm veriler değiştirilsin mi?',
   'data.importBody': 'Bu cihazdaki her şey — içecekler, sayılar, geçmiş ve ayarlar — dosyadakilerle değiştirilir. Bu geri alınamaz.',
   'data.importConfirm': 'Değiştir',
+  'data.restore': 'Önceki günler',
+  'data.restoreTitle': 'Önceki bir güne dön',
+  'data.restoreHint': 'Uygulama, kullandığın son 14 günün her biri için verilerinin bir kopyasını saklar. Birini geri yüklemek bu cihazdakinin yerini alır — o da kopya olarak saklanır, yani ona geri dönebilirsin.',
+  'data.restoreNone': 'Henüz önceki kopya yok. Uygulama, kullandığın her gün için bir tane saklar.',
+  'data.restoreKept': 'Saklandı: {when}',
+  'data.restoreLast': 'Son içecek: {when}',
+  'data.restoreCount': 'Sayılan içecekler: {count}',
+  'data.restoreConfirmTitle': 'Bu kopya geri yüklensin mi?',
+  'data.restoreConfirmBody': 'Bu cihazdaki her şey — içecekler, sayımlar, geçmiş ve ayarlar — bu kopyayla değiştirilir. Şu anki durum kopya olarak saklanır, yani ona geri dönebilirsin.',
+  'data.restoreConfirm': 'Geri yükle',
+  'storage.notSaving': 'Kayıtlı verilerin okunamadı. Korunmaları için uygulama yeniden başlayana kadar hiçbir şey kaydedilmez.',
+  'storage.notSavingApp': 'Ayarlardan önceki bir güne dönebilirsin.',
+  'storage.notSavingWeb': 'Ayarlardan bir dışa aktarımı içe aktarabilirsin.',
 };
 
 export const ru: Messages = {
@@ -2304,6 +2460,19 @@ export const ru: Messages = {
   'data.importTitle': 'Заменить все данные?',
   'data.importBody': 'Всё на этом устройстве — напитки, счёт, история и настройки — будет заменено данными из файла. Отменить это нельзя.',
   'data.importConfirm': 'Заменить',
+  'data.restore': 'Прошлые дни',
+  'data.restoreTitle': 'Вернуться к прошлому дню',
+  'data.restoreHint': 'Приложение хранит копию ваших данных за каждый из последних 14 дней, когда вы им пользовались. Восстановление заменяет то, что сейчас на устройстве, — это тоже сохраняется как копия, так что к нему можно вернуться.',
+  'data.restoreNone': 'Прошлых копий пока нет. Приложение сохраняет по одной за каждый день, когда вы им пользуетесь.',
+  'data.restoreKept': 'Сохранено {when}',
+  'data.restoreLast': 'Последний напиток {when}',
+  'data.restoreCount': 'Посчитано напитков: {count}',
+  'data.restoreConfirmTitle': 'Восстановить эту копию?',
+  'data.restoreConfirmBody': 'Всё на этом устройстве — напитки, счёт, история и настройки — будет заменено этой копией. Текущее состояние сохранится как копия, так что к нему можно вернуться.',
+  'data.restoreConfirm': 'Восстановить',
+  'storage.notSaving': 'Не удалось прочитать сохранённые данные. Чтобы их не потерять, ничего не сохраняется до следующего запуска приложения.',
+  'storage.notSavingApp': 'В настройках можно вернуться к прошлому дню.',
+  'storage.notSavingWeb': 'В настройках можно импортировать экспорт.',
 };
 
 export const sk: Messages = {
@@ -2481,6 +2650,19 @@ export const sk: Messages = {
   'data.importTitle': 'Nahradiť všetky údaje?',
   'data.importBody': 'Všetko v tomto zariadení — nápoje, počty, história a nastavenia — sa nahradí súborom. Nedá sa to vrátiť späť.',
   'data.importConfirm': 'Nahradiť',
+  'data.restore': 'Skoršie dni',
+  'data.restoreTitle': 'Späť k skoršiemu dňu',
+  'data.restoreHint': 'Aplikácia uchováva kópiu vašich údajov z každého z posledných 14 dní, keď bola používaná. Obnovenie nahradí to, čo je v tomto zariadení — to sa tiež uchová ako kópia, takže sa k tomu môžete vrátiť.',
+  'data.restoreNone': 'Zatiaľ žiadne skoršie kópie. Aplikácia uchová jednu za každý deň, keď ju používate.',
+  'data.restoreKept': 'Uchované {when}',
+  'data.restoreLast': 'Posledný nápoj {when}',
+  'data.restoreCount': 'Započítané nápoje: {count}',
+  'data.restoreConfirmTitle': 'Obnoviť túto kópiu?',
+  'data.restoreConfirmBody': 'Všetko v tomto zariadení — nápoje, počty, história a nastavenia — sa nahradí touto kópiou. Súčasný stav sa uchová ako kópia, takže sa k nemu môžete vrátiť.',
+  'data.restoreConfirm': 'Obnoviť',
+  'storage.notSaving': 'Uložené údaje sa nepodarilo načítať. Aby zostali zachované, nič sa neukladá až do ďalšieho spustenia aplikácie.',
+  'storage.notSavingApp': 'V nastaveniach sa môžete vrátiť k skoršiemu dňu.',
+  'storage.notSavingWeb': 'V nastaveniach môžete importovať export.',
 };
 
 export const nb: Messages = {
@@ -2658,6 +2840,19 @@ export const nb: Messages = {
   'data.importTitle': 'Erstatte alle data?',
   'data.importBody': 'Alt på denne enheten — drikker, tellinger, historikk og innstillinger — erstattes av filen. Dette kan ikke angres.',
   'data.importConfirm': 'Erstatt',
+  'data.restore': 'Tidligere dager',
+  'data.restoreTitle': 'Tilbake til en tidligere dag',
+  'data.restoreHint': 'Appen tar vare på en kopi av dataene dine fra hver av de siste 14 dagene du brukte den. Å gjenopprette en erstatter det som er på denne enheten — det tas også vare på som kopi, så du kan gå tilbake til det.',
+  'data.restoreNone': 'Ingen tidligere kopier ennå. Appen tar vare på én for hver dag du bruker den.',
+  'data.restoreKept': 'Lagret {when}',
+  'data.restoreLast': 'Siste drink {when}',
+  'data.restoreCount': 'Talte drinker: {count}',
+  'data.restoreConfirmTitle': 'Gjenopprette denne kopien?',
+  'data.restoreConfirmBody': 'Alt på denne enheten — drinker, tellinger, historikk og innstillinger — erstattes av denne kopien. Det som er her nå, tas vare på som kopi, så du kan gå tilbake til det.',
+  'data.restoreConfirm': 'Gjenopprett',
+  'storage.notSaving': 'De lagrede dataene dine kunne ikke leses. For å beskytte dem lagres ingenting før appen starter på nytt.',
+  'storage.notSavingApp': 'Du kan gå tilbake til en tidligere dag i innstillingene.',
+  'storage.notSavingWeb': 'Du kan importere en eksport i innstillingene.',
 };
 
 export const fi: Messages = {
@@ -2835,6 +3030,19 @@ export const fi: Messages = {
   'data.importTitle': 'Korvataanko kaikki tiedot?',
   'data.importBody': 'Kaikki tämän laitteen tiedot — juomat, laskurit, historia ja asetukset — korvataan tiedostolla. Tätä ei voi kumota.',
   'data.importConfirm': 'Korvaa',
+  'data.restore': 'Aiemmat päivät',
+  'data.restoreTitle': 'Takaisin aiempaan päivään',
+  'data.restoreHint': 'Sovellus säilyttää kopion tiedoistasi jokaiselta viimeiseltä 14 päivältä, jolloin käytit sitä. Palauttaminen korvaa sen, mitä tällä laitteella on — sekin säilytetään kopiona, joten voit palata siihen.',
+  'data.restoreNone': 'Aiempia kopioita ei vielä ole. Sovellus säilyttää yhden jokaiselta päivältä, jona käytät sitä.',
+  'data.restoreKept': 'Säilytetty {when}',
+  'data.restoreLast': 'Viimeisin juoma {when}',
+  'data.restoreCount': 'Laskettuja juomia: {count}',
+  'data.restoreConfirmTitle': 'Palautetaanko tämä kopio?',
+  'data.restoreConfirmBody': 'Kaikki tällä laitteella — juomat, laskurit, historia ja asetukset — korvataan tällä kopiolla. Nykyinen tila säilytetään kopiona, joten voit palata siihen.',
+  'data.restoreConfirm': 'Palauta',
+  'storage.notSaving': 'Tallennettuja tietojasi ei voitu lukea. Niiden suojaamiseksi mitään ei tallenneta ennen kuin sovellus käynnistyy uudelleen.',
+  'storage.notSavingApp': 'Asetuksissa voit palata aiempaan päivään.',
+  'storage.notSavingWeb': 'Asetuksissa voit tuoda viennin.',
 };
 
 export const hu: Messages = {
@@ -3012,6 +3220,19 @@ export const hu: Messages = {
   'data.importTitle': 'Minden adat cseréje?',
   'data.importBody': 'Az eszközön minden — italok, számlálók, előzmények és beállítások — a fájl tartalmára cserélődik. Nem vonható vissza.',
   'data.importConfirm': 'Csere',
+  'data.restore': 'Korábbi napok',
+  'data.restoreTitle': 'Vissza egy korábbi naphoz',
+  'data.restoreHint': 'Az alkalmazás az utolsó 14 nap mindegyikéről, amikor használtad, megőrzi az adataid egy másolatát. A visszaállítás lecseréli azt, ami ezen az eszközön van — ez is megmarad másolatként, így visszatérhetsz hozzá.',
+  'data.restoreNone': 'Még nincs korábbi másolat. Az alkalmazás minden napról, amikor használod, megőriz egyet.',
+  'data.restoreKept': 'Megőrizve: {when}',
+  'data.restoreLast': 'Utolsó ital: {when}',
+  'data.restoreCount': 'Számolt italok: {count}',
+  'data.restoreConfirmTitle': 'Visszaállítod ezt a másolatot?',
+  'data.restoreConfirmBody': 'Minden ezen az eszközön — italok, számlálók, előzmények és beállítások — lecserélődik erre a másolatra. A mostani állapot másolatként megmarad, így visszatérhetsz hozzá.',
+  'data.restoreConfirm': 'Visszaállítás',
+  'storage.notSaving': 'A mentett adataidat nem sikerült beolvasni. A védelmük érdekében semmi sem mentődik az alkalmazás következő indításáig.',
+  'storage.notSavingApp': 'A beállításokban visszatérhetsz egy korábbi naphoz.',
+  'storage.notSavingWeb': 'A beállításokban importálhatsz egy exportot.',
 };
 
 export const ro: Messages = {
@@ -3189,6 +3410,19 @@ export const ro: Messages = {
   'data.importTitle': 'Înlocuiești toate datele?',
   'data.importBody': 'Tot ce e pe acest dispozitiv — băuturi, numărători, istoric și setări — e înlocuit cu fișierul. Acțiunea nu poate fi anulată.',
   'data.importConfirm': 'Înlocuiește',
+  'data.restore': 'Zile anterioare',
+  'data.restoreTitle': 'Înapoi la o zi anterioară',
+  'data.restoreHint': 'Aplicația păstrează o copie a datelor tale din fiecare dintre ultimele 14 zile în care ai folosit-o. Restaurarea uneia înlocuiește ce este pe acest dispozitiv — care este păstrat și el ca o copie, deci poți reveni la el.',
+  'data.restoreNone': 'Încă nu există copii anterioare. Aplicația păstrează câte una pentru fiecare zi în care o folosești.',
+  'data.restoreKept': 'Păstrată {when}',
+  'data.restoreLast': 'Ultima băutură {when}',
+  'data.restoreCount': 'Băuturi numărate: {count}',
+  'data.restoreConfirmTitle': 'Restaurezi această copie?',
+  'data.restoreConfirmBody': 'Totul pe acest dispozitiv — băuturi, numărători, istoric și setări — este înlocuit de această copie. Starea actuală este păstrată ca o copie, deci poți reveni la ea.',
+  'data.restoreConfirm': 'Restaurează',
+  'storage.notSaving': 'Datele tale salvate nu au putut fi citite. Ca să rămână în siguranță, nu se salvează nimic până la următoarea pornire a aplicației.',
+  'storage.notSavingApp': 'Poți reveni la o zi anterioară din setări.',
+  'storage.notSavingWeb': 'Poți importa un export din setări.',
 };
 
 export const hr: Messages = {
@@ -3366,6 +3600,19 @@ export const hr: Messages = {
   'data.importTitle': 'Zamijeniti sve podatke?',
   'data.importBody': 'Sve na ovom uređaju — pića, brojevi, povijest i postavke — bit će zamijenjeno datotekom. To se ne može poništiti.',
   'data.importConfirm': 'Zamijeni',
+  'data.restore': 'Raniji dani',
+  'data.restoreTitle': 'Natrag na raniji dan',
+  'data.restoreHint': 'Aplikacija čuva kopiju vaših podataka za svaki od zadnjih 14 dana kada je bila korištena. Vraćanje zamjenjuje ono što je na ovom uređaju — i to se čuva kao kopija, pa mu se možete vratiti.',
+  'data.restoreNone': 'Još nema ranijih kopija. Aplikacija čuva jednu za svaki dan kada je koristite.',
+  'data.restoreKept': 'Sačuvano {when}',
+  'data.restoreLast': 'Zadnje piće {when}',
+  'data.restoreCount': 'Izbrojena pića: {count}',
+  'data.restoreConfirmTitle': 'Vratiti ovu kopiju?',
+  'data.restoreConfirmBody': 'Sve na ovom uređaju — pića, brojanja, povijest i postavke — zamjenjuje se ovom kopijom. Trenutno stanje čuva se kao kopija, pa mu se možete vratiti.',
+  'data.restoreConfirm': 'Vrati',
+  'storage.notSaving': 'Spremljeni podaci nisu se mogli pročitati. Da bi ostali sačuvani, ništa se ne sprema do sljedećeg pokretanja aplikacije.',
+  'storage.notSavingApp': 'U postavkama se možete vratiti na raniji dan.',
+  'storage.notSavingWeb': 'U postavkama možete uvesti izvoz.',
 };
 
 export const bg: Messages = {
@@ -3543,6 +3790,19 @@ export const bg: Messages = {
   'data.importTitle': 'Да заменим ли всички данни?',
   'data.importBody': 'Всичко на това устройство — напитки, бройки, история и настройки — се заменя с файла. Това не може да се отмени.',
   'data.importConfirm': 'Замени',
+  'data.restore': 'Предишни дни',
+  'data.restoreTitle': 'Обратно към предишен ден',
+  'data.restoreHint': 'Приложението пази копие на данните ви от всеки от последните 14 дни, в които е било използвано. Възстановяването заменя това, което е на устройството — то също се запазва като копие, така че можете да се върнете към него.',
+  'data.restoreNone': 'Все още няма предишни копия. Приложението пази по едно за всеки ден, в който го използвате.',
+  'data.restoreKept': 'Запазено {when}',
+  'data.restoreLast': 'Последна напитка {when}',
+  'data.restoreCount': 'Преброени напитки: {count}',
+  'data.restoreConfirmTitle': 'Да се възстанови ли това копие?',
+  'data.restoreConfirmBody': 'Всичко на това устройство — напитки, броене, история и настройки — се заменя с това копие. Сегашното състояние се запазва като копие, така че можете да се върнете към него.',
+  'data.restoreConfirm': 'Възстанови',
+  'storage.notSaving': 'Запазените ви данни не можаха да бъдат прочетени. За да останат защитени, нищо не се запазва до следващото стартиране на приложението.',
+  'storage.notSavingApp': 'В настройките можете да се върнете към предишен ден.',
+  'storage.notSavingWeb': 'В настройките можете да импортирате експорт.',
 };
 
 export const el: Messages = {
@@ -3720,6 +3980,19 @@ export const el: Messages = {
   'data.importTitle': 'Αντικατάσταση όλων των δεδομένων;',
   'data.importBody': 'Όλα σε αυτή τη συσκευή — ποτά, μετρήσεις, ιστορικό και ρυθμίσεις — αντικαθίστανται από το αρχείο. Δεν αναιρείται.',
   'data.importConfirm': 'Αντικατάσταση',
+  'data.restore': 'Προηγούμενες μέρες',
+  'data.restoreTitle': 'Επιστροφή σε προηγούμενη μέρα',
+  'data.restoreHint': 'Η εφαρμογή κρατά ένα αντίγραφο των δεδομένων σας από καθεμία από τις τελευταίες 14 μέρες που τη χρησιμοποιήσατε. Η επαναφορά αντικαθιστά ό,τι υπάρχει σε αυτή τη συσκευή — που κρατιέται κι αυτό ως αντίγραφο, οπότε μπορείτε να επιστρέψετε σε αυτό.',
+  'data.restoreNone': 'Δεν υπάρχουν ακόμα προηγούμενα αντίγραφα. Η εφαρμογή κρατά ένα για κάθε μέρα που τη χρησιμοποιείτε.',
+  'data.restoreKept': 'Κρατήθηκε {when}',
+  'data.restoreLast': 'Τελευταίο ποτό {when}',
+  'data.restoreCount': 'Ποτά που μετρήθηκαν: {count}',
+  'data.restoreConfirmTitle': 'Επαναφορά αυτού του αντιγράφου;',
+  'data.restoreConfirmBody': 'Όλα σε αυτή τη συσκευή — ποτά, μετρήσεις, ιστορικό και ρυθμίσεις — αντικαθίστανται από αυτό το αντίγραφο. Η τωρινή κατάσταση κρατιέται ως αντίγραφο, οπότε μπορείτε να επιστρέψετε σε αυτή.',
+  'data.restoreConfirm': 'Επαναφορά',
+  'storage.notSaving': 'Τα αποθηκευμένα δεδομένα σας δεν μπόρεσαν να διαβαστούν. Για να προστατευτούν, τίποτα δεν αποθηκεύεται μέχρι την επόμενη εκκίνηση της εφαρμογής.',
+  'storage.notSavingApp': 'Στις ρυθμίσεις μπορείτε να επιστρέψετε σε προηγούμενη μέρα.',
+  'storage.notSavingWeb': 'Στις ρυθμίσεις μπορείτε να εισαγάγετε μια εξαγωγή.',
 };
 
 export const uk: Messages = {
@@ -3897,6 +4170,19 @@ export const uk: Messages = {
   'data.importTitle': 'Замінити всі дані?',
   'data.importBody': 'Усе на цьому пристрої — напої, лічильники, історія й налаштування — буде замінено даними з файлу. Скасувати це не можна.',
   'data.importConfirm': 'Замінити',
+  'data.restore': 'Попередні дні',
+  'data.restoreTitle': 'Повернутися до попереднього дня',
+  'data.restoreHint': 'Застосунок зберігає копію ваших даних за кожен з останніх 14 днів, коли ви ним користувалися. Відновлення замінює те, що зараз на пристрої, — це теж зберігається як копія, тож до нього можна повернутися.',
+  'data.restoreNone': 'Попередніх копій ще немає. Застосунок зберігає по одній за кожен день, коли ви ним користуєтеся.',
+  'data.restoreKept': 'Збережено {when}',
+  'data.restoreLast': 'Останній напій {when}',
+  'data.restoreCount': 'Пораховано напоїв: {count}',
+  'data.restoreConfirmTitle': 'Відновити цю копію?',
+  'data.restoreConfirmBody': 'Усе на цьому пристрої — напої, рахунок, історія та налаштування — буде замінено цією копією. Поточний стан збережеться як копія, тож до нього можна повернутися.',
+  'data.restoreConfirm': 'Відновити',
+  'storage.notSaving': 'Не вдалося прочитати збережені дані. Щоб їх не втратити, нічого не зберігається до наступного запуску застосунку.',
+  'storage.notSavingApp': 'У налаштуваннях можна повернутися до попереднього дня.',
+  'storage.notSavingWeb': 'У налаштуваннях можна імпортувати експорт.',
 };
 
 export const ja: Messages = {
@@ -4074,6 +4360,19 @@ export const ja: Messages = {
   'data.importTitle': 'すべてのデータを置き換えますか？',
   'data.importBody': 'この端末の飲み物・カウント・履歴・設定はすべてファイルの内容に置き換わります。元に戻せません。',
   'data.importConfirm': '置き換える',
+  'data.restore': '以前の日',
+  'data.restoreTitle': '以前の日に戻す',
+  'data.restoreHint': 'アプリは、使った日のうち直近14日分について、それぞれデータのコピーを保存しています。復元すると、この端末のデータが置き換えられます。今のデータもコピーとして保存されるので、あとで戻せます。',
+  'data.restoreNone': '以前のコピーはまだありません。アプリを使った日ごとに1つ保存されます。',
+  'data.restoreKept': '保存日時 {when}',
+  'data.restoreLast': '最後の一杯 {when}',
+  'data.restoreCount': '数えた杯数：{count}',
+  'data.restoreConfirmTitle': 'このコピーを復元しますか？',
+  'data.restoreConfirmBody': 'この端末のすべて（飲み物、カウント、履歴、設定）がこのコピーに置き換えられます。今の状態はコピーとして保存されるので、あとで戻せます。',
+  'data.restoreConfirm': '復元',
+  'storage.notSaving': '保存されたデータを読み込めませんでした。データを守るため、アプリを再起動するまで何も保存されません。',
+  'storage.notSavingApp': '設定から以前の日に戻せます。',
+  'storage.notSavingWeb': '設定からエクスポートを読み込めます。',
 };
 
 export const zh: Messages = {
@@ -4250,6 +4549,19 @@ export const zh: Messages = {
   'data.importTitle': '替换全部数据？',
   'data.importBody': '此设备上的所有内容——饮品、计数、历史记录和设置——都将被文件中的数据替换。此操作无法撤销。',
   'data.importConfirm': '替换',
+  'data.restore': '之前的日子',
+  'data.restoreTitle': '回到之前的某一天',
+  'data.restoreHint': '应用会为你最近使用过的 14 天各保存一份数据副本。恢复某一份会替换此设备上的数据——当前数据也会保存为副本，你可以随时回到它。',
+  'data.restoreNone': '还没有之前的副本。你每使用一天，应用就会保存一份。',
+  'data.restoreKept': '保存于 {when}',
+  'data.restoreLast': '最后一杯 {when}',
+  'data.restoreCount': '已计饮品：{count}',
+  'data.restoreConfirmTitle': '恢复此副本？',
+  'data.restoreConfirmBody': '此设备上的所有内容（饮品、计数、历史记录和设置）都将被此副本替换。当前状态会保存为副本，你可以回到它。',
+  'data.restoreConfirm': '恢复',
+  'storage.notSaving': '无法读取已保存的数据。为保护数据，在应用重新启动之前不会保存任何内容。',
+  'storage.notSavingApp': '你可以在设置中回到之前的某一天。',
+  'storage.notSavingWeb': '你可以在设置中导入导出文件。',
 };
 
 export const CATALOGUES: Record<string, Messages> = {

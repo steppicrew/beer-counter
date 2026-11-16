@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { ConfirmSheet } from './ConfirmSheet';
+import { RestoreSheet } from './RestoreSheet';
 import { useI18n } from '../i18n';
 import type { MessageKey } from '../i18n';
 import { applyImport, checkImport, pickImport, saveExport } from '../lib/dataFile';
+import { isNativeApp } from '../lib/platform';
 
 type Status = 'exported' | 'invalid' | 'newer' | 'failed';
 
@@ -13,11 +15,15 @@ const MESSAGES: Record<Status, MessageKey> = {
   failed: 'data.failed',
 };
 
-/** Settings section: all data to a file and back, for moving phones. */
+/**
+ * Settings section: all data to a file and back, for moving phones — and, in
+ * the app, back to an earlier day it kept a copy of.
+ */
 export function DataSection() {
   const { t } = useI18n();
   const [status, setStatus] = useState<Status | null>(null);
   const [pending, setPending] = useState<string | null>(null);
+  const [restoring, setRestoring] = useState(false);
 
   const exportData = async () => {
     setStatus(null);
@@ -52,11 +58,27 @@ export function DataSection() {
         <button type="button" className="btn btn--ghost" onClick={() => void importData()}>
           {t('data.import')}
         </button>
+        {isNativeApp() && (
+          <button
+            type="button"
+            className="btn btn--ghost"
+            onClick={() => {
+              setStatus(null);
+              setRestoring(true);
+            }}
+          >
+            {t('data.restore')}
+          </button>
+        )}
       </div>
       {status && (
         <span className="field__hint" role="status">
           {t(MESSAGES[status])}
         </span>
+      )}
+
+      {restoring && (
+        <RestoreSheet onClose={() => setRestoring(false)} onFailed={() => setStatus('failed')} />
       )}
 
       {pending !== null && (

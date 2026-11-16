@@ -30,7 +30,8 @@ import java.util.Locale;
  *
  * The mirror follows every save. Beside it sit daily snapshots — the state
  * as it was when each day's first save came in — so a save that is readable
- * but wrong (a bug, a bad migration) cannot take the only copy with it.
+ * but wrong (a bug, a bad migration) cannot take the only copy with it. The
+ * page offers them as earlier days to go back to.
  *
  * Only "clear data" in Android's settings removes them, as it should.
  *
@@ -153,6 +154,60 @@ public class StateMirrorPlugin extends Plugin {
         JSObject result = new JSObject();
         result.put("copies", copies);
         call.resolve(result);
+    }
+
+    /** The snapshots, newest first, for the page to offer as earlier days. */
+    @PluginMethod
+    public void list(PluginCall call) {
+        JSArray entries = new JSArray();
+        for (File snapshot : snapshots()) {
+            try {
+                JSObject entry = new JSObject();
+                entry.put("name", snapshot.getName());
+                entry.put("keptAt", snapshot.lastModified());
+                entry.put("content", new String(new AtomicFile(snapshot).readFully(), StandardCharsets.UTF_8));
+                entries.put(entry);
+            } catch (Exception e) {
+                Log.w(TAG, "State snapshot not readable: " + snapshot.getName(), e);
+            }
+        }
+        JSObject result = new JSObject();
+        result.put("snapshots", entries);
+        call.resolve(result);
+    }
+
+    /**
+     * Makes `content` the mirror, after keeping the current one as a snapshot
+     * of its own — named to the second, so a restore is never lost to the
+     * day's snapshot and can itself be undone. The page then writes local
+     * storage and reloads.
+     */
+    @PluginMethod
+    public void restore(PluginCall call) {
+        String content = call.getString("content");
+        if (content == null) {
+            call.reject("Nothing to restore");
+            return;
+        }
+        String now = new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ss", Locale.ROOT).format(new Date());
+        try {
+            writeAtomically(
+                new AtomicFile(new File(dir(), SNAPSHOT_PREFIX + now + ".json")), mirror().readFully());
+        } catch (FileNotFoundException e) {
+            // No mirror, nothing to keep.
+        } catch (Exception e) {
+            // Without that copy the restore could not be undone: don't.
+            Log.w(TAG, "State before restore not kept", e);
+            call.reject("Could not keep the current state", e);
+            return;
+        }
+        try {
+            writeAtomically(mirror(), content.getBytes(StandardCharsets.UTF_8));
+            call.resolve();
+        } catch (Exception e) {
+            Log.w(TAG, "State mirror not restored", e);
+            call.reject("Could not restore", e);
+        }
     }
 
     /** One line in logcat, so a lost state leaves a trace even in release. */
