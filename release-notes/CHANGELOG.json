@@ -2,6 +2,36 @@
   "$comment": "Newest first. Each entry lists one short line per language. release-notes.mjs renders these into Play Console <lang> blocks, dropping the oldest entries when the 500-char limit is hit.",
   "releases": [
     {
+      "version": "1.7.23",
+      "date": "2026-11-16",
+      "notes": {
+        "en": "Your data is safer: the app keeps a copy outside the app’s web storage and one for each of the last 14 days. Settings → Your data → Earlier days goes back to one.",
+        "de": "Deine Daten sind sicherer: Die App hebt eine Kopie außerhalb ihres Web-Speichers auf und eine für jeden der letzten 14 Tage. Einstellungen → Deine Daten → Frühere Tage holt eine zurück.",
+        "fr": "Vos données sont plus sûres : l’app garde une copie hors de son stockage web, et une pour chacun des 14 derniers jours. Paramètres → Vos données → Jours précédents permet d’y revenir.",
+        "es": "Tus datos están más seguros: la app guarda una copia fuera de su almacenamiento web y otra de cada uno de los últimos 14 días. Ajustes → Tus datos → Días anteriores te devuelve a una.",
+        "it": "I tuoi dati sono più al sicuro: l’app conserva una copia fuori dalla sua memoria web e una per ciascuno degli ultimi 14 giorni. Impostazioni → I tuoi dati → Giorni precedenti ti riporta a una.",
+        "nl": "Je gegevens zijn veiliger: de app bewaart een kopie buiten zijn webopslag en een voor elk van de laatste 14 dagen. Instellingen → Je gegevens → Eerdere dagen zet er een terug.",
+        "pl": "Twoje dane są bezpieczniejsze: aplikacja przechowuje kopię poza swoją pamięcią web i po jednej z każdego z ostatnich 14 dni. Ustawienia → Twoje dane → Wcześniejsze dni przywraca jedną z nich.",
+        "pt": "Os teus dados estão mais seguros: a app guarda uma cópia fora do seu armazenamento web e uma de cada um dos últimos 14 dias. Definições → Os teus dados → Dias anteriores volta a uma delas.",
+        "cs": "Tvoje data jsou v bezpečí: aplikace uchovává kopii mimo své webové úložiště a jednu z každého z posledních 14 dnů. Nastavení → Tvoje data → Dřívější dny vrátí jednu z nich.",
+        "sk": "Vaše údaje sú v bezpečí: aplikácia uchováva kópiu mimo svojho webového úložiska a jednu z každého z posledných 14 dní. Nastavenia → Vaše údaje → Skoršie dni vráti jednu z nich.",
+        "da": "Dine data er mere sikre: appen gemmer en kopi uden for sit weblager og én for hver af de seneste 14 dage. Indstillinger → Dine data → Tidligere dage henter en tilbage.",
+        "sv": "Dina data är säkrare: appen sparar en kopia utanför sin webblagring och en för var och en av de senaste 14 dagarna. Inställningar → Dina data → Tidigare dagar hämtar tillbaka en.",
+        "nb": "Dataene dine er tryggere: appen tar vare på en kopi utenfor nettlagringen sin og én for hver av de siste 14 dagene. Innstillinger → Dine data → Tidligere dager henter tilbake én.",
+        "fi": "Tietosi ovat turvassa: sovellus säilyttää kopion verkkotallennustilansa ulkopuolella ja yhden jokaiselta viimeiseltä 14 päivältä. Asetukset → Tietosi → Aiemmat päivät palauttaa yhden.",
+        "hu": "Az adataid nagyobb biztonságban vannak: az alkalmazás a webes tárhelyén kívül is őriz egy másolatot, és egyet-egyet az utolsó 14 napról. Beállítások → Adataid → Korábbi napok visszahoz egyet.",
+        "ro": "Datele tale sunt mai în siguranță: aplicația păstrează o copie în afara stocării web și câte una pentru fiecare dintre ultimele 14 zile. Setări → Datele tale → Zile anterioare readuce una.",
+        "hr": "Vaši podaci su sigurniji: aplikacija čuva kopiju izvan svoje web pohrane i po jednu za svaki od zadnjih 14 dana. Postavke → Vaši podaci → Raniji dani vraća jednu.",
+        "bg": "Данните ви са по-сигурни: приложението пази копие извън уеб хранилището си и по едно за всеки от последните 14 дни. Настройки → Вашите данни → Предишни дни връща едно от тях.",
+        "el": "Τα δεδομένα σας είναι πιο ασφαλή: η εφαρμογή κρατά ένα αντίγραφο έξω από τον αποθηκευτικό χώρο web και ένα για καθεμία από τις τελευταίες 14 μέρες. Ρυθμίσεις → Τα δεδομένα σας → Προηγούμενες μέρες.",
+        "uk": "Ваші дані надійніше захищені: застосунок зберігає копію поза своїм вебсховищем і по одній за кожен з останніх 14 днів. Налаштування → Ваші дані → Попередні дні повертає одну з них.",
+        "tr": "Verilerin daha güvende: uygulama web depolamasının dışında bir kopya ve son 14 günün her biri için birer kopya saklar. Ayarlar → Verilerin → Önceki günler birini geri getirir.",
+        "ru": "Ваши данные надёжнее защищены: приложение хранит копию вне своего веб-хранилища и по одной за каждый из последних 14 дней. Настройки → Ваши данные → Прошлые дни возвращает одну из них.",
+        "ja": "データがより安全になりました。アプリはWebストレージの外にコピーを保存し、直近14日分のコピーも保持します。設定 → あなたのデータ → 以前の日 から戻せます。",
+        "zh": "数据更安全了：应用会在其网页存储之外保存一份副本，并保留最近 14 天每天一份。设置 → 你的数据 → 之前的日子 即可恢复。"
+      }
+    },
+    {
       "version": "1.7.22",
       "date": "2026-10-28",
       "notes": {
