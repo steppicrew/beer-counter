@@ -8,6 +8,7 @@ import com.getcapacitor.BridgeActivity;
 
 import de.steppicrew.beercounter.datafile.DataFilePlugin;
 import de.steppicrew.beercounter.shortcuts.ShortcutsPlugin;
+import de.steppicrew.beercounter.statemirror.StateMirrorPlugin;
 import de.steppicrew.beercounter.systembars.SystemBarsPlugin;
 import de.steppicrew.beercounter.tips.TipsPlugin;
 
@@ -20,6 +21,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(DataFilePlugin.class);
         registerPlugin(SystemBarsPlugin.class);
         registerPlugin(ShortcutsPlugin.class);
+        registerPlugin(StateMirrorPlugin.class);
         dropReplayedShortcut(savedInstanceState);
         super.onCreate(savedInstanceState);
     }

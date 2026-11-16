@@ -14,6 +14,7 @@ import { ME, PERSON_COLOURS } from '../lib/types';
 import { DEFAULT_BEVERAGES } from '../lib/defaults';
 import { archiveRound } from '../lib/stats';
 import type { TipProductId } from '../lib/tips';
+import { guardedStorage, storeLoaded } from './storage';
 
 /** One person's counts, by drink id. */
 export type Tallies = Record<string, Tally>;
@@ -476,7 +477,8 @@ export const useAppStore = create<AppState>()(
       }),
       {
         name: 'beer-counter-state',
-        storage: createJSONStorage(() => localStorage),
+        storage: createJSONStorage(() => guardedStorage),
+        onRehydrateStorage: () => (_state, error) => storeLoaded(error),
         version: 5,
         migrate: (persisted, version) => {
           const state = migrateToV4(persisted, version);
